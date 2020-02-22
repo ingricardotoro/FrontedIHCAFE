@@ -11,7 +11,9 @@ export default class ListCategories extends Component {
     }
 
     async componentDidMount(){
-        const res = await axios.get('http://localhost:4000/api/categories/categories_parents');
+        //const res = await axios.get('http://localhost:4000/api/categories/categories_parents');
+        const res = await axios.get('https://backendihcafe.herokuapp.com/api/categories/categories_parents');
+        
         this.setState({categories_parents:res.data.categories});
     }
 
