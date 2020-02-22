@@ -19,6 +19,8 @@ import Teams_list from './pages/Teams_list'
 import Account_list from './pages/Accounts'
 import AccountDashboard from './pages/AccountDashboard'
 
+import Inicio from './components/Inicio'
+
 
 function App() {
   return (
@@ -39,7 +41,9 @@ function App() {
             <Route path="/teams_list" exact component={Teams_list} />
 
             <Route path="/accounts" exact component={Account_list} />
-            <Route  path="/account/:id" exact  component ={AccountDashboard} /> 
+            <Route  path="/account/:id" exact  component ={AccountDashboard} />
+
+             <Route path="/inicio" exact component={Inicio} /> 
 
 
       </Router>
