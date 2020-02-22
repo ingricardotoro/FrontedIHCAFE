@@ -13,7 +13,9 @@ export default class TabBudget extends Component {
     }
     
     async componentDidMount(){
-        const res_p = await axios.post('http://localhost:4000/api/projects/findProjectsByBudgetId/'+this.props.id);
+        //const res_p = await axios.post('http://localhost:4000/api/projects/findProjectsByBudgetId/'+this.props.id);
+        const res_p = await axios.post('https://backendihcafe.herokuapp.com/api/projects/findProjectsByBudgetId/'+this.props.id);
+        
         this.setState({projects:res_p.data.projectsbybudgetid});
     }
 
