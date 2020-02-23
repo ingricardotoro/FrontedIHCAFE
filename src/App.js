@@ -43,7 +43,7 @@ function App() {
             <Route path="/accounts" exact component={Account_list} />
             <Route  path="/account/:id" exact  component ={AccountDashboard} />
 
-             <Route path="/inicio" exact component={Inicio} /> 
+             <Route path="/" exact component={Inicio} /> 
 
 
       </Router>
