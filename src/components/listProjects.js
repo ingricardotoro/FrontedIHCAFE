@@ -8,7 +8,7 @@ export default class listProjects extends Component {
     }
 
     async componentDidMount(){
-      const res = await axios.get('http://localhost:4000/api/projects/');
+      const res = await axios.get('https://backendihcafe.herokuapp.com/api/projects/');
       this.setState({projects:res.data.projects});
       //console.log(res.data.projects)
       //console.log(this.state.projects);

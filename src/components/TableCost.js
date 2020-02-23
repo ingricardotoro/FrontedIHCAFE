@@ -48,19 +48,19 @@ export default class TableCost extends Component {
     
     async componentDidMount(){
 
-        const res = await axios.post('http://localhost:4000/api/budgetlines/project/'+this.props.idProject);
+        const res = await axios.post('https://backendihcafe.herokuapp.com/api/budgetlines/project/'+this.props.idProject);
         this.setState({budgetLines:res.data.budgetLines});
 
-        const res2 = await axios.post('http://localhost:4000/api/budgetlines/cat_project/'+this.props.idProject);
+        const res2 = await axios.post('https://backendihcafe.herokuapp.com/api/budgetlines/cat_project/'+this.props.idProject);
         this.setState({budgetLinesCat:res2.data.budgetCategories});
 
-        const res3 = await axios.get('http://localhost:4000/api/projects/');
+        const res3 = await axios.get('https://backendihcafe.herokuapp.com/api/projects/');
         this.setState({projects:res3.data.projects});
 
-        const res4 = await axios.get('http://localhost:4000/api/categories/categories_parents/');
+        const res4 = await axios.get('https://backendihcafe.herokuapp.com/api/categories/categories_parents/');
         this.setState({categories:res4.data.categories});
 
-        const res6 = await axios.get('http://localhost:4000/api/accounts/');
+        const res6 = await axios.get('https://backendihcafe.herokuapp.com/api/accounts/');
         this.setState({cuentas:res6.data.cuentas});
        
 

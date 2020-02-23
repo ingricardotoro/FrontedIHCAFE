@@ -22,10 +22,10 @@ export default class RowBudget extends Component {
     
     async componentDidMount(){
 
-        const res = await axios.post('http://localhost:4000/api/budgetlines/project/category/'+this.props.idProject+'/'+this.props.idCat);
+        const res = await axios.post('https://backendihcafe.herokuapp.com/api/budgetlines/project/category/'+this.props.idProject+'/'+this.props.idCat);
         this.setState({budgetLines:res.data.budgetLinesCat});
 
-        const res3 = await axios.post('http://localhost:4000/api/categories/categoriesbyid/'+this.props.idCat);
+        const res3 = await axios.post('https://backendihcafe.herokuapp.com/api/categories/categoriesbyid/'+this.props.idCat);
         this.setState({nameCategory:res3.data.category.name});
     }
 
@@ -39,7 +39,7 @@ export default class RowBudget extends Component {
     onSubmitAprobar = async (budgetLine_id) =>{
         //e.preventDefault();
        
-        //const res_aprobar = await axios.post('http://localhost:4000/api/budgetlines/aprobar/'+budgetLine_id+'/'+this.state.aprobar);
+        //const res_aprobar = await axios.post('https://backendihcafe.herokuapp.com/api/budgetlines/aprobar/'+budgetLine_id+'/'+this.state.aprobar);
     }
 
     calculo(){ // para realizar el calculo de la suma de presupuestos

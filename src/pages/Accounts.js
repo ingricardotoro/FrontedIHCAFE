@@ -13,7 +13,7 @@ export default class Account_list extends Component {
     }
 
     async componentDidMount(){
-        const res = await axios.get('http://localhost:4000/api/accounts/');
+        const res = await axios.get('https://backendihcafe.herokuapp.com/api/accounts/');
         this.setState({accounts:res.data.cuentas});
     }
 
