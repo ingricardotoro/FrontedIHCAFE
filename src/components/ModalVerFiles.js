@@ -11,7 +11,7 @@ export default class ModalVerFiles extends Component {
     
     async componentDidMount(){
 
-        const res_files = await axios.post('http://localhost:4000/api/files/filesbybudgetid/'+this.props.budgetlineatlas);
+        const res_files = await axios.post('https://backendihcafe.herokuapp.com/api/files/filesbybudgetid/'+this.props.budgetlineatlas);
         this.setState({files:res_files.data.files});
 
     }

@@ -13,7 +13,7 @@ export default class listBudgets extends Component {
     }
     
     async componentDidMount(){
-      const res = await axios.get('http://localhost:4000/api/budgets/');
+      const res = await axios.get('https://backendihcafe.herokuapp.com/api/budgets/');
       this.setState({budgets:res.data.budgets});
     }
 

@@ -74,28 +74,28 @@ export default class TableCost extends Component {
     
     async componentDidMount(){
 
-        const res = await axios.post('http://localhost:4000/api/budgetlines/atlas/project/'+this.props.idProject);
+        const res = await axios.post('https://backendihcafe.herokuapp.com/api/budgetlines/atlas/project/'+this.props.idProject);
         this.setState({budgetLinesAtlas:res.data.budgetLines_atlas});
 
-        /*const res2 = await axios.post('http://localhost:4000/api/budgetlines/atlas/cat_project/'+this.props.idProject);
+        /*const res2 = await axios.post('https://backendihcafe.herokuapp.com/api/budgetlines/atlas/cat_project/'+this.props.idProject);
         this.setState({budgetLinesCat:res2.data.budgetCategories}); */
 
-        const res3 = await axios.get('http://localhost:4000/api/projects/');
+        const res3 = await axios.get('https://backendihcafe.herokuapp.com/api/projects/');
         this.setState({projects:res3.data.projects});
 
-        /* INICIAL const res4 = await axios.get('http://localhost:4000/api/categories/categories_parents/');
+        /* INICIAL const res4 = await axios.get('https://backendihcafe.herokuapp.com/api/categories/categories_parents/');
         this.setState({categories:res4.data.categories}); */
 
-        const res6 = await axios.get('http://localhost:4000/api/accounts/');
+        const res6 = await axios.get('https://backendihcafe.herokuapp.com/api/accounts/');
         this.setState({cuentas:res6.data.cuentas});
 
-        const res_atlas = await axios.get('http://localhost:4000/api/atlas/resultados');
+        const res_atlas = await axios.get('https://backendihcafe.herokuapp.com/api/atlas/resultados');
         this.setState({resultados_atlas:res_atlas.data.atlas_resultados});
 
-        const res_account_atlas = await axios.get('http://localhost:4000/api/atlas/accounts');
+        const res_account_atlas = await axios.get('https://backendihcafe.herokuapp.com/api/atlas/accounts');
         this.setState({accounts_atlas:res_account_atlas.data.atlas_accounts});
 
-        const res_suppliers = await axios.get('http://localhost:4000/api/suppliers/');
+        const res_suppliers = await axios.get('https://backendihcafe.herokuapp.com/api/suppliers/');
         this.setState({suppliers:res_suppliers.data.suppliers});
 
         this.setState({project_id: this.props.idProject})
@@ -130,7 +130,7 @@ export default class TableCost extends Component {
     //onChanceProject = (e) => {this.setState({project_id: e.target.value})}
     /* INICIAL onChanceClasificacion = async (e) => {
         this.setState({code: e.target.value});
-        const res7 = await axios.get('http://localhost:4000/api/categories/child/'+e.target.value);
+        const res7 = await axios.get('https://backendihcafe.herokuapp.com/api/categories/child/'+e.target.value);
         this.setState({name:res7.data.child.name});
     } */
 
@@ -141,19 +141,19 @@ export default class TableCost extends Component {
 
    /* ININIAL  onChanceCategory = async (e) => {
         this.setState({category_id: e.target.value });
-        const res5 = await axios.get('http://localhost:4000/api/categories/categories_childs/'+e.target.value);
+        const res5 = await axios.get('https://backendihcafe.herokuapp.com/api/categories/categories_childs/'+e.target.value);
         this.setState({clasificaciones:res5.data.clasificaciones});
     } */
 
     onChanceResultAtlas = async (e) => {
         this.setState({result_atlas: e.target.value });
-        const res_prod_atlas = await axios.get('http://localhost:4000/api/atlas/productos/'+e.target.value);
+        const res_prod_atlas = await axios.get('https://backendihcafe.herokuapp.com/api/atlas/productos/'+e.target.value);
         this.setState({products_atlas:res_prod_atlas.data.productos_atlas});
     }
 
     onChanceProductAtlas = async (e) => {
         this.setState({product_atlas: e.target.value });
-        const res_activity_atlas = await axios.get('http://localhost:4000/api/atlas/productos/'+e.target.value);
+        const res_activity_atlas = await axios.get('https://backendihcafe.herokuapp.com/api/atlas/productos/'+e.target.value);
         this.setState({activities_atlas:res_activity_atlas.data.productos_atlas});
     }
 
@@ -163,7 +163,7 @@ export default class TableCost extends Component {
 
     onChanceAccountAtlas = async (e) => {
         this.setState({account_atlas: e.target.value });
-        const res_sub_atlas = await axios.get('http://localhost:4000/api/atlas/sub_accounts/'+e.target.value);
+        const res_sub_atlas = await axios.get('https://backendihcafe.herokuapp.com/api/atlas/sub_accounts/'+e.target.value);
         this.setState({sub_accounts_atlas:res_sub_atlas.data.sub_accounts});
 
     }
@@ -198,7 +198,7 @@ export default class TableCost extends Component {
 
     onClickAprobar = async (id) =>{
         //e.preventDefault();
-        if ( await axios.post('http://localhost:4000/api/budgetlines/aprobar_atlas/'+id+'/'+this.state.aprobar)){
+        if ( await axios.post('https://backendihcafe.herokuapp.com/api/budgetlines/aprobar_atlas/'+id+'/'+this.state.aprobar)){
             window.location.href = 'http://localhost:3000/project/'+this.props.idProject
         } 
     }
@@ -213,7 +213,7 @@ export default class TableCost extends Component {
         this.setState({fase_archivo: e.target.value });
     }
     onClickSubirArchivo = async (id) =>{
-         await axios.post('http://localhost:4000/api/files/'+id,{
+         await axios.post('https://backendihcafe.herokuapp.com/api/files/'+id,{
             nombre_archivo:this.state.nombre_archivo,
             fase_archivo:this.state.fase_archivo,
             file:this.state.archivo,
@@ -226,7 +226,7 @@ export default class TableCost extends Component {
         //codigo para crear un nuevo renglon presupuestario
     onSubmit  = async e =>{
         e.preventDefault();
-        const res = await axios.post('http://localhost:4000/api/budgetlines/budgetlineatlas',{
+        const res = await axios.post('https://backendihcafe.herokuapp.com/api/budgetlines/budgetlineatlas',{
             code_resultado:this.state.result_atlas,
             code_producto:this.state.product_atlas,
             code_activity:this.state.activity_atlas,
@@ -392,7 +392,7 @@ export default class TableCost extends Component {
                                                                     <span aria-hidden="true">&times;</span>
                                                                 </button>
                                                             </div>  
-                                                            <form action = {'http://localhost:4000/api/files/'+budgetLinesAtlas.id} method="post" enctype="multipart/form-data">
+                                                            <form action = {'https://backendihcafe.herokuapp.com/api/files/'+budgetLinesAtlas.id} method="post" enctype="multipart/form-data">
 
                                                                 <div class="modal-body">                                                                
                                                                     <div className="form-control mt-3">

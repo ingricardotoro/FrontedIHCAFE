@@ -12,7 +12,7 @@ export default class Atlas extends Component {
     }
 
     async componentDidMount(){
-        const res = await axios.get('http://localhost:4000/api/atlas/resultados');
+        const res = await axios.get('https://backendihcafe.herokuapp.com/api/atlas/resultados');
         this.setState({atlas_resultados:res.data.atlas_resultados});
     }
 

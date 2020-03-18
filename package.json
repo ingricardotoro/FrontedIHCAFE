@@ -2,9 +2,9 @@
   "name": "frontend",
   "version": "0.1.0",
   "private": true,
-  "engines":{
-    "npm":"6.10.2",
-    "node":"12.9.1"
+  "engines": {
+    "npm": "6.10.2",
+    "node": "12.9.1"
   },
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
@@ -16,8 +16,7 @@
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.3.0"
   },
-  "homepage":"./",
-  
+  "homepage": "./",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
