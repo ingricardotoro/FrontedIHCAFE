@@ -6,12 +6,12 @@ export default class BudgetNew extends Component {
         super();
         this.state = {
             
-            code ,
-            name ,
-            description ,
-            excercise_start ,
-            excercise_end ,
-            account_id ,
+            code:'' ,
+            name:'' ,
+            description:'' ,
+            excercise_start:'' ,
+            excercise_end:'' ,
+            account_id:0 ,
             person_id:1 ,
             buddgetstart:0.0 ,
             buddgeupdate:0.0 ,
@@ -19,7 +19,7 @@ export default class BudgetNew extends Component {
             balance :0.0,
             returns :0.0,
             deviation :0.0,
-            status ,
+            status:true ,
             approval : true,
             approvalby_id:1,
             dateapproval:Date.now(),
