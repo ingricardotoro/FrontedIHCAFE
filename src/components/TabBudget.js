@@ -95,7 +95,7 @@ export default class TabBudget extends Component {
                         </div>
                         <div className="modal-body">
                             
-                            <form onSubmit={this.onSumbit}>
+                            <form onSubmit={ () => this.onSumbit()}>
                                 <div style={{width:'100%',textAlign:'center', display:'inline-block'}}>
                                     <button  type="submit" className="btn btn-danger waves-effect ">Eliminar Este Presupuesto</button>
                                 </div>

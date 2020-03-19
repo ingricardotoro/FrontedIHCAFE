@@ -56,7 +56,7 @@ export default class ProjectNew extends Component {
             team_id:this.state.team_id,
             status:this.state.status
         })
-        window.location.href = 'https://ihcafe-35ae7.firebaseapp.com//projects'
+        window.location.href = 'https://ihcafe-35ae7.firebaseapp.com/projects'
        
     }
 
@@ -80,7 +80,7 @@ export default class ProjectNew extends Component {
                                     <i className="icofont icofont-home" />
                                     </a>
                                 </li>
-                                <li className="breadcrumb-item"><Link to={'/budgets'} >Proyectos</Link>
+                                <li className="breadcrumb-item"><Link to={'/budgets'} >Presupuestos</Link>
                                 </li>
                                 <li className="breadcrumb-item">Crear Nuevo
                                 </li>

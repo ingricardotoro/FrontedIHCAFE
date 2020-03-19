@@ -13,6 +13,7 @@ export default class ListProjects extends Component {
     async componentDidMount(){
         const res = await axios.get('https://backendihcafe.herokuapp.com/api/projects/');
         this.setState({projects:res.data.projects});
+        console.log(this.state.projects);
     }
 
     render() {
@@ -63,7 +64,9 @@ export default class ListProjects extends Component {
                                     <div className="col-md-12">
                                         <ul className="list-view">
                                             {
+                                               
                                                 this.state.projects.map(project => 
+                                                 
                                                     <li>
                                                         <div className="card user-card">
                                                             <div className="card-block">
@@ -89,6 +92,7 @@ export default class ListProjects extends Component {
                                                         </div>
                                                     </li>
                                                 )
+                                               
                                             }
                                        
                                         </ul>

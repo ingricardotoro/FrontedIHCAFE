@@ -18,19 +18,23 @@ export default class Projectcard extends Component {
     }
 
     async componentDidMount(){
-        const res = await axios.post('https://backendihcafe.herokuapp.com/api/budgetlines/project/'+this.props.id);
-        this.setState({budgetLines:res.data.budgetLines});
+        const res = await axios.post('https://backendihcafe.herokuapp.com/api/budgetlines/atlas/project/'+this.props.id);
+        this.setState({budgetLines:res.data.budgetLines_atlas});
     }
 
     calculo(){ // para realizar el calculo de la suma de presupuestos
         for (let index = 0; index < this.state.budgetLines.length; index++) {
-            this.state.total_inicial +=   this.state.budgetLines[index].buddgetstart;
-            this.state.total_ejecutado += this.state.budgetLines[index].buddgetfinal;
-            this.state.total_disponible +=  this.state.budgetLines[index].balance;
-            this.state.total_reembolsos += this.state.budgetLines[index].returns;
+           
 
             if ( this.state.budgetLines[index].status == "Solicitado") {
-                this.state.total_Solicitado += this.state.budgetLines[index].buddgetstart;
+                this.state.total_Solicitado += this.state.budgetLines[index].budgetstart;
+            }
+
+            if (this.state.budgetLines[index].status == "Aprobado") {
+                 this.state.total_inicial +=   this.state.budgetLines[index].budgetstart;
+                this.state.total_ejecutado += this.state.budgetLines[index].budgeupdate;
+                this.state.total_disponible +=  this.state.budgetLines[index].balance;
+                this.state.total_reembolsos += this.state.budgetLines[index].returns;
             }
         }
     }

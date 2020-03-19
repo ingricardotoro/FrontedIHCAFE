@@ -97,7 +97,7 @@ export default class Sidebar extends Component {
                                     <li className=" ">
                                         <Link to={'/projects/new'} href="navbar-light.html">
                                         <span className="pcoded-micon"><i className="ti-angle-right" /></span>
-                                        <span className="pcoded-mtext" data-i18n="nav.navigate.navbar">Nuevo Proyectos</span>
+                                        <span className="pcoded-mtext" data-i18n="nav.navigate.navbar">Nuevo Proyecto</span>
                                         <span className="pcoded-mcaret" />
                                         </Link>
                                     </li> 

@@ -3,6 +3,7 @@ import axios from 'axios'
 import RowCardsProjects from '../components/RowCardsProjects'
 import ModalVerFiles from '../components/ModalVerFiles'
 
+
 export default class TableCost extends Component {
     
     constructor() {
@@ -252,7 +253,9 @@ export default class TableCost extends Component {
 
             /***atlas result_atlas, product_atlas ,account_atlas */
         })
-        window.location.href = 'https://ihcafe-35ae7.firebaseapp.com//project/'+this.props.idProject
+       
+        //window.location.href = 'http://localhost:3000/project/'+this.props.idProject;
+        window.location.href = 'https://ihcafe-35ae7.firebaseapp.com/project/'+this.props.idProject;
        
     }
 
@@ -556,7 +559,7 @@ export default class TableCost extends Component {
                         </div>
                         <div className="modal-body">
                             
-                            <form onSubmit={this.onSubmit}>
+                            <form onSubmit={  this.onSubmit}>
                                 {/* <select onChange={this.onChanceProject} name="select" className="form-control mt-3">
                                     <option value="#">Seleccione Proyecto</option>
                                     {
