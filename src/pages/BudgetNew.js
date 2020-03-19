@@ -43,7 +43,7 @@ export default class BudgetNew extends Component {
     onChangeEstado = (e) => {this.setState({status: e.target.value})}
 
     onSubmit  = async e =>{
-       
+        e.preventDefault();
         const res = await axios.post('https://backendihcafe.herokuapp.com/api/budgets',{
             
             code:this.state.code,
