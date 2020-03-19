@@ -13,9 +13,11 @@ export default class Navbar extends Component {
                             <a className="mobile-search morphsearch-search" href="#">
                             <i className="ti-search" />
                             </a>
-                            <a href="index.html">
-                            <img className="img-fluid" src="assets/images/logo.png" alt="Theme-Logo" />
-                            </a>
+                            
+                            <Link to={'/budgets'} >
+                                <img className="img-fluid" src="assets/images/logo.png" alt="Theme-Logo" />
+                            </Link>
+                            
                             <a className="mobile-options">
                             <i className="ti-more" />
                             </a>
@@ -24,18 +26,15 @@ export default class Navbar extends Component {
                             <div>
                             <ul className="nav-left">
                                 <li>
-                                <div className="sidebar_toggle"><a href="javascript:void(0)"><i className="ti-menu" /></a></div>
+                                <div className="sidebar_toggle"><a href="#"><i className="ti-menu" /></a></div>
                                 </li>
                                 <li>
-                                <a className="main-search morphsearch-search" href="#">
-                                    {/* themify icon */}
-                                    <i className="ti-search" />
-                                </a>
+                                
                                 </li>
                                 <li>
-                                <a href="#!" onclick="javascript:toggleFullScreen()">
+                                {/* <a href="#!" onClick={ "javascript:toggleFullScreen()"}>
                                     <i className="ti-fullscreen" />
-                                </a>
+                                </a> */}
                                 </li>
                                 
                             </ul>
@@ -44,7 +43,7 @@ export default class Navbar extends Component {
                                 <li className="user-profile header-notification">
                                     <a href="#!">
                                         <img src="assets/images/user.png" alt="User-Profile-Image" />
-                                        <span>John Doe</span>
+                                        <span>Usuario</span>
                                         <i className="ti-angle-down" />
                                     </a>
                                     <ul className="show-notification profile-notification">

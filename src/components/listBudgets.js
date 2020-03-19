@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios'
-
+import {Link} from 'react-router-dom'
 import TabBudget from '../components/TabBudget'
 
 export default class listBudgets extends Component {
@@ -29,6 +29,13 @@ export default class listBudgets extends Component {
                                         <h4>Presupuestos</h4>
                                         <span>Listado de Presupuestos Creados</span>
                                     </div>
+                                   
+                                   <div>
+                                       <Link to={'/budgets/new'} type="button" className="btn btn-primary waves-effect waves-light f-left mt-3 d-inline-block md-trigger" ><i className="icofont icofont-plus m-r-5" /> Crear Nuevo Presupuesto
+                                        </Link>
+                                   </div>
+                                    
+
                                     <div className="page-header-breadcrumb">
                                         <ul className="breadcrumb-title">
                                             <li className="breadcrumb-item">
@@ -36,12 +43,13 @@ export default class listBudgets extends Component {
                                                     <i className="icofont icofont-home"></i>
                                                 </a>
                                             </li>
-                                            <li className="breadcrumb-item"><a href="#!">Pages</a>
+                                            <li className="breadcrumb-item"><a href="#!">Presupuestos</a>
                                             </li>
                                         </ul>
                                     </div>
+
                                  </div>
-                                 
+                                 <div className="mt-5">
                                 {    
                                     this.state.budgets.map( budget =>   
                                      
@@ -58,6 +66,7 @@ export default class listBudgets extends Component {
                                      />
                                     )
                                 }
+                                </div>
                             </div>
                         </div>
                         <div id="styleSelector">

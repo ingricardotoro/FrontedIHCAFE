@@ -1,7 +1,10 @@
-import React, { Component } from 'react'
-import axios from 'axios'
-import {Link} from 'react-router-dom'
-import Projectcard from '../components/Projectcard'
+import React, { Component } from 'react';
+import axios from 'axios';
+import {Link, Redirect} from 'react-router-dom';
+import Projectcard from '../components/Projectcard';
+
+import { withRouter } from 'react-router';
+import { hashHistory } from 'react-router';
 
 export default class TabBudget extends Component {
 
@@ -21,6 +24,21 @@ export default class TabBudget extends Component {
         return number.toLocaleString('en-US', { style: 'currency', currency: 'HNL' });
     }
 
+     
+    onSumbit = async (e) => {
+        //e.preventDefault();
+        const res_p = await axios.post('https://backendihcafe.herokuapp.com/api/budgets/delete/'+this.props.id);
+        
+        
+            return <Redirect push to="/budgets" /> 
+       
+            
+            //return this.props.history.push('/budgets');
+            //window.location.href = 'https://ihcafe-35ae7.firebaseapp.com/budgets/';
+             //hashHistory.push('/budgets');
+       
+    }
+
     render() {
         return (
              <div> 
@@ -29,12 +47,17 @@ export default class TabBudget extends Component {
                         <div className="col-sm-12">
                             <div className="card">
                                 <div className="card-header">
-                                   <a href="#"> <h4>{this.props.nombre} - ( {this.props.account}) </h4></a>
+                                   <a href="#"> <h4>{this.props.nombre} - ( {this.props.account}) - 
+                                  
+                                   </h4></a>
                                     <span>{this.props.description}</span>
                                     <div className="card-header-right">
                                         <i className="icofont icofont-rounded-down"></i>
                                         <i className="icofont icofont-refresh"></i>
-                                        <i className="icofont icofont-close-circled"></i>
+                                        <a data-toggle="modal" data-target={'#modal_delete_'+this.props.id}>
+                                            <i className="icofont icofont-close-circled"></i>
+                                        </a>
+                                        
                                     </div>
 
                                     <div>
@@ -56,7 +79,45 @@ export default class TabBudget extends Component {
                                                 </tr>
                                             </tbody>
                                         </table> 
-                                       
+
+                                         {/* Add Contact Start Model */}
+                <div>
+                {/* Modal large*/}
+              
+                <div className="modal fade" id={"modal_delete_"+this.props.id}  tabIndex={-1} role="dialog">
+                    <div className="modal-dialog modal-lg" role="document">
+                    <div className="modal-content">
+                        <div className="modal-header">
+                        <h4 className="modal-title">Eliminar Presupuesto: {this.props.nombre} </h4>
+                        <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                        </div>
+                        <div className="modal-body">
+                            
+                            <form onSubmit={this.onSumbit}>
+                                <div style={{width:'100%',textAlign:'center', display:'inline-block'}}>
+                                    <button  type="submit" className="btn btn-danger waves-effect ">Eliminar Este Presupuesto</button>
+                                </div>
+                            </form>
+                            
+
+
+                        <div className="modal-footer">
+                            <button type="button" className="btn btn-default waves-effect " data-dismiss="modal">Cerrar</button>
+                            
+                        </div>
+                        
+                        </div>
+                    </div>
+                    </div>
+                </div>
+                </div>
+
+                {/* Add Contact Ends Model*/}
+
+
+
                                     </div>
                                     
                                 
@@ -92,7 +153,7 @@ export default class TabBudget extends Component {
                                                 <div className="row">
                                                     <div className="col-sm-12" align="center">
                                                    
-                                                    <Link to={'/project/new'} ><i style={{color:'#54d98c'}} className="icofont icofont-plus-circle icofont-5x "></i></Link>
+                                                    <Link to={'/projects/new'} ><i style={{color:'#54d98c'}} className="icofont icofont-plus-circle icofont-5x "></i></Link>
                                                    
                                                     </div>
                                                     {/* end of col-sm-8 */}
@@ -126,9 +187,6 @@ export default class TabBudget extends Component {
                                     </div>
 
                                    
-
-
-
                                 </div>
                             </div>
                         </div>

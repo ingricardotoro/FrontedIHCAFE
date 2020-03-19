@@ -80,7 +80,7 @@ export default class ProjectNew extends Component {
                                     <i className="icofont icofont-home" />
                                     </a>
                                 </li>
-                                <li className="breadcrumb-item"><Link to={'/projects'} >Proyectos</Link>
+                                <li className="breadcrumb-item"><Link to={'/budgets'} >Proyectos</Link>
                                 </li>
                                 <li className="breadcrumb-item">Crear Nuevo
                                 </li>
