@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { Redirect } from "react-router-dom";
+import { withRouter } from 'react-router';
+
 export default class BudgetNew extends Component {
 
     constructor() {
@@ -67,7 +69,8 @@ export default class BudgetNew extends Component {
         
         })
         if (res) {
-            return <Redirect to="/budgets" />
+            //return <Redirect to="/budgets" />
+            return this.props.history.push('/budgets');
         }
         //window.location.href = 'https://ihcafe-35ae7.firebaseapp.com/budgets/';
        
