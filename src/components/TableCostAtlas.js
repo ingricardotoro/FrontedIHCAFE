@@ -199,7 +199,7 @@ export default class TableCost extends Component {
     onClickAprobar = async (id) =>{
         //e.preventDefault();
         if ( await axios.post('https://backendihcafe.herokuapp.com/api/budgetlines/aprobar_atlas/'+id+'/'+this.state.aprobar)){
-            window.location.href = 'http://localhost:3000/project/'+this.props.idProject
+            window.location.href = 'https://ihcafe-35ae7.firebaseapp.com//project/'+this.props.idProject
         } 
     }
 
@@ -219,7 +219,7 @@ export default class TableCost extends Component {
             file:this.state.archivo,
          })
 
-        // window.location.href = 'http://localhost:3000/project/'+this.props.idProject
+        // window.location.href = 'https://ihcafe-35ae7.firebaseapp.com//project/'+this.props.idProject
         
     }
 
@@ -252,7 +252,7 @@ export default class TableCost extends Component {
 
             /***atlas result_atlas, product_atlas ,account_atlas */
         })
-        window.location.href = 'http://localhost:3000/project/'+this.props.idProject
+        window.location.href = 'https://ihcafe-35ae7.firebaseapp.com//project/'+this.props.idProject
        
     }
 

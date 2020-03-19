@@ -1,6 +1,74 @@
 import React, { Component } from 'react'
 
 export default class BudgetNew extends Component {
+
+    constructor() {
+        super();
+        this.state = {
+            
+            code ,
+            name ,
+            description ,
+            excercise_start ,
+            excercise_end ,
+            account_id ,
+            person_id:1 ,
+            buddgetstart:0.0 ,
+            buddgeupdate:0.0 ,
+            buddgetfinal :0.0,
+            balance :0.0,
+            returns :0.0,
+            deviation :0.0,
+            status ,
+            approval : true,
+            approvalby_id:1,
+            dateapproval:Date.now(),
+
+            cuentas:[]
+        }
+    }
+
+    async componentDidMount(){
+
+        const res6 = await axios.get('https://backendihcafe.herokuapp.com/api/accounts/');
+        this.setState({cuentas:res6.data.cuentas});
+    }
+
+    onChangeCode = (e) => {this.setState({code: e.target.value})}
+    onChangeName = (e) => {this.setState({name: e.target.value})}
+    onChangedescription = (e) => {this.setState({description: e.target.value})}
+    onChangeStart = (e) => {this.setState({excercise_start: e.target.value})}
+    onChangeEnd = (e) => {this.setState({excercise_end: e.target.value})}
+    onChangeAccount = (e) => {this.setState({account_id: e.target.value})}
+    onChangeEstado = (e) => {this.setState({status: e.target.value})}
+
+    onSubmit  = async e =>{
+       
+        const res = await axios.post('https://backendihcafe.herokuapp.com/api/budgets',{
+            
+            code:this.state.code,
+            name:this.state.name,
+            description: this.state.description,
+            excercise_start : this.state.excercise_start,
+            excercise_end : this.state.excercise_end,
+            account_id: this.state.account_id,
+            person_id: this.state.person_id,
+            buddgetstart: this.state.buddgetstart,
+            buddgeupdate : this.state.buddgeupdate,
+            buddgetfinal : this.state.buddgetfinal,
+            balance: this.state.buddgetfinal,
+            returns : this.state.returns,
+            deviation : this.state.deviation,
+            status : this.state.status,
+            approval : this.state.approval,
+            approvalby_id : this.state.approvalby_id,
+            dateapproval : this.state.dateapproval
+        
+        })
+        window.location.href = 'https://backendihcafe.herokuapp.com/api/budgets/';
+       
+    }
+   
     render() {
         return (
             <div className="pcoded-content">
@@ -33,49 +101,53 @@ export default class BudgetNew extends Component {
                                             <p>
                                             </p><div className="card-block">
                                                 
-                                                <form>
+                                                <form onSubmit={this.onSubmit}>
                                                 <div className="form-group row">
                                                     <label className="col-sm-2 col-form-label">Código de Identificación</label>
                                                     <div className="col-sm-10">
-                                                    <input type="text" className="form-control" placeholder="Código del Presupuesto" />
+                                                    <input onChange={this.onChangeCode} type="text" className="form-control" placeholder="Código de Identifiació del Presupuesto" />
                                                     </div>
                                                 </div>
                                                 <div className="form-group row">
                                                     <label className="col-sm-2 col-form-label">Nombre del Presupuesto</label>
                                                     <div className="col-sm-10">
-                                                    <input required type="text" className="form-control" placeholder="Ingrese un Nombre" />
+                                                    <input onChange={this.onChangeName} required type="text" className="form-control" placeholder="Ingrese un Nombre al Presupuesto" />
                                                     </div>
                                                 </div>
                                                 <div className="form-group row">
                                                     <label className="col-sm-2 col-form-label">Descripción del Presupuesto</label>
                                                     <div className="col-sm-10">
-                                                    <textarea rows={5} cols={5} className="form-control" placeholder="Default textarea" defaultValue={""} />
+                                                    <textarea onChange={this.onChangedescription} rows={5} cols={5} className="form-control" placeholder="Default textarea" defaultValue={""} />
                                                     </div>
                                                 </div>
                                                 <div className="form-group row">
                                                     <label className="col-sm-2 col-form-label">Fecha de Inicio</label>
                                                     <div className="col-sm-10">
-                                                        <input class="form-control" type="date" placeholder="Inicio del ejercicio presupuestal" />
+                                                        <input onChange={this.onChangeStart} class="form-control" type="date" placeholder="Inicio del ejercicio presupuestal" />
                                                     </div>
                                                 </div>
                                                 <div className="form-group row">
                                                     <label className="col-sm-2 col-form-label">Fecha de Finalización</label>
                                                     <div className="col-sm-10">
-                                                        <input class="form-control" type="date" placeholder="Fin del ejercicio presupuestal" />
+                                                        <input onChange={this.onChangeEnd} class="form-control" type="date" placeholder="Fin del ejercicio presupuestal" />
                                                     </div>
                                                 </div>
                                                 <div className="form-group row">
                                                     <label className="col-sm-2 col-form-label">Cuenta de Presupuesto</label>
                                                     <div className="col-sm-10">
-                                                    <select name="select" className="form-control">
-                                                        <option value="opt1">Selecione Cuenta</option>
-                                                        <option value="opt2">Banco occidente 2253 (Dolar)</option>
-                                                        <option value="opt3">Banco Rural 21212-1 (LPS)</option>
-                                                        <option value="opt4">Cuenta de Cheues IHCAFE (LPS)</option>
+                                                    
+                                                    <select onChange={this.onChangeAccount} name="select" className="form-control mt-3">
+                                                        <option value="#">Seleccione Cuenta de Origen</option>
+                                                        {  
+                                                            this.state.cuentas.map(cuenta => 
+                                                                <option value={cuenta.id}>({cuenta.coin}-{cuenta.actualbalance})-{cuenta.name} </option>
+                                                            )
+                                                        } 
                                                     </select>
+
                                                     </div>
                                                 </div>
-                                                <div className="row">
+                                                {/* <div className="row">
                                                     <label className="col-sm-4 col-lg-2 col-form-label">Presupuesto Inicial</label>
                                                     <div className="col-sm-8 col-lg-10">
                                                         <div className="input-group">
@@ -83,14 +155,14 @@ export default class BudgetNew extends Component {
                                                         <input type="text" className="form-control" />
                                                         </div>
                                                     </div>
-                                                </div>
+                                                </div> */}
                                                 <div className="form-group row">
                                                     <label className="col-sm-2 col-form-label">Estado del Presupuesto</label>
                                                     <div className="col-sm-10">
-                                                    <select name="select" className="form-control">
-                                                        <option value="opt1">Selecione Estado</option>
-                                                        <option value="opt2">Aprobado</option>
-                                                        <option value="opt3">En espera</option>
+                                                    <select onChange={this.onChangeEstado} name="select" className="form-control">
+                                                        <option value="0">Selecione Estado</option>
+                                                        <option value="1">Aprobado</option>
+                                                        <option value="2">En espera</option>
                                                     </select>
                                                     </div>
                                                 </div>

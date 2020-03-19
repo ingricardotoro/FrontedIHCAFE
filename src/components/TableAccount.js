@@ -124,7 +124,7 @@ export default class TableAccount extends Component {
             balance:this.state.balance,
             category_id:this.state.category_id
         })
-        window.location.href = 'http://localhost:3000/budgets'
+        window.location.href = 'https://ihcafe-35ae7.firebaseapp.com//budgets'
        
     }*/
 
