@@ -136,7 +136,7 @@ export default class BudgetNew extends Component {
                                                     <label className="col-sm-2 col-form-label">Cuenta de Presupuesto</label>
                                                     <div className="col-sm-10">
                                                     
-                                                    <select onChange={this.onChangeAccount} name="select" className="form-control mt-3">
+                                                    <select onChange={this.onChangeAccount} name="select_account" className="form-control mt-3">
                                                         <option value="#">Seleccione Cuenta de Origen</option>
                                                         {  
                                                             this.state.cuentas.map(cuenta => 
@@ -159,7 +159,7 @@ export default class BudgetNew extends Component {
                                                 <div className="form-group row">
                                                     <label className="col-sm-2 col-form-label">Estado del Presupuesto</label>
                                                     <div className="col-sm-10">
-                                                    <select onChange={this.onChangeEstado} name="select" className="form-control">
+                                                    <select onChange={this.onChangeEstado} name="select_status" className="form-control">
                                                         <option value="0">Selecione Estado</option>
                                                         <option value="1">Aprobado</option>
                                                         <option value="2">En espera</option>
