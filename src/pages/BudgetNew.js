@@ -65,7 +65,7 @@ export default class BudgetNew extends Component {
             dateapproval : this.state.dateapproval
         
         })
-        window.location.href = 'https://backendihcafe.herokuapp.com/api/budgets/';
+        window.location.href = 'https://ihcafe-35ae7.firebaseapp.com/budgets/';
        
     }
    
