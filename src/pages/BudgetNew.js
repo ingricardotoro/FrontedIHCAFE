@@ -65,6 +65,9 @@ export default class BudgetNew extends Component {
             dateapproval : this.state.dateapproval
         
         })
+        if (res) {
+            return <Redirect to="/budgets" />
+        }
         //window.location.href = 'https://ihcafe-35ae7.firebaseapp.com/budgets/';
        
     }
