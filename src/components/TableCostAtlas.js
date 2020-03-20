@@ -3,7 +3,6 @@ import axios from 'axios'
 import RowCardsProjects from '../components/RowCardsProjects'
 import ModalVerFiles from '../components/ModalVerFiles'
 import { Redirect} from 'react-router-dom';
-import { withRouter } from 'react-router';
 
 
  class TableCost extends Component {
@@ -230,7 +229,7 @@ import { withRouter } from 'react-router';
 
         //codigo para crear un nuevo renglon presupuestario
     onSubmit  = async e =>{
-        //e.preventDefault();
+        e.preventDefault();
         const res = await axios.post('https://backendihcafe.herokuapp.com/api/budgetlines/budgetlineatlas',{
             code_resultado:this.state.result_atlas,
             code_producto:this.state.product_atlas,
@@ -257,11 +256,16 @@ import { withRouter } from 'react-router';
 
             /***atlas result_atlas, product_atlas ,account_atlas */
         })
-        
+       
+       
+            //return <Redirect to={"/project/"+this.props.idProject} />
+            window.location.reload(true);
+           
+         
        
         //this.go_project();
         
-            return <Redirect to={"/project/"+this.props.idProject}  />
+            //return <Redirect to={"/project/"+this.props.idProject}  />
             //return this.props.history.push('/project/'+this.props.idProject);
       
         //window.location.href = 'http://localhost:3000/project/'+this.props.idProject;
@@ -274,8 +278,8 @@ import { withRouter } from 'react-router';
         
         const res_p = await axios.post('https://backendihcafe.herokuapp.com/api/budgetlines/budgetlineatlas/delete/'+id);
         
-        return <Redirect to={"/project/"+this.props.idProject}  />
-       
+        //return <Redirect to={"/project/"+this.props.idProject}  />
+        window.location.reload(true);
     }
 
    
@@ -771,4 +775,4 @@ import { withRouter } from 'react-router';
     }
 }
 
-export default withRouter (TableCost);
+export default (TableCost);
