@@ -2,9 +2,11 @@ import React, { Component } from 'react'
 import axios from 'axios'
 import RowCardsProjects from '../components/RowCardsProjects'
 import ModalVerFiles from '../components/ModalVerFiles'
+import { Redirect} from 'react-router-dom';
+import { withRouter } from 'react-router';
 
 
-export default class TableCost extends Component {
+ class TableCost extends Component {
     
     constructor() {
         super();
@@ -197,10 +199,11 @@ export default class TableCost extends Component {
         return number.toLocaleString('en-US', { style: 'currency', currency: 'HNL' });
     }
 
-    onClickAprobar = async (id) =>{
+    onClickAprobar = async (id,valor) =>{
         //e.preventDefault();
-        if ( await axios.post('https://backendihcafe.herokuapp.com/api/budgetlines/aprobar_atlas/'+id+'/'+this.state.aprobar)){
-            window.location.href = 'https://ihcafe-35ae7.firebaseapp.com//project/'+this.props.idProject
+        if ( 
+            await axios.post('https://backendihcafe.herokuapp.com/api/budgetlines/aprobar_atlas/'+id+'/'+this.state.aprobar+'/'+valor)){
+            window.location.href = 'https://ihcafe-35ae7.firebaseapp.com/project/'+this.props.idProject
         } 
     }
 
@@ -214,7 +217,8 @@ export default class TableCost extends Component {
         this.setState({fase_archivo: e.target.value });
     }
     onClickSubirArchivo = async (id) =>{
-         await axios.post('https://backendihcafe.herokuapp.com/api/files/'+id,{
+        //await axios.post('https://backendihcafe.herokuapp.com/api/files/'+id,{ 
+        await axios.post('localhost:4000/api/files/'+id,{
             nombre_archivo:this.state.nombre_archivo,
             fase_archivo:this.state.fase_archivo,
             file:this.state.archivo,
@@ -226,7 +230,7 @@ export default class TableCost extends Component {
 
         //codigo para crear un nuevo renglon presupuestario
     onSubmit  = async e =>{
-        e.preventDefault();
+        //e.preventDefault();
         const res = await axios.post('https://backendihcafe.herokuapp.com/api/budgetlines/budgetlineatlas',{
             code_resultado:this.state.result_atlas,
             code_producto:this.state.product_atlas,
@@ -253,12 +257,28 @@ export default class TableCost extends Component {
 
             /***atlas result_atlas, product_atlas ,account_atlas */
         })
+        
        
+        //this.go_project();
+        
+            return <Redirect to={"/project/"+this.props.idProject}  />
+            //return this.props.history.push('/project/'+this.props.idProject);
+      
         //window.location.href = 'http://localhost:3000/project/'+this.props.idProject;
-        window.location.href = 'https://ihcafe-35ae7.firebaseapp.com/project/'+this.props.idProject;
+        //window.location.href = 'https://ihcafe-35ae7.firebaseapp.com/project/'+this.props.idProject;
        
     }
 
+    //funcion para elimiar un renglon presupuestario
+    onSumbitDelete  = async (id) =>{
+        
+        const res_p = await axios.post('https://backendihcafe.herokuapp.com/api/budgetlines/budgetlineatlas/delete/'+id);
+        
+        return <Redirect to={"/project/"+this.props.idProject}  />
+       
+    }
+
+   
     render() {
 
       this.calculo();
@@ -323,7 +343,7 @@ export default class TableCost extends Component {
                                                     <label className="text-info"> {this.formatMoney( budgetLinesAtlas.budgetstart)}</label>
                                                 </td>
                                                 <td>
-                                                    <label className="text-danger"> {this.formatMoney(budgetLinesAtlas.budgetfinal)}</label>
+                                                    <label className="text-danger"> {this.formatMoney(budgetLinesAtlas.budgeupdate)}</label>
                                                 </td>
                                                 <td>
                                                     <label className="text-success"> {this.formatMoney(budgetLinesAtlas.balance)}</label>
@@ -347,10 +367,44 @@ export default class TableCost extends Component {
                                                 </td>
                                                 <td align="center" className="action-icon"> 
                                                     <a href="#!" className="m-r-15 text-muted" data-toggle="tooltip" data-placement="top" title data-original-title="Edit"><i className="icofont icofont-ui-edit" /></a>
-                                                    <a href="#!" className="text-muted" data-toggle="tooltip" data-placement="top" title data-original-title="Delete"><i className="icofont icofont-delete-alt" /></a>
+                                                    
+                                                    <a className="text-muted" title data-original-title="Eliminar">
+                                                        <i className="icofont icofont-delete-alt" data-toggle="modal" data-target={'#modal_delete_'+budgetLinesAtlas.id}></i>
+                                                    </a>
                                                 </td>
+                                                
+                                                 {/* INICIL Modal DELETE*/}
+              
+                                                <div className="modal fade" id={"modal_delete_"+budgetLinesAtlas.id}  tabIndex={-1} role="dialog">
+                                                    <div className="modal-dialog modal-lg" role="document">
+                                                    <div className="modal-content">
+                                                        <div className="modal-header">
+                                                        <h4 className="modal-title">Eliminar Presupuesto: {budgetLinesAtlas.atlas_account.name} </h4>
+                                                        <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">×</span>
+                                                        </button>
+                                                        </div>
+                                                        <div className="modal-body">
+                                                            
+                                                            <form onSubmit={ () => this.onSumbitDelete(budgetLinesAtlas.id)}>
+                                                                <div style={{width:'100%',textAlign:'center', display:'inline-block'}}>
+                                                                    <button  type="submit" className="btn btn-danger waves-effect ">Eliminar Este Renglon Presupuestario</button>
+                                                                </div>
+                                                            </form>
+                                                            
+                                                        <div className="modal-footer">
+                                                            <button type="button" className="btn btn-default waves-effect " data-dismiss="modal">Cerrar</button>
+                                                            
+                                                        </div>
+                                                        
+                                                        </div>
+                                                    </div>
+                                                    </div>
+                                                </div>
+                                                
+                                                {/*FIN Modal DELETE*/}
 
-                         
+
                                                 <div class="modal fade" id={'aprobar_'+budgetLinesAtlas.id} tabindex="-1" role="dialog">
                                                     <div class="modal-dialog modal-lg" role="document">
                                                         <div class="modal-content">
@@ -372,7 +426,7 @@ export default class TableCost extends Component {
                                                                 </div>
                                                                 <div class="modal-footer">
                                                                     <button type="button" class="btn btn-default waves-effect " data-dismiss="modal">Cerrar</button>
-                                                                    <button type="button" onClick={ () =>this.onClickAprobar(budgetLinesAtlas.id )} class="btn btn-primary waves-effect waves-light ">Guardar</button>
+                                                                    <button type="button" onClick={ () =>this.onClickAprobar(budgetLinesAtlas.id, budgetLinesAtlas.budgetstart)} class="btn btn-primary waves-effect waves-light ">Guardar</button>
                                                                 </div>
                                                             </form>
                                                         </div>
@@ -395,7 +449,7 @@ export default class TableCost extends Component {
                                                                     <span aria-hidden="true">&times;</span>
                                                                 </button>
                                                             </div>  
-                                                            <form action = {'https://backendihcafe.herokuapp.com/api/files/'+budgetLinesAtlas.id} method="post" enctype="multipart/form-data">
+                                                            <form action = {"localhost:4000/api/files/"+budgetLinesAtlas.id} method="post" enctype="multipart/form-data">
 
                                                                 <div class="modal-body">                                                                
                                                                     <div className="form-control mt-3">
@@ -716,3 +770,5 @@ export default class TableCost extends Component {
         )
     }
 }
+
+export default withRouter (TableCost);
