@@ -281,7 +281,7 @@ import { Redirect} from 'react-router-dom';
         
         const res_p = await axios.post('https://backendihcafe.herokuapp.com/api/budgetlines/budgetlineatlas/delete/'+id);
         if (res_p) {
-             return <Redirect to={"/project/"+this.props.idProject}  />
+             //return <Redirect to={"/project/"+this.props.idProject}  />
         }
        
         //window.location.reload(true);
