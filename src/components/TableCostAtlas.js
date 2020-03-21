@@ -230,7 +230,7 @@ import { Redirect} from 'react-router-dom';
 
         //codigo para crear un nuevo renglon presupuestario
     onSubmit  = async e =>{
-        //e.preventDefault();
+        e.preventDefault();
         const res = await axios.post('https://backendihcafe.herokuapp.com/api/budgetlines/budgetlineatlas',{
             code_resultado:this.state.result_atlas,
             code_producto:this.state.product_atlas,
