@@ -260,8 +260,18 @@ export default class TableCost extends Component {
        
         //window.location.reload(true);
         if (res) {
+
+
+            <Redirect
+            to={{
+                pathname: "/project/"+this.props.idProject,
+                search: "?project",
+                state: { referrer: currentLocation }
+            }}
+            />
+
             
-            <Redirect push to={"/project/"+this.props.idProject} />
+            //<Redirect push to={"/project/"+this.props.idProject} />
 
             //return this.props.history.push('project/'+t/his.props.idProject);
             //return <Redirect to="/project/"+this.props.idProject  />
@@ -288,7 +298,14 @@ export default class TableCost extends Component {
        
         const res_p = await axios.post('https://backendihcafe.herokuapp.com/api/budgetlines/budgetlineatlas/delete/'+id);
         if (res_p) {
-            <Redirect push to={"/project/"+this.props.idProject} />
+            <Redirect
+            to={{
+                pathname: "/project/"+this.props.idProject,
+                search: "?project",
+                state: { referrer: currentLocation }
+            }}
+            />
+            //<Redirect push to={"/project/"+this.props.idProject} />
             //return this.props.history.push('/project/'+this.props.idProject);
             //return <Redirect to={"/project/"+this.props.idProject}  />
         }
