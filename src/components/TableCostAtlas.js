@@ -278,8 +278,9 @@ import { Redirect} from 'react-router-dom';
 
     //funcion para elimiar un renglon presupuestario
     onSumbitDelete  = async (id) =>{
-        
+        e.preventDefault();
         const res_p = await axios.post('https://backendihcafe.herokuapp.com/api/budgetlines/budgetlineatlas/delete/'+id);
+        
         if (res_p) {
              //return <Redirect to={"/project/"+this.props.idProject}  />
         }
