@@ -283,6 +283,8 @@ import { Redirect} from 'react-router-dom';
         
         if (res_p) {
              //return <Redirect to={"/project/"+this.props.idProject}  />
+             return <Redirect to={"/budgets"}  />
+
         }
        
         //window.location.reload(true);
