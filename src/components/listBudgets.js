@@ -27,7 +27,7 @@ export default class listBudgets extends Component {
                                 <div className="page-header page-wrapper">
                                     <div className="page-header-title">
                                         <h4>Presupuestos</h4>
-                                        <span>Listado de Presupuestos</span>
+                                        <span>Listado de Presupuestos 2020</span>
                                     </div>
                                    
                                    <div>
