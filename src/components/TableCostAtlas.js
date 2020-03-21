@@ -5,7 +5,7 @@ import ModalVerFiles from '../components/ModalVerFiles'
 import { Redirect} from 'react-router-dom';
 
 
- class TableCost extends Component {
+export default class TableCost extends Component {
     
     constructor() {
         super();
@@ -778,5 +778,3 @@ import { Redirect} from 'react-router-dom';
         )
     }
 }
-
-export default (TableCost);
