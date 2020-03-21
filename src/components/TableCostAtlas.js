@@ -277,7 +277,7 @@ import { Redirect} from 'react-router-dom';
     }
 
     //funcion para elimiar un renglon presupuestario
-    onClickDelete  = async (e,id) =>{
+    onClickDelete  = async (id) =>{
        
         const res_p = await axios.post('https://backendihcafe.herokuapp.com/api/budgetlines/budgetlineatlas/delete/'+id);
         
@@ -396,13 +396,11 @@ import { Redirect} from 'react-router-dom';
                                                         </button>
                                                         </div>
                                                         <div className="modal-body">
-                                                            
                                                            
                                                             <div style={{width:'100%',textAlign:'center', display:'inline-block'}}>
                                                                 <button onClick={ () => this.onClickDelete(budgetLinesAtlas.id)} className="btn btn-danger waves-effect ">Eliminar Este Renglon Presupuestario</button>
                                                             </div>
                                                           
-                                                            
                                                         <div className="modal-footer">
                                                             <button type="button" className="btn btn-default waves-effect " data-dismiss="modal">Cerrar</button>
                                                             
