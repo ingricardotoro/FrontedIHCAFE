@@ -264,9 +264,7 @@ export default class TableCost extends Component {
 
             <Redirect
             to={{
-                pathname: "/project/"+this.props.idProject,
-                search: "?project",
-                state: { referrer: currentLocation }
+                pathname: "/project/"+this.props.idProject
             }}
             />
 
@@ -300,9 +298,7 @@ export default class TableCost extends Component {
         if (res_p) {
             <Redirect
             to={{
-                pathname: "/project/"+this.props.idProject,
-                search: "?project",
-                state: { referrer: currentLocation }
+                pathname: "/project/"+this.props.idProject
             }}
             />
             //<Redirect push to={"/project/"+this.props.idProject} />
