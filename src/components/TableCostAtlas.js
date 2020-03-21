@@ -291,7 +291,7 @@ export default class TableCost extends Component {
             <Redirect to="/project/{this.props.idProject}" />
             //return this.props.history.push('/project/'+this.props.idProject);
             //return <Redirect to={"/project/"+this.props.idProject}  />
-        }
+        } 
         
              //return <Redirect to={"/budgets"}  />
        
