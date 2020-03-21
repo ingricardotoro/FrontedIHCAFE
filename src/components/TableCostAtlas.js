@@ -230,7 +230,7 @@ import { Redirect} from 'react-router-dom';
 
         //codigo para crear un nuevo renglon presupuestario
     onSubmit  = async e =>{
-        //e.preventDefault();
+        e.preventDefault();
         const res = await axios.post('https://backendihcafe.herokuapp.com/api/budgetlines/budgetlineatlas',{
             code_resultado:this.state.result_atlas,
             code_producto:this.state.product_atlas,
@@ -258,9 +258,9 @@ import { Redirect} from 'react-router-dom';
             /***atlas result_atlas, product_atlas ,account_atlas */
         })
        
-        if (res) {
+        //if (res) {
             return <Redirect to={"/project/"+this.props.idProject}  />
-        }
+        //}
             //return <Redirect to={"/project/"+this.props.idProject} />
             //window.location.reload(true);
            
@@ -278,14 +278,14 @@ import { Redirect} from 'react-router-dom';
 
     //funcion para elimiar un renglon presupuestario
     onSumbitDelete  = async (e,id) =>{
-        //e.preventDefault();
+        e.preventDefault();
         const res_p = await axios.post('https://backendihcafe.herokuapp.com/api/budgetlines/budgetlineatlas/delete/'+id);
         
-        if (res_p) {
+        //if (res_p) {
              return <Redirect to={"/project/"+this.props.idProject}  />
              //return <Redirect to={"/budgets"}  />
 
-        }
+        //}
        
         //window.location.reload(true);
     }
