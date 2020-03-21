@@ -277,15 +277,14 @@ import { Redirect} from 'react-router-dom';
     }
 
     //funcion para elimiar un renglon presupuestario
-    onSumbitDelete  = async (e,id) =>{
-        e.preventDefault();
+    onClickDelete  = async (e,id) =>{
+       
         const res_p = await axios.post('https://backendihcafe.herokuapp.com/api/budgetlines/budgetlineatlas/delete/'+id);
         
-        /*if (res_p) {
+        if (res_p) {
              return <Redirect to={"/project/"+this.props.idProject}  />
              //return <Redirect to={"/budgets"}  />
-
-        }*/
+        }
        
         //window.location.reload(true);
     }
@@ -398,11 +397,11 @@ import { Redirect} from 'react-router-dom';
                                                         </div>
                                                         <div className="modal-body">
                                                             
-                                                            <form onSubmit={ () => this.onSumbitDelete(budgetLinesAtlas.id)}>
-                                                                <div style={{width:'100%',textAlign:'center', display:'inline-block'}}>
-                                                                    <button  type="submit" className="btn btn-danger waves-effect ">Eliminar Este Renglon Presupuestario</button>
-                                                                </div>
-                                                            </form>
+                                                           
+                                                            <div style={{width:'100%',textAlign:'center', display:'inline-block'}}>
+                                                                <button onClick={ () => this.onClickDelete(budgetLinesAtlas.id)} className="btn btn-danger waves-effect ">Eliminar Este Renglon Presupuestario</button>
+                                                            </div>
+                                                          
                                                             
                                                         <div className="modal-footer">
                                                             <button type="button" className="btn btn-default waves-effect " data-dismiss="modal">Cerrar</button>
