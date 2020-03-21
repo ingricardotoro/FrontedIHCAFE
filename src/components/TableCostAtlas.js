@@ -259,7 +259,10 @@ export default class TableCost extends Component {
         })
        
         //window.location.reload(true);
-            return <Redirect to={"/project/"+this.props.idProject}  />
+        if (res) {
+             return <Redirect to={"/project/"+this.props.idProject}  />
+        }
+           
         
             //return <Redirect to={"/project/"+this.props.idProject} />
             //window.location.reload(true);
@@ -280,8 +283,10 @@ export default class TableCost extends Component {
     onClickDelete  = async (id) =>{
        
         const res_p = await axios.post('https://backendihcafe.herokuapp.com/api/budgetlines/budgetlineatlas/delete/'+id);
+        if (res_p) {
+            return <Redirect to={"/project/"+this.props.idProject}  />
+        }
         
-        return <Redirect to={"/project/"+this.props.idProject}  />
              //return <Redirect to={"/budgets"}  />
        
        
