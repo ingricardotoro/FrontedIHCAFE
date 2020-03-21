@@ -202,7 +202,8 @@ import { Redirect} from 'react-router-dom';
         //e.preventDefault();
         if ( 
             await axios.post('https://backendihcafe.herokuapp.com/api/budgetlines/aprobar_atlas/'+id+'/'+this.state.aprobar+'/'+valor)){
-            window.location.href = 'https://ihcafe-35ae7.firebaseapp.com/project/'+this.props.idProject
+            //window.location.href = 'https://ihcafe-35ae7.firebaseapp.com/project/'+this.props.idProject
+            return <Redirect to={"/project/"+this.props.idProject}  />
         } 
     }
 
@@ -257,9 +258,11 @@ import { Redirect} from 'react-router-dom';
             /***atlas result_atlas, product_atlas ,account_atlas */
         })
        
-       
+        if (res) {
+            return <Redirect to={"/project/"+this.props.idProject}  />
+        }
             //return <Redirect to={"/project/"+this.props.idProject} />
-            window.location.reload(true);
+            //window.location.reload(true);
            
          
        
@@ -277,9 +280,11 @@ import { Redirect} from 'react-router-dom';
     onSumbitDelete  = async (id) =>{
         
         const res_p = await axios.post('https://backendihcafe.herokuapp.com/api/budgetlines/budgetlineatlas/delete/'+id);
-        
-        //return <Redirect to={"/project/"+this.props.idProject}  />
-        window.location.reload(true);
+        if (res_p) {
+             return <Redirect to={"/project/"+this.props.idProject}  />
+        }
+       
+        //window.location.reload(true);
     }
 
    

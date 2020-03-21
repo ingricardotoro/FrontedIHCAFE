@@ -205,8 +205,8 @@ export default class TableCost extends Component {
 
             /***atlas result_atlas, product_atlas ,account_atlas */
         })
-        window.location.href = 'https://ihcafe-35ae7.firebaseapp.com//project/'+this.props.idProject
-       
+        //window.location.href = 'https://ihcafe-35ae7.firebaseapp.com/project/'+this.props.idProject
+        return <Redirect to={"/project/"+this.props.idProject}  />
     }
 
     render() {

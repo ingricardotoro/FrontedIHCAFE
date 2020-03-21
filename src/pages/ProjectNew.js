@@ -56,10 +56,9 @@ export default class ProjectNew extends Component {
             team_id:this.state.team_id,
             status:this.state.status
         })
-        window.location.href = 'https://ihcafe-35ae7.firebaseapp.com/projects'
-       
+        //window.location.href = 'https://ihcafe-35ae7.firebaseapp.com/projects'
+        return <Redirect to={"/projects"}  />
     }
-
 
     render() {
         return (
