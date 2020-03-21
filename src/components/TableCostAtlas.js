@@ -258,9 +258,9 @@ import { Redirect} from 'react-router-dom';
             /***atlas result_atlas, product_atlas ,account_atlas */
         })
        
-        /*if (res) {
+        if (res) {
             return <Redirect to={"/project/"+this.props.idProject}  />
-        }*/
+        }
             //return <Redirect to={"/project/"+this.props.idProject} />
             //window.location.reload(true);
            
