@@ -70,8 +70,8 @@ export default class BudgetNew extends Component {
         
         })
         if (res) {
-            //return <Redirect to="/budgets" />
-            return this.props.history.push('/budgets');
+            return <Redirect to="/budgets" />
+            //return this.props.history.push('/budgets');
         }
         //window.location.href = 'https://ihcafe-35ae7.firebaseapp.com/budgets/';
        

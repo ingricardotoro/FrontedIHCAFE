@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import axios from 'axios'
 import RowCardsProjects from '../components/RowCardsProjects'
 import ModalVerFiles from '../components/ModalVerFiles'
-import { Redirect} from 'react-router-dom';
+import { Redirect, Route} from 'react-router-dom';
 
 
 export default class TableCost extends Component {
@@ -68,7 +68,9 @@ export default class TableCost extends Component {
 
             archivo:[],
             nombre_archivo:'',
-            fase_archivo:''
+            fase_archivo:'',
+
+            variable:0
 
          
         }
@@ -230,7 +232,7 @@ export default class TableCost extends Component {
 
         //codigo para crear un nuevo renglon presupuestario
     onSubmit  = async e =>{
-        e.preventDefault();
+        //e.preventDefault();
         const res = await axios.post('https://backendihcafe.herokuapp.com/api/budgetlines/budgetlineatlas',{
             code_resultado:this.state.result_atlas,
             code_producto:this.state.product_atlas,
@@ -259,14 +261,13 @@ export default class TableCost extends Component {
         })
        
         //window.location.reload(true);
-        if (res) {
-
+        //if (res) {
 
             //<Redirect push to={"/project/"+this.props.idProject} />
 
             //return this.props.history.push('project/'+t/his.props.idProject);
             //return <Redirect to="/project/"+this.props.idProject  />
-        }
+        //}
            
         
             //return <Redirect to={"/project/"+this.props.idProject} />
@@ -282,16 +283,19 @@ export default class TableCost extends Component {
     }
 
     //funcion para elimiar un renglon presupuestario
-    onClickDelete  = async (id) =>{
+    onSubmitDelete  = async (id) =>{
        
         const res_p = await axios.post('https://backendihcafe.herokuapp.com/api/budgetlines/budgetlineatlas/delete/'+id);
-        if (res_p) {
+        //return <Redirect to={"/project/"+this.props.idProject}  />
+        //return res_p ==1 ?  <Redirect push to="/budgets" />:  <Redirect push to="/budgets" /> 
+        //if (res_p) {
           
-            
-            return <Redirect to={"/project/"+this.props.idProject} />
+            //return this.props.history.push('/project/'+this.props.idProject);
+           
+            //return <Redirect to={{"/project/"this.props.idProject}}  />
             //return this.props.history.push('/project/'+this.props.idProject);
             // <Redirect to={"/project/"+this.props.idProject}  />
-        } 
+        //} 
         
              //return <Redirect to={"/budgets"}  />
        
@@ -406,11 +410,13 @@ export default class TableCost extends Component {
                                                         </button>
                                                         </div>
                                                         <div className="modal-body">
-                                                           
-                                                            <div style={{width:'100%',textAlign:'center', display:'inline-block'}}>
-                                                                <button onClick={ () => this.onClickDelete(budgetLinesAtlas.id)} className="btn btn-danger waves-effect ">Eliminar Este Renglon Presupuestario</button>
-                                                            </div>
-                                                          
+
+                                                           <form onSubmit={ () => this.onSubmitDelete(budgetLinesAtlas.id)}>
+                                                                <div style={{width:'100%',textAlign:'center', display:'inline-block'}}>
+                                                                    <button type="submit" className="btn btn-danger waves-effect ">Eliminar Este Renglon Presupuestario</button>
+                                                                </div>
+                                                           </form>
+                                                            
                                                         <div className="modal-footer">
                                                             <button type="button" className="btn btn-default waves-effect " data-dismiss="modal">Cerrar</button>
                                                             
