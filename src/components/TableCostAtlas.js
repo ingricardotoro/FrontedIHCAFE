@@ -232,7 +232,7 @@ export default class TableCost extends Component {
 
         //codigo para crear un nuevo renglon presupuestario
     onSubmit  = async e =>{
-        //e.preventDefault();
+        e.preventDefault();
         const res = await axios.post('https://backendihcafe.herokuapp.com/api/budgetlines/budgetlineatlas',{
             code_resultado:this.state.result_atlas,
             code_producto:this.state.product_atlas,
@@ -266,7 +266,7 @@ export default class TableCost extends Component {
             //<Redirect push to={"/project/"+this.props.idProject} />
 
             //return this.props.history.push('project/'+t/his.props.idProject);
-           //return <Redirect to={"/project/"+this.props.idProject}  />
+           return <Redirect to={"/project/"+this.props.idProject}  />
         //}
            
         
