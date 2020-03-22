@@ -34,7 +34,7 @@ export default class BudgetNew extends Component {
 
     async componentDidMount(){
 
-        const res6 = await axios.get('localhost:4000/api/accounts/');
+        const res6 = await axios.get('http://167.99.15.83:4000/api/accounts/');
         this.setState({cuentas:res6.data.cuentas});
     }
 
@@ -48,7 +48,7 @@ export default class BudgetNew extends Component {
 
     onSubmit  = async e =>{
         e.preventDefault();
-        const res = await axios.post('localhost:4000/api/budgets',{
+        const res = await axios.post('http://167.99.15.83:4000/api/budgets',{
             
             code:this.state.code,
             name:this.state.name,

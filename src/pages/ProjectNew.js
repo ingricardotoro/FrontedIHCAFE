@@ -24,10 +24,10 @@ export default class ProjectNew extends Component {
     }
 
     async componentDidMount(){
-        const res = await axios.get('localhost:4000/api/budgets/');
+        const res = await axios.get('http://167.99.15.83:4000/api/budgets/');
         this.setState({budgets:res.data.budgets});
 
-        const res2 = await axios.get('localhost:4000/api/teams/');
+        const res2 = await axios.get('http://167.99.15.83:4000/api/teams/');
         this.setState({teams:res2.data.teams});
     }
 
@@ -44,7 +44,7 @@ export default class ProjectNew extends Component {
     
     onSubmit  = async e =>{
         e.preventDefault();
-        const res = await axios.post('localhost:4000/api/projects',{
+        const res = await axios.post('http://167.99.15.83:4000/api/projects',{
             code:this.state.code,
             name:this.state.name,
             location:this.state.location,
