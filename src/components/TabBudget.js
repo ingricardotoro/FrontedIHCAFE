@@ -16,7 +16,7 @@ export default class TabBudget extends Component {
     }
     
     async componentDidMount(){
-        const res_p = await axios.post('https://backendihcafe.herokuapp.com/api/projects/findProjectsByBudgetId/'+this.props.id);
+        const res_p = await axios.post('localhost:4000/api/projects/findProjectsByBudgetId/'+this.props.id);
         this.setState({projects:res_p.data.projectsbybudgetid});
     }
 
@@ -27,7 +27,7 @@ export default class TabBudget extends Component {
      
     onSumbit = async (e) => {
         //e.preventDefault();
-        const res_p = await axios.post('https://backendihcafe.herokuapp.com/api/budgets/delete/'+this.props.id);
+        const res_p = await axios.post('localhost:4000/api/budgets/delete/'+this.props.id);
         
         
             return <Redirect push to="/budgets" /> 
@@ -101,8 +101,6 @@ export default class TabBudget extends Component {
                                 </div>
                             </form>
                             
-
-
                         <div className="modal-footer">
                             <button type="button" className="btn btn-default waves-effect " data-dismiss="modal">Cerrar</button>
                             

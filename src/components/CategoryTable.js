@@ -11,7 +11,7 @@ export default class CategoryTable extends Component {
     
     async componentDidMount(){
 
-        const res3 = await axios.get('https://backendihcafe.herokuapp.com/api/categories/categories_childs/'+this.props.idCat);
+        const res3 = await axios.get('localhost:4000/api/categories/categories_childs/'+this.props.idCat);
         this.setState({subcategories:res3.data.clasificaciones});
     }
     render() {

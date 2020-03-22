@@ -18,7 +18,7 @@ export default class Projectcard extends Component {
     }
 
     async componentDidMount(){
-        const res = await axios.post('https://backendihcafe.herokuapp.com/api/budgetlines/atlas/project/'+this.props.id);
+        const res = await axios.post('localhost:4000/api/budgetlines/atlas/project/'+this.props.id);
         this.setState({budgetLines:res.data.budgetLines_atlas});
     }
 

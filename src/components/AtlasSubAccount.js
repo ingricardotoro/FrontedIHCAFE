@@ -11,7 +11,7 @@ export default class AtlasSubAccount extends Component {
     
     async componentDidMount(){
 
-        const res3 = await axios.get('https://backendihcafe.herokuapp.com/api/atlas/sub_accounts/'+this.props.codeResultado);
+        const res3 = await axios.get('localhost:4000/api/atlas/sub_accounts/'+this.props.codeResultado);
         this.setState({subAccount_atlas:res3.data.sub_accounts}); 
     }
     render() {

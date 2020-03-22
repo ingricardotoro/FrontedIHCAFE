@@ -11,7 +11,7 @@ export default class AtlasActividades extends Component {
     
     async componentDidMount(){
 
-        const res3 = await axios.get('https://backendihcafe.herokuapp.com/api/atlas/productos/'+this.props.codeResultado);
+        const res3 = await axios.get('localhost:4000/api/atlas/productos/'+this.props.codeResultado);
         this.setState({productos_atlas:res3.data.productos_atlas});
     }
     render() {
