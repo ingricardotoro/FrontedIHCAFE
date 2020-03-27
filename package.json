@@ -19,7 +19,7 @@
     "react-router-dom": "^5.1.2",
     "react-scripts": "^3.4.0"
   },
-  "homepage": "./",
+  "homepage": ".",
   "scripts": {
   
     "start": "react-scripts start",
