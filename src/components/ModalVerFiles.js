@@ -42,7 +42,7 @@ export default class ModalVerFiles extends Component {
                                                     <div className="card-block">
                                                         <div className="media">
                                                             <a className="media-left" href="#">
-                                                                <img style={{width:'200px'}} className="img-thumbnail " src={'http://http://167.99.15.83:4000/'+file.filedir + file.filename} />
+                                                                <img style={{width:'200px'}} className="img-thumbnail " src={'http://http://167.99.15.83:4000'+file.filedir + file.filename} />
                                                             </a>
                                                             <div className="media-body">
                                                                 <div className="col-xs-12">
