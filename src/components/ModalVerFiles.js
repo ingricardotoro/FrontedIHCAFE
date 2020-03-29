@@ -41,18 +41,24 @@ export default class ModalVerFiles extends Component {
                                                 <div className="card user-card">
                                                     <div className="card-block">
                                                         <div className="media">
-                                                            <a className="media-left" href="#">
+                                                        {file.filename.slice(-4) == '.pdf' 
+                                                     
+                                                            ?  <a className="media-left" href="#">
+                                                                <i style={{width:'200px'}} className="icofont icofont-file-pdf icofont-4x" src={'http://167.99.15.83:4000/'+file.filedir + file.filename} />
+                                                            </a>
+                                                            :    <a className="media-left" href="#">
                                                                 <img style={{width:'200px'}} className="img-thumbnail " src={'http://167.99.15.83:4000/'+file.filedir + file.filename} />
                                                             </a>
+                                                        }
                                                             <div className="media-body">
                                                                 <div className="col-xs-12">
                                                                         <h6 className="d-inline-block">{file.description} </h6>
                                                                         
                                                                 </div>
                                                                     <div className="f-13 text-muted m-b-15">{file.fase}</div>
-                                                                    <a href = {'http://167.99.15.83:4000/'+file.filedir + file.filename}>DESCARGAR </a>
+                                                                    <a href = {'http://167.99.15.83:4000/'+file.filedir + file.filename}>DESCARGAR 
+                                                                    </a>
                                                                   
-                                                                    
                                                             </div>
                                                         </div>
                                                     </div>
