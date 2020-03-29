@@ -357,9 +357,9 @@ export default class TableCost extends Component {
                                     <tr>
                                         <th>Código</th>
                                         <th>Sub-Cuenta Atlas</th>
-                                        <th>Inicial</th>
-                                        <th>Ejecutado</th>
-                                        <th>Disponible</th>
+                                        <th>Valor</th>
+                                       {/*  <th>Ejecutado</th>
+                                        <th>Disponible</th> */}
                                         <th>Estado</th>
                                         <th>Rembolsar</th>
                                         <th>Archivos</th>
@@ -382,12 +382,12 @@ export default class TableCost extends Component {
                                                 <td>
                                                     <label className="text-info"> {this.formatMoney( budgetLinesAtlas.budgetstart)}</label>
                                                 </td>
-                                                <td>
+                                              {/*   <td>
                                                     <label className="text-danger"> {this.formatMoney(budgetLinesAtlas.budgeupdate)}</label>
                                                 </td>
                                                 <td>
                                                     <label className="text-success"> {this.formatMoney(budgetLinesAtlas.balance)}</label>
-                                                </td>
+                                                </td> */}
                                                                                         
                                                 {budgetLinesAtlas.status === 'Solicitado' 
                                                      
@@ -506,9 +506,9 @@ export default class TableCost extends Component {
                                                                     <div >
                                                                     <select onChange={this.onClickFaseArchivo} name="fase" className="form-control mt-3">
                                                                             <option value="0">Seleccion Fase</option>
-                                                                            <option value="Fase 1">Fase 1</option>
-                                                                            <option value="Fase 2">Fase 2</option>
-                                                                            <option value="Fase 3">Fase 3</option>
+                                                                            <option value="Solicitud">Solicitud</option>
+                                                                            <option value="Desembolso">Desembolso</option>
+                                                                            <option value="Liquidacion">Liquidacion</option>
                                                                     </select>
                                                                     </div>
 
