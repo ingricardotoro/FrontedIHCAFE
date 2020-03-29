@@ -772,7 +772,7 @@ export default class TableCost extends Component {
                                     <input name="buddgetstart" onChange={this.onChanceBudget} type="text" className="form-control" placeholder="Ingrese El valor Solicitado : 0,000.00 " />
                                 </div>
                                 <div style={{width:'50%', display:'inline-block'}} >
-                                    <input name="code" className="form-control" onChange={this.onChanceCode} type="text" className="form-control" placeholder="Ingrese Codigo de Identificación: 01-101-01 " />
+                                    <input name="code" onChange={this.onChanceCode} type="text" className="form-control" placeholder="Ingrese Codigo de Identificación: 01-101-01 " />
                                 </div>
                                
                                 <div style={{width:'50%', display:'inline-block'}} >
