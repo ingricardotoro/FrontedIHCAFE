@@ -17,12 +17,12 @@ export default class ModalVerFiles extends Component {
         this.setState({files:res_files.data.files});
 
     }
-    onSubmitDelete  = async (id) =>{
-
+    onClickDelete  = async (id) =>{
+        
         const res_del = await axios.post('http://167.99.15.83:4000/api/files/delete/'+id);
         //console.warn("PELIGRO="+res_del.data.deleteRowCount);
         //res_del.data.deleteRowCount > 0 ? <Redirect to={"/project/"+this.props.idProject}  /> : null
-           
+        window.location.href = 'http://localhost:3001/project/'+this.props.idProject;
     }
 
     render() {
@@ -68,9 +68,8 @@ export default class ModalVerFiles extends Component {
                                                                         <a href = {'http://167.99.15.83:4000/'+file.filedir + file.filename}>DESCARGAR  </a>
                                                                     
                                                                     <div className="mt-3 red">
-                                                                        <form onSubmit={ () => this.onSubmitDelete(file.id)}>
-                                                                             <button type="submit" className="btn btn-sm btn-danger" >Eliminar Archivo </button>
-                                                                        </form>
+                                                                       
+                                                                        <button onClick={ () => onClickDelete (file.id)} className="btn btn-sm btn-danger" >Eliminar Archivo </button>
                                                                        
                                                                     </div>
                                                             </div>
