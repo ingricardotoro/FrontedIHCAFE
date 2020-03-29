@@ -43,9 +43,9 @@ export default class ModalVerFiles extends Component {
                                                         <div className="media">
                                                         {file.filename.slice(-4) == '.pdf' 
                                                      
-                                                            ?  <a className="media-left" href="#">
-                                                                <i style={{width:'200px'}} className="icofont icofont-file-pdf icofont-4x" src={'http://167.99.15.83:4000/'+file.filedir + file.filename} />
-                                                            </a>
+                                                            ?   <a className="media-left" href="#">
+                                                                     <i style={{width:'200px', color:'red'}} className="icofont icofont-file-pdf icofont-5x" src={'http://167.99.15.83:4000/'+file.filedir + file.filename} />Archivo PDF
+                                                                </a>
                                                             :    <a className="media-left" href="#">
                                                                 <img style={{width:'200px'}} className="img-thumbnail " src={'http://167.99.15.83:4000/'+file.filedir + file.filename} />
                                                             </a>
