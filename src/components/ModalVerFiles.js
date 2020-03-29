@@ -68,7 +68,7 @@ export default class ModalVerFiles extends Component {
                                                                         <a href = {'http://167.99.15.83:4000/'+file.filedir + file.filename}>DESCARGAR  </a>
                                                                     
                                                                     <div className="mt-3 red">
-                                                                        <button className="btn btn-sm btn-danger" onClick = { () => this.onSubmitDelete(file.id)}>Eliminar Archivo </button>
+                                                                        <button type="submit" className="btn btn-sm btn-danger" onSubmit= { () => this.onSubmitDelete(file.id)}>Eliminar Archivo </button>
                                                                     </div>
                                                             </div>
                                                         </div>
