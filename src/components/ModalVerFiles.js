@@ -20,7 +20,8 @@ export default class ModalVerFiles extends Component {
     onSubmitDelete  = async (id) =>{
 
         const res_del = await axios.post('http://167.99.15.83:4000/api/files/delete/'+id);
-        if (res_del){
+        if (res_del > 0){
+            console.warn("PELIGRO="+res_del)
             return <Redirect to={"/project/"+this.props.idProject}  />
         } 
     }
