@@ -17,38 +17,44 @@ export default class Projectcard extends Component {
         }
     }
 
-    async componentDidMount(){
+    
+
+     async componentDidMount(){
+
         const res = await axios.post('http://167.99.15.83:4000/api/budgetlines/atlas/project/'+this.props.id);
         this.setState({budgetLines:res.data.budgetLines_atlas});
+        this.calculo();
     }
 
-    calculo(){ // para realizar el calculo de la suma de presupuestos
-        for (let index = 0; index < this.state.budgetLines.length; index++) {
-           
-
-            if ( this.state.budgetLines[index].status === "Solicitado") {
-                //this.state.total_Solicitado += this.state.budgetLines[index].budgetstart;
-                this.setState(this.starte.total_Solicitado, this.starte.total_Solicitado + this.state.budgetLines[index].budgetstart);
-
-            }
-
-            if (this.state.budgetLines[index].status === "Aprobado") {
-                //this.state.total_inicial +=   this.state.budgetLines[index].budgetstart;   this.state.total_ejecutado += this.state.budgetLines[index].budgeupdate;this.state.total_disponible +=  this.state.budgetLines[index].balance;this.state.total_reembolsos += this.state.budgetLines[index].returns;
-
-                this.setState(this.state.total_inicial , this.state.total_inicial+  this.state.budgetLines[index].budgetstart);
-                this.setState(this.state.total_ejecutado ,this.state.total_ejecutado+ this.state.budgetLines[index].budgeupdate);
-                this.setState(this.state.total_disponible , this.state.total_disponible+  this.state.budgetLines[index].balance);
-                this.setState(this.state.total_reembolsos , this.state.total_reembolsos+ this.state.budgetLines[index].returns);
-            }
-        }
-    }
 
      formatMoney(number) {
         return number.toLocaleString('en-US', { style: 'currency', currency: 'HNL' });
       }
 
+      calculo(){ // para realizar el calculo de la suma de presupuestos
+      
+
+        for (let index = 0; index < this.state.budgetLines.length; index++) {
+        
+            if ( this.state.budgetLines[index].status === "Solicitado") {
+               
+                this.state.total_Solicitado += this.state.budgetLines[index].budgetstart;
+                //this.setState({total_Solicitado: prevState.total_Solicitado + this.budgetLines[index].budgetstart});
+                //this.setState(prevstate => ({ total_Solicitado: prevstate.total_Solicitado + this.budgetLines[index].budgetstart}));
+            }
+
+            if (this.state.budgetLines[index].status === "Aprobado") {
+                this.state.total_inicial +=   this.state.budgetLines[index].budgetstart;   
+                this.state.total_ejecutado += this.state.budgetLines[index].budgeupdate;
+                this.state.total_disponible +=  this.state.budgetLines[index].balance;
+                this.state.total_reembolsos += this.state.budgetLines[index].returns;
+            }
+        }
+       
+    }
+
     render() {
-        this.calculo();
+       
         return (
            
                 <div className="col-sm-6">

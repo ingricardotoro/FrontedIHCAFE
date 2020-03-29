@@ -107,37 +107,41 @@ export default class TableCost extends Component {
     }
 
     calculo(){ // para realizar el calculo de la suma de presupuestos
-
-        this.setState(this.state.total_inicial,0.0);
-        this.setState(this.state.total_ejecutado,0.0); 
-        this.setState(this.state.total_disponible,0.0); 
-        this.setState(this.state.total_solicitado,0.0);
+        this.state.total_inicial = 0.0;this.state.total_ejecutado = 0.0;this.state.total_disponible = 0.0;this.state.total_solicitado = 0.0;
+        /*this.setState({total_inicial:0.0});
+        this.setState({total_ejecutado:0.0}); 
+        this.setState({total_disponible:0.0}); 
+        this.setState({total_solicitado:0.0});*/
 
         for (let index = 0; index < this.state.budgetLinesAtlas.length; index++) {
             
             
             if (this.state.budgetLinesAtlas[index].status === 'Solicitado') {
-               //this.state.total_solicitado = this.state.total_solicitado + this.state.budgetLinesAtlas[index].budgetstart;
-               this.setState(this.state.total_solicitado , this.state.total_solicitado + this.state.budgetLinesAtlas[index].budgetstart);
+               this.state.total_solicitado = this.state.total_solicitado + this.state.budgetLinesAtlas[index].budgetstart;
+               //this.setState(this.state.total_solicitado , this.state.total_solicitado + this.state.budgetLinesAtlas[index].budgetstart);
               
             }
             if (this.state.budgetLinesAtlas[index].status === 'Aprobado') {
-              //this.state.total_inicial +=  this.state.budgetLinesAtlas[index].budgetstart;this.state.total_ejecutado +=  this.state.budgetLinesAtlas[index].budgetfinal;this.state.total_disponible += this.state.budgetLinesAtlas[index].balance;
+              this.state.total_inicial +=  this.state.budgetLinesAtlas[index].budgetstart;
+              this.state.total_ejecutado +=  this.state.budgetLinesAtlas[index].budgetfinal;
+              this.state.total_disponible += this.state.budgetLinesAtlas[index].balance;
 
-              this.setState(this.state.total_inicial ,this.state.total_inicial+  this.state.budgetLinesAtlas[index].budgetstart);
+              /*this.setState(this.state.total_inicial ,this.state.total_inicial+  this.state.budgetLinesAtlas[index].budgetstart);
               this.setState(this.state.total_ejecutado ,this.state.total_ejecutado+  this.state.budgetLinesAtlas[index].budgetfinal);
               this.setState(this.state.total_disponible ,this.state.total_disponible+ this.state.budgetLinesAtlas[index].balance);
-            
+            */
             }
             
         }
 
-       //this.state.porcentaje_ejecutado = (this.state.total_ejecutado * 100 )/this.state.total_inicial; this.state.porcentaje_disponible = (this.state.total_disponible * 100 )/this.state.total_inicial;this.state.porcentaje_rembolsos = (this.state.total_rembolsos * 100 )/this.state.total_inicial;
+       this.state.porcentaje_ejecutado = (this.state.total_ejecutado * 100 )/this.state.total_inicial; 
+       this.state.porcentaje_disponible = (this.state.total_disponible * 100 )/this.state.total_inicial;
+       this.state.porcentaje_rembolsos = (this.state.total_rembolsos * 100 )/this.state.total_inicial;
 
-       this.setState(this.state.porcentaje_ejecutado , (this.state.total_ejecutado * 100 )/this.state.total_inicial);
+       /*this.setState(this.state.porcentaje_ejecutado , (this.state.total_ejecutado * 100 )/this.state.total_inicial);
        this.setState(this.state.porcentaje_disponible , (this.state.total_disponible * 100 )/this.state.total_inicial);
        this.setState(this.state.porcentaje_rembolsos , (this.state.total_rembolsos * 100 )/this.state.total_inicial);
-
+        */
     }
 
     /**********************LLENADO PARA EL SAVE********* */

@@ -52,13 +52,18 @@ export default class RowBudget extends Component {
         for (let index = 0; index < this.state.budgetLines.length; index++) {
 
             if (this.state.budgetLines[index].status === 'Solicitado') {
-                //this.state.total_solicitado = this.state.total_solicitado + this.state.budgetLines[index].buddgetstart;
-                this.setState(this.state.total_solicitado , this.state.total_solicitado + this.state.budgetLines[index].buddgetstart);
+                this.state.total_solicitado = this.state.total_solicitado + this.state.budgetLines[index].buddgetstart;
+                //this.setState(this.state.total_solicitado , this.state.total_solicitado + this.state.budgetLines[index].buddgetstart);
                 
             }else{
-                this.setState(this.state.total_inicial, this.state.total_inicial + this.state.budgetLines[index].buddgetstart);
+                this.state.total_inicial +=this.state.budgetLines[index].buddgetstart;
+                this.state.total_ejecutado +=this.state.budgetLines[index].buddgetfinal;
+                this.state.total_disponible += this.state.budgetLines[index].balance;
+
+                /*this.setState(this.state.total_inicial, this.state.total_inicial + this.state.budgetLines[index].buddgetstart);
                 this.setState(this.state.total_ejecutado, this.state.total_ejecutado +this.state.budgetLines[index].buddgetfinal);
                 this.setState(this.state.total_disponible, this.state.total_disponible + this.state.budgetLines[index].balance); 
+                */
             }
             
         }
