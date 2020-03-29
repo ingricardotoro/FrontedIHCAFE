@@ -460,6 +460,7 @@ export default class TableCost extends Component {
 
 
                                                 <ModalVerFiles  
+                                                    idProject = {this.props.idProject}
                                                     budgetlineatlas={budgetLinesAtlas.id}  
                                                     budgetlineatlasName={budgetLinesAtlas.atlas_account.name}
                                                 />

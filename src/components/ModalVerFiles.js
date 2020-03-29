@@ -15,6 +15,11 @@ export default class ModalVerFiles extends Component {
         this.setState({files:res_files.data.files});
 
     }
+    onSubmitDelete  = async (id) =>{
+
+        const res_del = await axios.post('http://167.99.15.83:4000/api/files/delete/'+id);
+        return <Redirect to={"/project/"+this.props.idProject}  />
+    }
 
     render() {
         if (this.state.files) {
@@ -56,9 +61,9 @@ export default class ModalVerFiles extends Component {
                                                                         
                                                                 </div>
                                                                     <div className="f-13 text-muted m-b-15">{file.fase}</div>
-                                                                    <a href = {'http://167.99.15.83:4000/'+file.filedir + file.filename}>DESCARGAR 
-                                                                    </a>
-                                                                  
+                                                                    <a href = {'http://167.99.15.83:4000/'+file.filedir + file.filename}>DESCARGAR  </a>
+                                                                    <a href = {'http://167.99.15.83:4000/'+file.filedir + file.filename}>Eliminar Archivo  </a>
+                                                           
                                                             </div>
                                                         </div>
                                                     </div>
