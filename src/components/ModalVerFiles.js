@@ -22,7 +22,7 @@ export default class ModalVerFiles extends Component {
         const res_del = await axios.post('http://167.99.15.83:4000/api/files/delete/'+id);
         //console.warn("PELIGRO="+res_del.data.deleteRowCount);
         //res_del.data.deleteRowCount > 0 ? <Redirect to={"/project/"+this.props.idProject}  /> : null
-        window.location.href = 'http://localhost:3001/project/'+this.props.idProject;
+        window.location.href = 'http://167.99.15.83:3001/project/'+this.props.idProject;
     }
 
     render() {
