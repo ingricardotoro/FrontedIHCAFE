@@ -69,7 +69,7 @@ export default class ModalVerFiles extends Component {
                                                                     
                                                                     <div className="mt-3 red">
                                                                        
-                                                                        <button onClick={ () => onClickDelete (file.id)} className="btn btn-sm btn-danger" >Eliminar Archivo </button>
+                                                                        <button onClick={ () => onClickDelete(file.id)} className="btn btn-sm btn-danger" >Eliminar Archivo </button>
                                                                        
                                                                     </div>
                                                             </div>
