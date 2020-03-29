@@ -71,8 +71,8 @@ export default class ListProjects extends Component {
                                                         <div className="card user-card">
                                                             <div className="card-block">
                                                                 <div className="media">
-                                                                    <a className="media-left" href="#">
-                                                                        <img className="media-object img-circle card-list-img" src="assets/images/avatar-1.png" alt="Generic placeholder image" />
+                                                                    <a className="media-left" href="/">
+                                                                        <img className="media-object img-circle card-list-img" src="assets/images/avatar-1.png" alt="Generic placeholder" />
                                                                     </a>
                                                                     <div className="media-body">
                                                                         <div className="col-xs-12">

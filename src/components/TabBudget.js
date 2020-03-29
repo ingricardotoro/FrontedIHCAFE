@@ -3,9 +3,6 @@ import axios from 'axios';
 import {Link, Redirect} from 'react-router-dom';
 import Projectcard from '../components/Projectcard';
 
-import { withRouter } from 'react-router';
-import { hashHistory } from 'react-router';
-
 export default class TabBudget extends Component {
 
     constructor() {
@@ -29,8 +26,9 @@ export default class TabBudget extends Component {
         //e.preventDefault();
         const res_p = await axios.post('http://167.99.15.83:4000/api/budgets/delete/'+this.props.id);
         
-        
-            return <Redirect push to="/budgets" /> 
+        if (res_p) {     }
+
+        return <Redirect push to="/budgets" /> 
        
             
             //return this.props.history.push('/budgets');
@@ -47,16 +45,15 @@ export default class TabBudget extends Component {
                         <div className="col-sm-12">
                             <div className="card">
                                 <div className="card-header">
-                                   <a href="#"> <h4>{this.props.nombre} - ( {this.props.account}) - 
+                                    <h4>{this.props.nombre} - ( {this.props.account}) </h4>
                                   
-                                   </h4></a>
                                     <span>{this.props.description}</span>
                                     <div className="card-header-right">
                                         <i className="icofont icofont-rounded-down"></i>
                                         <i className="icofont icofont-refresh"></i>
-                                        <a data-toggle="modal" data-target={'#modal_delete_'+this.props.id}>
+                                        <button className="btn btn-sm btn-danger" data-toggle="modal" data-target={'#modal_delete_'+this.props.id} >
                                             <i className="icofont icofont-close-circled"></i>
-                                        </a>
+                                        </button>
                                         
                                     </div>
 

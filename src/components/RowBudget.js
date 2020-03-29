@@ -43,16 +43,22 @@ export default class RowBudget extends Component {
 
     calculo(){ // para realizar el calculo de la suma de presupuestos
 
-        this.state.total_inicial = 0.0; this.state.total_ejecutado = 0.0;this.state.total_disponible = 0.0;this.state.total_solicitado = 0.0;
+        //this.state.total_inicial = 0.0; this.state.total_ejecutado = 0.0;this.state.total_disponible = 0.0;this.state.total_solicitado = 0.0;
+        this.setSate(this.state.total_inicial , 0.0); 
+        this.setSate(this.state.total_ejecutado , 0.0);
+        this.setSate(this.state.total_disponible , 0.0);
+        this.setSate(this.state.total_solicitado , 0.0);
 
         for (let index = 0; index < this.state.budgetLines.length; index++) {
 
-            if (this.state.budgetLines[index].status == 'Solicitado') {
-                this.state.total_solicitado = this.state.total_solicitado + this.state.budgetLines[index].buddgetstart;
+            if (this.state.budgetLines[index].status === 'Solicitado') {
+                //this.state.total_solicitado = this.state.total_solicitado + this.state.budgetLines[index].buddgetstart;
+                this.setState(this.state.total_solicitado , this.state.total_solicitado + this.state.budgetLines[index].buddgetstart);
+                
             }else{
-                this.state.total_inicial= this.state.total_inicial + this.state.budgetLines[index].buddgetstart;
-                this.state.total_ejecutado= this.state.total_ejecutado +this.state.budgetLines[index].buddgetfinal;
-                this.state.total_disponible= this.state.total_disponible + this.state.budgetLines[index].balance; 
+                this.setState(this.state.total_inicial, this.state.total_inicial + this.state.budgetLines[index].buddgetstart);
+                this.setState(this.state.total_ejecutado, this.state.total_ejecutado +this.state.budgetLines[index].buddgetfinal);
+                this.setState(this.state.total_disponible, this.state.total_disponible + this.state.budgetLines[index].balance); 
             }
             
         }
@@ -109,13 +115,13 @@ export default class RowBudget extends Component {
                                                     <label className="text-success"> {this.formatMoney(budgetLine.balance)}</label>
                                                 </td>
                                                                                         
-                                                {budgetLine.status == 'Solicitado' 
+                                                {budgetLine.status === 'Solicitado' 
                                                      
                                                 ?<td><button type="button" class="btn btn-success waves-effect" data-toggle="modal" data-target={'#aprobar_'+budgetLine.id}>Decidir</button> </td>
                                                 :<td><label >{budgetLine.status}</label></td>
                                                 }
 
-                                                {budgetLine.status == 'Aprobado' 
+                                                {budgetLine.status === 'Aprobado' 
                                                      
                                                 ?<td><button type="button" class="btn btn-warning waves-effect" data-toggle="modal" data-target={'#rembolsar_'+budgetLine.id}>Rembolsar</button></td>
                                                 :<td align="center"><label >---</label></td>

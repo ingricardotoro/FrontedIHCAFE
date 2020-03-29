@@ -44,7 +44,7 @@ export default class ProjectNew extends Component {
     
     onSubmit  = async e =>{
         e.preventDefault();
-        const res = await axios.post('http://167.99.15.83:4000/api/projects',{
+         await axios.post('http://167.99.15.83:4000/api/projects',{
             code:this.state.code,
             name:this.state.name,
             location:this.state.location,

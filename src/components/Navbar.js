@@ -7,10 +7,10 @@ export default class Navbar extends Component {
                     <nav className="navbar header-navbar pcoded-header">
                         <div className="navbar-wrapper">
                         <div className="navbar-logo">
-                            <a className="mobile-menu" id="mobile-collapse" href="#!">
+                            <a className="mobile-menu" id="mobile-collapse" href="/">
                             <i className="ti-menu" />
                             </a>
-                            <a className="mobile-search morphsearch-search" href="#">
+                            <a className="mobile-search morphsearch-search" href="/">
                             <i className="ti-search" />
                             </a>
                             
@@ -18,15 +18,15 @@ export default class Navbar extends Component {
                                 <img className="img-fluid" src="assets/images/logo.png" alt="Theme-Logo" />
                             </Link>
                             
-                            <a className="mobile-options">
-                            <i className="ti-more" />
+                            <a className="mobile-options" href="/">
+                                <i className="ti-more" />
                             </a>
                         </div>
                         <div className="navbar-container container-fluid">
                             <div>
                             <ul className="nav-left">
                                 <li>
-                                <div className="sidebar_toggle"><a href="#"><i className="ti-menu" /></a></div>
+                                <div className="sidebar_toggle"><a href="/"><i className="ti-menu" /></a></div>
                                 </li>
                                 <li>
                                 
@@ -42,7 +42,7 @@ export default class Navbar extends Component {
                               
                                 <li className="user-profile header-notification">
                                     <a href="#!">
-                                        <img src="assets/images/user.png" alt="User-Profile-Image" />
+                                        <img src="assets/images/user.png" alt="Usersa" />
                                         <span>Usuario</span>
                                         <i className="ti-angle-down" />
                                     </a>

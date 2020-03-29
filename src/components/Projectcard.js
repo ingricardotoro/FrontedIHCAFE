@@ -26,15 +26,19 @@ export default class Projectcard extends Component {
         for (let index = 0; index < this.state.budgetLines.length; index++) {
            
 
-            if ( this.state.budgetLines[index].status == "Solicitado") {
-                this.state.total_Solicitado += this.state.budgetLines[index].budgetstart;
+            if ( this.state.budgetLines[index].status === "Solicitado") {
+                //this.state.total_Solicitado += this.state.budgetLines[index].budgetstart;
+                this.setState(this.starte.total_Solicitado, this.starte.total_Solicitado + this.state.budgetLines[index].budgetstart);
+
             }
 
-            if (this.state.budgetLines[index].status == "Aprobado") {
-                 this.state.total_inicial +=   this.state.budgetLines[index].budgetstart;
-                this.state.total_ejecutado += this.state.budgetLines[index].budgeupdate;
-                this.state.total_disponible +=  this.state.budgetLines[index].balance;
-                this.state.total_reembolsos += this.state.budgetLines[index].returns;
+            if (this.state.budgetLines[index].status === "Aprobado") {
+                //this.state.total_inicial +=   this.state.budgetLines[index].budgetstart;   this.state.total_ejecutado += this.state.budgetLines[index].budgeupdate;this.state.total_disponible +=  this.state.budgetLines[index].balance;this.state.total_reembolsos += this.state.budgetLines[index].returns;
+
+                this.setState(this.state.total_inicial , this.state.total_inicial+  this.state.budgetLines[index].budgetstart);
+                this.setState(this.state.total_ejecutado ,this.state.total_ejecutado+ this.state.budgetLines[index].budgeupdate);
+                this.setState(this.state.total_disponible , this.state.total_disponible+  this.state.budgetLines[index].balance);
+                this.setState(this.state.total_reembolsos , this.state.total_reembolsos+ this.state.budgetLines[index].returns);
             }
         }
     }

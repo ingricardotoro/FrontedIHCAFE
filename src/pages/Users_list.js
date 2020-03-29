@@ -67,8 +67,8 @@ export default class Users_list extends Component {
                                             <td>empresaABC.org</td>
                                             <td>Tegucigalpa</td>
                                             <td className="action-icon">
-                                            <a href="javascript:;" className="m-r-15 crm-action-edit text-muted"><i className="icofont icofont-ui-edit" /></a>
-                                            <a href="javascript:;" className="crm-action-delete text-muted"><i className="icofont icofont-delete-alt" /></a>
+                                            <a href="/" className="m-r-15 crm-action-edit text-muted"><i className="icofont icofont-ui-edit" /></a>
+                                            <a href="/" className="crm-action-delete text-muted"><i className="icofont icofont-delete-alt" /></a>
                                             </td>
                                         </tr>
                                         <tr>
@@ -85,8 +85,8 @@ export default class Users_list extends Component {
                                             <td>empresaABC.org</td>
                                             <td>Tegucigalpa</td>
                                             <td className="action-icon">
-                                            <a href="javascript:;" className="m-r-15 crm-action-edit text-muted"><i className="icofont icofont-ui-edit" /></a>
-                                            <a href="javascript:;" className="crm-action-delete text-muted"><i className="icofont icofont-delete-alt" /></a>
+                                            <a href="/" className="m-r-15 crm-action-edit text-muted"><i className="icofont icofont-ui-edit" /></a>
+                                            <a href="/" className="crm-action-delete text-muted"><i className="icofont icofont-delete-alt" /></a>
                                             </td>
                                         </tr>
                                         <tr>
@@ -103,8 +103,8 @@ export default class Users_list extends Component {
                                             <td>empresaABC.org</td>
                                             <td>Tegucigalpa</td>
                                             <td className="action-icon">
-                                            <a href="javascript:;" className="m-r-15 crm-action-edit text-muted"><i className="icofont icofont-ui-edit" /></a>
-                                            <a href="javascript:;" className="crm-action-delete text-muted"><i className="icofont icofont-delete-alt" /></a>
+                                            <a href="/" className="m-r-15 crm-action-edit text-muted"><i className="icofont icofont-ui-edit" /></a>
+                                            <a href="/" className="crm-action-delete text-muted"><i className="icofont icofont-delete-alt" /></a>
                                             </td>
                                         </tr>
                                         <tr>
@@ -121,8 +121,8 @@ export default class Users_list extends Component {
                                             <td>empresaABC.org</td>
                                             <td>Tegucigalpa</td>
                                             <td className="action-icon">
-                                            <a href="javascript:;" className="m-r-15 crm-action-edit text-muted"><i className="icofont icofont-ui-edit" /></a>
-                                            <a href="javascript:;" className="crm-action-delete text-muted"><i className="icofont icofont-delete-alt" /></a>
+                                            <a href="/" className="m-r-15 crm-action-edit text-muted"><i className="icofont icofont-ui-edit" /></a>
+                                            <a href="/" className="crm-action-delete text-muted"><i className="icofont icofont-delete-alt" /></a>
                                             </td>
                                         </tr>
                                         <tr>
@@ -139,8 +139,8 @@ export default class Users_list extends Component {
                                             <td>empresaABC.org</td>
                                             <td>Tegucigalpa</td>
                                             <td className="action-icon">
-                                            <a href="javascript:;" className="m-r-15 crm-action-edit text-muted"><i className="icofont icofont-ui-edit" /></a>
-                                            <a href="javascript:;" className="crm-action-delete text-muted"><i className="icofont icofont-delete-alt" /></a>
+                                            <a href="/" className="m-r-15 crm-action-edit text-muted"><i className="icofont icofont-ui-edit" /></a>
+                                            <a href="/" className="crm-action-delete text-muted"><i className="icofont icofont-delete-alt" /></a>
                                             </td>
                                         </tr>
                                         <tr>
@@ -157,8 +157,8 @@ export default class Users_list extends Component {
                                             <td>empresaABC.org</td>
                                             <td>Tegucigalpa</td>
                                             <td className="action-icon">
-                                            <a href="javascript:;" className="m-r-15 crm-action-edit text-muted"><i className="icofont icofont-ui-edit" /></a>
-                                            <a href="javascript:;" className="crm-action-delete text-muted"><i className="icofont icofont-delete-alt" /></a>
+                                            <a href="/" className="m-r-15 crm-action-edit text-muted"><i className="icofont icofont-ui-edit" /></a>
+                                            <a href="/" className="crm-action-delete text-muted"><i className="icofont icofont-delete-alt" /></a>
                                             </td>
                                         </tr>
                                         <tr>
@@ -175,8 +175,8 @@ export default class Users_list extends Component {
                                             <td>empresaABC.org</td>
                                             <td>Tegucigalpa</td>
                                             <td className="action-icon">
-                                            <a href="javascript:;" className="m-r-15 crm-action-edit text-muted"><i className="icofont icofont-ui-edit" /></a>
-                                            <a href="javascript:;" className="crm-action-delete text-muted"><i className="icofont icofont-delete-alt" /></a>
+                                            <a href="/" className="m-r-15 crm-action-edit text-muted"><i className="icofont icofont-ui-edit" /></a>
+                                            <a href="/" className="crm-action-delete text-muted"><i className="icofont icofont-delete-alt" /></a>
                                             </td>
                                         </tr>
                                         <tr>
@@ -193,8 +193,8 @@ export default class Users_list extends Component {
                                             <td>empresaABC.org</td>
                                             <td>Tegucigalpa</td>
                                             <td className="action-icon">
-                                            <a href="javascript:;" className="m-r-15 crm-action-edit text-muted"><i className="icofont icofont-ui-edit" /></a>
-                                            <a href="javascript:;" className="crm-action-delete text-muted"><i className="icofont icofont-delete-alt" /></a>
+                                            <a href="/" className="m-r-15 crm-action-edit text-muted"><i className="icofont icofont-ui-edit" /></a>
+                                            <a href="/" className="crm-action-delete text-muted"><i className="icofont icofont-delete-alt" /></a>
                                             </td>
                                         </tr>
                                         <tr>
@@ -211,8 +211,8 @@ export default class Users_list extends Component {
                                             <td>empresaABC.org</td>
                                             <td>Tegucigalpa</td>
                                             <td className="action-icon">
-                                            <a href="javascript:;" className="m-r-15 crm-action-edit text-muted"><i className="icofont icofont-ui-edit" /></a>
-                                            <a href="javascript:;" className="crm-action-delete text-muted"><i className="icofont icofont-delete-alt" /></a>
+                                            <a href="/" className="m-r-15 crm-action-edit text-muted"><i className="icofont icofont-ui-edit" /></a>
+                                            <a href="/" className="crm-action-delete text-muted"><i className="icofont icofont-delete-alt" /></a>
                                             </td>
                                         </tr>
                                         <tr>
@@ -229,8 +229,8 @@ export default class Users_list extends Component {
                                             <td>empresaABC.org</td>
                                             <td>Tegucigalpa</td>
                                             <td className="action-icon">
-                                            <a href="javascript:;" className="m-r-15 crm-action-edit text-muted"><i className="icofont icofont-ui-edit" /></a>
-                                            <a href="javascript:;" className="crm-action-delete text-muted"><i className="icofont icofont-delete-alt" /></a>
+                                            <a href="/" className="m-r-15 crm-action-edit text-muted"><i className="icofont icofont-ui-edit" /></a>
+                                            <a href="/" className="crm-action-delete text-muted"><i className="icofont icofont-delete-alt" /></a>
                                             </td>
                                         </tr>
                                         <tr>
@@ -247,8 +247,8 @@ export default class Users_list extends Component {
                                             <td>empresaABC.org</td>
                                             <td>Tegucigalpa</td>
                                             <td className="action-icon">
-                                            <a href="javascript:;" className="m-r-15 crm-action-edit text-muted"><i className="icofont icofont-ui-edit" /></a>
-                                            <a href="javascript:;" className="crm-action-delete text-muted"><i className="icofont icofont-delete-alt" /></a>
+                                            <a href="/" className="m-r-15 crm-action-edit text-muted"><i className="icofont icofont-ui-edit" /></a>
+                                            <a href="/" className="crm-action-delete text-muted"><i className="icofont icofont-delete-alt" /></a>
                                             </td>
                                         </tr>
                                         <tr>
@@ -265,8 +265,8 @@ export default class Users_list extends Component {
                                             <td>empresaABC.org</td>
                                             <td>Tegucigalpa</td>
                                             <td className="action-icon">
-                                            <a href="javascript:;" className="m-r-15 crm-action-edit text-muted"><i className="icofont icofont-ui-edit" /></a>
-                                            <a href="javascript:;" className="crm-action-delete text-muted"><i className="icofont icofont-delete-alt" /></a>
+                                            <a href="/" className="m-r-15 crm-action-edit text-muted"><i className="icofont icofont-ui-edit" /></a>
+                                            <a href="/" className="crm-action-delete text-muted"><i className="icofont icofont-delete-alt" /></a>
                                             </td>
                                         </tr>
                                         <tr>
@@ -283,8 +283,8 @@ export default class Users_list extends Component {
                                             <td>empresaABC.org</td>
                                             <td>Tegucigalpa</td>
                                             <td className="action-icon">
-                                            <a href="javascript:;" className="m-r-15 crm-action-edit text-muted"><i className="icofont icofont-ui-edit" /></a>
-                                            <a href="javascript:;" className="crm-action-delete text-muted"><i className="icofont icofont-delete-alt" /></a>
+                                            <a href="/" className="m-r-15 crm-action-edit text-muted"><i className="icofont icofont-ui-edit" /></a>
+                                            <a href="/" className="crm-action-delete text-muted"><i className="icofont icofont-delete-alt" /></a>
                                             </td>
                                         </tr>
                                         <tr>
@@ -301,8 +301,8 @@ export default class Users_list extends Component {
                                             <td>empresaABC.org</td>
                                             <td>Tegucigalpa</td>
                                             <td className="action-icon">
-                                            <a href="javascript:;" className="m-r-15 crm-action-edit text-muted"><i className="icofont icofont-ui-edit" /></a>
-                                            <a href="javascript:;" className="crm-action-delete text-muted"><i className="icofont icofont-delete-alt" /></a>
+                                            <a href="/" className="m-r-15 crm-action-edit text-muted"><i className="icofont icofont-ui-edit" /></a>
+                                            <a href="/" className="crm-action-delete text-muted"><i className="icofont icofont-delete-alt" /></a>
                                             </td>
                                         </tr>
                                         <tr>
@@ -319,8 +319,8 @@ export default class Users_list extends Component {
                                             <td>empresaABC.org</td>
                                             <td>Tegucigalpa</td>
                                             <td className="action-icon">
-                                            <a href="javascript:;" className="m-r-15 crm-action-edit text-muted"><i className="icofont icofont-ui-edit" /></a>
-                                            <a href="javascript:;" className="crm-action-delete text-muted"><i className="icofont icofont-delete-alt" /></a>
+                                            <a href="/" className="m-r-15 crm-action-edit text-muted"><i className="icofont icofont-ui-edit" /></a>
+                                            <a href="/" className="crm-action-delete text-muted"><i className="icofont icofont-delete-alt" /></a>
                                             </td>
                                         </tr>
                                         <tr>
@@ -337,8 +337,8 @@ export default class Users_list extends Component {
                                             <td>empresaABC.org</td>
                                             <td>Tegucigalpa</td>
                                             <td className="action-icon">
-                                            <a href="javascript:;" className="m-r-15 crm-action-edit text-muted"><i className="icofont icofont-ui-edit" /></a>
-                                            <a href="javascript:;" className="crm-action-delete text-muted"><i className="icofont icofont-delete-alt" /></a>
+                                            <a href="/" className="m-r-15 crm-action-edit text-muted"><i className="icofont icofont-ui-edit" /></a>
+                                            <a href="/" className="crm-action-delete text-muted"><i className="icofont icofont-delete-alt" /></a>
                                             </td>
                                         </tr>
                                         <tr>
@@ -355,8 +355,8 @@ export default class Users_list extends Component {
                                             <td>empresaABC.org</td>
                                             <td>Tegucigalpa</td>
                                             <td className="action-icon">
-                                            <a href="javascript:;" className="m-r-15 crm-action-edit text-muted"><i className="icofont icofont-ui-edit" /></a>
-                                            <a href="javascript:;" className="crm-action-delete text-muted"><i className="icofont icofont-delete-alt" /></a>
+                                            <a href="/" className="m-r-15 crm-action-edit text-muted"><i className="icofont icofont-ui-edit" /></a>
+                                            <a href="/" className="crm-action-delete text-muted"><i className="icofont icofont-delete-alt" /></a>
                                             </td>
                                         </tr>
                                         <tr>
@@ -373,8 +373,8 @@ export default class Users_list extends Component {
                                             <td>empresaABC.org</td>
                                             <td>Tegucigalpa</td>
                                             <td className="action-icon">
-                                            <a href="javascript:;" className="m-r-15 crm-action-edit text-muted"><i className="icofont icofont-ui-edit" /></a>
-                                            <a href="javascript:;" className="crm-action-delete text-muted"><i className="icofont icofont-delete-alt" /></a>
+                                            <a href="/" className="m-r-15 crm-action-edit text-muted"><i className="icofont icofont-ui-edit" /></a>
+                                            <a href="/" className="crm-action-delete text-muted"><i className="icofont icofont-delete-alt" /></a>
                                             </td>
                                         </tr>
                                         <tr>
@@ -391,8 +391,8 @@ export default class Users_list extends Component {
                                             <td>empresaABC.org</td>
                                             <td>Tegucigalpa</td>
                                             <td className="action-icon">
-                                            <a href="javascript:;" className="m-r-15 crm-action-edit text-muted"><i className="icofont icofont-ui-edit" /></a>
-                                            <a href="javascript:;" className="crm-action-delete text-muted"><i className="icofont icofont-delete-alt" /></a>
+                                            <a href="/" className="m-r-15 crm-action-edit text-muted"><i className="icofont icofont-ui-edit" /></a>
+                                            <a href="/" className="crm-action-delete text-muted"><i className="icofont icofont-delete-alt" /></a>
                                             </td>
                                         </tr>
                                         </tbody>

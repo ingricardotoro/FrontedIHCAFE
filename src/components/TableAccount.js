@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import axios from 'axios'
 import RowCardsProjects from '../components/RowCardsProjects'
 import RowBudget from '../components/RowBudget'
 
