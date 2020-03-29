@@ -21,7 +21,7 @@ export default class ModalVerFiles extends Component {
 
         const res_del = await axios.post('http://167.99.15.83:4000/api/files/delete/'+id);
         if (res_del){
-            <Redirect to={"/project/"+this.props.idProject}  />
+            return <Redirect to={"/project/"+this.props.idProject}  />
         } 
     }
 
