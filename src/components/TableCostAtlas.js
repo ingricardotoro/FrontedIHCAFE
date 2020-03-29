@@ -302,7 +302,9 @@ export default class TableCost extends Component {
         const res_p = await axios.post('http://167.99.15.83:4000/api/budgetlines/budgetlineatlas/delete/'+id);
         //return <Redirect to={"/project/"+this.props.idProject}  />
         //return res_p ==1 ?  <Redirect push to="/budgets" />:  <Redirect push to="/budgets" /> 
-        if (res_p) {}
+        if (res_p) {
+           
+        }
           
             //return this.props.history.push('/project/'+this.props.idProject);
            
