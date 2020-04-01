@@ -226,7 +226,8 @@ export default class TableCost extends Component {
             
   
         await axios.post('http://167.99.15.83:4000/api/budgetlines/aprobar_atlas/'+id+'/'+this.state.aprobar+'/'+this.state.valor+'/'+this.state.comentario);
-        window.location.href = 'https://167.99.15.83:3001/project/'+this.props.idProject
+        //redict desde el server
+        //window.location.href = 'https://167.99.15.83:3001/project/'+this.props.idProject
            
         
     }
