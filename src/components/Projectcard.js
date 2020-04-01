@@ -97,7 +97,8 @@ export default class Projectcard extends Component {
                                     <tbody>
                                         <tr>
                                             <td>Presupuesto Inicial </td>
-                                            <td>{this.formatMoney(this.state.total_inicial)}</td>
+                                            {/* <td>{this.formatMoney(this.state.total_inicial)}</td> */}
+                                            <td>{this.formatMoney(this.props.budgetstart)}</td>
                                             <td>{this.formatMoney(this.state.total_Solicitado)}</td>
                                         </tr>
                                         <tr>

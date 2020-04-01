@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios'
+import moment from 'moment'
 import RowCardsProjects from '../components/RowCardsProjects'
 import ModalVerFiles from '../components/ModalVerFiles'
 import { Redirect} from 'react-router-dom';
@@ -65,6 +66,8 @@ export default class TableCost extends Component {
             details:'',
 
             aprobar:0,
+            valor:0.0,
+            comentario:'',
 
             archivo:[],
             nombre_archivo:'',
@@ -154,7 +157,12 @@ export default class TableCost extends Component {
 
     onChangeStartDate = (e) => {this.setState({startdate: e.target.value})}
     onChangeEndDate = (e) => {this.setState({enddate: e.target.value})}
-    onChanceBudget = (e) => {this.setState({budgetstart: e.target.value});this.setState({balance: e.target.value});}
+    onChanceBudget = (e) => {this.setState({budgetstart: e.target.value});
+    this.setState({balance: e.target.value});}
+
+    onchangeComentario = (e) => {this.setState({comentario: e.target.value})}
+    onchangeMonto = (e) => {this.setState({valor: e.target.value})}
+    onchangeSelectAprobar = (e) => {this.setState({aprobar: e.target.value });}
     /**********************fINAL DEL LLENADO PARA EL SAVE********* */
 
    /* ININIAL  onChanceCategory = async (e) => {
@@ -206,18 +214,14 @@ export default class TableCost extends Component {
         this.setState({code: e.target.value });
     }
 
-    onchangeSelectAprobar= async (e) => {
-        this.setState({aprobar: e.target.value });
-    }
-
     formatMoney(number) {
         return number.toLocaleString('en-US', { style: 'currency', currency: 'HNL' });
     }
 
-    onClickAprobar = async (id,valor) =>{
+    onClickAprobar = async (id) =>{
         //e.preventDefault();
         if ( 
-            await axios.post('http://167.99.15.83:4000/api/budgetlines/aprobar_atlas/'+id+'/'+this.state.aprobar+'/'+valor)){
+            await axios.post('http://167.99.15.83:4000/api/budgetlines/aprobar_atlas/'+id+'/'+this.state.aprobar+'/'+this.state.valor+'/'+this.state.comentario)){
             //window.location.href = 'https://ihcafe-35ae7.firebaseapp.com/project/'+this.props.idProject
             return <Redirect to={"/project/"+this.props.idProject}  />
         } 
@@ -358,8 +362,8 @@ export default class TableCost extends Component {
                                         <th>Código</th>
                                         <th>Sub-Cuenta Atlas</th>
                                         <th>Valor</th>
-                                       {/*  <th>Ejecutado</th>
-                                        <th>Disponible</th> */}
+                                        <th>Fecha</th>
+                                        {/* <th>Disponible</th> */}
                                         <th>Estado</th>
                                         <th>Rembolsar</th>
                                         <th>Archivos</th>
@@ -379,13 +383,20 @@ export default class TableCost extends Component {
                                                 <td className="pro-name">
                                                     <h6>{budgetLinesAtlas.atlas_account.name}</h6>
                                                 </td>
-                                                <td>
-                                                    <label className="text-info"> {this.formatMoney( budgetLinesAtlas.budgetstart)}</label>
+                                                {budgetLinesAtlas.statu === 'Aprobado'? 
+                                                    <td>
+                                                        <label className="text-info"> {this.formatMoney( budgetLinesAtlas.balance)}</label>
+                                                    </td>
+                                                    :
+                                                    <td>
+                                                        <label className="text-info"> {this.formatMoney( budgetLinesAtlas.budgetstart)}</label>
+                                                    </td>
+                                                }
+                                                
+                                                 <td>
+                                                    <label className="text-danger"> {this.formatMoney(moment(budgetLinesAtlas.date_start).format('DD/MM/YYYY'))}</label>
                                                 </td>
-                                              {/*   <td>
-                                                    <label className="text-danger"> {this.formatMoney(budgetLinesAtlas.budgeupdate)}</label>
-                                                </td>
-                                                <td>
+                                                {/*<td>
                                                     <label className="text-success"> {this.formatMoney(budgetLinesAtlas.balance)}</label>
                                                 </td> */}
                                                                                         
@@ -449,24 +460,34 @@ export default class TableCost extends Component {
                                                     <div class="modal-dialog modal-lg" role="document">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
-                                                                <h4 class="modal-title">{budgetLinesAtlas.name}-{this.formatMoney(budgetLinesAtlas.budgetstart)} </h4>
+                                                                  <h4 class="modal-title">Monto: {this.formatMoney(budgetLinesAtlas.budgetstart)} </h4>
                                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                     <span aria-hidden="true">&times;</span>
                                                                 </button>
                                                             </div>  
                                                             <form >
 
-                                                                <div class="modal-body">                                                                
+                                                                <div class="modal-body">  
+                                                                
+                                                                <p class="modal-title">Descripción: {budgetLinesAtlas.details}</p> 
+
                                                                     <select onChange={this.onchangeSelectAprobar} name="select" className="form-control mt-3">
-                                                                            <option value="0">Seleccion Opción</option>
+                                                                            <option value="1">Si Aprobar</option>
                                                                             <option value="1">SI APROBAR</option>
                                                                             <option value="2">NO APROBAR</option>
                                                                     </select>
-                                                                   
+
+                                                                    <label>Monto A Aprobar</label>
+                                                                    <input onChange={this.onchangeMonto} name="monto" type="text" className="form-control mb-3" Value={budgetLinesAtlas.budgetstart}/>
+                                                                                                            
+                                                                    <label>Comentarios</label>
+                                                                    <textarea onChange={this.onchangeComentario} name="comentario" className="form-control">
+
+                                                                    </textarea>
                                                                 </div>
                                                                 <div class="modal-footer">
                                                                     <button type="button" class="btn btn-default waves-effect " data-dismiss="modal">Cerrar</button>
-                                                                    <button type="button" onClick={ () =>this.onClickAprobar(budgetLinesAtlas.id, budgetLinesAtlas.budgetstart)} class="btn btn-primary waves-effect waves-light ">Guardar</button>
+                                                                    <button type="button" onClick={ () =>this.onClickAprobar(budgetLinesAtlas.id)} class="btn btn-primary waves-effect waves-light ">Guardar</button>
                                                                 </div>
                                                             </form>
                                                         </div>

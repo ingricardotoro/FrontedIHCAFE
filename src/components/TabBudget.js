@@ -30,7 +30,6 @@ export default class TabBudget extends Component {
 
         return <Redirect push to="/budgets" /> 
        
-            
             //return this.props.history.push('/budgets');
             //window.location.href = 'https://ihcafe-35ae7.firebaseapp.com/budgets/';
              //hashHistory.push('/budgets');
@@ -127,6 +126,7 @@ export default class TabBudget extends Component {
                                             <Projectcard 
                                                name={project.name}
                                                id={project.id}
+                                               budgetstart={project.budgetstart}
                                                startdate={project.startdate}
                                                enddate={project.enddate}
                                                description={project.description}
