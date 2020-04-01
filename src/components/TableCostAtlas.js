@@ -65,8 +65,8 @@ export default class TableCost extends Component {
             supplier:0,
             details:'',
 
-            aprobar:0,
-            valor:0.0,
+            aprobar:1,
+            valor:-1.0,
             comentario:'',
 
             archivo:[],
@@ -218,13 +218,17 @@ export default class TableCost extends Component {
         return number.toLocaleString('en-US', { style: 'currency', currency: 'HNL' });
     }
 
-    onClickAprobar = async (id) =>{
+    onClickAprobar = async (id, monto) =>{
         //e.preventDefault();
-        if ( 
-            await axios.post('http://167.99.15.83:4000/api/budgetlines/aprobar_atlas/'+id+'/'+this.state.aprobar+'/'+this.state.valor+'/'+this.state.comentario)){
-            //window.location.href = 'https://ihcafe-35ae7.firebaseapp.com/project/'+this.props.idProject
-            return <Redirect to={"/project/"+this.props.idProject}  />
+        if (this.state.valor == -1){
+                this.state.valor=monto;
         } 
+            
+  
+        await axios.post('http://167.99.15.83:4000/api/budgetlines/aprobar_atlas/'+id+'/'+this.state.aprobar+'/'+this.state.valor+'/'+this.state.comentario);
+        window.location.href = 'https://167.99.15.83:3001/project/'+this.props.idProject
+           
+        
     }
 
     onClickArchivo = async (e) =>{
@@ -487,7 +491,7 @@ export default class TableCost extends Component {
                                                                 </div>
                                                                 <div class="modal-footer">
                                                                     <button type="button" class="btn btn-default waves-effect " data-dismiss="modal">Cerrar</button>
-                                                                    <button type="button" onClick={ () =>this.onClickAprobar(budgetLinesAtlas.id)} class="btn btn-primary waves-effect waves-light ">Guardar</button>
+                                                                    <button type="button" onClick={ () =>this.onClickAprobar(budgetLinesAtlas.id, budgetLinesAtlas.budgetstart)} class="btn btn-primary waves-effect waves-light ">Guardar</button>
                                                                 </div>
                                                             </form>
                                                         </div>
