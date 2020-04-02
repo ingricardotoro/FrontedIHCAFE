@@ -3,8 +3,7 @@ import axios from 'axios'
 import moment from 'moment'
 import RowCardsProjects from '../components/RowCardsProjects'
 import ModalVerFiles from '../components/ModalVerFiles'
-import { Redirect} from 'react-router-dom';
-
+import { Redirect } from 'react-router-dom';
 
 export default class TableCost extends Component {
     
@@ -12,7 +11,7 @@ export default class TableCost extends Component {
        
         super();
         this.state = {
-
+            
             redirect: false,
 
             budgetLinesAtlas:[],
@@ -223,14 +222,15 @@ export default class TableCost extends Component {
     }
 
     onClickAprobar = async (id, monto) =>{
-        //e.preventDefault();
+
         if (this.state.valor == -1){
                 this.state.valor=monto;
         } 
             
         await axios.post('http://167.99.15.83:4000/api/budgetlines/aprobar_atlas/'+id+'/'+this.state.aprobar+'/'+this.state.valor+'/'+this.state.comentario);
         
-        this.setState({ redirect: "/project/"+this.props.idProject });
+        //this.setState({ redirect: "/project/"+this.props.idProject });
+        window.location.href = '/project/'+this.props.idProject
     }
 
     onClickArchivo = async (e) =>{
@@ -301,16 +301,22 @@ export default class TableCost extends Component {
    
     render() {
 
-        if (this.state.redirect) {
-            return <Redirect to={this.state.redirect} />
-          }
-
       this.calculo();
-      
+
+       /*if (this.state.redirect ){
+            //return <Redirect to={this.state.redirect} />
+            return <Redirect
+            to={{
+              pathname: "/project/"+this.props.idProject,
+              state: { from: this.state.redirect }
+            }}
+          />
+       } */
+
         return (
            
             <div>
-               
+                
                 <RowCardsProjects 
                     inicial={this.state.total_inicial} 
                     ejecutado={this.state.total_ejecutado}
