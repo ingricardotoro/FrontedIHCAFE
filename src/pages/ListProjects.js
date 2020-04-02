@@ -82,9 +82,9 @@ export default class ListProjects extends Component {
                                                                             <div className="f-13 text-muted m-b-15">Equipo #1</div>
                                                                             <p>{project.description} </p>
                                                                             <label className="label label-warning ml-3">Fecha de Inicio: {project.startdate}</label> 
-                                                                            <label className="label label-danger ml-3">Fecha de Finalización: {project.endtdate}</label> 
-                                                                            <label className="label label-info ml-3">{project.budget.name}</label> 
-                                                                            <label className="label label-success ml-3">Prespuesto: {project.budget.buddgetstart}</label> 
+                                                                            <label className="label label-danger ml-3">Prespuesto: {project.budgetstart}</label> 
+                                                                            <label className="label label-info ml-3">{project.budget.description}</label> 
+                                                                            <label className="label label-success ml-3">Prespuesto: {project.budgetstart}</label> 
                                                                             
                                                                     </div>
                                                                 </div>

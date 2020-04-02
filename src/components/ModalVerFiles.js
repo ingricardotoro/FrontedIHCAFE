@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import axios from 'axios'
-import { Redirect } from 'react-router-dom';
 
 export default class ModalVerFiles extends Component {
 
@@ -19,7 +18,7 @@ export default class ModalVerFiles extends Component {
     }
     onClickDelete  = async (id) =>{
         
-        const res_del = await axios.post('http://167.99.15.83:4000/api/files/delete/'+id);
+        await axios.post('http://167.99.15.83:4000/api/files/delete/'+id);
         //console.warn("PELIGRO="+res_del.data.deleteRowCount);
         //res_del.data.deleteRowCount > 0 ? <Redirect to={"/project/"+this.props.idProject}  /> : null
         window.location.href = 'http://167.99.15.83:3001/project/'+this.props.idProject;
@@ -40,9 +39,12 @@ export default class ModalVerFiles extends Component {
                                     </button>
                                 </div>
                                 <div class="modal-body" align="center">
-    
+
                                 <div className="row card-block">
                                     <div className="col-md-12">
+                                        <p>
+                                            {this.props.budgetlineatlasDetails}
+                                        </p>
                                         <ul className="list-view">
                                         {
                                                 this.state.files.map(file => 

@@ -3,7 +3,6 @@ import axios from 'axios'
 import moment from 'moment'
 import RowCardsProjects from '../components/RowCardsProjects'
 import ModalVerFiles from '../components/ModalVerFiles'
-import { Redirect } from 'react-router-dom';
 
 export default class TableCost extends Component {
     
@@ -76,7 +75,9 @@ export default class TableCost extends Component {
             nombre_archivo:'',
             fase_archivo:'',
 
-            variable:0
+            variable:0,
+            //variable que almacenara el budgetstart del proyecto actual
+            bdg_start_project: 0.0
 
          
         }
@@ -86,12 +87,16 @@ export default class TableCost extends Component {
 
         const res = await axios.post('http://167.99.15.83:4000/api/budgetlines/atlas/project/'+this.props.idProject);
         this.setState({budgetLinesAtlas:res.data.budgetLines_atlas});
-
+        console.warn("VALOR="+res.data.budgetLines_atlas);
         /*const res2 = await axios.post('http://167.99.15.83:4000/api/budgetlines/atlas/cat_project/'+this.props.idProject);
         this.setState({budgetLinesCat:res2.data.budgetCategories}); */
 
         const res3 = await axios.get('http://167.99.15.83:4000/api/projects/');
         this.setState({projects:res3.data.projects});
+
+        //obtenemos el budgetstart de este proyecto
+        const res_pro = await axios.get('http://167.99.15.83:4000/api/projects/'+this.props.idProject);
+        this.setState({bdg_start_project:res_pro.data.data.budgetstart});
 
         /* INICIAL const res4 = await axios.get('http://167.99.15.83:4000/api/categories/categories_parents/');
         this.setState({categories:res4.data.categories}); */
@@ -112,8 +117,22 @@ export default class TableCost extends Component {
        
     }
 
-    calculo(){ // para realizar el calculo de la suma de presupuestos
+    /*setVariblesToZero = () => {
+
+        this.setState({total_inicial:0.0});
+        this.setState({total_ejecutado:0.0}); 
+        this.setState({total_disponible:0.0}); 
+        this.setState({total_solicitado:0.0});
+       /* this.setState((prevState) => ({total_inicial: prevState.total_inicial * 0}))
+    }*/
+   
+    calculo(){ 
+
+        //this.setVariblesToZero();
+        
+        // para realizar el calculo de la suma de presupuestos
         this.state.total_inicial = 0.0;this.state.total_ejecutado = 0.0;this.state.total_disponible = 0.0;this.state.total_solicitado = 0.0;
+        
         /*this.setState({total_inicial:0.0});
         this.setState({total_ejecutado:0.0}); 
         this.setState({total_disponible:0.0}); 
@@ -128,9 +147,12 @@ export default class TableCost extends Component {
               
             }
             if (this.state.budgetLinesAtlas[index].status === 'Aprobado') {
-              this.state.total_inicial +=  this.state.budgetLinesAtlas[index].budgetstart;
-              this.state.total_ejecutado +=  this.state.budgetLinesAtlas[index].budgetfinal;
-              this.state.total_disponible += this.state.budgetLinesAtlas[index].balance;
+             
+              //this.state.total_inicial +=  this.state.budgetLinesAtlas[index].budgetstart;
+           
+              this.state.total_ejecutado +=  this.state.budgetLinesAtlas[index].balance;
+              
+              //this.state.total_disponible += this.state.budgetLinesAtlas[index].balance;
 
               /*this.setState(this.state.total_inicial ,this.state.total_inicial+  this.state.budgetLinesAtlas[index].budgetstart);
               this.setState(this.state.total_ejecutado ,this.state.total_ejecutado+  this.state.budgetLinesAtlas[index].budgetfinal);
@@ -139,10 +161,11 @@ export default class TableCost extends Component {
             }
             
         }
-
-       this.state.porcentaje_ejecutado = (this.state.total_ejecutado * 100 )/this.state.total_inicial; 
-       this.state.porcentaje_disponible = (this.state.total_disponible * 100 )/this.state.total_inicial;
-       this.state.porcentaje_rembolsos = (this.state.total_rembolsos * 100 )/this.state.total_inicial;
+       this.state.total_disponible = this.state.bdg_start_project-this.state.total_ejecutado;
+       this.state.porcentaje_ejecutado = (this.state.total_ejecutado * 100 )/this.state.bdg_start_project; 
+       this.state.porcentaje_disponible = (this.state.total_disponible * 100 )/this.state.bdg_start_project;
+       //this.state.porcentaje_rembolsos = (this.state.total_rembolsos * 100 )/this.state.bdg_start_project;
+       this.state.porcentaje_solicitado = (this.state.total_solicitado * 100 )/this.state.bdg_start_project;
 
        /*this.setState(this.state.porcentaje_ejecutado , (this.state.total_ejecutado * 100 )/this.state.total_inicial);
        this.setState(this.state.porcentaje_disponible , (this.state.total_disponible * 100 )/this.state.total_inicial);
@@ -218,12 +241,13 @@ export default class TableCost extends Component {
     }
 
     formatMoney(number) {
-        return number.toLocaleString('en-US', { style: 'currency', currency: 'HNL' });
+        //return number.toLocaleString('en-US', { style: 'currency', currency: 'HNL' });
+        return number;
     }
 
     onClickAprobar = async (id, monto) =>{
 
-        if (this.state.valor == -1){
+        if (this.state.valor === -1){
                 this.state.valor=monto;
         } 
             
@@ -281,7 +305,7 @@ export default class TableCost extends Component {
 
             /***atlas result_atlas, product_atlas ,account_atlas */
         })
-       
+        window.location.href = '/project/'+this.props.idProject
         //window.location.reload(true);
         if (res) {}
        
@@ -291,6 +315,7 @@ export default class TableCost extends Component {
     onSubmitDelete  = async (id) =>{
        
         const res_p = await axios.post('http://167.99.15.83:4000/api/budgetlines/budgetlineatlas/delete/'+id);
+        window.location.href = '/project/'+this.props.idProject
         //return <Redirect to={"/project/"+this.props.idProject}  />
         //return res_p ==1 ?  <Redirect push to="/budgets" />:  <Redirect push to="/budgets" /> 
         if (res_p) {
@@ -300,7 +325,7 @@ export default class TableCost extends Component {
     }
    
     render() {
-
+      
       this.calculo();
 
        /*if (this.state.redirect ){
@@ -318,13 +343,16 @@ export default class TableCost extends Component {
             <div>
                 
                 <RowCardsProjects 
-                    inicial={this.state.total_inicial} 
+                    inicial = {this.state.bdg_start_project}
+                    //inicial={this.state.total_inicial} 
                     ejecutado={this.state.total_ejecutado}
                     disponible={this.state.total_disponible}
-                    rembolsos={this.state.total_rembolsos}
+                    solicitado={this.state.total_solicitado}
+                    //rembolsos={this.state.total_rembolsos}
                     porcentaje_ejecutado={this.state.porcentaje_ejecutado}
                     porcentaje_disponible={this.state.porcentaje_disponible}
-                    porcentaje_rembolsos={this.state.porcentaje_rembolsos}
+                    porcentaje_solicitado={this.state.porcentaje_solicitado}
+                    //porcentaje_rembolsos={this.state.porcentaje_rembolsos}
                 />
 
                 {/* Page body start */}
@@ -347,7 +375,7 @@ export default class TableCost extends Component {
                                 <thead>
                                     <tr>
                                         <th>Código</th>
-                                        <th>Sub-Cuenta Atlas</th>
+                                        <th>Cuenta Atlas</th>
                                         <th>Valor</th>
                                         <th>Fecha</th>
                                         {/* <th>Disponible</th> */}
@@ -486,6 +514,7 @@ export default class TableCost extends Component {
                                                     idProject = {this.props.idProject}
                                                     budgetlineatlas={budgetLinesAtlas.id}  
                                                     budgetlineatlasName={budgetLinesAtlas.atlas_account.name}
+                                                    budgetlineatlasDetails={budgetLinesAtlas.details}
                                                 />
 
                                                  {/* SUBIR Archivos */}
@@ -567,7 +596,7 @@ export default class TableCost extends Component {
                                         )
                                     }
                                     
-                                    <tr>
+                                   {/*  <tr>
                                         <td align="center" className="pro-name">
                                             <label className="text-danger">---</label>
                                         </td>
@@ -631,7 +660,7 @@ export default class TableCost extends Component {
                                         <td className="action-icon"> 
                                           
                                         </td>
-                                    </tr>
+                                    </tr> */}
                                     
                                 </tbody>
                                 </table>
