@@ -9,8 +9,12 @@ import { Redirect} from 'react-router-dom';
 export default class TableCost extends Component {
     
     constructor() {
+       
         super();
         this.state = {
+
+            redirect: false,
+
             budgetLinesAtlas:[],
             budgetLinesCat:[],
             projects:[],
@@ -226,8 +230,7 @@ export default class TableCost extends Component {
             
         await axios.post('http://167.99.15.83:4000/api/budgetlines/aprobar_atlas/'+id+'/'+this.state.aprobar+'/'+this.state.valor+'/'+this.state.comentario);
         
-        <Redirect push to={"/project/"+this.props.idProject} />
-        
+        this.setState({ redirect: "/project/"+this.props.idProject });
     }
 
     onClickArchivo = async (e) =>{
@@ -246,8 +249,6 @@ export default class TableCost extends Component {
             fase_archivo:this.state.fase_archivo,
             file:this.state.archivo,
          })
-
-        // window.location.href = 'https://ihcafe-35ae7.firebaseapp.com//project/'+this.props.idProject
         
     }
 
@@ -283,23 +284,6 @@ export default class TableCost extends Component {
        
         //window.location.reload(true);
         if (res) {}
-
-            //<Redirect push to={"/project/"+this.props.idProject} />
-
-            //return this.props.history.push('project/'+t/his.props.idProject);
-           return <Redirect to={"/project/"+this.props.idProject}  />
-        //}
-           
-        
-            //return <Redirect to={"/project/"+this.props.idProject} />
-            //window.location.reload(true);
-           
-        
-            //return <Redirect to={"/project/"+this.props.idProject}  />
-            //return this.props.history.push('/project/'+this.props.idProject);
-      
-        //window.location.href = 'http://localhost:3000/project/'+this.props.idProject;
-        //window.location.href = 'https://ihcafe-35ae7.firebaseapp.com/project/'+this.props.idProject;
        
     }
 
@@ -313,24 +297,18 @@ export default class TableCost extends Component {
            
         }
           
-            //return this.props.history.push('/project/'+this.props.idProject);
-           
-            //return <Redirect to={{"/project/"this.props.idProject}}  />
-            //return this.props.history.push('/project/'+this.props.idProject);
-            // <Redirect to={"/project/"+this.props.idProject}  />
-        //} 
-        
-        //return <Redirect to={"/budgets"}  />
-       
-        //window.location.reload(true);
     }
-
    
     render() {
+
+        if (this.state.redirect) {
+            return <Redirect to={this.state.redirect} />
+          }
 
       this.calculo();
       
         return (
+           
             <div>
                
                 <RowCardsProjects 
