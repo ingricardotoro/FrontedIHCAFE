@@ -87,7 +87,7 @@ export default class TableCost extends Component {
 
         const res = await axios.post('http://167.99.15.83:4000/api/budgetlines/atlas/project/'+this.props.idProject);
         this.setState({budgetLinesAtlas:res.data.budgetLines_atlas});
-        console.warn("VALOR="+res.data.budgetLines_atlas);
+       
         /*const res2 = await axios.post('http://167.99.15.83:4000/api/budgetlines/atlas/cat_project/'+this.props.idProject);
         this.setState({budgetLinesCat:res2.data.budgetCategories}); */
 

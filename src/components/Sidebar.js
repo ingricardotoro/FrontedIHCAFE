@@ -136,11 +136,11 @@ export default class Sidebar extends Component {
                                 </Link>
                                 <ul className="pcoded-submenu">
                                     <li className=" ">
-                                        <a href="navbar-light.html">
+                                        <Link to="/reports">
                                         <span className="pcoded-micon"><i className="ti-angle-right" /></span>
-                                        <span className="pcoded-mtext" data-i18n="nav.navigate.navbar">Navbar</span>
+                                        <span className="pcoded-mtext" data-i18n="nav.navigate.navbar">Ver Reportes</span>
                                         <span className="pcoded-mcaret" />
-                                        </a>
+                                        </Link>
                                     </li> 
                                 </ul>
                             </li>
