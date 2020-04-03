@@ -17,8 +17,6 @@ export default class Projectcard extends Component {
         }
     }
 
-    
-
      async componentDidMount(){
 
         const res = await axios.post('http://167.99.15.83:4000/api/budgetlines/atlas/project/'+this.props.id);
@@ -44,17 +42,17 @@ export default class Projectcard extends Component {
             }
 
             if (this.state.budgetLines[index].status === "Aprobado") {
-                this.state.total_inicial +=   this.state.budgetLines[index].budgetstart;   
-                this.state.total_ejecutado += this.state.budgetLines[index].budgeupdate;
-                this.state.total_disponible +=  this.state.budgetLines[index].balance;
-                this.state.total_reembolsos += this.state.budgetLines[index].returns;
+                //this.state.total_inicial +=   this.state.budgetLines[index].budgetstart;   
+                this.state.total_ejecutado += this.state.budgetLines[index].balance;
+                this.state.total_disponible = this.props.budgetstart - this.state.total_ejecutado;
+                //this.state.total_reembolsos += this.state.budgetLines[index].returns;
             }
         }
        
     }
 
     render() {
-       
+       this.calculo();
         return (
            
                 <div className="col-sm-6">
@@ -128,7 +126,7 @@ export default class Projectcard extends Component {
                                    {/*      <button className="btn btn-primary  waves-effect waves-light" type="button"  >LPS. {this.state.total_inicial} </button>
                                         <button className="btn btn-danger  waves-effect waves-light" type="button"  >LPS. {this.state.total_ejecutado} </button>
                                         <button className="btn btn-success  waves-effect waves-light" type="button"  >LPS. {this.state.total_disponible} </button>
- */}
+                                    */}
                                         {/* end of dropdown menu */}
                                 </div>
                                  {/* end of dropdown-secondary */}

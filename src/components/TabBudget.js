@@ -111,7 +111,6 @@ export default class TabBudget extends Component {
                 {/* Add Contact Ends Model*/}
 
 
-
                                     </div>
                                     
                                 
@@ -142,7 +141,7 @@ export default class TabBudget extends Component {
                                         <div className="card card-border-default">
                                             <div className="card-header" align="center">
                                                 
-                                              <Link to={'/projects/new'} ><h3>Crear Nuevo Projecto</h3></Link>
+                                              <Link to={'/projects/new'} ><h3>Crear Nuevo Proyecto</h3></Link>
                                             </div>
                                             <div className="card-block">
                                                 <div className="row">
