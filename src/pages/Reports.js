@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import axios from 'axios'
+import jsPDF from 'jspdf';
 
+import {Link} from 'react-router-dom'
 export default class Reports extends Component {
 
     constructor() {
@@ -8,8 +10,9 @@ export default class Reports extends Component {
         this.state = {
             budgets:[],
             budget_id:0,
-            projects:[]
-
+            projects:[],
+            project_id:0,
+            trimestre:0
             
         }
     }
@@ -26,6 +29,11 @@ export default class Reports extends Component {
         const res_p = await axios.post('http://167.99.15.83:4000/api/projects/findProjectsByBudgetId/'+e.target.value);
         this.setState({projects:res_p.data.projectsbybudgetid});
     }
+
+    onChangeSelectProject = async (e) => {this.setState({project_id: e.target.value}); }
+    onChangeSelectTrimestre = async (e) => {this.setState({trimestre: e.target.value}); }
+
+
     render() {
         return (
             <div>
@@ -90,8 +98,8 @@ export default class Reports extends Component {
                                                     </td>
                                                     <td>
                                                         <label>Seleccione Proyecto</label>
-                                                        <select className="form-control mb-3" name="proyecto">
-                                                            <option value="1">Seleccione Proyecto</option>
+                                                        <select onChange={ this.onChangeSelectProject} className="form-control mb-3" name="proyecto">
+                                                            <option value="0">Seleccione Proyecto</option>
                                                             { this.state.projects.map( project =>   
                                                             
                                                                  <option value={project.id}>{project.name} </option>
@@ -102,7 +110,9 @@ export default class Reports extends Component {
                                                     </td>
                                                     <td>
                                                         <label>Seleccione Trimestre</label>
-                                                        <select className="form-control mb-3" name="trimestre">
+                                                        
+                                                        <select onChange={ this.onChangeSelectTrimestre} className="form-control mb-3" name="trimestre">
+                                                            <option value="1">Seleccione Trimestre</option>
                                                             <option value="1">Trimestre 1</option>
                                                             <option value="2">Trimestre 2</option>
                                                             <option value="3">Trimestre 3</option>
@@ -112,14 +122,14 @@ export default class Reports extends Component {
                                                     <td>
                                                         <label>Seleccione Año</label>
                                                         <select className="form-control mb-3" name="anio">
-                                                            <option value="1">2020</option>
-                                                            <option value="2">2021</option>
-                                                            <option value="3">2022</option>
+                                                            <option value="2020">2020</option>
+                                                            <option value="2021">2021</option>
+                                                            <option value="2022">2022</option>
                                                         </select>
                                                     </td>
                                                     <td>
                                                         <label>Crear Reporte</label>
-                                                        <button className="btn btn-block btn-primary">Generar</button>
+                                                        <Link to={'/report_view/'+this.state.budget_id+'/'+this.state.project_id+'/'+this.state.trimestre} className="btn btn-block btn-primary">Generar</Link>
                                                     </td>
                                                 </tr>
                                             </tbody>

@@ -23,6 +23,7 @@ import Account_list from './pages/Accounts'
 import AccountDashboard from './pages/AccountDashboard'
 
 import Reports from './pages/Reports'
+import Report_View from './pages/Report_View'
 
 
 function App() {
@@ -50,6 +51,7 @@ function App() {
             <Route  path="/account/:id" exact  component ={AccountDashboard} /> 
 
             <Route path="/reports" exact component={Reports} />
+            <Route path="/report_view/:bgt_id/:proj_id/:trim" exact component={Report_View} />
            
       </Router>
     </div>
