@@ -1,22 +1,76 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import {Link, Redirect} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import Projectcard from '../components/Projectcard';
+import BudgetCard from './BudgetCard';
 
 export default class TabBudget extends Component {
 
     constructor() {
         super();
         this.state = {
-            projects:[]
+            projects:[],
+            projects2:[],
+           
+            budgetLinesAtlas:[],
+            total_disponible:0.0,
+            total_ejecutado:0.0,
+            total_solicitado:0.0,
+
+            budgetLinesAtlas2:[],
+            total_disponible2:0.0,
+            total_ejecutado2:0.0,
+            total_solicitado2:0.0
         }
     }
     
-    async componentDidMount(){
-        const res_p = await axios.post('http://167.99.15.83:4000/api/projects/findProjectsByBudgetId/'+this.props.id);
+     async componentDidMount(){
+
+        const res_p2 =  await axios.post('http://167.99.15.83:4000/api/projects/findProjectsByBudgetId/'+this.props.id);
+        this.setState({projects2:res_p2.data.projectsbybudgetid});
+
+        this.state.projects2.map( project2 => { 
+
+            this.calculo2(project2.id);
+
+        })
+
+        this.calculo1();
+
+    }
+
+    async calculo1(){
+
+        const res_p =  await axios.post('http://167.99.15.83:4000/api/projects/findProjectsByBudgetId/'+this.props.id);
         this.setState({projects:res_p.data.projectsbybudgetid});
     }
 
+    async calculo2(project_id){
+        
+       
+        const res_bud =  await axios.post('http://167.99.15.83:4000/api/budgetlines/atlas/project/'+project_id);
+       // console.warn("VALOR="+res.data.budgetLines_atlas);
+        this.setState({budgetLinesAtlas2:res_bud.data.budgetLines_atlas});
+        
+        this.state.budgetLinesAtlas2.map( budgetLine2 => {
+           
+            if (budgetLine2.status === 'Solicitado') {
+               
+                this.setState((prevState) => ({total_solicitado2: prevState.total_solicitado2 + budgetLine2.budgetstart}))
+                
+             }
+             if (budgetLine2.status === 'Aprobado') {
+            
+               this.setState((prevState) => ({total_ejecutado2: prevState.total_ejecutado2 + budgetLine2.balance}))
+             }
+
+             this.state.total_disponible2 = this.props.budgetstart - this.state.total_ejecutado2;
+             
+        })
+
+    }
+
+    
     formatMoney(number) {
         return number.toLocaleString('en-US', { style: 'currency', currency: 'HNL' });
     }
@@ -28,12 +82,8 @@ export default class TabBudget extends Component {
         
         if (res_p) {     }
 
-        return <Redirect push to="/budgets" /> 
-       
-            //return this.props.history.push('/budgets');
-            //window.location.href = 'https://ihcafe-35ae7.firebaseapp.com/budgets/';
-             //hashHistory.push('/budgets');
-       
+        window.location.href = '/budgets';
+        
     }
 
     render() {
@@ -58,23 +108,13 @@ export default class TabBudget extends Component {
 
                                     <div>
                                        
-                                        <table className="table"> 
-                                            <thead>
-                                                <th>Presupuesto Asignado</th>
-                                                <th>Presupuesto Ejecutado</th>
-                                                <th>Reembolsos Realizados</th>
-                                                <th>Presupuesto Disponible</th>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td><button  style={{width: '100%'}} className="btn btn-lg btn-primary  waves-effect waves-light" type="button"  >{this.formatMoney(this.props.budgetstart)}</button></td>
-                                                    <td><button  style={{width: '100%'}}  className="btn btn-lg btn-danger  waves-effect waves-light" type="button"  >{this.formatMoney(this.props.budgetupdate)} </button></td>
-                                                   
-                                                    <td><button  style={{width: '100%'}} className="btn btn-lg btn-warning  waves-effect waves-light" type="button"  >{this.formatMoney(this.props.returns)}</button></td>
-                                                    <td><button  style={{width: '100%'}} className="btn btn-lg btn-success  waves-effect waves-light" type="button"  >{this.formatMoney(this.props.balance)} </button></td>
-                                                </tr>
-                                            </tbody>
-                                        </table> 
+                                       <BudgetCard 
+                                            total_disponible2={this.state.total_disponible2} 
+                                            total_ejecutado2={this.state.total_ejecutado2} 
+                                            total_solicitado2={this.state.total_solicitado2} 
+                                            budgetstart={this.props.budgetstart} 
+                                            budget_id={this.props.id} 
+                                       />
 
                                          {/* Add Contact Start Model */}
                 <div>
