@@ -16,6 +16,7 @@ export default class ProjectNew extends Component {
             enddate:"",
             budget_id:0,
             team_id:0,
+            monto:0,
             status:"",
 
             budgets:[],
@@ -41,12 +42,14 @@ export default class ProjectNew extends Component {
     onChangeBudget = (e) => {this.setState({budget_id: e.target.value})}
     onChangeTeam = (e) => {this.setState({team_id: e.target.value})}
     onChangeStatus = (e) => {this.setState({status: e.target.value})}
+    onChangeMonto = (e) => {this.setState({monto: e.target.value})}
     
     onSubmit  = async e =>{
         e.preventDefault();
          await axios.post('http://167.99.15.83:4000/api/projects',{
             code:this.state.code,
             name:this.state.name,
+            budgetstart:this.state.monto,
             location:this.state.location,
             description:this.state.description,
             priority:this.state.priority,
@@ -57,9 +60,10 @@ export default class ProjectNew extends Component {
             status:this.state.status
         })
         //window.location.href = 'https://ihcafe-35ae7.firebaseapp.com/projects'
-        return <Redirect to={"/projects"}  />
+        window.location.href = '/budgets';
+        //return <Redirect to={"/projects"}  />
     }
-
+     
     render() {
         return (
             <div className="pcoded-content">
@@ -129,6 +133,12 @@ export default class ProjectNew extends Component {
                                                     <label className="col-sm-2 col-form-label">Descripción del Proyecto</label>
                                                     <div className="col-sm-10">
                                                     <textarea onChange = {this.onChangeDescription} rows={5} cols={5} className="form-control" placeholder="Default textarea" defaultValue={""} />
+                                                    </div>
+                                                </div>
+                                                <div className="form-group row">
+                                                    <label className="col-sm-2 col-form-label">Presupuesto Aprobado del Proyecto</label>
+                                                    <div className="col-sm-10">
+                                                    <input onChange={this.onChangeMonto} required type="text" className="form-control" placeholder="Ingrese el Presupuesto Aprobado para este Proyecto" />
                                                     </div>
                                                 </div>
                                                 <div className="form-group row">
