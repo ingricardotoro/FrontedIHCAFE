@@ -78,14 +78,14 @@ export default class TabBudget extends Component {
   }
 
   onSumbit = async (e) => {
-    //e.preventDefault();
+    e.preventDefault();
     const res_p = await axios.post(
       "http://167.99.15.83:4000/api/budgets/delete/" + this.props.id
     );
 
-    //if (res_p) {     }
+    //if (res_p) { }
 
-    //window.location.href = "/budgets";
+    window.location.href = "/budgets";
     //eliminado
   };
 
