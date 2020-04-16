@@ -77,8 +77,8 @@ export default class TabBudget extends Component {
     });
   }
 
-  onSumbit = async (e) => {
-    e.preventDefault();
+  onDelete = async (e) => {
+    //e.preventDefault();
     const res_p = await axios.post(
       "http://167.99.15.83:4000/api/budgets/delete/" + this.props.id
     );
@@ -149,22 +149,21 @@ export default class TabBudget extends Component {
                               </button>
                             </div>
                             <div className="modal-body">
-                              <form onSubmit={() => this.onSumbit()}>
-                                <div
-                                  style={{
-                                    width: "100%",
-                                    textAlign: "center",
-                                    display: "inline-block",
-                                  }}
+                              <div
+                                style={{
+                                  width: "100%",
+                                  textAlign: "center",
+                                  display: "inline-block",
+                                }}
+                              >
+                                <button
+                                  onClick={() => this.onDelete()}
+                                  type="submit"
+                                  className="btn btn-danger waves-effect "
                                 >
-                                  <button
-                                    type="submit"
-                                    className="btn btn-danger waves-effect "
-                                  >
-                                    Eliminar Este Presupuesto
-                                  </button>
-                                </div>
-                              </form>
+                                  Eliminar Este Presupuesto
+                                </button>
+                              </div>
 
                               <div className="modal-footer">
                                 <button
