@@ -86,6 +86,7 @@ export default class TabBudget extends Component {
     //if (res_p) {     }
 
     //window.location.href = "/budgets";
+    //eliminado
   };
 
   render() {
