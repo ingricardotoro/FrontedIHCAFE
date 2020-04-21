@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import { Redirect } from "react-router-dom";
 
 export default class BudgetNew extends Component {
   constructor() {
@@ -9,6 +8,8 @@ export default class BudgetNew extends Component {
     this.state = {
       code: "",
       name: "",
+      tipo: "",
+      coin_id: 0,
       description: "",
       excercise_start: "",
       excercise_end: "",
@@ -26,15 +27,18 @@ export default class BudgetNew extends Component {
       dateapproval: Date.now(),
 
       cuentas: [],
+      coins: [],
     };
   }
 
   async componentDidMount() {
     const res6 = await axios.get("http://167.99.15.83:4000/api/accounts/");
     this.setState({ cuentas: res6.data.cuentas });
+
+    const res7 = await axios.get("http://167.99.15.83:4000/api/coins/");
+    this.setState({ coins: res7.data.coins });
   }
   onChangeBudgetstart = (e) => {
-    //lo nuevo
     this.setState({ buddgetstart: e.target.value });
   };
   onChangeCode = (e) => {
@@ -59,12 +63,20 @@ export default class BudgetNew extends Component {
   onChangeEstado = (e) => {
     this.setState({ status: e.target.value });
   };
+  onChangeTipo = (e) => {
+    this.setState({ tipo: e.target.value });
+  };
+  onChangeCoin = (e) => {
+    this.setState({ coin_id: e.target.value });
+  };
 
   onSubmit = async (e) => {
     e.preventDefault();
     const res = await axios.post("http://167.99.15.83:4000/api/budgets", {
       code: this.state.code,
       name: this.state.name,
+      tipo: this.state.tipo,
+      coin_id: this.state.coin_id,
       description: this.state.description,
       excercise_start: this.state.excercise_start,
       excercise_end: this.state.excercise_end,
@@ -221,6 +233,51 @@ export default class BudgetNew extends Component {
                                         {cuenta.name}{" "}
                                       </option>
                                     ))}
+                                  </select>
+                                </div>
+                              </div>
+                              <div className="form-group row">
+                                <label className="col-sm-2 col-form-label">
+                                  Tipo de Moneda
+                                </label>
+                                <div className="col-sm-10">
+                                  <select
+                                    onChange={this.onChangeCoin}
+                                    name="select_coin"
+                                    className="form-control mt-3"
+                                  >
+                                    <option value="#">
+                                      Seleccione Tipo de Moneda
+                                    </option>
+                                    {this.state.coins.map((coin) => (
+                                      <option value={coin.id}>
+                                        ({coin.code})-{coin.name}
+                                      </option>
+                                    ))}
+                                  </select>
+                                </div>
+                              </div>
+
+                              <div className="form-group row">
+                                <label className="col-sm-2 col-form-label">
+                                  Tipo de Presupuesto
+                                </label>
+                                <div className="col-sm-10">
+                                  <select
+                                    onChange={this.onChangeTipo}
+                                    name="select_tipo"
+                                    className="form-control mt-3"
+                                  >
+                                    <option value="#">
+                                      Seleccione Tipo de Presupuesto
+                                    </option>
+
+                                    <option value="atlas">
+                                      Presupuesto Atlas
+                                    </option>
+                                    <option value="estandar">
+                                      Presupuesto Estandar
+                                    </option>
                                   </select>
                                 </div>
                               </div>
