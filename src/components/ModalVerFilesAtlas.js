@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 
-export default class ModalVerFiles extends Component {
+export default class ModalVerFilesAtlas extends Component {
   constructor() {
     super();
     this.state = {
@@ -10,8 +10,11 @@ export default class ModalVerFiles extends Component {
   }
 
   async componentDidMount() {
-    /*const res_files = await axios.post('http://167.99.15.83:4000/api/files/filesbybudgetid/'+this.props.budgetlineatlas);
-        this.setState({files:res_files.data.files});*/
+    const res_files = await axios.post(
+      "http://167.99.15.83:4000/api/files/filesbybudgetid/" +
+        this.props.budgetlineatlas
+    );
+    this.setState({ files: res_files.data.files });
   }
   onClickDelete = async (id) => {
     await axios.post("http://167.99.15.83:4000/api/files/delete/" + id);

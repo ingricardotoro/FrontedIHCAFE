@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import axios from "axios";
 import moment from "moment";
 import RowCardsProjects from "../components/RowCardsProjects";
-import ModalVerFiles from "../components/ModalVerFiles";
+import ModalVerFiles from "./ModalVerFiles";
 
 export default class TableCost extends Component {
   constructor() {
@@ -690,12 +690,12 @@ export default class TableCost extends Component {
                                       </div>
                                     </div>
 
-                                    <ModalVerFiles
+                                    {/* <ModalVerFiles
                                       idProject={this.props.idProject}
                                       budgetline={budgetLine.id}
                                       budgetlineName={budgetLine.name.name}
                                       budgetlineDetails={budgetLine.details}
-                                    />
+                                    /> */}
 
                                     {/* SUBIR Archivos */}
                                     <div

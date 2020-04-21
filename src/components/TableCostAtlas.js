@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import axios from "axios";
 import moment from "moment";
 import RowCardsProjects from "../components/RowCardsProjects";
-import ModalVerFiles from "../components/ModalVerFiles";
+import ModalVerFilesAtlas from "./ModalVerFilesAtlas";
 
 export default class TableCost extends Component {
   constructor() {
@@ -749,7 +749,7 @@ export default class TableCost extends Component {
                                     </div>
                                   </div>
 
-                                  <ModalVerFiles
+                                  <ModalVerFilesAtlas
                                     idProject={this.props.idProject}
                                     budgetlineatlas={budgetLinesAtlas.id}
                                     budgetlineatlasName={
