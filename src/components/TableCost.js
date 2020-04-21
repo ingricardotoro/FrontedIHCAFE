@@ -407,7 +407,6 @@ export default class TableCost extends Component {
                             </tr>
                           </thead>
                           <tbody>
-                            {//console.log(`2=${this.state.budgetLines}`)}
                             {this.state.budgetLines != undefined
                               ? this.state.budgetLines.map((budgetLine) => (
                                   <tr key={budgetLine.id}>
