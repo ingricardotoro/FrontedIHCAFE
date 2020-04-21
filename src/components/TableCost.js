@@ -306,11 +306,11 @@ export default class TableCost extends Component {
     this.setState({ fase_archivo: e.target.value });
   };
   onClickSubirArchivo = async (id) => {
-    await axios.post("http://167.99.15.83:4000/api/files/" + id, {
+    /*await axios.post("http://167.99.15.83:4000/api/files/" + id, {
       nombre_archivo: this.state.nombre_archivo,
       fase_archivo: this.state.fase_archivo,
       file: this.state.archivo,
-    });
+    });*/
   };
 
   //codigo para crear un nuevo renglon presupuestario
@@ -407,7 +407,7 @@ export default class TableCost extends Component {
                             </tr>
                           </thead>
                           <tbody>
-                            {console.log(`2=${this.state.budgetLines}`)}
+                            {//console.log(`2=${this.state.budgetLines}`)}
                             {this.state.budgetLines != undefined
                               ? this.state.budgetLines.map((budgetLine) => (
                                   <tr key={budgetLine.id}>
