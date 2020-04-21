@@ -10,7 +10,7 @@ export default class TableCost extends Component {
     this.state = {
       redirect: false,
 
-      budgetLine: [],
+      budgetLines: [],
       budgetLinesCat: [],
       projects: [],
 
@@ -29,7 +29,7 @@ export default class TableCost extends Component {
       name: "",
       project_id: 0,
       category_id: 0,
-      sub_category_id: 0,
+      sub_category_code: "",
       user_id: 1,
       status: "Solicitado",
       supplier_id: 1,
@@ -83,8 +83,9 @@ export default class TableCost extends Component {
     const res = await axios.post(
       "http://167.99.15.83:4000/api/budgetlines/project/" + this.props.idProject
     );
-    this.setState({ budgetLines: res.data.budgetLines });
 
+    this.setState({ budgetLines: res.data.budgetLines });
+    //console.log(`1=${this.state.budgetLines[0].name}`);
     /*const res2 = await axios.post('http://167.99.15.83:4000/api/budgetlines/atlas/cat_project/'+this.props.idProject);
         this.setState({budgetLinesCat:res2.data.budgetCategories}); */
 
@@ -133,8 +134,6 @@ export default class TableCost extends Component {
   };
 
   calculo() {
-    //this.setVariblesToZero();
-
     // para realizar el calculo de la suma de presupuestos
     this.state.total_inicial = 0.0;
     this.state.total_ejecutado = 0.0;
@@ -183,7 +182,7 @@ export default class TableCost extends Component {
   /**********************LLENADO PARA EL SAVE********* */
   //onChanceProject = (e) => {this.setState({project_id: e.target.value})}
   onChanceClasificacion = async (e) => {
-    this.setState({ sub_category_id: e.target.value });
+    this.setState({ sub_category_code: e.target.value });
     const res7 = await axios.get(
       "http://167.99.15.83:4000/api/categories/child/" + e.target.value
     );
@@ -276,6 +275,7 @@ export default class TableCost extends Component {
       style: "currency",
       currency: "HNL",
     });
+    //return number;
   }
 
   /*onClickAprobar = async (id, monto) => {
@@ -332,7 +332,7 @@ export default class TableCost extends Component {
       buddgetfinal: this.state.budgetfinal,
       balance: this.state.budgetstart,
       category_id: this.state.category_id,
-      sub_category_id: this.state.sub_category_id,
+      sub_category_code: this.state.sub_category_code,
     });
 
     window.location.href = "/project/" + this.props.idProject;
@@ -407,61 +407,44 @@ export default class TableCost extends Component {
                             </tr>
                           </thead>
                           <tbody>
-                            {this.state.budgetLines === "undefined"
-                              ? this.state.budgetLines.map((budgetLines) => (
-                                  <tr key={budgetLines.id}>
-                                    {/* {this.suma(budgetLines.buddgetstart, budgetLines.buddgetfinal,budgetLines.balance)}  */}
-
+                            {console.log(`2=${this.state.budgetLines}`)}
+                            {this.state.budgetLines != undefined
+                              ? this.state.budgetLines.map((budgetLine) => (
+                                  <tr key={budgetLine.id}>
                                     <td className="pro-name">
                                       <label className="text-danger">
-                                        {budgetLines.code}
+                                        {budgetLine.code}
                                       </label>
                                     </td>
                                     <td className="pro-name">
-                                      <h6>{budgetLines.name}</h6>
+                                      <h6>{budgetLine.name}</h6>
                                     </td>
-                                    {budgetLines.statu === "Aprobado" ? (
-                                      <td>
-                                        <label className="text-info">
-                                          {" "}
-                                          {this.formatMoney(
-                                            budgetLines.balance
-                                          )}
-                                        </label>
-                                      </td>
-                                    ) : (
-                                      <td>
-                                        <label className="text-info">
-                                          {" "}
-                                          {this.formatMoney(
-                                            budgetLines.budgetstart
-                                          )}
-                                        </label>
-                                      </td>
-                                    )}
+
+                                    <td>
+                                      <label className="text-info">
+                                        {this.formatMoney(budgetLine.balance)}
+                                      </label>
+                                    </td>
 
                                     <td>
                                       <label className="text-danger">
                                         {" "}
                                         {this.formatMoney(
-                                          moment(budgetLines.date_start).format(
+                                          moment(budgetLine.date_start).format(
                                             "DD/MM/YYYY"
                                           )
                                         )}
                                       </label>
                                     </td>
-                                    {/*<td>
-                                                        <label className="text-success"> {this.formatMoney(budgetLines.balance)}</label>
-                                                    </td> */}
 
-                                    {budgetLines.status === "Solicitado" ? (
+                                    {budgetLine.status === "Solicitado" ? (
                                       <td>
                                         <button
                                           type="button"
                                           class="btn btn-success waves-effect"
                                           data-toggle="modal"
                                           data-target={
-                                            "#aprobar_" + budgetLines.id
+                                            "#aprobar_" + budgetLine.id
                                           }
                                         >
                                           Decidir
@@ -469,18 +452,18 @@ export default class TableCost extends Component {
                                       </td>
                                     ) : (
                                       <td>
-                                        <label>{budgetLines.status}</label>
+                                        <label>{budgetLine.status}</label>
                                       </td>
                                     )}
 
-                                    {budgetLines.status === "Aprobado" ? (
+                                    {budgetLine.status === "Aprobado" ? (
                                       <td>
                                         <button
                                           type="button"
                                           class="btn btn-warning waves-effect"
                                           data-toggle="modal"
                                           data-target={
-                                            "#rembolsar_" + budgetLines.id
+                                            "#rembolsar_" + budgetLine.id
                                           }
                                         >
                                           Rembolsar
@@ -498,7 +481,7 @@ export default class TableCost extends Component {
                                         class="btn btn-primary waves-effect"
                                         data-toggle="modal"
                                         data-target={
-                                          "#ver_archivos_" + budgetLines.id
+                                          "#ver_archivos_" + budgetLine.id
                                         }
                                       >
                                         Ver
@@ -508,7 +491,7 @@ export default class TableCost extends Component {
                                         class="btn btn-success waves-effect"
                                         data-toggle="modal"
                                         data-target={
-                                          "#archivos_" + budgetLines.id
+                                          "#archivos_" + budgetLine.id
                                         }
                                       >
                                         Subir
@@ -536,7 +519,7 @@ export default class TableCost extends Component {
                                           className="icofont icofont-delete-alt"
                                           data-toggle="modal"
                                           data-target={
-                                            "#modal_delete_" + budgetLines.id
+                                            "#modal_delete_" + budgetLine.id
                                           }
                                         ></i>
                                       </a>
@@ -546,7 +529,7 @@ export default class TableCost extends Component {
 
                                     <div
                                       className="modal fade"
-                                      id={"modal_delete_" + budgetLines.id}
+                                      id={"modal_delete_" + budgetLine.id}
                                       tabIndex={-1}
                                       role="dialog"
                                     >
@@ -558,7 +541,7 @@ export default class TableCost extends Component {
                                           <div className="modal-header">
                                             <h4 className="modal-title">
                                               Eliminar Presupuesto:{" "}
-                                              {budgetLines.name}{" "}
+                                              {budgetLine.name}{" "}
                                             </h4>
                                             <button
                                               type="button"
@@ -573,7 +556,7 @@ export default class TableCost extends Component {
                                             <form
                                               onSubmit={() =>
                                                 this.onSubmitDelete(
-                                                  budgetLines.id
+                                                  budgetLine.id
                                                 )
                                               }
                                             >
@@ -612,7 +595,7 @@ export default class TableCost extends Component {
 
                                     <div
                                       class="modal fade"
-                                      id={"aprobar_" + budgetLines.id}
+                                      id={"aprobar_" + budgetLine.id}
                                       tabindex="-1"
                                       role="dialog"
                                     >
@@ -625,7 +608,7 @@ export default class TableCost extends Component {
                                             <h4 class="modal-title">
                                               Monto:{" "}
                                               {this.formatMoney(
-                                                budgetLines.budgetstart
+                                                budgetLine.balance
                                               )}{" "}
                                             </h4>
                                             <button
@@ -643,7 +626,7 @@ export default class TableCost extends Component {
                                             <div class="modal-body">
                                               <p class="modal-title">
                                                 Descripción:{" "}
-                                                {budgetLines.details}
+                                                {budgetLine.details}
                                               </p>
 
                                               <select
@@ -670,7 +653,7 @@ export default class TableCost extends Component {
                                                 name="monto"
                                                 type="text"
                                                 className="form-control mb-3"
-                                                Value={budgetLines.budgetstart}
+                                                Value={budgetLine.budgetstart}
                                               />
 
                                               <label>Comentarios</label>
@@ -694,8 +677,8 @@ export default class TableCost extends Component {
                                                 type="button"
                                                 onClick={() =>
                                                   this.onClickAprobar(
-                                                    budgetLines.id,
-                                                    budgetLines.budgetstart
+                                                    budgetLine.id,
+                                                    budgetLine.budgetstart
                                                   )
                                                 }
                                                 class="btn btn-primary waves-effect waves-light "
@@ -710,15 +693,15 @@ export default class TableCost extends Component {
 
                                     <ModalVerFiles
                                       idProject={this.props.idProject}
-                                      budgetline={budgetLines.id}
-                                      budgetlineName={budgetLines.name.name}
-                                      budgetlineDetails={budgetLines.details}
+                                      budgetline={budgetLine.id}
+                                      budgetlineName={budgetLine.name.name}
+                                      budgetlineDetails={budgetLine.details}
                                     />
 
                                     {/* SUBIR Archivos */}
                                     <div
                                       class="modal fade"
-                                      id={"archivos_" + budgetLines.id}
+                                      id={"archivos_" + budgetLine.id}
                                       tabindex="-1"
                                       role="dialog"
                                     >
@@ -729,9 +712,9 @@ export default class TableCost extends Component {
                                         <div class="modal-content">
                                           <div class="modal-header">
                                             <h4 class="modal-title">
-                                              {budgetLines.name}-
+                                              {budgetLine.name}-
                                               {this.formatMoney(
-                                                budgetLines.budgetstart
+                                                budgetLine.balance
                                               )}{" "}
                                             </h4>
                                             <button
@@ -748,7 +731,7 @@ export default class TableCost extends Component {
                                           <form
                                             action={
                                               "http://167.99.15.83:4000/api/files/" +
-                                              budgetLines.id
+                                              budgetLine.id
                                             }
                                             method="post"
                                             enctype="multipart/form-data"
@@ -762,7 +745,7 @@ export default class TableCost extends Component {
                                                 ></input>
                                               </div>
                                               <input
-                                                value={budgetLines.id}
+                                                value={budgetLine.id}
                                                 name="budget_id"
                                                 type="hidden"
                                                 className="form-control"
@@ -832,7 +815,7 @@ export default class TableCost extends Component {
 
                                     <div
                                       class="modal fade"
-                                      id={"rembolsar_" + budgetLines.id}
+                                      id={"rembolsar_" + budgetLine.id}
                                       tabindex="-1"
                                       role="dialog"
                                     >
@@ -843,9 +826,9 @@ export default class TableCost extends Component {
                                         <div class="modal-content">
                                           <div class="modal-header">
                                             <h4 class="modal-title">
-                                              Rembolsar {budgetLines.name}-
+                                              Rembolsar {budgetLine.name}-
                                               {this.formatMoney(
-                                                budgetLines.budgetstart
+                                                budgetLine.balance
                                               )}{" "}
                                             </h4>
                                             <button
@@ -879,9 +862,9 @@ export default class TableCost extends Component {
                                               type="hidden"
                                               name={
                                                 "input_rembolsar_" +
-                                                budgetLines.id
+                                                budgetLine.id
                                               }
-                                              value={budgetLines.id}
+                                              value={budgetLine.id}
                                             />
                                             <div className="mt-3">
                                               <button
