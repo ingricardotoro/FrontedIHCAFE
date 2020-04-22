@@ -106,16 +106,6 @@ export default class TableCost extends Component {
     const res6 = await axios.get("http://167.99.15.83:4000/api/accounts/");
     this.setState({ cuentas: res6.data.cuentas });
 
-    /*  const res_atlas = await axios.get(
-      "http://167.99.15.83:4000/api/atlas/resultados"
-    );
-    this.setState({ resultados_atlas: res_atlas.data.atlas_resultados });
- 
-    const res_account_atlas = await axios.get(
-      "http://167.99.15.83:4000/api/atlas/accounts"
-    );
-    this.setState({ accounts_atlas: res_account_atlas.data.atlas_accounts });
-*/
     const res_suppliers = await axios.get(
       "http://167.99.15.83:4000/api/suppliers/"
     );
@@ -144,8 +134,8 @@ export default class TableCost extends Component {
       for (let index = 0; index < this.state.budgetLines.length; index++) {
         if (this.state.budgetLines[index].status === "Solicitado") {
           this.state.total_solicitado =
-            this.state.total_solicitado +
-            this.state.budgetLines[index].budgetstart;
+            this.state.total_solicitado + this.state.budgetLines[index].balance;
+          console.log(this.state.total_solicitado);
           //this.setState(this.state.total_solicitado , this.state.total_solicitado + this.state.budgetLines[index].budgetstart);
         }
         if (this.state.budgetLines[index].status === "Aprobado") {
