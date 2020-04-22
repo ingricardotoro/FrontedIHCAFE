@@ -220,23 +220,29 @@ export default class TableCost extends Component {
     //return number;
   }
 
-  onClickAprobar = async (id, monto) => {
+  onClickAprobar = async (id, maximo) => {
     if (this.state.valor === -1) {
-      this.state.valor = monto;
+      this.state.valor = maximo;
     }
 
-    await axios.post(
-      "http://167.99.15.83:4000/api/budgetlines/aprobar/" +
-        id +
-        "/" +
-        this.state.aprobar +
-        "/" +
-        this.state.valor +
-        "/" +
-        this.state.comentario
-    );
+    if (this.state.valor <= maximo) {
+      // si es aprobado un valor igual o menor
 
-    window.location.href = "/project/" + this.props.idProject;
+      await axios.post(
+        "http://167.99.15.83:4000/api/budgetlines/aprobar/" +
+          id +
+          "/" +
+          this.state.aprobar +
+          "/" +
+          this.state.valor +
+          "/" +
+          this.state.comentario
+      );
+
+      window.location.href = "/project/" + this.props.idProject;
+    } else {
+      alert("Valor No Valido");
+    }
   };
 
   onClickArchivo = async (e) => {
@@ -350,7 +356,7 @@ export default class TableCost extends Component {
                             </tr>
                           </thead>
                           <tbody>
-                            {this.state.budgetLines != undefined
+                            {this.state.budgetLines !== undefined
                               ? this.state.budgetLines.map((budgetLine) => (
                                   <tr key={budgetLine.id}>
                                     <td className="pro-name">
@@ -595,7 +601,7 @@ export default class TableCost extends Component {
                                                 name="monto"
                                                 type="text"
                                                 className="form-control mb-3"
-                                                Value={budgetLine.budgetstart}
+                                                Value={budgetLine.balance}
                                               />
 
                                               <label>Comentarios</label>
@@ -620,7 +626,7 @@ export default class TableCost extends Component {
                                                 onClick={() =>
                                                   this.onClickAprobar(
                                                     budgetLine.id,
-                                                    budgetLine.budgetstart
+                                                    budgetLine.balance
                                                   )
                                                 }
                                                 class="btn btn-primary waves-effect waves-light "
