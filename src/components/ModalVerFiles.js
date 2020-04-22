@@ -10,13 +10,14 @@ export default class ModalVerFiles extends Component {
   }
 
   async componentDidMount() {
-    /*const res_files = await axios.post('http://167.99.15.83:4000/api/files/filesbybudgetid/'+this.props.budgetlineatlas);
-        this.setState({files:res_files.data.files});*/
+    const res_files = await axios.post(
+      "http://167.99.15.83:4000/api/files/filesbybudgetid/" +
+        this.props.budgetline
+    );
+    this.setState({ files: res_files.data.files });
   }
-  onClickDelete = async (id) => {
-    await axios.post("http://167.99.15.83:4000/api/files/delete/" + id);
-    //console.warn("PELIGRO="+res_del.data.deleteRowCount);
-    //res_del.data.deleteRowCount > 0 ? <Redirect to={"/project/"+this.props.idProject}  /> : null
+  onClickDelete = async (filename) => {
+    await axios.post("http://167.99.15.83:4000/api/files/delete/" + filename);
     window.location.href =
       "http://167.99.15.83:3001/project/" + this.props.idProject;
   };
@@ -27,14 +28,14 @@ export default class ModalVerFiles extends Component {
         <div>
           <div
             class="modal fade"
-            id={"ver_archivos_" + this.props.budgetlineatlas}
+            id={"ver_archivos_" + this.props.budgetline}
             tabindex="-1"
             role="dialog"
           >
             <div class="modal-dialog modal-lg" role="document">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h4 class="modal-title">{this.props.budgetlineatlasName} </h4>
+                  <h4 class="modal-title">{this.props.budgetlineName} </h4>
                   <button
                     type="button"
                     class="close"
@@ -47,7 +48,7 @@ export default class ModalVerFiles extends Component {
                 <div class="modal-body" align="center">
                   <div className="row card-block">
                     <div className="col-md-12">
-                      <p>{this.props.budgetlineatlasDetails}</p>
+                      <p>{this.props.budgetlineDetails}</p>
                       <ul className="list-view">
                         {this.state.files.map((file) => (
                           <li>
@@ -118,7 +119,7 @@ export default class ModalVerFiles extends Component {
                                       <button
                                         type="button"
                                         onClick={() =>
-                                          this.onClickDelete(file.id)
+                                          this.onClickDelete(file.filename)
                                         }
                                         className="btn btn-sm btn-danger"
                                       >

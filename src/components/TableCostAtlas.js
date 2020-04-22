@@ -286,24 +286,29 @@ export default class TableCost extends Component {
     //return number;
   }
 
-  onClickAprobar = async (id, monto) => {
+  onClickAprobar = async (id, maximo) => {
     if (this.state.valor === -1) {
-      this.state.valor = monto;
+      this.state.valor = maximo;
     }
 
-    await axios.post(
-      "http://167.99.15.83:4000/api/budgetlines/aprobar_atlas/" +
-        id +
-        "/" +
-        this.state.aprobar +
-        "/" +
-        this.state.valor +
-        "/" +
-        this.state.comentario
-    );
+    if (this.state.valor <= maximo) {
+      // si es aprobado un valor igual o menor
 
-    //this.setState({ redirect: "/project/"+this.props.idProject });
-    window.location.href = "/project/" + this.props.idProject;
+      await axios.post(
+        "http://167.99.15.83:4000/api/budgetlines/aprobar_atlas/" +
+          id +
+          "/" +
+          this.state.aprobar +
+          "/" +
+          this.state.valor +
+          "/" +
+          this.state.comentario
+      );
+
+      window.location.href = "/project/" + this.props.idProject;
+    } else {
+      alert("Valor No Valido");
+    }
   };
 
   onClickArchivo = async (e) => {

@@ -639,12 +639,12 @@ export default class TableCost extends Component {
                                       </div>
                                     </div>
 
-                                    {/* <ModalVerFiles
+                                    <ModalVerFiles
                                       idProject={this.props.idProject}
                                       budgetline={budgetLine.id}
                                       budgetlineName={budgetLine.name.name}
                                       budgetlineDetails={budgetLine.details}
-                                    /> */}
+                                    />
 
                                     {/* SUBIR Archivos */}
                                     <div
