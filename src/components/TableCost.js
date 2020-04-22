@@ -642,8 +642,8 @@ export default class TableCost extends Component {
                                     <ModalVerFiles
                                       idProject={this.props.idProject}
                                       budgetline={budgetLine.id}
-                                      budgetlineName={budgetLine.name.name}
-                                      budgetlineDetails={budgetLine.details}
+                                      budgetlineName={budgetLine.name}
+                                      budgetlineDetails={budgetLine.description}
                                     />
 
                                     {/* SUBIR Archivos */}
