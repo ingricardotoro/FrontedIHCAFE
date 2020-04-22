@@ -220,40 +220,6 @@ export default class TableCost extends Component {
     this.setState({ clasificaciones: res5.data.clasificaciones });
   };
 
-  /* onChanceResultAtlas = async (e) => {
-    this.setState({ result_atlas: e.target.value });
-    const res_prod_atlas = await axios.get(
-      "http://167.99.15.83:4000/api/atlas/productos/" + e.target.value
-    );
-    this.setState({ products_atlas: res_prod_atlas.data.productos_atlas });
-  };
-
-  onChanceProductAtlas = async (e) => {
-    this.setState({ product_atlas: e.target.value });
-    const res_activity_atlas = await axios.get(
-      "http://167.99.15.83:4000/api/atlas/productos/" + e.target.value
-    );
-    this.setState({
-      activities_atlas: res_activity_atlas.data.productos_atlas,
-    });
-  };
-
-  onChanceActivityAtlas = async (e) => {
-    this.setState({ activity_atlas: e.target.value });
-  };
-
-  onChanceAccountAtlas = async (e) => {
-    this.setState({ account_atlas: e.target.value });
-    const res_sub_atlas = await axios.get(
-      "http://167.99.15.83:4000/api/atlas/sub_accounts/" + e.target.value
-    );
-    this.setState({ sub_accounts_atlas: res_sub_atlas.data.sub_accounts });
-  };
-
-  onChanceSubAccountAtlas = async (e) => {
-    this.setState({ sub_account_atlas: e.target.value });
-  }; */
-
   onChanceSupplier = async (e) => {
     this.setState({ supplier: e.target.value });
   };
@@ -340,13 +306,13 @@ export default class TableCost extends Component {
 
   //funcion para elimiar un renglon presupuestario
   onSubmitDelete = async (id) => {
-    /*const res_p = await axios.post(
-      "http://167.99.15.83:4000/api/budgetlines/budgetlineatlas/delete/" + id
+    const res_p = await axios.post(
+      "http://167.99.15.83:4000/api/budgetlines/delete/" + id
     );
     window.location.href = "/project/" + this.props.idProject;
 
     if (res_p) {
-    }*/
+    }
   };
 
   render() {
