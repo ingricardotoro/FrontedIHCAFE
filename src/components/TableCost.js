@@ -135,38 +135,24 @@ export default class TableCost extends Component {
         if (this.state.budgetLines[index].status === "Solicitado") {
           this.state.total_solicitado =
             this.state.total_solicitado + this.state.budgetLines[index].balance;
-          console.log(this.state.total_solicitado);
-          //this.setState(this.state.total_solicitado , this.state.total_solicitado + this.state.budgetLines[index].budgetstart);
         }
         if (this.state.budgetLines[index].status === "Aprobado") {
-          //this.state.total_inicial +=  this.state.budgetLines[index].budgetstart;
-
           this.state.total_ejecutado += this.state.budgetLines[index].balance;
-
-          //this.state.total_disponible += this.state.budgetLines[index].balance;
-
-          /*this.setState(this.state.total_inicial ,this.state.total_inicial+  this.state.budgetLines[index].budgetstart);
-                    this.setState(this.state.total_ejecutado ,this.state.total_ejecutado+  this.state.budgetLines[index].budgetfinal);
-                    this.setState(this.state.total_disponible ,this.state.total_disponible+ this.state.budgetLines[index].balance);
-                    */
         }
       }
     }
 
     this.state.total_disponible =
       this.state.bdg_start_project - this.state.total_ejecutado;
+
     this.state.porcentaje_ejecutado =
       (this.state.total_ejecutado * 100) / this.state.bdg_start_project;
+
     this.state.porcentaje_disponible =
       (this.state.total_disponible * 100) / this.state.bdg_start_project;
-    //this.state.porcentaje_rembolsos = (this.state.total_rembolsos * 100 )/this.state.bdg_start_project;
+
     this.state.porcentaje_solicitado =
       (this.state.total_solicitado * 100) / this.state.bdg_start_project;
-
-    /*this.setState(this.state.porcentaje_ejecutado , (this.state.total_ejecutado * 100 )/this.state.total_inicial);
-       this.setState(this.state.porcentaje_disponible , (this.state.total_disponible * 100 )/this.state.total_inicial);
-       this.setState(this.state.porcentaje_rembolsos , (this.state.total_rembolsos * 100 )/this.state.total_inicial);
-        */
   }
 
   /**********************LLENADO PARA EL SAVE********* */
@@ -234,23 +220,24 @@ export default class TableCost extends Component {
     //return number;
   }
 
-  /*onClickAprobar = async (id, monto) => {
+  onClickAprobar = async (id, monto) => {
     if (this.state.valor === -1) {
       this.state.valor = monto;
     }
 
-    await axios();
-   .post
-      "http://167.99.15.83:4000/api/budgetlines/aprobar_atlas/" +
+    await axios.post(
+      "http://167.99.15.83:4000/api/budgetlines/aprobar/" +
         id +
         "/" +
         this.state.aprobar +
         "/" +
         this.state.valor +
         "/" +
-        this.state.comentario/
-    //window.location.href = "/project/" + this.props.idProject;
-  };*/
+        this.state.comentario
+    );
+
+    window.location.href = "/project/" + this.props.idProject;
+  };
 
   onClickArchivo = async (e) => {
     this.setState({ archivo: e.target.value });
