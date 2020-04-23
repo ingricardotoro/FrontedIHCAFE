@@ -104,7 +104,9 @@ export default class TabBudget extends Component {
                   <span>{this.props.description}</span>
                   <div className="card-header-right">
                     <i className="icofont icofont-rounded-down"></i>
-                    <i className="icofont icofont-refresh"></i>
+                    <Link to={"/budgets/edit/" + this.props.id}>
+                      <i className="icofont icofont-edit"></i>
+                    </Link>
                     <button
                       className="btn btn-sm btn-danger"
                       data-toggle="modal"
