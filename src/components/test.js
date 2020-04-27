@@ -1,6 +1,9 @@
-/* import React, { Component } from "react";
+ /*import React, { Component } from "react";
 import PropTypes from 'prop-types'
 class Box extends Component {
+    state={
+        name:''
+    }
     static propTypes = {
         name: PropTypes.string.isRequired
     }
@@ -20,7 +23,9 @@ class Box extends Component {
   }
 }
 
+
 export default class test extends Component {
+    debugger
   render() {
     return (
       <div>
@@ -30,5 +35,5 @@ export default class test extends Component {
       </div>
     );
   }
-}
- */
+}*/
+ 
