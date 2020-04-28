@@ -11,8 +11,8 @@ export default class ModalVerFiles extends Component {
 
   async componentDidMount() {
     const res_files = await axios.post(
-      "http://167.99.15.83:4000/api/files/filesbybudgetid/" +
-        this.props.budgetline
+      "http://167.99.15.83:4000/api/files/filesbybudgetid/" + this.props.budget_id + "/" +
+      this.props.budgetline
     );
     this.setState({ files: res_files.data.files });
   }
@@ -76,26 +76,26 @@ export default class ModalVerFiles extends Component {
                                       Archivo PDF
                                     </a>
                                   ) : (
-                                    <a
-                                      className="media-left"
-                                      href={
-                                        "http://167.99.15.83:4000/" +
-                                        file.filedir +
-                                        file.filename
-                                      }
-                                    >
-                                      <img
-                                        style={{ width: "200px" }}
-                                        className="img-thumbnail "
-                                        src={
+                                      <a
+                                        className="media-left"
+                                        href={
                                           "http://167.99.15.83:4000/" +
                                           file.filedir +
                                           file.filename
                                         }
-                                        alt={file.filename}
-                                      />
-                                    </a>
-                                  )}
+                                      >
+                                        <img
+                                          style={{ width: "200px" }}
+                                          className="img-thumbnail "
+                                          src={
+                                            "http://167.99.15.83:4000/" +
+                                            file.filedir +
+                                            file.filename
+                                          }
+                                          alt={file.filename}
+                                        />
+                                      </a>
+                                    )}
                                   <div className="media-body">
                                     <div className="col-xs-12">
                                       <h6 className="d-inline-block">

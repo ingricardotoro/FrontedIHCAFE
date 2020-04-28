@@ -118,7 +118,7 @@ export default class TableCost extends Component {
     this.setState({ category_id: e.target.value });
     const res5 = await axios.get(
       "http://167.99.15.83:4000/api/categories/categories_childs/" +
-        e.target.value
+      e.target.value
     );
     this.setState({ clasificaciones: res5.data.clasificaciones });
   };
@@ -191,7 +191,7 @@ export default class TableCost extends Component {
     this.setState({ category_id: e.target.value });
     const res5 = await axios.get(
       "http://167.99.15.83:4000/api/categories/categories_childs/" +
-        e.target.value
+      e.target.value
     );
     this.setState({ clasificaciones: res5.data.clasificaciones });
   };
@@ -230,13 +230,13 @@ export default class TableCost extends Component {
 
       await axios.post(
         "http://167.99.15.83:4000/api/budgetlines/aprobar/" +
-          id +
-          "/" +
-          this.state.aprobar +
-          "/" +
-          this.state.valor +
-          "/" +
-          this.state.comentario
+        id +
+        "/" +
+        this.state.aprobar +
+        "/" +
+        this.state.valor +
+        "/" +
+        this.state.comentario
       );
 
       window.location.href = "/project/" + this.props.idProject;
@@ -313,7 +313,7 @@ export default class TableCost extends Component {
           porcentaje_ejecutado={this.state.porcentaje_ejecutado}
           porcentaje_disponible={this.state.porcentaje_disponible}
           porcentaje_solicitado={this.state.porcentaje_solicitado}
-          //porcentaje_rembolsos={this.state.porcentaje_rembolsos}
+        //porcentaje_rembolsos={this.state.porcentaje_rembolsos}
         />
 
         {/* Page body start */}
@@ -358,469 +358,391 @@ export default class TableCost extends Component {
                           <tbody>
                             {this.state.budgetLines !== undefined
                               ? this.state.budgetLines.map((budgetLine) => (
-                                  <tr key={budgetLine.id}>
-                                    <td className="pro-name">
-                                      <label className="text-danger">
-                                        {budgetLine.code}
-                                      </label>
-                                    </td>
-                                    <td className="pro-name">
-                                      <h6>{budgetLine.name}</h6>
-                                    </td>
+                                <tr key={budgetLine.id}>
+                                  <td className="pro-name">
+                                    <label className="text-danger">
+                                      {budgetLine.code}
+                                    </label>
+                                  </td>
+                                  <td className="pro-name">
+                                    <h6>{budgetLine.name}</h6>
+                                  </td>
 
+                                  <td>
+                                    <label className="text-info">
+                                      {this.formatMoney(budgetLine.balance)}
+                                    </label>
+                                  </td>
+
+                                  <td>
+                                    <label className="text-danger">
+                                      {" "}
+                                      {this.formatMoney(
+                                        moment(budgetLine.date_start).format(
+                                          "DD/MM/YYYY"
+                                        )
+                                      )}
+                                    </label>
+                                  </td>
+
+                                  {budgetLine.status === "Solicitado" ? (
                                     <td>
-                                      <label className="text-info">
-                                        {this.formatMoney(budgetLine.balance)}
-                                      </label>
-                                    </td>
-
-                                    <td>
-                                      <label className="text-danger">
-                                        {" "}
-                                        {this.formatMoney(
-                                          moment(budgetLine.date_start).format(
-                                            "DD/MM/YYYY"
-                                          )
-                                        )}
-                                      </label>
-                                    </td>
-
-                                    {budgetLine.status === "Solicitado" ? (
-                                      <td>
-                                        <button
-                                          type="button"
-                                          class="btn btn-success waves-effect"
-                                          data-toggle="modal"
-                                          data-target={
-                                            "#aprobar_" + budgetLine.id
-                                          }
-                                        >
-                                          Decidir
-                                        </button>{" "}
-                                      </td>
-                                    ) : (
-                                      <td>
-                                        <label>{budgetLine.status}</label>
-                                      </td>
-                                    )}
-
-                                    {budgetLine.status === "Aprobado" ? (
-                                      <td>
-                                        <button
-                                          type="button"
-                                          class="btn btn-warning waves-effect"
-                                          data-toggle="modal"
-                                          data-target={
-                                            "#rembolsar_" + budgetLine.id
-                                          }
-                                        >
-                                          Rembolsar
-                                        </button>
-                                      </td>
-                                    ) : (
-                                      <td align="center">
-                                        <label>---</label>
-                                      </td>
-                                    )}
-
-                                    <td>
-                                      <button
-                                        type="button"
-                                        class="btn btn-primary waves-effect"
-                                        data-toggle="modal"
-                                        data-target={
-                                          "#ver_archivos_" + budgetLine.id
-                                        }
-                                      >
-                                        Ver
-                                      </button>
                                       <button
                                         type="button"
                                         class="btn btn-success waves-effect"
                                         data-toggle="modal"
                                         data-target={
-                                          "#archivos_" + budgetLine.id
+                                          "#aprobar_" + budgetLine.id
                                         }
                                       >
-                                        Subir
+                                        Decidir
+                                        </button>{" "}
+                                    </td>
+                                  ) : (
+                                      <td>
+                                        <label>{budgetLine.status}</label>
+                                      </td>
+                                    )}
+
+                                  {budgetLine.status === "Aprobado" ? (
+                                    <td>
+                                      <button
+                                        type="button"
+                                        class="btn btn-warning waves-effect"
+                                        data-toggle="modal"
+                                        data-target={
+                                          "#rembolsar_" + budgetLine.id
+                                        }
+                                      >
+                                        Rembolsar
+                                        </button>
+                                    </td>
+                                  ) : (
+                                      <td align="center">
+                                        <label>---</label>
+                                      </td>
+                                    )}
+
+                                  <td>
+                                    <button
+                                      type="button"
+                                      class="btn btn-primary waves-effect"
+                                      data-toggle="modal"
+                                      data-target={
+                                        "#ver_archivos_" + budgetLine.id
+                                      }
+                                    >
+                                      Ver
                                       </button>
-                                    </td>
-                                    <td align="center" className="action-icon">
-                                      <a
-                                        href="#!"
-                                        className="m-r-15 text-muted"
-                                        data-toggle="tooltip"
-                                        data-placement="top"
-                                        title
-                                        data-original-title="Edit"
-                                      >
-                                        <i className="icofont icofont-ui-edit" />
-                                      </a>
-
-                                      <a
-                                        href="#!"
-                                        className="text-muted"
-                                        title
-                                        data-original-title="Eliminar"
-                                      >
-                                        <i
-                                          className="icofont icofont-delete-alt"
-                                          data-toggle="modal"
-                                          data-target={
-                                            "#modal_delete_" + budgetLine.id
-                                          }
-                                        ></i>
-                                      </a>
-                                    </td>
-
-                                    {/* INICIL Modal DELETE*/}
-
-                                    <div
-                                      className="modal fade"
-                                      id={"modal_delete_" + budgetLine.id}
-                                      tabIndex={-1}
-                                      role="dialog"
+                                    <button
+                                      type="button"
+                                      class="btn btn-success waves-effect"
+                                      data-toggle="modal"
+                                      data-target={
+                                        "#archivos_" + budgetLine.id
+                                      }
                                     >
-                                      <div
-                                        className="modal-dialog modal-lg"
-                                        role="document"
-                                      >
-                                        <div className="modal-content">
-                                          <div className="modal-header">
-                                            <h4 className="modal-title">
-                                              Eliminar Presupuesto:{" "}
-                                              {budgetLine.name}{" "}
-                                            </h4>
-                                            <button
-                                              type="button"
-                                              className="close"
-                                              data-dismiss="modal"
-                                              aria-label="Close"
-                                            >
-                                              <span aria-hidden="true">×</span>
-                                            </button>
-                                          </div>
-                                          <div className="modal-body">
-                                            <form
-                                              onSubmit={() =>
-                                                this.onSubmitDelete(
-                                                  budgetLine.id
-                                                )
-                                              }
-                                            >
-                                              <div
-                                                style={{
-                                                  width: "100%",
-                                                  textAlign: "center",
-                                                  display: "inline-block",
-                                                }}
-                                              >
-                                                <button
-                                                  type="submit"
-                                                  className="btn btn-danger waves-effect "
-                                                >
-                                                  Eliminar Este Renglon
-                                                  Presupuestario
-                                                </button>
-                                              </div>
-                                            </form>
-
-                                            <div className="modal-footer">
-                                              <button
-                                                type="button"
-                                                className="btn btn-default waves-effect "
-                                                data-dismiss="modal"
-                                              >
-                                                Cerrar
-                                              </button>
-                                            </div>
-                                          </div>
-                                        </div>
-                                      </div>
-                                    </div>
-
-                                    {/*FIN Modal DELETE*/}
-
-                                    <div
-                                      class="modal fade"
-                                      id={"aprobar_" + budgetLine.id}
-                                      tabindex="-1"
-                                      role="dialog"
+                                      Subir
+                                      </button>
+                                  </td>
+                                  <td align="center" className="action-icon">
+                                    <a
+                                      href="#!"
+                                      className="m-r-15 text-muted"
+                                      data-toggle="tooltip"
+                                      data-placement="top"
+                                      title
+                                      data-original-title="Edit"
                                     >
-                                      <div
-                                        class="modal-dialog modal-lg"
-                                        role="document"
-                                      >
-                                        <div class="modal-content">
-                                          <div class="modal-header">
-                                            <h4 class="modal-title">
-                                              Monto:{" "}
-                                              {this.formatMoney(
-                                                budgetLine.balance
-                                              )}{" "}
-                                            </h4>
-                                            <button
-                                              type="button"
-                                              class="close"
-                                              data-dismiss="modal"
-                                              aria-label="Close"
-                                            >
-                                              <span aria-hidden="true">
-                                                &times;
-                                              </span>
-                                            </button>
-                                          </div>
-                                          <form>
-                                            <div class="modal-body">
-                                              <p class="modal-title">
-                                                Descripción:{" "}
-                                                {budgetLine.details}
-                                              </p>
+                                      <i className="icofont icofont-ui-edit" />
+                                    </a>
 
-                                              <select
-                                                onChange={
-                                                  this.onchangeSelectAprobar
-                                                }
-                                                name="select"
-                                                className="form-control mt-3"
-                                              >
-                                                <option value="1">
-                                                  Si Aprobar
-                                                </option>
-                                                <option value="1">
-                                                  SI APROBAR
-                                                </option>
-                                                <option value="2">
-                                                  NO APROBAR
-                                                </option>
-                                              </select>
-
-                                              <label>Monto A Aprobar</label>
-                                              <input
-                                                onChange={this.onchangeMonto}
-                                                name="monto"
-                                                type="text"
-                                                className="form-control mb-3"
-                                                Value={budgetLine.balance}
-                                              />
-
-                                              <label>Comentarios</label>
-                                              <textarea
-                                                onChange={
-                                                  this.onchangeComentario
-                                                }
-                                                name="comentario"
-                                                className="form-control"
-                                              ></textarea>
-                                            </div>
-                                            <div class="modal-footer">
-                                              <button
-                                                type="button"
-                                                class="btn btn-default waves-effect "
-                                                data-dismiss="modal"
-                                              >
-                                                Cerrar
-                                              </button>
-                                              <button
-                                                type="button"
-                                                onClick={() =>
-                                                  this.onClickAprobar(
-                                                    budgetLine.id,
-                                                    budgetLine.balance
-                                                  )
-                                                }
-                                                class="btn btn-primary waves-effect waves-light "
-                                              >
-                                                Guardar
-                                              </button>
-                                            </div>
-                                          </form>
-                                        </div>
-                                      </div>
-                                    </div>
-
-                                    <ModalVerFiles
-                                      idProject={this.props.idProject}
-                                      budgetline={budgetLine.id}
-                                      budgetlineName={budgetLine.name}
-                                      budgetlineDetails={budgetLine.description}
-                                    />
-
-                                    {/* SUBIR Archivos */}
-                                    <div
-                                      class="modal fade"
-                                      id={"archivos_" + budgetLine.id}
-                                      tabindex="-1"
-                                      role="dialog"
+                                    <a
+                                      href="#!"
+                                      className="text-muted"
+                                      title
+                                      data-original-title="Eliminar"
                                     >
-                                      <div
-                                        class="modal-dialog modal-lg"
-                                        role="document"
-                                      >
-                                        <div class="modal-content">
-                                          <div class="modal-header">
-                                            <h4 class="modal-title">
-                                              {budgetLine.name}-
-                                              {this.formatMoney(
-                                                budgetLine.balance
-                                              )}{" "}
-                                            </h4>
-                                            <button
-                                              type="button"
-                                              class="close"
-                                              data-dismiss="modal"
-                                              aria-label="Close"
-                                            >
-                                              <span aria-hidden="true">
-                                                &times;
-                                              </span>
-                                            </button>
-                                          </div>
-                                          <form
-                                            action={
-                                              "http://167.99.15.83:4000/api/files/" +
-                                              budgetLine.id
-                                            }
-                                            method="post"
-                                            enctype="multipart/form-data"
+                                      <i
+                                        className="icofont icofont-delete-alt"
+                                        data-toggle="modal"
+                                        data-target={
+                                          "#modal_delete_" + budgetLine.id
+                                        }
+                                      ></i>
+                                    </a>
+                                  </td>
+
+                                  {/* INICIL Modal DELETE*/}
+
+                                  <div
+                                    className="modal fade"
+                                    id={"modal_delete_" + budgetLine.id}
+                                    tabIndex={-1}
+                                    role="dialog"
+                                  >
+                                    <div
+                                      className="modal-dialog modal-lg"
+                                      role="document"
+                                    >
+                                      <div className="modal-content">
+                                        <div className="modal-header">
+                                          <h4 className="modal-title">
+                                            Eliminar Presupuesto:{" "}
+                                            {budgetLine.name}{" "}
+                                          </h4>
+                                          <button
+                                            type="button"
+                                            className="close"
+                                            data-dismiss="modal"
+                                            aria-label="Close"
                                           >
-                                            <div class="modal-body">
-                                              <div className="form-control mt-3">
-                                                <input
-                                                  onChange={this.onClickArchivo}
-                                                  type="file"
-                                                  name="archivo"
-                                                ></input>
-                                              </div>
-                                              <input
-                                                value={budgetLine.id}
-                                                name="budget_id"
-                                                type="hidden"
-                                                className="form-control"
-                                              />
-                                              <input
-                                                value={this.props.idProject}
-                                                name="project_id"
-                                                type="hidden"
-                                                className="form-control"
-                                              />
-
-                                              <div className="form-control mt-3">
-                                                <input
-                                                  name="file_name"
-                                                  onChange={
-                                                    this.onClickNombreArchivo
-                                                  }
-                                                  type="text"
-                                                  className="form-control"
-                                                  placeholder="Ingrese Nombre de Archivo "
-                                                />
-                                              </div>
-                                              <div>
-                                                <select
-                                                  onChange={
-                                                    this.onClickFaseArchivo
-                                                  }
-                                                  name="fase"
-                                                  className="form-control mt-3"
-                                                >
-                                                  <option value="0">
-                                                    Seleccion Fase
-                                                  </option>
-                                                  <option value="Solicitud">
-                                                    Solicitud
-                                                  </option>
-                                                  <option value="Desembolso">
-                                                    Desembolso
-                                                  </option>
-                                                  <option value="Liquidacion">
-                                                    Liquidacion
-                                                  </option>
-                                                </select>
-                                              </div>
-                                            </div>
-                                            <div class="modal-footer">
-                                              <button
-                                                type="button"
-                                                class="btn btn-default waves-effect "
-                                                data-dismiss="modal"
-                                              >
-                                                Cerrar
-                                              </button>
-                                              {/* <button type="button" onClick={ () =>this.onClickSubirArchivo(budgetLines.id )} class="btn btn-primary waves-effect waves-light ">Guardar</button> */}
+                                            <span aria-hidden="true">×</span>
+                                          </button>
+                                        </div>
+                                        <div className="modal-body">
+                                          <form
+                                            onSubmit={() =>
+                                              this.onSubmitDelete(
+                                                budgetLine.id
+                                              )
+                                            }
+                                          >
+                                            <div
+                                              style={{
+                                                width: "100%",
+                                                textAlign: "center",
+                                                display: "inline-block",
+                                              }}
+                                            >
                                               <button
                                                 type="submit"
-                                                class="btn btn-primary waves-effect waves-light "
+                                                className="btn btn-danger waves-effect "
                                               >
-                                                Guardar
-                                              </button>
+                                                Eliminar Este Renglon
+                                                Presupuestario
+                                                </button>
                                             </div>
                                           </form>
+
+                                          <div className="modal-footer">
+                                            <button
+                                              type="button"
+                                              className="btn btn-default waves-effect "
+                                              data-dismiss="modal"
+                                            >
+                                              Cerrar
+                                              </button>
+                                          </div>
                                         </div>
                                       </div>
                                     </div>
-                                    {/* FINAL DE SUBIR ARCHIVOS */}
+                                  </div>
 
+                                  {/*FIN Modal DELETE*/}
+
+                                  <div
+                                    class="modal fade"
+                                    id={"aprobar_" + budgetLine.id}
+                                    tabindex="-1"
+                                    role="dialog"
+                                  >
                                     <div
-                                      class="modal fade"
-                                      id={"rembolsar_" + budgetLine.id}
-                                      tabindex="-1"
-                                      role="dialog"
+                                      class="modal-dialog modal-lg"
+                                      role="document"
                                     >
-                                      <div
-                                        class="modal-dialog modal-lg"
-                                        role="document"
-                                      >
-                                        <div class="modal-content">
-                                          <div class="modal-header">
-                                            <h4 class="modal-title">
-                                              Rembolsar {budgetLine.name}-
-                                              {this.formatMoney(
-                                                budgetLine.balance
-                                              )}{" "}
-                                            </h4>
+                                      <div class="modal-content">
+                                        <div class="modal-header">
+                                          <h4 class="modal-title">
+                                            Monto:{" "}
+                                            {this.formatMoney(
+                                              budgetLine.balance
+                                            )}{" "}
+                                          </h4>
+                                          <button
+                                            type="button"
+                                            class="close"
+                                            data-dismiss="modal"
+                                            aria-label="Close"
+                                          >
+                                            <span aria-hidden="true">
+                                              &times;
+                                              </span>
+                                          </button>
+                                        </div>
+                                        <form>
+                                          <div class="modal-body">
+                                            <p class="modal-title">
+                                              Descripción:{" "}
+                                              {budgetLine.details}
+                                            </p>
+
+                                            <select
+                                              onChange={
+                                                this.onchangeSelectAprobar
+                                              }
+                                              name="select"
+                                              className="form-control mt-3"
+                                            >
+                                              <option value="1">
+                                                Si Aprobar
+                                                </option>
+                                              <option value="1">
+                                                SI APROBAR
+                                                </option>
+                                              <option value="2">
+                                                NO APROBAR
+                                                </option>
+                                            </select>
+
+                                            <label>Monto A Aprobar</label>
+                                            <input
+                                              onChange={this.onchangeMonto}
+                                              name="monto"
+                                              type="text"
+                                              className="form-control mb-3"
+                                              Value={budgetLine.balance}
+                                            />
+
+                                            <label>Comentarios</label>
+                                            <textarea
+                                              onChange={
+                                                this.onchangeComentario
+                                              }
+                                              name="comentario"
+                                              className="form-control"
+                                            ></textarea>
+                                          </div>
+                                          <div class="modal-footer">
                                             <button
                                               type="button"
-                                              class="close"
+                                              class="btn btn-default waves-effect "
                                               data-dismiss="modal"
-                                              aria-label="Close"
                                             >
-                                              <span aria-hidden="true">
-                                                &times;
-                                              </span>
-                                            </button>
+                                              Cerrar
+                                              </button>
+                                            <button
+                                              type="button"
+                                              onClick={() =>
+                                                this.onClickAprobar(
+                                                  budgetLine.id,
+                                                  budgetLine.balance
+                                                )
+                                              }
+                                              class="btn btn-primary waves-effect waves-light "
+                                            >
+                                              Guardar
+                                              </button>
                                           </div>
-                                          <div
-                                            class="modal-body"
-                                            align="center"
+                                        </form>
+                                      </div>
+                                    </div>
+                                  </div>
+
+                                  <ModalVerFiles
+                                    budget_id={this.props.budget_id}
+                                    idProject={this.props.idProject}
+                                    budgetline={budgetLine.id}
+                                    budgetlineName={budgetLine.name}
+                                    budgetlineDetails={budgetLine.description}
+                                  />
+
+                                  {/* SUBIR Archivos */}
+                                  <div
+                                    class="modal fade"
+                                    id={"archivos_" + budgetLine.id}
+                                    tabindex="-1"
+                                    role="dialog"
+                                  >
+                                    <div
+                                      class="modal-dialog modal-lg"
+                                      role="document"
+                                    >
+                                      <div class="modal-content">
+                                        <div class="modal-header">
+                                          <h4 class="modal-title">
+                                            {budgetLine.name}-
+                                              {this.formatMoney(
+                                              budgetLine.balance
+                                            )}{" "}
+                                          </h4>
+                                          <button
+                                            type="button"
+                                            class="close"
+                                            data-dismiss="modal"
+                                            aria-label="Close"
                                           >
-                                            <div>
-                                              <label htmlFor="">
-                                                Descripción del Rembolso
-                                              </label>
-                                              <textarea
-                                                className="form-control"
-                                                style={{ width: "100%" }}
-                                                id=""
-                                                cols="30"
-                                                rows="10"
-                                              ></textarea>
+                                            <span aria-hidden="true">
+                                              &times;
+                                              </span>
+                                          </button>
+                                        </div>
+                                        <form
+                                          action={
+                                            "http://167.99.15.83:4000/api/files/"
+                                          }
+                                          method="post"
+                                          enctype="multipart/form-data"
+                                        >
+                                          <div class="modal-body">
+                                            <div className="form-control mt-3">
+                                              <input
+                                                onChange={this.onClickArchivo}
+                                                type="file"
+                                                name="archivo"
+                                              ></input>
                                             </div>
                                             <input
-                                              type="hidden"
-                                              name={
-                                                "input_rembolsar_" +
-                                                budgetLine.id
-                                              }
                                               value={budgetLine.id}
+                                              name="budgetline_id"
+                                              type="hidden"
+                                              className="form-control"
                                             />
-                                            <div className="mt-3">
-                                              <button
-                                                type="button"
-                                                className="btn btn-primary waves-effect waves-light "
+                                            <input
+                                              value={this.props.budget_id}
+                                              name="budget_id"
+                                              type="hidden"
+                                              className="form-control"
+                                            />
+                                            <input
+                                              value={this.props.idProject}
+                                              name="project_id"
+                                              type="hidden"
+                                              className="form-control"
+                                            />
+
+                                            <div className="form-control mt-3">
+                                              <input
+                                                name="file_name"
+                                                onChange={
+                                                  this.onClickNombreArchivo
+                                                }
+                                                type="text"
+                                                className="form-control"
+                                                placeholder="Ingrese Nombre de Archivo "
+                                              />
+                                            </div>
+                                            <div>
+                                              <select
+                                                onChange={
+                                                  this.onClickFaseArchivo
+                                                }
+                                                name="fase"
+                                                className="form-control mt-3"
                                               >
-                                                Reembolsar
-                                              </button>
+                                                <option value="0">
+                                                  Seleccion Fase
+                                                  </option>
+                                                <option value="Solicitud">
+                                                  Solicitud
+                                                  </option>
+                                                <option value="Desembolso">
+                                                  Desembolso
+                                                  </option>
+                                                <option value="Liquidacion">
+                                                  Liquidacion
+                                                  </option>
+                                              </select>
                                             </div>
                                           </div>
                                           <div class="modal-footer">
@@ -830,13 +752,97 @@ export default class TableCost extends Component {
                                               data-dismiss="modal"
                                             >
                                               Cerrar
-                                            </button>
+                                              </button>
+                                            {/* <button type="button" onClick={ () =>this.onClickSubirArchivo(budgetLines.id )} class="btn btn-primary waves-effect waves-light ">Guardar</button> */}
+                                            <button
+                                              type="submit"
+                                              class="btn btn-primary waves-effect waves-light "
+                                            >
+                                              Guardar
+                                              </button>
                                           </div>
+                                        </form>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  {/* FINAL DE SUBIR ARCHIVOS */}
+
+                                  <div
+                                    class="modal fade"
+                                    id={"rembolsar_" + budgetLine.id}
+                                    tabindex="-1"
+                                    role="dialog"
+                                  >
+                                    <div
+                                      class="modal-dialog modal-lg"
+                                      role="document"
+                                    >
+                                      <div class="modal-content">
+                                        <div class="modal-header">
+                                          <h4 class="modal-title">
+                                            Rembolsar {budgetLine.name}-
+                                              {this.formatMoney(
+                                            budgetLine.balance
+                                          )}{" "}
+                                          </h4>
+                                          <button
+                                            type="button"
+                                            class="close"
+                                            data-dismiss="modal"
+                                            aria-label="Close"
+                                          >
+                                            <span aria-hidden="true">
+                                              &times;
+                                              </span>
+                                          </button>
+                                        </div>
+                                        <div
+                                          class="modal-body"
+                                          align="center"
+                                        >
+                                          <div>
+                                            <label htmlFor="">
+                                              Descripción del Rembolso
+                                              </label>
+                                            <textarea
+                                              className="form-control"
+                                              style={{ width: "100%" }}
+                                              id=""
+                                              cols="30"
+                                              rows="10"
+                                            ></textarea>
+                                          </div>
+                                          <input
+                                            type="hidden"
+                                            name={
+                                              "input_rembolsar_" +
+                                              budgetLine.id
+                                            }
+                                            value={budgetLine.id}
+                                          />
+                                          <div className="mt-3">
+                                            <button
+                                              type="button"
+                                              className="btn btn-primary waves-effect waves-light "
+                                            >
+                                              Reembolsar
+                                              </button>
+                                          </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                          <button
+                                            type="button"
+                                            class="btn btn-default waves-effect "
+                                            data-dismiss="modal"
+                                          >
+                                            Cerrar
+                                            </button>
                                         </div>
                                       </div>
                                     </div>
-                                  </tr>
-                                ))
+                                  </div>
+                                </tr>
+                              ))
                               : null}
 
                             {/*  <tr>

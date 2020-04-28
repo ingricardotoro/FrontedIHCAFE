@@ -81,7 +81,7 @@ export default class TableCost extends Component {
   async componentDidMount() {
     const res = await axios.post(
       "http://167.99.15.83:4000/api/budgetlines/atlas/project/" +
-        this.props.idProject
+      this.props.idProject
     );
     this.setState({ budgetLinesAtlas: res.data.budgetLines_atlas });
 
@@ -127,7 +127,7 @@ export default class TableCost extends Component {
     this.setState({ category_id: e.target.value });
     const res5 = await axios.get(
       "http://167.99.15.83:4000/api/categories/categories_childs/" +
-        e.target.value
+      e.target.value
     );
     this.setState({ clasificaciones: res5.data.clasificaciones });
   };
@@ -296,13 +296,13 @@ export default class TableCost extends Component {
 
       await axios.post(
         "http://167.99.15.83:4000/api/budgetlines/aprobar_atlas/" +
-          id +
-          "/" +
-          this.state.aprobar +
-          "/" +
-          this.state.valor +
-          "/" +
-          this.state.comentario
+        id +
+        "/" +
+        this.state.aprobar +
+        "/" +
+        this.state.valor +
+        "/" +
+        this.state.comentario
       );
 
       window.location.href = "/project/" + this.props.idProject;
@@ -404,7 +404,7 @@ export default class TableCost extends Component {
           porcentaje_ejecutado={this.state.porcentaje_ejecutado}
           porcentaje_disponible={this.state.porcentaje_disponible}
           porcentaje_solicitado={this.state.porcentaje_solicitado}
-          //porcentaje_rembolsos={this.state.porcentaje_rembolsos}
+        //porcentaje_rembolsos={this.state.porcentaje_rembolsos}
         />
 
         {/* Page body start */}
@@ -473,15 +473,15 @@ export default class TableCost extends Component {
                                       </label>
                                     </td>
                                   ) : (
-                                    <td>
-                                      <label className="text-info">
-                                        {" "}
-                                        {this.formatMoney(
-                                          budgetLinesAtlas.budgetstart
-                                        )}
-                                      </label>
-                                    </td>
-                                  )}
+                                      <td>
+                                        <label className="text-info">
+                                          {" "}
+                                          {this.formatMoney(
+                                            budgetLinesAtlas.budgetstart
+                                          )}
+                                        </label>
+                                      </td>
+                                    )}
 
                                   <td>
                                     <label className="text-danger">
@@ -511,10 +511,10 @@ export default class TableCost extends Component {
                                       </button>{" "}
                                     </td>
                                   ) : (
-                                    <td>
-                                      <label>{budgetLinesAtlas.status}</label>
-                                    </td>
-                                  )}
+                                      <td>
+                                        <label>{budgetLinesAtlas.status}</label>
+                                      </td>
+                                    )}
 
                                   {budgetLinesAtlas.status === "Aprobado" ? (
                                     <td>
@@ -530,10 +530,10 @@ export default class TableCost extends Component {
                                       </button>
                                     </td>
                                   ) : (
-                                    <td align="center">
-                                      <label>---</label>
-                                    </td>
-                                  )}
+                                      <td align="center">
+                                        <label>---</label>
+                                      </td>
+                                    )}
 
                                   <td>
                                     <button
@@ -755,6 +755,7 @@ export default class TableCost extends Component {
                                   </div>
 
                                   <ModalVerFilesAtlas
+                                    budget_id={this.props.budget_id}
                                     idProject={this.props.idProject}
                                     budgetlineatlas={budgetLinesAtlas.id}
                                     budgetlineatlasName={
@@ -801,8 +802,7 @@ export default class TableCost extends Component {
                                         </div>
                                         <form
                                           action={
-                                            "http://167.99.15.83:4000/api/files/" +
-                                            budgetLinesAtlas.id
+                                            "http://167.99.15.83:4000/api/files/atlas"
                                           }
                                           method="post"
                                           enctype="multipart/form-data"
@@ -817,6 +817,12 @@ export default class TableCost extends Component {
                                             </div>
                                             <input
                                               value={budgetLinesAtlas.id}
+                                              name="budgetlineatlas_id"
+                                              type="hidden"
+                                              className="form-control"
+                                            />
+                                            <input
+                                              value={this.props.budget_id}
                                               name="budget_id"
                                               type="hidden"
                                               className="form-control"
@@ -899,8 +905,8 @@ export default class TableCost extends Component {
                                           <h4 class="modal-title">
                                             Rembolsar {budgetLinesAtlas.name}-
                                             {this.formatMoney(
-                                              budgetLinesAtlas.budgetstart
-                                            )}{" "}
+                                            budgetLinesAtlas.budgetstart
+                                          )}{" "}
                                           </h4>
                                           <button
                                             type="button"

@@ -11,6 +11,7 @@ export default class ProjectDashboard extends Component {
     super();
     this.state = {
       tipo_budget: "",
+      budget_id: 0
     };
   }
 
@@ -20,6 +21,7 @@ export default class ProjectDashboard extends Component {
       "http://167.99.15.83:4000/api/projects/" + this.props.match.params.id
     );
     this.setState({ tipo_budget: res.data.data.budget.tipo });
+    this.setState({ budget_id: res.data.data.budget.id });
   }
 
   render() {
@@ -52,13 +54,15 @@ export default class ProjectDashboard extends Component {
                   <TableCostAtlas
                     idProject={this.props.match.params.id}
                     budget_tipo={this.state.tipo_budget} //atlas o estandar
+                    budget_id={this.state.budget_id} //id del presupuesto
                   />
                 ) : (
-                  <TableCost
-                    idProject={this.props.match.params.id}
-                    budget_tipo={this.state.tipo_budget} //atlas o estandar
-                  />
-                )}
+                    <TableCost
+                      idProject={this.props.match.params.id}
+                      budget_tipo={this.state.tipo_budget} //atlas o estandar
+                      budget_id={this.state.budget_id} //id del presupuesto
+                    />
+                  )}
               </div>
             </div>
           </div>
