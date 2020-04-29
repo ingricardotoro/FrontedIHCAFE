@@ -50,7 +50,9 @@ export default class ProjectDashboard extends Component {
                     </ul>
                   </div>
                 </div>
+
                 {this.state.tipo_budget === "atlas" ? (
+
                   <TableCostAtlas
                     idProject={this.props.match.params.id}
                     budget_tipo={this.state.tipo_budget} //atlas o estandar

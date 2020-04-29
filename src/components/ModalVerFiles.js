@@ -5,11 +5,13 @@ export default class ModalVerFiles extends Component {
   constructor() {
     super();
     this.state = {
-      files: [],
+      files: []
+
     };
   }
 
   async componentDidMount() {
+    console.log("PROPS=" + this.props.budget_id)
     const res_files = await axios.post(
       "http://167.99.15.83:4000/api/files/filesbybudgetid/" + this.props.budget_id + "/" +
       this.props.budgetline

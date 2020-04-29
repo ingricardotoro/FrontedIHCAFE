@@ -640,6 +640,7 @@ export default class TableCost extends Component {
                                   </div>
 
                                   <ModalVerFiles
+
                                     budget_id={this.props.budget_id}
                                     idProject={this.props.idProject}
                                     budgetline={budgetLine.id}
