@@ -20,12 +20,15 @@ export default class Reports extends Component {
       trimestre: 0,
       modena: 'Lempiras',
       budgetLinesAtlas: [],
-      accounts_atlas: []
+      accounts_atlas: [],
+      arrayBudgetLines: [],
+
+      ArrayReportebyProject: []
     };
   }
 
   // JSpdf Generator For generating the PDF
-  jsPdfGenerator = () => {
+  reporte_atlas_by_project = () => {
 
     const anio = this.state.year;
 
@@ -49,7 +52,7 @@ export default class Reports extends Component {
 
     //var finalY = doc.previousAutoTable.finalY
     //doc.text('From javascript arrays', 14, finalY + 15)
-    doc.text('Reporte de Presupuesto ATlAS (' + anio + ') Modena:' + this.state.modena, 250, 30)
+    doc.text('Reporte de Presupuesto ATlAS Por Project (' + anio + ') Modena:' + this.state.modena, 230, 30)
 
     /*doc.autoTable({
       head: headRows(),
@@ -65,44 +68,117 @@ export default class Reports extends Component {
 
     doc.autoTable({
       head: headRows(),
-      body: bodyRows(this.state.budgetLinesAtlas),
+      body: bodyRows(this.state.ArrayReportebyProject),
       startY: 50,
       showHead: 'firstPage',
     })
 
     function headRows() {
       return [
-        { id: 'id', name: 'name', balance: 'balance' }
+        {
+          code: 'Cuentas Atlas', name: 'Detalles', TOTAL: 'TOTAL'
+        }
         //{ id: 'ID', name: 'Name', email: 'Email', city: 'City', expenses: 'Sum' },
       ]
     }
 
-    function bodyRows(budgetLinesAtlas) {
-      var body = []
-
-      //recorrido de cada gasto de este proyecto
-      for (let index = 0; index < budgetLinesAtlas.length; index++) {
-
+    function bodyRows(ArrayReportebyProject) {
+      var body = [];
+      for (let index = 0; index < ArrayReportebyProject.length; index++) {
         body.push({
-          id: budgetLinesAtlas[index].id,
-          name: budgetLinesAtlas[index].atlas_account.details,
-          balance: budgetLinesAtlas[index].balance,
-        })
-
+          code: ArrayReportebyProject[index].code,
+          name: ArrayReportebyProject[index].name,
+          TOTAL: ArrayReportebyProject[index].TOTAL,
+        });
       }
-
-
-      //recorremos todos los gastos de este proyecto
-      /*Object.keys(this.state.budgetLinesAtlas).map((budg_line) => {
-        if (budg_line === "Aprobado") {
-          this.state.total_ejecutado += this.state.budg_line.balance;
-
-            }
-          })
-        })*/
-
       return body
     }
+
+    /* function bodyRows(arrayBudgetLines) {
+      var body = [];
+      var arrayQ1 = [];
+      var arrayQ2 = [];
+      var arrayQ3 = [];
+      var arrayQ4 = [];
+
+      var FQ1_i = new Date("2020-01-01");
+      var FQ1_f = new Date("2020-03-31");
+
+      var FQ2_i = new Date("2020-01-01");
+      var FQ2_f = new Date("2020-03-31");
+
+      var FQ3_i = new Date("2020-01-01");
+      var FQ3_f = new Date("2020-03-31");
+
+      var FQ4_i = new Date("2020-01-01");
+      var FQ4_f = new Date("2020-03-31");
+
+      //recorrido de cada gasto de este proyecto
+      for (let index = 0; index < arrayBudgetLines.length; index++) {
+        for (let j = 0; j < arrayBudgetLines[index].length; j++) {
+          if (arrayBudgetLines[index][j].status === 'Aprobado') {
+
+            var fecha = new Date(arrayBudgetLines[index][j].date_start);
+            console.log(fecha.getTime()); console.log(FQ1_i.getTime()); console.log(FQ1_f.getTime());
+
+            if (fecha.getTime() >= FQ1_i.getTime() && fecha.getTime() <= FQ1_f.getTime()) {
+              arrayQ1.push(arrayBudgetLines[index][j]);
+            }
+
+            if (fecha >= "2020-04-01" && fecha <= "2020-06-30") {
+              arrayQ2.push(arrayBudgetLines[index][j]);
+            }
+
+            if (fecha >= "2020-07-01" && fecha <= "2020-09-31") {
+              arrayQ3.push(arrayBudgetLines[index][j]);
+            }
+
+            if (fecha >= "2020-10-01" && fecha <= "2020-12-31") {
+              arrayQ4.push(arrayBudgetLines[index][j]);
+            }
+
+          }
+        }
+      }
+      console.log(arrayQ1);
+      for (let index = 0; index < arrayQ1.length; index++) {
+        body.push({
+          id1: arrayQ1[index].id,
+          name1: arrayQ1[index].atlas_account.details,
+          balance1: arrayQ1[index].balance,
+        });
+      }
+
+      /* for (let index = 0; index < arrayQ2.length; index++) {
+
+        body.push({
+          id2: arrayQ2[index].id,
+          name2: arrayQ2[index].atlas_account.details,
+          balance2: arrayQ2[index].balance,
+        });
+      }
+
+      for (let index = 0; index < arrayQ3.length; index++) {
+
+        body.push({
+          id3: arrayQ3[index].id,
+          name3: arrayQ3[index].atlas_account.details,
+          balance3: arrayQ3[index].balance,
+        });
+      }
+
+      for (let index = 0; index < arrayQ4.length; index++) {
+
+        body.push({
+          id4: arrayQ4[index].id,
+          name4: arrayQ4[index].atlas_account.details,
+          balance4: arrayQ4[index].balance,
+        });
+      } 
+
+
+    return body
+  } */
 
 
     // Save the Data
@@ -124,8 +200,6 @@ export default class Reports extends Component {
     );
     this.setState({ accounts_atlas: res_account_atlas.data.atlas_accounts });
 
-
-
     /*const res = await axios.get("http://167.99.15.83:4000/api/coins/");
     this.setState({ budgets: res.data.budgets });*/
   }
@@ -142,6 +216,7 @@ export default class Reports extends Component {
 
   onChangeSelectBudget_Atlas = async (e) => {
     this.setState({ budget_atlas_id: e.target.value });
+    this.state.arrayBudgetLines = [];//lo iniciaiza
 
     const res_pro_atlas = await axios.post(
       "http://167.99.15.83:4000/api/projects/findProjectsByBudgetId/" +
@@ -154,7 +229,9 @@ export default class Reports extends Component {
       const res = await axios.post(
         "http://167.99.15.83:4000/api/budgetlines/atlas/project/" + p_atlas.id
       );
+
       this.setState({ budgetLinesAtlas: res.data.budgetLines_atlas });
+      this.state.arrayBudgetLines.push(res.data.budgetLines_atlas);
 
       //recorremos todos los gastos de este proyecto
       Object.keys(this.state.budgetLinesAtlas).map((budg_line) => {
@@ -166,8 +243,17 @@ export default class Reports extends Component {
     })
   };
 
-  onChangeSelectProject = async (e) => {
+  onChangeSelectProject_Atlas = async (e) => {
     this.setState({ project_id: e.target.value });
+
+    const res_pro_atlas = await axios.post(
+      "http://167.99.15.83:4000/api/budgetlines/atlas/reporte_atlas_by_project/" +
+      e.target.value
+    );
+
+    this.setState({ ArrayReportebyProject: res_pro_atlas.data.ArrayReportebyProject });
+    console.log(this.state.ArrayReportebyProject)
+
   };
   onChangeSelectCoin = async (e) => {
     this.setState({ coin_id: e.target.value });
@@ -347,7 +433,7 @@ export default class Reports extends Component {
                                       <th>Prespupuesto</th>
                                       <th>Proyecto</th>
                                       <th>Moneda</th>
-                                      <th>Trimestre</th>
+
                                       <th>Año</th>
                                       <th>Ver Reporte</th>
                                     </tr>
@@ -357,14 +443,14 @@ export default class Reports extends Component {
                                       <td>
                                         <label>Prespupuesto</label>
                                         <select
-                                          onChange={this.onChangeSelectBudget}
+                                          onChange={this.onChangeSelectBudget_Atlas}
                                           className="form-control mb-3"
                                           name="presupuesto"
                                         >
                                           <option value="0">
                                             Seleccione Presupuesto{" "}
                                           </option>
-                                          {this.state.budgets.map((budget) => (
+                                          {this.state.budgets_atlas.map((budget) => (
                                             <option value={budget.id}>
                                               {budget.name}{" "}
                                             </option>
@@ -374,14 +460,14 @@ export default class Reports extends Component {
                                       <td>
                                         <label>Proyecto</label>
                                         <select
-                                          onChange={this.onChangeSelectProject}
+                                          onChange={this.onChangeSelectProject_Atlas}
                                           className="form-control mb-3"
                                           name="proyecto"
                                         >
                                           <option value="0">
                                             Seleccione Proyecto
                                           </option>
-                                          {this.state.projects.map(
+                                          {this.state.projects_atlas.map(
                                             (project) => (
                                               <option value={project.id}>
                                                 {project.name}{" "}
@@ -402,25 +488,7 @@ export default class Reports extends Component {
                                           <option value="3">EURO</option>
                                         </select>
                                       </td>
-                                      <td>
-                                        <label>Trimestre</label>
 
-                                        <select
-                                          onChange={
-                                            this.onChangeSelectTrimestre
-                                          }
-                                          className="form-control mb-3"
-                                          name="trimestre"
-                                        >
-                                          <option value="1">
-                                            Seleccione Trimestre
-                                          </option>
-                                          <option value="1">Trimestre 1</option>
-                                          <option value="2">Trimestre 2</option>
-                                          <option value="3">Trimestre 3</option>
-                                          <option value="4">Trimestre 4</option>
-                                        </select>
-                                      </td>
                                       <td>
                                         <label>Año</label>
                                         <select
@@ -448,7 +516,7 @@ export default class Reports extends Component {
                                         >
                                           Generar
                                         </Link> */}
-                                        <button className="btn btn-block btn-primary" onClick={this.jsPdfGenerator} type="primary"> Generate PDF </button>
+                                        <button className="btn btn-block btn-primary" onClick={this.reporte_atlas_by_project} type="primary"> Generate PDF </button>
                                         {/*  <button
                                           onClick={this.handleClick}
                                           className="btn btn-block btn-primary"
