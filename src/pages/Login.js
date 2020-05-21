@@ -74,7 +74,7 @@ export default class Login extends Component {
                                             </div>
                                             <div className="card-block" style={{ width: 500, margin: "auto" }} >
                                                 <div className="j-wrapper j-wrapper-400">
-                                                    <form action="" method="post" className="form-control">
+                                                    <form onSubmit={this.onSubmit} className="form-control">
 
                                                         <div align="center" style={{ padding: 5 }} ><h4>Ingreso al sistema</h4></div>
                                                         <div align="center" style={{ padding: 5 }} >
