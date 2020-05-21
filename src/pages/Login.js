@@ -107,7 +107,7 @@ export default class Login extends Component {
                                                             ></span>
                                                             <input
                                                                 onChange={this.onChange}
-                                                                type="text"
+                                                                type="password"
                                                                 className="form-control"
                                                                 name="password"
                                                                 placeholder="Ingrese Contraseña"

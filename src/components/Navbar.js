@@ -65,7 +65,7 @@ class Navbar extends Component {
 
 
                     <Link to={'/'} >
-                        <img style={{ height: 30 }} className="img-fluid" src="assets/images/ihcafe.png" alt="Theme-Logo" />
+                        <img style={{ height: 30, backgroundColor: '#fff' }} className="img-fluid" src="assets/images/ihcafe.png" alt="Theme-Logo" />
                     </Link>
 
 
