@@ -106,7 +106,7 @@ class Navbar extends Component {
 
         return (
             <div>
-                <nav className="navbar header-navbar">
+                <nav className="navbar header-navbar pcoded-header" style={{ backgroundColor: '#fff' }}>
                     <div className="navbar-wrapper">
 
                         <div className="navbar-container container-fluid">
