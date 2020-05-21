@@ -31,28 +31,35 @@ export default class Reports extends Component {
   reporte_atlas_by_project = () => {
 
     const anio = this.state.year;
-
+    let coin = ''
     switch (this.state.coin_id) {
       case 1:
         this.setState({ modena: "Lempiras" })
+        coin = "LPS"
         break;
       case 2:
         this.setState({ modena: "Dolares" })
+        coin = "$"
         break;
       case 3:
         this.setState({ modena: "Euros" })
+        coin = "€"
         break;
 
       default: this.setState({ modena: "Lempiras" })
+        coin = "LPS."
         break;
     }
 
     // Example From https://parall.ax/products/jspdf
-    var doc = new jsPDF('l', 'pt');
+    var doc = new jsPDF('p', 'pt');
 
     //var finalY = doc.previousAutoTable.finalY
     //doc.text('From javascript arrays', 14, finalY + 15)
-    doc.text('Reporte de Presupuesto ATlAS Por Project (' + anio + ') Modena:' + this.state.modena, 230, 30)
+    doc.text('IHCAFE', 280, 30)
+    doc.text('Reporte de Presupuesto ATlAS ', 200, 50)
+    doc.text('Proyecto CONECTA+ (' + anio + ') Modena:' + this.state.modena, 130, 70)
+
 
     /*doc.autoTable({
       head: headRows(),
@@ -69,26 +76,50 @@ export default class Reports extends Component {
     doc.autoTable({
       head: headRows(),
       body: bodyRows(this.state.ArrayReportebyProject),
-      startY: 50,
+      startY: 100,
       showHead: 'firstPage',
     })
 
     function headRows() {
       return [
         {
-          code: 'Cuentas Atlas', name: 'Detalles', TOTAL: 'TOTAL'
+          code: 'Cuentas Atlas', name: 'Detalles', Aprobado: "inicial", Ejecutado: 'Ejecutado'
         }
         //{ id: 'ID', name: 'Name', email: 'Email', city: 'City', expenses: 'Sum' },
       ]
+    }
+
+    function formatMoney(number) {
+      if (coin === "LPS") {
+        return number.toLocaleString("en-US", {
+          style: "currency",
+          currency: "LPS",
+        });
+      }
+      if (coin === "$") {
+        return number.toLocaleString("en-US", {
+          style: "currency",
+          currency: "$",
+        });
+      }
+      if (coin === "€") {
+        return number.toLocaleString("en-US", {
+          style: "currency",
+          currency: "€",
+        });
+      }
+
+      //return number;
     }
 
     function bodyRows(ArrayReportebyProject) {
       var body = [];
       for (let index = 0; index < ArrayReportebyProject.length; index++) {
         body.push({
-          code: ArrayReportebyProject[index].code,
-          name: ArrayReportebyProject[index].name,
-          TOTAL: ArrayReportebyProject[index].TOTAL,
+          code: ArrayReportebyProject[index].atlas_account.code,
+          name: ArrayReportebyProject[index].atlas_account.name,
+          Aprobado: formatMoney(ArrayReportebyProject[index].inicial),
+          Ejecutado: formatMoney(ArrayReportebyProject[index].TOTAL)
         });
       }
       return body

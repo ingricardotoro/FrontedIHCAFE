@@ -25,14 +25,24 @@ import AccountDashboard from "./pages/AccountDashboard";
 import Reports from "./pages/Reports";
 import Report_View from "./pages/Report_View";
 
-
+import Login from './pages/Login'
+import Inicio from './pages/Inicio'
 
 function App() {
   return (
+
     <div className="App">
+
+
       <Router>
+
         <Navbar />
+
         <Sidebar />
+
+        <Route exact path="/" component={Inicio} />
+        <Route path="/login" exact component={Login} />
+
         <Route path="/atlas" exact component={Atlas} />
         <Route path="/atlas_accounts" exact component={AtlasAccount} />
         <Route path="/budgets" exact component={listBudgets} />
@@ -57,6 +67,7 @@ function App() {
           exact
           component={Report_View}
         />
+
       </Router>
     </div>
   );
