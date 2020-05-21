@@ -106,7 +106,7 @@ class Navbar extends Component {
 
         return (
             <div>
-                <nav className="navbar header-navbar pcoded-header">
+                <nav className="navbar header-navbar">
                     <div className="navbar-wrapper">
 
                         <div className="navbar-container container-fluid">
