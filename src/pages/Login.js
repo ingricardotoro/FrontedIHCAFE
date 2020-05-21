@@ -63,7 +63,7 @@ export default class Login extends Component {
                             </div>
                             {/* Page-header end */}
                             {/* Page-body start */}
-                            <div class="page-body">
+                            <div className="page-body">
                                 <div className="row">
                                     <div className="col-sm-12">
                                         <div className="card">
