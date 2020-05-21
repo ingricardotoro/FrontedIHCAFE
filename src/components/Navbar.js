@@ -52,7 +52,7 @@ class Navbar extends Component {
 
         const userLink = (
             <div>
-                <div className="navbar-logo">
+                <div className="navbar-logo" style={{ backgroundColor: '#fff' }}>
                     <a className="mobile-menu" id="mobile-collapse" href="/">
                         <i className="ti-menu" />
                     </a>
@@ -75,11 +75,11 @@ class Navbar extends Component {
                         <div className="sidebar_toggle"><a href="/"><i className="ti-menu" /></a></div>
                     </li>
 
-                    <li>
+                    {/* <li>
                         <a href="#!" onClick={"javascript:toggleFullScreen()"}>
                             <i className="ti-fullscreen" />
                         </a>
-                    </li>
+                    </li> */}
 
                 </ul>
 
@@ -106,7 +106,7 @@ class Navbar extends Component {
 
         return (
             <div>
-                <nav className="navbar header-navbar pcoded-header" style={{ backgroundColor: '#fff' }}>
+                <nav className="navbar header-navbar pcoded-header" >
                     <div className="navbar-wrapper">
 
                         <div className="navbar-container container-fluid">
