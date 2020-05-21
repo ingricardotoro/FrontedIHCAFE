@@ -287,8 +287,9 @@ export default class Sidebar extends Component {
 
         )
         return (
-
-            localStorage.usertoken ? navegacion : null
+            <div>
+                {localStorage.usertoken ? navegacion : null}
+            </div>
 
         )
     }
