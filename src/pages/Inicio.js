@@ -8,7 +8,7 @@ class Inicio extends Component {
                     <div className="col-sm-8 mx-auto">
                         <h1 className="text-center">Bienvenido Al Sistema de Presupuestos de IHCAFE</h1>
 
-                        <img style={{ paddingTop: 30 }} className="img-fluid" src="/assets/images/ihcafe.PNG" alt="Theme-Logo" />
+                        <img style={{ paddingTop: 30 }} className="img-fluid" src="/assets/images/ihcafe.png" alt="Theme-Logo" />
                         <div style={{ paddingTop: 60, paddingBottom: 30 }} align='center'>
 
 
