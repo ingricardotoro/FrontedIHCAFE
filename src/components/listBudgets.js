@@ -2,16 +2,28 @@ import React, { Component } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import TabBudget from "../components/TabBudget";
+import jwt_decode from 'jwt-decode'
 
 export default class listBudgets extends Component {
   constructor() {
     super();
     this.state = {
       budgets: [],
+      user_name: "",
+      user_lastname: ""
     };
   }
 
   async componentDidMount() {
+
+    const token = localStorage.token
+    const decode = jwt_decode(token)
+    this.setState({
+      user_name: decode.name,
+      user_lastname: decode.lastname
+    })
+
+
     const res = await axios.get("http://167.99.15.83:4000/api/budgets/all");
     this.setState({ budgets: res.data.budgets });
   }
@@ -25,7 +37,8 @@ export default class listBudgets extends Component {
               <div className="page-wrapper">
                 <div className="page-header page-wrapper">
                   <div className="page-header-title">
-                    <h4>Presupuestos</h4>
+                    <h4>Presupuestos {this.state.name} -  {this.state.lastname} </h4>
+
                     <span>Listado de Presupuestos 2020</span>
                   </div>
 
