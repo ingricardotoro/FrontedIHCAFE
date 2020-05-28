@@ -17,7 +17,7 @@ export default class listBudgets extends Component {
   async componentDidMount() {
 
     const token = localStorage.token
-    const decode = jwt_decode(token)
+    const decode = jwt_decode(usertoken)
     this.setState({
       user_name: decode.name,
       user_lastname: decode.lastname
