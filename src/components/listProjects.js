@@ -8,10 +8,14 @@ export default class listProjects extends Component {
     }
 
     async componentDidMount(){
+        //verificacion de usuario logeado
+        if (!localStorage.usertoken) {
+            window.location.href = "/"
+        }
+        
       const res = await axios.get('http://167.99.15.83:4000/api/projects/');
       this.setState({projects:res.data.projects});
-      //console.log(res.data.projects)
-      //console.log(this.state.projects);
+  
     }
 
     render() {

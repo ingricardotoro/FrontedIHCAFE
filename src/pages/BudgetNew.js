@@ -32,6 +32,11 @@ export default class BudgetNew extends Component {
   }
 
   async componentDidMount() {
+    //verificacion de usuario logeado
+    if (!localStorage.usertoken) {
+      window.location.href = "/"
+    }
+
     const res6 = await axios.get("http://167.99.15.83:4000/api/accounts/");
     this.setState({ cuentas: res6.data.cuentas });
 

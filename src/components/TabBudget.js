@@ -24,9 +24,14 @@ export default class TabBudget extends Component {
   }
 
   async componentDidMount() {
+
+    //verificacion de usuario logeado
+    if (!localStorage.usertoken) {
+      window.location.href = "/"
+    }
     const res_p2 = await axios.post(
       "http://167.99.15.83:4000/api/projects/findProjectsByBudgetId/" +
-        this.props.id
+      this.props.id
     );
     this.setState({ projects2: res_p2.data.projectsbybudgetid });
 
@@ -40,7 +45,7 @@ export default class TabBudget extends Component {
   async calculo1() {
     const res_p = await axios.post(
       "http://167.99.15.83:4000/api/projects/findProjectsByBudgetId/" +
-        this.props.id
+      this.props.id
     );
     this.setState({ projects: res_p.data.projectsbybudgetid });
   }

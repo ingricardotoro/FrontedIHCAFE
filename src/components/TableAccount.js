@@ -3,7 +3,7 @@ import RowCardsProjects from '../components/RowCardsProjects'
 import RowBudget from '../components/RowBudget'
 
 export default class TableAccount extends Component {
-    
+
     constructor() {
         super();
         this.state = {
@@ -40,12 +40,17 @@ export default class TableAccount extends Component {
             categories:[],
             clasificaciones:[],
             cuentas:[]*/
-            
-         
+
+
         }
     }
-    
-    async componentDidMount(){
+
+    async componentDidMount() {
+
+        //verificacion de usuario logeado
+        if (!localStorage.usertoken) {
+            window.location.href = "/"
+        }
 
         /*const res = await axios.post('http://167.99.15.83:4000/api/budgetlines/project/'+this.props.idProject);
         this.setState({budgetLines:res.data.budgetLines});
@@ -61,7 +66,7 @@ export default class TableAccount extends Component {
 
         const res6 = await axios.get('http://167.99.15.83:4000/api/accounts/');
         this.setState({cuentas:res6.data.cuentas});*/
-       
+
 
     }
 
@@ -102,7 +107,7 @@ export default class TableAccount extends Component {
     /*formatMoney(number) {
         return number.toLocaleString('en-US', { style: 'currency', currency: 'HNL' });
     }*/
-    
+
     //codigo para crear un nuevo renglon presupuestario
     /*onSubmit  = async e =>{
         e.preventDefault();
@@ -129,12 +134,12 @@ export default class TableAccount extends Component {
 
     render() {
 
-      //this.calculo();
-      
+        //this.calculo();
+
         return (
             <div>
-               
-                <RowCardsProjects 
+
+                <RowCardsProjects
                     inicial="100000.00"
                     ejecutado="100000.00"
                     disponible="100000.00"
@@ -146,31 +151,31 @@ export default class TableAccount extends Component {
 
                 {/* Page body start */}
                 <div className="page-body">
-                <div className="row">
-                    <div className="col-sm-12">
-                    {/* Product list card start */}
-                    <div className="card product-add-modal">
-                        <div className="card-header">
-                            <h5>Historial de Movimientos </h5>
-                            
-                            <button type="button" className="btn btn-primary waves-effect waves-light f-right d-inline-block md-trigger" data-toggle="modal" data-target="#modal-13"><i className="icofont icofont-plus m-r-5" /> Crear Nuevo</button>
-                        </div>
-                        
-                       
-                           
-                            <RowBudget idCat={1}  idProject={1} />
-                           
-                        
+                    <div className="row">
+                        <div className="col-sm-12">
+                            {/* Product list card start */}
+                            <div className="card product-add-modal">
+                                <div className="card-header">
+                                    <h5>Historial de Movimientos </h5>
 
+                                    <button type="button" className="btn btn-primary waves-effect waves-light f-right d-inline-block md-trigger" data-toggle="modal" data-target="#modal-13"><i className="icofont icofont-plus m-r-5" /> Crear Nuevo</button>
+                                </div>
+
+
+
+                                <RowBudget idCat={1} idProject={1} />
+
+
+
+                            </div>
+                            {/* Product list card end */}
+                        </div>
                     </div>
-                    {/* Product list card end */}
-                    </div>
-                </div>
                 </div>
 
                 {/* Add Contact Start Model */}
-              
-               
+
+
 
                 {/* Page body end */}
 

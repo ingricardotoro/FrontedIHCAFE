@@ -1,6 +1,15 @@
 import React, { Component } from "react";
 
 export default class RowCardsProjects extends Component {
+
+  componentDidMount() {
+    //verificacion de usuario logeado
+    if (!localStorage.usertoken) {
+      window.location.href = "/"
+    }
+
+  }
+
   formatMoney(number) {
     return number.toLocaleString("en-US", {
       style: "currency",

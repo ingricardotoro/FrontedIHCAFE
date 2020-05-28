@@ -1,14 +1,21 @@
 import React, { Component } from 'react'
 import TableAccount from '../components/TableAccount'
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 export default class ProjectDashboard extends Component {
 
+    componentDidMount() {
+        //verificacion de usuario logeado
+        if (!localStorage.usertoken) {
+            window.location.href = "/"
+        }
+    }
+
     render() {
-      
+
         return (
             <div>
-                 <div className="pcoded-content">
+                <div className="pcoded-content">
                     <div className="pcoded-inner-content">
                         <div className="main-body">
                             <div className="page-wrapper">
@@ -24,13 +31,13 @@ export default class ProjectDashboard extends Component {
                                                     <i className="icofont icofont-home"></i>
                                                 </a>
                                             </li>
-                                            <li className="breadcrumb-item"><Link to={'/accounts' }>Cuentas</Link>
+                                            <li className="breadcrumb-item"><Link to={'/accounts'}>Cuentas</Link>
                                             </li>
                                             <li className="breadcrumb-item">Historial
                                             </li>
                                         </ul>
                                     </div>
-                                 </div>
+                                </div>
                                 <TableAccount idAccount={this.props.match.params.id} />
                             </div>
                         </div>

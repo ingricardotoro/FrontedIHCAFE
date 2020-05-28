@@ -11,13 +11,6 @@ class Navbar extends Component {
         //this.props.history.push('/')
     }
 
-    componentDidMount() {
-        //verificacion de usuario logeado
-        if (!localStorage.usertoken) {
-            window.location.href = "/"
-        }
-    }
-
     render() {
 
         const loginRegLink = (

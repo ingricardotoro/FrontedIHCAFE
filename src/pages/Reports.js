@@ -4,6 +4,7 @@ import jsPDF from "jspdf";
 import 'jspdf-autotable';
 
 export default class Reports extends Component {
+
   constructor() {
     super();
     this.state = {
@@ -219,6 +220,11 @@ export default class Reports extends Component {
 
 
   async componentDidMount() {
+
+    //verificacion de usuario logeado
+    if (!localStorage.usertoken) {
+      window.location.href = "/"
+    }
 
     const res = await axios.get("http://167.99.15.83:4000/api/budgets/");
     this.setState({ budgets: res.data.budgets });

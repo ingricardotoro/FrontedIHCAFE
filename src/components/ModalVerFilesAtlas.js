@@ -10,6 +10,10 @@ export default class ModalVerFilesAtlas extends Component {
   }
 
   async componentDidMount() {
+    //verificacion de usuario logeado
+    if (!localStorage.usertoken) {
+      window.location.href = "/"
+    }
     const res_files = await axios.post(
       "http://167.99.15.83:4000/api/files/filesbybudgetid_atlas/" + this.props.budget_id + "/" +
       this.props.budgetlineatlas
