@@ -16,10 +16,6 @@ export default class listBudgets extends Component {
 
   async componentDidMount() {
 
-    if (!localStorage.usertoken) {
-      window.location.href = "/"
-    }
-
     const token = localStorage.usertoken
     const decode = jwt_decode(token)
     this.setState({
