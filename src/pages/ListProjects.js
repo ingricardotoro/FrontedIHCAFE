@@ -19,6 +19,14 @@ export default class ListProjects extends Component {
     this.setState({ projects: res.data.projects });
   }
 
+  formatMoney(number) {
+    return number.toLocaleString("en-US", {
+      style: "currency",
+      currency: "HNL",
+    });
+    //return number;
+  }
+
   render() {
     return (
       <div>
@@ -57,7 +65,7 @@ export default class ListProjects extends Component {
                       {/* List view card start */}
                       <div className="card">
                         <div className="card-header">
-                          <h5>Projectos</h5>
+                          <h5>Proyectos</h5>
                           <div>
                             <Link
                               to={"/projects/new"}
@@ -78,7 +86,7 @@ export default class ListProjects extends Component {
                           <div className="col-md-12">
                             <ul className="list-view">
                               {this.state.projects.map((project) => (
-                                <li>
+                                <li style={{ paddingBottom: "10px" }} >
                                   <div className="card user-card">
                                     <div className="card-block">
                                       <div className="media">
@@ -94,7 +102,7 @@ export default class ListProjects extends Component {
                                             <h6 className="d-inline-block">
                                               {project.name}{" "}
                                             </h6>
-                                            <label className="label label-info ml-3">
+                                            <label className="label label-primary ml-3">
                                               Prioridad: {project.priority}
                                             </label>
                                           </div>
@@ -102,16 +110,18 @@ export default class ListProjects extends Component {
                                             Equipo #1
                                           </div>
                                           <p>{project.description} </p>
-                                          <label className="label label-warning ml-3">
+                                          <label className="label label-primary ml-3">
                                             Fecha de Inicio: {project.startdate}
                                           </label>
                                           <label className="label label-danger ml-3">
-                                            Prespuesto: {project.budgetstart}
+                                            Prespuesto Ejecutado: {(project.budgetstart)}
                                           </label>
                                           {/* <label className="label label-info ml-3">{project.budget.description}</label>  */}
                                           <label className="label label-success ml-3">
-                                            Prespuesto: {project.budgetstart}
+                                            Prespuesto Disponible: {(project.budgetstart)}
                                           </label>
+                                          <button className="btn btn-warning btn-sm m-1">Editar</button>
+                                          <button className="btn btn-danger btn-sm m-1">Eliminar</button>
                                         </div>
                                       </div>
                                     </div>

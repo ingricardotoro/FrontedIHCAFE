@@ -18,7 +18,7 @@ export default class Account_list extends Component {
             window.location.href = "/"
         }
 
-        const res = await axios.get('https://backendihcafe.herokuapp.com/api/accounts/');
+        const res = await axios.get('http://167.99.15.83:4000/api/accounts/');
         this.setState({ accounts: res.data.cuentas });
     }
 
@@ -54,9 +54,10 @@ export default class Account_list extends Component {
 
                                                     <div className="product-add-modal">
                                                         {/* <button type="button" className="btn btn-success waves-effect waves-light f-right d-inline-block md-trigger" data-toggle="modal" data-target="#modal-13"> <i className="icofont icofont-plus m-r-5" /> Nuevo Producto
-                                        </button>   */}
+                                                        </button>   */}
                                                         <Link to={'/account_new'} > <button type="button" className="btn btn-success waves-effect waves-light f-right d-inline-block md-trigger" > <i className="icofont icofont-plus m-r-5" /> Nueva Cuenta
-                                        </button>  </Link>
+                                                            </button>
+                                                        </Link>
                                                     </div>
                                                     <div>
                                                         {/* Modal static*/}
@@ -75,30 +76,25 @@ export default class Account_list extends Component {
                                                                             <th>Nombre</th>
                                                                             <th>Moneda</th>
                                                                             <th>descripción</th>
-                                                                            <th>Balance Actual</th>
+                                                                            {/* <th>Balance Actual</th> */}
                                                                             <th>Usuario</th>
                                                                             <th>Historial</th>
                                                                         </tr>
                                                                     </thead>
                                                                     <tbody>
-
                                                                         {this.state.accounts.map(account =>
-
-
-                                                                            <tr>
+                                                                            <tr key={account.id}>
                                                                                 <td className="pro-list-img">
-                                                                                    <img width="80px" src={"assets/images/accounts/" + account.id + ".png"} className="img-fluid" alt="tbl" />
+                                                                                    <img width="80px" src={"assets/images/accounts/bank.jpg"} className="img-fluid" alt="tbl" />
                                                                                 </td>
                                                                                 <td>{account.name}</td>
-                                                                                <td>{account.coin}</td>
+                                                                                <td>{account.coin_id}</td>
                                                                                 <td>{account.description}</td>
-                                                                                <td>{this.formatMoney(account.actualbalance)}</td>
-                                                                                <td>Admin</td>
-
-                                                                                <td> <Link to={'/account/' + account.id} ><button type="button" class="btn btn-primary waves-effect" >Ver Historial</button></Link></td>
+                                                                                {/* <td>{this.formatMoney(account.actualbalance)}</td> */}
+                                                                                <td>{account.person_id}</td>
+                                                                                <td> <Link to={'/account/' + account.id} ><button type="button" className="btn btn-primary waves-effect" >Ver Historial</button></Link></td>
                                                                             </tr>
                                                                         )}
-
                                                                     </tbody>
                                                                 </table>
                                                             </div>

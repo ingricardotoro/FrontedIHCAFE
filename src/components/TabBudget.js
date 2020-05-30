@@ -88,10 +88,8 @@ export default class TabBudget extends Component {
       "http://167.99.15.83:4000/api/budgets/delete/" + this.props.id
     );
 
-    //if (res_p) { }
-
     window.location.href = "/budgets";
-    //eliminado
+
   };
 
   render() {

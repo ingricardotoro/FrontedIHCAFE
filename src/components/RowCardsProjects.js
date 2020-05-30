@@ -15,7 +15,10 @@ export default class RowCardsProjects extends Component {
       style: "currency",
       currency: "HNL",
     });
+    //return number;
   }
+
+
 
   render() {
     return (

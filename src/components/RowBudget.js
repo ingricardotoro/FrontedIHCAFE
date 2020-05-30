@@ -48,11 +48,11 @@ export default class RowBudget extends Component {
 
     calculo() { // para realizar el calculo de la suma de presupuestos
 
-        //this.state.total_inicial = 0.0; this.state.total_ejecutado = 0.0;this.state.total_disponible = 0.0;this.state.total_solicitado = 0.0;
-        this.setSate(this.state.total_inicial, 0.0);
+        this.state.total_inicial = 0.0; this.state.total_ejecutado = 0.0; this.state.total_disponible = 0.0; this.state.total_solicitado = 0.0;
+        /*this.setSate(this.state.total_inicial, 0.0);
         this.setSate(this.state.total_ejecutado, 0.0);
         this.setSate(this.state.total_disponible, 0.0);
-        this.setSate(this.state.total_solicitado, 0.0);
+        this.setSate(this.state.total_solicitado, 0.0);*/
 
         for (let index = 0; index < this.state.budgetLines.length; index++) {
 

@@ -20,6 +20,7 @@ import Users_list from "./pages/Users_list";
 import Teams_list from "./pages/Teams_list";
 
 import Account_list from "./pages/Accounts";
+import Account_new from "./pages/AccountNew";
 import AccountDashboard from "./pages/AccountDashboard";
 
 import Reports from "./pages/Reports";
@@ -32,7 +33,6 @@ function App() {
   return (
 
     <div className="App">
-
 
       <Router>
 
@@ -59,6 +59,7 @@ function App() {
         <Route path="/teams_list" exact component={Teams_list} />
 
         <Route path="/accounts" exact component={Account_list} />
+        <Route path="/account_new" exact component={Account_new} />
         <Route path="/account/:id" exact component={AccountDashboard} />
 
         <Route path="/reports" exact component={Reports} />
