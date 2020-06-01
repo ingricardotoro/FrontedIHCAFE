@@ -3,18 +3,14 @@ import axios from 'axios'
 import { Link } from 'react-router-dom'
 import jwt_decode from 'jwt-decode'
 
-export default class AccountNew extends Component {
+export default class CoinNew extends Component {
 
     constructor() {
         super();
         this.state = {
-
             description: "",
             name: "",
-            coin: 0,
-            coins: [],
-            person_id: 0
-
+            code: "",
         }
     }
 
@@ -23,32 +19,21 @@ export default class AccountNew extends Component {
         if (!localStorage.usertoken) {
             window.location.href = "/"
         }
-
-        const token = localStorage.usertoken
-        const decode = jwt_decode(token)
-        this.setState({
-            person_id: decode.id
-        })
-
-        const res = await axios.get('http://167.99.15.83:4000/api/coins/');
-        this.setState({ coins: res.data.coins });
-
     }
 
     onChangeName = (e) => { this.setState({ name: e.target.value }) }
     onChangeDescription = (e) => { this.setState({ description: e.target.value }) }
-    onChangeCoin = (e) => { this.setState({ coin: e.target.value }) }
+    onChangeCode = (e) => { this.setState({ code: e.target.value }) }
 
 
     onSubmit = async e => {
         e.preventDefault();
-        await axios.post('http://167.99.15.83:4000/api/accounts', {
+        await axios.post('http://167.99.15.83:4000/api/coins/', {
             description: this.state.description,
             name: this.state.name,
-            coin: this.state.coin,
-            person_id: this.state.person_id
+            code: this.state.code
         })
-        window.location.href = '/accounts';
+        window.location.href = '/coins';
     }
 
     render() {
@@ -60,8 +45,8 @@ export default class AccountNew extends Component {
                         <div className="page-wrapper">
                             <div className="page-header page-wrapper mt-3 ">
                                 <div className="page-header-title">
-                                    <h4>Crear una nueva cuenta Monetaria</h4>
-                                    <span>Creación de Nuevas Cuentas Monetarias</span>
+                                    <h4>Crear una Nueva Moneda</h4>
+                                    <span>Creación de Nuevas Monedas</span>
                                 </div>
                                 <div className="page-header-breadcrumb">
                                     <ul className="breadcrumb-title">
@@ -70,9 +55,9 @@ export default class AccountNew extends Component {
                                                 <i className="icofont icofont-home" />
                                             </a>
                                         </li>
-                                        <li className="breadcrumb-item"><Link to={'/accounts'} >Cuentas</Link>
+                                        <li className="breadcrumb-item"><Link to={'/coins'} >Monedas</Link>
                                         </li>
-                                        <li className="breadcrumb-item">Crear Nueva Cuenta
+                                        <li className="breadcrumb-item">Crear Nueva Moneda
                                 </li>
                                     </ul>
                                 </div>
@@ -100,45 +85,35 @@ export default class AccountNew extends Component {
 
 
                                                             <div className="form-group row">
-                                                                <label className="col-sm-2 col-form-label">Nombre de la Cuenta</label>
+                                                                <label className="col-sm-2 col-form-label">Nombre de la Moneda</label>
                                                                 <div className="col-sm-10">
-                                                                    <input onChange={this.onChangeName} required type="text" className="form-control" placeholder="Ingrese Nombre de cuenta" />
+                                                                    <input onChange={this.onChangeName} required type="text" className="form-control" placeholder="Ingrese Nombre de Moneda" />
                                                                 </div>
                                                             </div>
 
                                                             <div className="form-group row">
-                                                                <label className="col-sm-2 col-form-label">Descripción de la Cuenta</label>
+                                                                <label className="col-sm-2 col-form-label">Símbolo de la Moneda</label>
                                                                 <div className="col-sm-10">
-                                                                    <textarea onChange={this.onChangeDescription} rows={5} cols={5} className="form-control" placeholder="Descripción de la cuenta" defaultValue={""} />
+                                                                    <input onChange={this.onChangeCode} required type="text" className="form-control" placeholder="Ingrese Símbolo de Moneda" />
                                                                 </div>
                                                             </div>
 
                                                             <div className="form-group row">
-                                                                <label className="col-sm-2 col-form-label">Moneda a utilizar</label>
+                                                                <label className="col-sm-2 col-form-label">Descripción de la Moneda</label>
                                                                 <div className="col-sm-10">
-                                                                    <select onChange={this.onChangeCoin} name="select" className="form-control">
-                                                                        <option value="#">Seleccione Moneda</option>
-                                                                        {
-                                                                            this.state.coins.map(coin =>
-                                                                                <option key={coin.id} value={coin.id}>{coin.name} </option>
-                                                                            )
-                                                                        }
-                                                                    </select>
+                                                                    <textarea onChange={this.onChangeDescription} rows={5} cols={5} className="form-control" placeholder="Descripción de la moneda" defaultValue={""} />
                                                                 </div>
                                                             </div>
 
                                                             <div className="row">
-                                                                <label className="col-sm-4 col-lg-2 col-form-label">Guardar Presupuesto</label>
+                                                                <label className="col-sm-4 col-lg-2 col-form-label">Guardar Moneda</label>
                                                                 <div className="col-sm-8 col-lg-10">
                                                                     <div className="input-group">
-                                                                        <button type="submit" className="btn btn-lg btn-success" >Crear Cuenta </button>
+                                                                        <button type="submit" className="btn btn-lg btn-success" >Crear Moneda </button>
                                                                     </div>
-
                                                                 </div>
                                                             </div>
-
                                                         </form>
-
                                                     </div>
                                                 </div>
 

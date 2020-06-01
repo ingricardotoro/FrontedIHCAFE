@@ -18,6 +18,9 @@ import BudgetLineNew from "./pages/BudgetLineNew";
 import pageSupplierslist from "./pages/Suppliers_list";
 import Users_list from "./pages/Users_list";
 import Teams_list from "./pages/Teams_list";
+import Teams_New from './pages/TeamNew';
+import TeamMembers from './pages/TeamMembers'
+import Roles from './pages/Roles'
 
 import Account_list from "./pages/Accounts";
 import Account_new from "./pages/AccountNew";
@@ -25,6 +28,10 @@ import AccountDashboard from "./pages/AccountDashboard";
 
 import Reports from "./pages/Reports";
 import Report_View from "./pages/Report_View";
+
+import Coinlist from './pages/Coinlist'
+import CoinNew from './pages/CoinNew'
+import ConversionList from './pages/Conversions'
 
 import Login from './pages/Login'
 import Inicio from './pages/Inicio'
@@ -57,6 +64,12 @@ function App() {
         <Route path="/suppliers_list" exact component={pageSupplierslist} />
         <Route path="/users_list" exact component={Users_list} />
         <Route path="/teams_list" exact component={Teams_list} />
+        <Route path="/teams_new" exact component={Teams_New} />
+        <Route path="/teammembers/:id" exact component={TeamMembers} />
+        <Route path="/roles_list" exact component={Roles} />
+        <Route path="/coins" exact component={Coinlist} />
+        <Route path="/coin_new" exact component={CoinNew} />
+        <Route path="/conversions/:id" exact component={ConversionList} />
 
         <Route path="/accounts" exact component={Account_list} />
         <Route path="/account_new" exact component={Account_new} />

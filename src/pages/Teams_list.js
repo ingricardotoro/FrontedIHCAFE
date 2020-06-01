@@ -1,481 +1,201 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
+import axios from 'axios'
 
-export default class Teams_list extends Component {
+export default class Team_list extends Component {
 
-    componentDidMount() {
+
+    constructor() {
+        super();
+        this.state = {
+            teams: [],
+        }
+    }
+
+    async componentDidMount() {
         //verificacion de usuario logeado
         if (!localStorage.usertoken) {
             window.location.href = "/"
         }
+
+        const res = await axios.get('http://167.99.15.83:4000/api/teams/');
+        this.setState({ teams: res.data.teams });
     }
+
+    formatMoney(number) {
+        return number.toLocaleString('en-US', { style: 'currency', currency: 'HNL' });
+    }
+
+    onSubmitDelete = async (id) => {
+        const res_p = await axios.post(
+            "http://167.99.15.83:4000/api/teams/delete/" + id
+        );
+        window.location.href = "/teams_list";
+
+        if (res_p) {
+        }
+    };
+
     render() {
         return (
+
             <div>
                 <div className="pcoded-content">
                     <div className="pcoded-inner-content">
                         {/* Main-body start */}
                         <div className="main-body">
                             <div className="page-wrapper">
-                                {/* Page-header start */}
-                                <div className="page-header">
+                                {/* Page header start */}
+                                <div className="page-header page-wrapper">
                                     <div className="page-header-title">
-                                        <h4>CRM Contact</h4>
+                                        <h4>Gestión de Equipos de Trabajo</h4>
                                     </div>
-                                    <div className="page-header-breadcrumb">
-                                        <ul className="breadcrumb-title">
-                                            <li className="breadcrumb-item">
-                                                <a href="index.html">
-                                                    <i className="icofont icofont-home" />
-                                                </a>
-                                            </li>
-                                            <li className="breadcrumb-item"><a href="#!">CRM Contact</a>
-                                            </li>
-                                        </ul>
-                                    </div>
+
                                 </div>
-                                {/* Page-header end */}
-                                {/* Page-body start */}
+                                {/* Page header start */}
+                                {/* Page body start */}
                                 <div className="page-body">
-                                    <div className="card product-add-modal">
-                                        <div className="card-header">
-                                            <h5>Gestión de Clientes</h5>
-                                            <button type="button" className="btn btn-primary waves-effect waves-light f-right d-inline-block md-trigger" data-modal="modal-13"> <i className="icofont icofont-plus m-r-5" /> Nuevo Cliente
-                                </button>
-                                        </div>
-                                        <div className="card-block">
-                                            <div className="table-content crm-table">
-                                                <div className="project-table">
-                                                    <table id="crm-contact" className="table table-striped nowrap">
-                                                        <thead>
-                                                            <tr>
-                                                                <th>Foto</th>
-                                                                <th>Empresa</th>
-                                                                <th>Contácto</th>
-                                                                <th>Correo</th>
-                                                                <th>Teléfono 1</th>
-                                                                <th>Teléfono 2</th>
-                                                                <th>Web Site</th>
-                                                                <th>Ciudad</th>
-                                                                <th>Acciones</th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                            <tr>
-                                                                <td>
-                                                                    <img src="assets/images/avatar-1.png" className="d-inline-block img-circle " alt="tbl" />
-                                                                </td>
-                                                                <td className="pro-name">
-                                                                    Empresa ABC
-                                            </td>
-                                                                <td>Jorge Torres</td>
-                                                                <td>Sortino@domain.com</td>
-                                                                <td>+447662552550</td>
-                                                                <td>+447662552550</td>
-                                                                <td>empresaABC.org</td>
-                                                                <td>Tegucigalpa</td>
-                                                                <td className="action-icon">
-                                                                    <a href="/" className="m-r-15 crm-action-edit text-muted"><i className="icofont icofont-ui-edit" /></a>
-                                                                    <a href="/" className="crm-action-delete text-muted"><i className="icofont icofont-delete-alt" /></a>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>
-                                                                    <img src="assets/images/avatar-2.png" className="d-inline-block img-circle " alt="tbl" />
-                                                                </td>
-                                                                <td className="pro-name">
-                                                                    Empresa ABC
-                                            </td>
-                                                                <td>Jorge Torres</td>
-                                                                <td>Sortino@domain.com</td>
-                                                                <td>+447662552550</td>
-                                                                <td>+447662552550</td>
-                                                                <td>empresaABC.org</td>
-                                                                <td>Tegucigalpa</td>
-                                                                <td className="action-icon">
-                                                                    <a href="/" className="m-r-15 crm-action-edit text-muted"><i className="icofont icofont-ui-edit" /></a>
-                                                                    <a href="/" className="crm-action-delete text-muted"><i className="icofont icofont-delete-alt" /></a>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>
-                                                                    <img src="assets/images/avatar-3.png" className="d-inline-block img-circle " alt="tbl" />
-                                                                </td>
-                                                                <td className="pro-name">
-                                                                    Empresa ABC
-                                            </td>
-                                                                <td>Jorge Torres</td>
-                                                                <td>Sortino@domain.com</td>
-                                                                <td>+447662552550</td>
-                                                                <td>+447662552550</td>
-                                                                <td>empresaABC.org</td>
-                                                                <td>Tegucigalpa</td>
-                                                                <td className="action-icon">
-                                                                    <a href="/" className="m-r-15 crm-action-edit text-muted"><i className="icofont icofont-ui-edit" /></a>
-                                                                    <a href="/" className="crm-action-delete text-muted"><i className="icofont icofont-delete-alt" /></a>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>
-                                                                    <img src="assets/images/avatar-5.png" className="d-inline-block img-circle " alt="tbl" />
-                                                                </td>
-                                                                <td className="pro-name">
-                                                                    Empresa ABC
-                                            </td>
-                                                                <td>Jorge Torres</td>
-                                                                <td>Sortino@domain.com</td>
-                                                                <td>+447662552550</td>
-                                                                <td>+447662552550</td>
-                                                                <td>empresaABC.org</td>
-                                                                <td>Tegucigalpa</td>
-                                                                <td className="action-icon">
-                                                                    <a href="/" className="m-r-15 crm-action-edit text-muted"><i className="icofont icofont-ui-edit" /></a>
-                                                                    <a href="/" className="crm-action-delete text-muted"><i className="icofont icofont-delete-alt" /></a>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>
-                                                                    <img src="assets/images/avatar-4.png" className="d-inline-block img-circle " alt="tbl" />
-                                                                </td>
-                                                                <td className="pro-name">
-                                                                    Empresa ABC
-                                            </td>
-                                                                <td>Jorge Torres</td>
-                                                                <td>Sortino@domain.com</td>
-                                                                <td>+447662552550</td>
-                                                                <td>+447662552550</td>
-                                                                <td>empresaABC.org</td>
-                                                                <td>Tegucigalpa</td>
-                                                                <td className="action-icon">
-                                                                    <a href="/" className="m-r-15 crm-action-edit text-muted"><i className="icofont icofont-ui-edit" /></a>
-                                                                    <a href="/" className="crm-action-delete text-muted"><i className="icofont icofont-delete-alt" /></a>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>
-                                                                    <img src="assets/images/avatar-1.png" className="d-inline-block img-circle " alt="tbl" />
-                                                                </td>
-                                                                <td className="pro-name">
-                                                                    Empresa ABC
-                                            </td>
-                                                                <td>Jorge Torres</td>
-                                                                <td>Sortino@domain.com</td>
-                                                                <td>+447662552550</td>
-                                                                <td>+447662552550</td>
-                                                                <td>empresaABC.org</td>
-                                                                <td>Tegucigalpa</td>
-                                                                <td className="action-icon">
-                                                                    <a href="/" className="m-r-15 crm-action-edit text-muted"><i className="icofont icofont-ui-edit" /></a>
-                                                                    <a href="/" className="crm-action-delete text-muted"><i className="icofont icofont-delete-alt" /></a>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>
-                                                                    <img src="assets/images/avatar-2.png" className="d-inline-block img-circle " alt="tbl" />
-                                                                </td>
-                                                                <td className="pro-name">
-                                                                    Empresa ABC
-                                            </td>
-                                                                <td>Jorge Torres</td>
-                                                                <td>Sortino@domain.com</td>
-                                                                <td>+447662552550</td>
-                                                                <td>+447662552550</td>
-                                                                <td>empresaABC.org</td>
-                                                                <td>Tegucigalpa</td>
-                                                                <td className="action-icon">
-                                                                    <a href="/" className="m-r-15 crm-action-edit text-muted"><i className="icofont icofont-ui-edit" /></a>
-                                                                    <a href="/" className="crm-action-delete text-muted"><i className="icofont icofont-delete-alt" /></a>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>
-                                                                    <img src="assets/images/avatar-3.png" className="d-inline-block img-circle " alt="tbl" />
-                                                                </td>
-                                                                <td className="pro-name">
-                                                                    Empresa ABC
-                                            </td>
-                                                                <td>Jorge Torres</td>
-                                                                <td>Sortino@domain.com</td>
-                                                                <td>+447662552550</td>
-                                                                <td>+447662552550</td>
-                                                                <td>empresaABC.org</td>
-                                                                <td>Tegucigalpa</td>
-                                                                <td className="action-icon">
-                                                                    <a href="/" className="m-r-15 crm-action-edit text-muted"><i className="icofont icofont-ui-edit" /></a>
-                                                                    <a href="/" className="crm-action-delete text-muted"><i className="icofont icofont-delete-alt" /></a>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>
-                                                                    <img src="assets/images/avatar-4.png" className="d-inline-block img-circle " alt="tbl" />
-                                                                </td>
-                                                                <td className="pro-name">
-                                                                    Empresa ABC
-                                            </td>
-                                                                <td>Jorge Torres</td>
-                                                                <td>Sortino@domain.com</td>
-                                                                <td>+447662552550</td>
-                                                                <td>+447662552550</td>
-                                                                <td>empresaABC.org</td>
-                                                                <td>Tegucigalpa</td>
-                                                                <td className="action-icon">
-                                                                    <a href="/" className="m-r-15 crm-action-edit text-muted"><i className="icofont icofont-ui-edit" /></a>
-                                                                    <a href="/" className="crm-action-delete text-muted"><i className="icofont icofont-delete-alt" /></a>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>
-                                                                    <img src="assets/images/avatar-5.png" className="d-inline-block img-circle " alt="tbl" />
-                                                                </td>
-                                                                <td className="pro-name">
-                                                                    Empresa ABC
-                                            </td>
-                                                                <td>Jorge Torres</td>
-                                                                <td>Sortino@domain.com</td>
-                                                                <td>+447662552550</td>
-                                                                <td>+447662552550</td>
-                                                                <td>empresaABC.org</td>
-                                                                <td>Tegucigalpa</td>
-                                                                <td className="action-icon">
-                                                                    <a href="/" className="m-r-15 crm-action-edit text-muted"><i className="icofont icofont-ui-edit" /></a>
-                                                                    <a href="/" className="crm-action-delete text-muted"><i className="icofont icofont-delete-alt" /></a>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>
-                                                                    <img src="assets/images/avatar-1.png" className="d-inline-block img-circle " alt="tbl" />
-                                                                </td>
-                                                                <td className="pro-name">
-                                                                    Empresa ABC
-                                            </td>
-                                                                <td>Jorge Torres</td>
-                                                                <td>Sortino@domain.com</td>
-                                                                <td>+447662552550</td>
-                                                                <td>+447662552550</td>
-                                                                <td>empresaABC.org</td>
-                                                                <td>Tegucigalpa</td>
-                                                                <td className="action-icon">
-                                                                    <a href="/" className="m-r-15 crm-action-edit text-muted"><i className="icofont icofont-ui-edit" /></a>
-                                                                    <a href="/" className="crm-action-delete text-muted"><i className="icofont icofont-delete-alt" /></a>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>
-                                                                    <img src="assets/images/avatar-2.png" className="d-inline-block img-circle " alt="tbl" />
-                                                                </td>
-                                                                <td className="pro-name">
-                                                                    Empresa ABC
-                                            </td>
-                                                                <td>Jorge Torres</td>
-                                                                <td>Sortino@domain.com</td>
-                                                                <td>+447662552550</td>
-                                                                <td>+447662552550</td>
-                                                                <td>empresaABC.org</td>
-                                                                <td>Tegucigalpa</td>
-                                                                <td className="action-icon">
-                                                                    <a href="/" className="m-r-15 crm-action-edit text-muted"><i className="icofont icofont-ui-edit" /></a>
-                                                                    <a href="/" className="crm-action-delete text-muted"><i className="icofont icofont-delete-alt" /></a>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>
-                                                                    <img src="assets/images/avatar-3.png" className="d-inline-block img-circle " alt="tbl" />
-                                                                </td>
-                                                                <td className="pro-name">
-                                                                    Empresa ABC
-                                            </td>
-                                                                <td>Jorge Torres</td>
-                                                                <td>Sortino@domain.com</td>
-                                                                <td>+447662552550</td>
-                                                                <td>+447662552550</td>
-                                                                <td>empresaABC.org</td>
-                                                                <td>Tegucigalpa</td>
-                                                                <td className="action-icon">
-                                                                    <a href="/" className="m-r-15 crm-action-edit text-muted"><i className="icofont icofont-ui-edit" /></a>
-                                                                    <a href="/" className="crm-action-delete text-muted"><i className="icofont icofont-delete-alt" /></a>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>
-                                                                    <img src="assets/images/avatar-4.png" className="d-inline-block img-circle " alt="tbl" />
-                                                                </td>
-                                                                <td className="pro-name">
-                                                                    Empresa ABC
-                                            </td>
-                                                                <td>Jorge Torres</td>
-                                                                <td>Sortino@domain.com</td>
-                                                                <td>+447662552550</td>
-                                                                <td>+447662552550</td>
-                                                                <td>empresaABC.org</td>
-                                                                <td>Tegucigalpa</td>
-                                                                <td className="action-icon">
-                                                                    <a href="/" className="m-r-15 crm-action-edit text-muted"><i className="icofont icofont-ui-edit" /></a>
-                                                                    <a href="/" className="crm-action-delete text-muted"><i className="icofont icofont-delete-alt" /></a>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>
-                                                                    <img src="assets/images/avatar-5.png" className="d-inline-block img-circle " alt="tbl" />
-                                                                </td>
-                                                                <td className="pro-name">
-                                                                    Empresa ABC
-                                            </td>
-                                                                <td>Jorge Torres</td>
-                                                                <td>Sortino@domain.com</td>
-                                                                <td>+447662552550</td>
-                                                                <td>+447662552550</td>
-                                                                <td>empresaABC.org</td>
-                                                                <td>Tegucigalpa</td>
-                                                                <td className="action-icon">
-                                                                    <a href="/" className="m-r-15 crm-action-edit text-muted"><i className="icofont icofont-ui-edit" /></a>
-                                                                    <a href="/" className="crm-action-delete text-muted"><i className="icofont icofont-delete-alt" /></a>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>
-                                                                    <img src="assets/images/avatar-1.png" className="d-inline-block img-circle " alt="tbl" />
-                                                                </td>
-                                                                <td className="pro-name">
-                                                                    Empresa ABC
-                                            </td>
-                                                                <td>Jorge Torres</td>
-                                                                <td>Sortino@domain.com</td>
-                                                                <td>+447662552550</td>
-                                                                <td>+447662552550</td>
-                                                                <td>empresaABC.org</td>
-                                                                <td>Tegucigalpa</td>
-                                                                <td className="action-icon">
-                                                                    <a href="/" className="m-r-15 crm-action-edit text-muted"><i className="icofont icofont-ui-edit" /></a>
-                                                                    <a href="/" className="crm-action-delete text-muted"><i className="icofont icofont-delete-alt" /></a>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>
-                                                                    <img src="assets/images/avatar-2.png" className="d-inline-block img-circle " alt="tbl" />
-                                                                </td>
-                                                                <td className="pro-name">
-                                                                    Empresa ABC
-                                            </td>
-                                                                <td>Jorge Torres</td>
-                                                                <td>Sortino@domain.com</td>
-                                                                <td>+447662552550</td>
-                                                                <td>+447662552550</td>
-                                                                <td>empresaABC.org</td>
-                                                                <td>Tegucigalpa</td>
-                                                                <td className="action-icon">
-                                                                    <a href="/" className="m-r-15 crm-action-edit text-muted"><i className="icofont icofont-ui-edit" /></a>
-                                                                    <a href="/" className="crm-action-delete text-muted"><i className="icofont icofont-delete-alt" /></a>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>
-                                                                    <img src="assets/images/avatar-3.png" className="d-inline-block img-circle " alt="tbl" />
-                                                                </td>
-                                                                <td className="pro-name">
-                                                                    Empresa ABC
-                                            </td>
-                                                                <td>Jorge Torres</td>
-                                                                <td>Sortino@domain.com</td>
-                                                                <td>+447662552550</td>
-                                                                <td>+447662552550</td>
-                                                                <td>empresaABC.org</td>
-                                                                <td>Tegucigalpa</td>
-                                                                <td className="action-icon">
-                                                                    <a href="/" className="m-r-15 crm-action-edit text-muted"><i className="icofont icofont-ui-edit" /></a>
-                                                                    <a href="/" className="crm-action-delete text-muted"><i className="icofont icofont-delete-alt" /></a>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>
-                                                                    <img src="assets/images/avatar-5.png" className="d-inline-block img-circle " alt="tbl" />
-                                                                </td>
-                                                                <td className="pro-name">
-                                                                    Empresa ABC
-                                            </td>
-                                                                <td>Jorge Torres</td>
-                                                                <td>Sortino@domain.com</td>
-                                                                <td>+447662552550</td>
-                                                                <td>+447662552550</td>
-                                                                <td>empresaABC.org</td>
-                                                                <td>Tegucigalpa</td>
-                                                                <td className="action-icon">
-                                                                    <a href="/" className="m-r-15 crm-action-edit text-muted"><i className="icofont icofont-ui-edit" /></a>
-                                                                    <a href="/" className="crm-action-delete text-muted"><i className="icofont icofont-delete-alt" /></a>
-                                                                </td>
-                                                            </tr>
-                                                        </tbody>
-                                                        <tfoot>
-                                                            <tr>
-                                                                <th>
-                                                                </th>
-                                                                <th>Name</th>
-                                                                <th>Email</th>
-                                                                <th>Position</th>
-                                                                <th>Office</th>
-                                                                <th>Age</th>
-                                                                <th>Phone No</th>
-                                                                <th>Start Date</th>
-                                                                <th>Action</th>
-                                                            </tr>
-                                                        </tfoot>
-                                                    </table>
+                                    <div className="row">
+                                        <div className="col-sm-12">
+                                            {/* Product list card start */}
+                                            <div className="card product-add-modal">
+                                                <div className="card-header">
+                                                    <h5>Catálogo de Equipos</h5>
+
+
+                                                    <div className="product-add-modal">
+                                                        {/* <button type="button" className="btn btn-success waves-effect waves-light f-right d-inline-block md-trigger" data-toggle="modal" data-target="#modal-13"> <i className="icofont icofont-plus m-r-5" /> Nuevo Producto
+                                                        </button>   */}
+                                                        <Link to={'/teams_new'} > <button type="button" className="btn btn-success waves-effect waves-light f-right d-inline-block md-trigger" > <i className="icofont icofont-plus m-r-5" /> Nuevo Equipo
+                                                            </button>
+                                                        </Link>
+                                                    </div>
+                                                    <div>
+                                                        {/* Modal static*/}
+
+                                                    </div>
+
                                                 </div>
-                                            </div>
-                                        </div>
-                                        {/* Add Contact Start Model */}
-                                        <div className="md-modal md-effect-13 addcontact" id="modal-13">
-                                            <div className="md-content">
-                                                <h3 className="f-26">Add Contact</h3>
-                                                <div>
-                                                    <div className="input-group">
-                                                        <span className="input-group-addon" id="basic-addon1"><i className="icofont icofont-user" /></span>
-                                                        <input type="text" className="form-control" placeholder="Full Name" />
-                                                    </div>
-                                                    <div className="input-group">
-                                                        <span className="input-group-addon" id="basic-addon2"><i className="icofont icofont-user" /></span>
-                                                        <input type="text" className="form-control" placeholder="Email" />
-                                                    </div>
-                                                    <div className="input-group">
-                                                        <span className="input-group-addon" id="basic-addon3"><i className="icofont icofont-user" /></span>
-                                                        <input type="text" className="form-control" placeholder="Position" />
-                                                    </div>
-                                                    <div className="input-group">
-                                                        <span className="input-group-addon" id="basic-addon4"><i className="icofont icofont-user" /></span>
-                                                        <input type="text" className="form-control" placeholder="Office" />
-                                                    </div>
-                                                    <div className="input-group">
-                                                        <span className="input-group-addon" id="basic-addon5"><i className="icofont icofont-user" /></span>
-                                                        <input type="number" className="form-control" placeholder="Age" />
-                                                    </div>
-                                                    <div className="input-group">
-                                                        <span className="input-group-addon" id="basic-addon6"><i className="icofont icofont-user" /></span>
-                                                        <input type="text" className="form-control" placeholder="Phone Number" />
-                                                    </div>
-                                                    <div className="input-group">
-                                                        <span className="input-group-addon" id="basic-addon7"><i className="icofont icofont-user" /></span>
-                                                        <input id="dropper-default" className="form-control" type="text" placeholder="Select Your Birth Date" readOnly="readonly" />
-                                                    </div>
-                                                    <div className="text-center">
-                                                        <button type="button" className="btn btn-primary waves-effect m-r-20 f-w-600 d-inline-block">Save</button>
-                                                        <button type="button" className="btn btn-primary waves-effect m-r-20 f-w-600 md-close d-inline-block">Close</button>
+                                                <div className="card-block">
+                                                    <div className="table-responsive">
+                                                        <div className="table-content">
+                                                            <div className="dt-responsive table-responsive">
+                                                                <table id="e-product-list" className="table table-striped table-bordered nowrap">
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <th>Imagen</th>
+                                                                            <th>Nombre</th>
+                                                                            <th>Descripción</th>
+                                                                            {/* <th>Balance Actual</th> */}
+                                                                            <th>Ver Miembros</th>
+                                                                            <th>Eliminar</th>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                        {this.state.teams.map(team =>
+                                                                            <tr key={team.id}>
+                                                                                <td className="pro-list-img">
+                                                                                    <img width="80px" src={"assets/images/teams/team.jpg"} className="img-fluid" alt="tbl" />
+                                                                                </td>
+                                                                                <td>{team.name}</td>
+                                                                                <td>{team.description}</td>
+                                                                                {/* <td>{this.formatMoney(team  .actualbalance)}</td> */}
+                                                                                <td> <Link to={'/teammembers/' + team.id} ><button type="button" className="btn btn-primary waves-effect" >Ver Miembros</button></Link></td>
+                                                                                <td><button type="button" data-toggle="modal" data-target={"#modal_delete_" + team.id} className="btn btn-danger waves-effect" >Eliminar</button></td>
+
+                                                                                {/* INICIO Modal DELETE*/}
+
+                                                                                < div
+                                                                                    className="modal fade"
+                                                                                    id={"modal_delete_" + team.id}
+                                                                                    tabIndex={- 1}
+                                                                                    role="dialog"
+                                                                                >
+                                                                                    <div
+                                                                                        className="modal-dialog modal-lg"
+                                                                                        role="document"
+                                                                                    >
+                                                                                        <div className="modal-content">
+                                                                                            <div className="modal-header">
+                                                                                                <h4 className="modal-title">
+                                                                                                    Eliminar Equipo de Trabajo:{" "}
+                                                                                                    {team.name}{" "}
+                                                                                                </h4>
+                                                                                                <button
+                                                                                                    type="button"
+                                                                                                    className="close"
+                                                                                                    data-dismiss="modal"
+                                                                                                    aria-label="Close"
+                                                                                                >
+                                                                                                    <span aria-hidden="true">×</span>
+                                                                                                </button>
+                                                                                            </div>
+                                                                                            <div className="modal-body">
+                                                                                                <form
+                                                                                                    onSubmit={() =>
+                                                                                                        this.onSubmitDelete(
+                                                                                                            team.id
+                                                                                                        )
+                                                                                                    }
+                                                                                                >
+                                                                                                    <div
+                                                                                                        style={{
+                                                                                                            width: "100%",
+                                                                                                            textAlign: "center",
+                                                                                                            display: "inline-block",
+                                                                                                        }}
+                                                                                                    >
+                                                                                                        <button
+                                                                                                            type="submit"
+                                                                                                            className="btn btn-danger waves-effect "
+                                                                                                        >
+                                                                                                            Eliminar Este Equipo de Trabajo
+                </button>
+                                                                                                    </div>
+                                                                                                </form>
+
+                                                                                                <div className="modal-footer">
+                                                                                                    <button
+                                                                                                        type="button"
+                                                                                                        className="btn btn-default waves-effect "
+                                                                                                        data-dismiss="modal"
+                                                                                                    >
+                                                                                                        Cerrar
+                </button>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+
+                                                                                { /*FIN Modal DELETE*/}
+
+                                                                            </tr>
+
+
+                                                                        )}
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
+
                                             </div>
+                                            {/* Product list card end */}
                                         </div>
-                                        <div className="md-overlay" />
-                                        {/* Add Contact Ends Model*/}
                                     </div>
-                                    {/* Container-fluid ends */}
                                 </div>
-                                {/* Page-body end */}
+                                {/* Page body end */}
                             </div>
                         </div>
-                        {/* Warning Section Starts */}
+                        {/* Main-body end */}
                         <div id="styleSelector">
                         </div>
                     </div>
                 </div>
 
-            </div>
+            </div >
         )
     }
 }

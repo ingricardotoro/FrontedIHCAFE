@@ -22,7 +22,7 @@ export default class Sidebar extends Component {
                             </li>
 
                             <li className="pcoded-hasmenu">
-                                <Link to="/" >
+                                <Link to="#" >
                                     <span className="pcoded-micon"><i className="ti-pencil-alt" /></span>
                                     <span className="pcoded-mtext" data-i18n="nav.navigate.main">ATLAS</span>
                                     <span className="pcoded-mcaret" />
@@ -50,7 +50,7 @@ export default class Sidebar extends Component {
                             </li>
 
                             <li className="pcoded-hasmenu">
-                                <Link to="/" >
+                                <Link to="#" >
                                     <span className="pcoded-micon"><i className="ti-pencil-alt" /></span>
                                     <span className="pcoded-mtext" data-i18n="nav.navigate.main">Presupuestos</span>
                                     <span className="pcoded-mcaret" />
@@ -106,7 +106,7 @@ export default class Sidebar extends Component {
                             </li>
 
                             <li className="pcoded-hasmenu">
-                                <Link to="/">
+                                <Link to="#">
                                     <span className="pcoded-micon"><i className="ti-layers" /></span>
                                     <span className="pcoded-mtext" data-i18n="nav.navigate.main">Categorias</span>
                                     <span className="pcoded-mcaret" />
@@ -130,7 +130,7 @@ export default class Sidebar extends Component {
                             </li>
 
                             <li className="pcoded-hasmenu">
-                                <Link to="/">
+                                <Link to="#">
                                     <span className="pcoded-micon"><i className="ti-bar-chart-alt" /></span>
                                     <span className="pcoded-mtext" data-i18n="nav.navigate.main">Reportes</span>
                                     <span className="pcoded-mcaret" />
@@ -152,7 +152,7 @@ export default class Sidebar extends Component {
                         <ul className="pcoded-item pcoded-left-item">
 
                             <li className="pcoded-hasmenu">
-                                <Link to="/">
+                                <Link to="#">
                                     <span className="pcoded-micon"><i className="ti-book" /></span>
                                     <span className="pcoded-mtext" data-i18n="nav.navigate.main">Cuentas</span>
                                     <span className="pcoded-mcaret" />
@@ -169,23 +169,23 @@ export default class Sidebar extends Component {
                             </li>
 
                             <li className="pcoded-hasmenu">
-                                <Link to="/">
+                                <Link to="#">
                                     <span className="pcoded-micon"><i className="ti-money" /></span>
                                     <span className="pcoded-mtext" data-i18n="nav.navigate.main">Monedas</span>
                                     <span className="pcoded-mcaret" />
                                 </Link>
                                 <ul className="pcoded-submenu">
                                     <li className=" ">
-                                        <a href="navbar-light.html">
+                                        <Link to={'/coins'}>
                                             <span className="pcoded-micon"><i className="ti-angle-right" /></span>
-                                            <span className="pcoded-mtext" data-i18n="nav.navigate.navbar">Navbar</span>
+                                            <span className="pcoded-mtext" data-i18n="nav.navigate.navbar">Ver monedas</span>
                                             <span className="pcoded-mcaret" />
-                                        </a>
+                                        </Link>
                                     </li>
                                 </ul>
                             </li>
                             <li className="pcoded-hasmenu">
-                                <Link to="/">
+                                <Link to="#">
                                     <span className="pcoded-micon"><i className="ti-reload" /></span>
                                     <span className="pcoded-mtext" data-i18n="nav.navigate.main">Rembolsos</span>
                                     <span className="pcoded-mcaret" />
@@ -208,7 +208,7 @@ export default class Sidebar extends Component {
                         <ul className="pcoded-item pcoded-left-item">
 
                             <li className="pcoded-hasmenu">
-                                <Link to="/">
+                                <Link to="#">
                                     <span className="pcoded-micon"><i className="ti-sharethis" /></span>
                                     <span className="pcoded-mtext" data-i18n="nav.navigate.main">Equipos</span>
                                     <span className="pcoded-mcaret" />
@@ -232,7 +232,7 @@ export default class Sidebar extends Component {
                             </li>
 
                             <li className="pcoded-hasmenu">
-                                <Link to="/">
+                                <Link to="#">
                                     <span className="pcoded-micon"><i className="ti-server" /></span>
                                     <span className="pcoded-mtext" data-i18n="nav.navigate.main">Proveedores</span>
                                     <span className="pcoded-mcaret" />
@@ -256,7 +256,7 @@ export default class Sidebar extends Component {
                             </li>
 
                             <li className="pcoded-hasmenu">
-                                <Link to="/">
+                                <Link to="#">
                                     <span className="pcoded-micon"><i className="ti-user" /></span>
                                     <span className="pcoded-mtext" data-i18n="nav.navigate.main">Usarios</span>
                                     <span className="pcoded-mcaret" />

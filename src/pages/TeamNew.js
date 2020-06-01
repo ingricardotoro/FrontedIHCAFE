@@ -1,20 +1,14 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
-import jwt_decode from 'jwt-decode'
 
-export default class AccountNew extends Component {
+export default class TeamNew extends Component {
 
     constructor() {
         super();
         this.state = {
-
             description: "",
-            name: "",
-            coin: 0,
-            coins: [],
-            person_id: 0
-
+            name: ""
         }
     }
 
@@ -23,32 +17,18 @@ export default class AccountNew extends Component {
         if (!localStorage.usertoken) {
             window.location.href = "/"
         }
-
-        const token = localStorage.usertoken
-        const decode = jwt_decode(token)
-        this.setState({
-            person_id: decode.id
-        })
-
-        const res = await axios.get('http://167.99.15.83:4000/api/coins/');
-        this.setState({ coins: res.data.coins });
-
     }
 
     onChangeName = (e) => { this.setState({ name: e.target.value }) }
     onChangeDescription = (e) => { this.setState({ description: e.target.value }) }
-    onChangeCoin = (e) => { this.setState({ coin: e.target.value }) }
-
 
     onSubmit = async e => {
         e.preventDefault();
-        await axios.post('http://167.99.15.83:4000/api/accounts', {
+        await axios.post('http://167.99.15.83:4000/api/teams', {
             description: this.state.description,
-            name: this.state.name,
-            coin: this.state.coin,
-            person_id: this.state.person_id
+            name: this.state.name
         })
-        window.location.href = '/accounts';
+        window.location.href = '/teams_list';
     }
 
     render() {
@@ -60,8 +40,8 @@ export default class AccountNew extends Component {
                         <div className="page-wrapper">
                             <div className="page-header page-wrapper mt-3 ">
                                 <div className="page-header-title">
-                                    <h4>Crear una nueva cuenta Monetaria</h4>
-                                    <span>Creación de Nuevas Cuentas Monetarias</span>
+                                    <h4>Crear una nuevo Equipo de Trabajo</h4>
+                                    <span>Creación de Nuevos Equipos de Trabajo</span>
                                 </div>
                                 <div className="page-header-breadcrumb">
                                     <ul className="breadcrumb-title">
@@ -70,9 +50,9 @@ export default class AccountNew extends Component {
                                                 <i className="icofont icofont-home" />
                                             </a>
                                         </li>
-                                        <li className="breadcrumb-item"><Link to={'/accounts'} >Cuentas</Link>
+                                        <li className="breadcrumb-item"><Link to={'/teams_list'} >Equipos</Link>
                                         </li>
-                                        <li className="breadcrumb-item">Crear Nueva Cuenta
+                                        <li className="breadcrumb-item">Crear Nuevo Equipo
                                 </li>
                                     </ul>
                                 </div>
@@ -102,36 +82,22 @@ export default class AccountNew extends Component {
                                                             <div className="form-group row">
                                                                 <label className="col-sm-2 col-form-label">Nombre de la Cuenta</label>
                                                                 <div className="col-sm-10">
-                                                                    <input onChange={this.onChangeName} required type="text" className="form-control" placeholder="Ingrese Nombre de cuenta" />
+                                                                    <input onChange={this.onChangeName} required type="text" className="form-control" placeholder="Ingrese Nombre de Equipo" />
                                                                 </div>
                                                             </div>
 
                                                             <div className="form-group row">
                                                                 <label className="col-sm-2 col-form-label">Descripción de la Cuenta</label>
                                                                 <div className="col-sm-10">
-                                                                    <textarea onChange={this.onChangeDescription} rows={5} cols={5} className="form-control" placeholder="Descripción de la cuenta" defaultValue={""} />
-                                                                </div>
-                                                            </div>
-
-                                                            <div className="form-group row">
-                                                                <label className="col-sm-2 col-form-label">Moneda a utilizar</label>
-                                                                <div className="col-sm-10">
-                                                                    <select onChange={this.onChangeCoin} name="select" className="form-control">
-                                                                        <option value="#">Seleccione Moneda</option>
-                                                                        {
-                                                                            this.state.coins.map(coin =>
-                                                                                <option key={coin.id} value={coin.id}>{coin.name} </option>
-                                                                            )
-                                                                        }
-                                                                    </select>
+                                                                    <textarea onChange={this.onChangeDescription} rows={5} cols={5} className="form-control" placeholder="Descripción del Equipo" defaultValue={""} />
                                                                 </div>
                                                             </div>
 
                                                             <div className="row">
-                                                                <label className="col-sm-4 col-lg-2 col-form-label">Guardar Presupuesto</label>
+                                                                <label className="col-sm-4 col-lg-2 col-form-label">Creación de Equipo</label>
                                                                 <div className="col-sm-8 col-lg-10">
                                                                     <div className="input-group">
-                                                                        <button type="submit" className="btn btn-lg btn-success" >Crear Cuenta </button>
+                                                                        <button type="submit" className="btn btn-lg btn-success" >Crear Equipo </button>
                                                                     </div>
 
                                                                 </div>

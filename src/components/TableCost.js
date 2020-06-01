@@ -1024,7 +1024,7 @@ export default class TableCost extends Component {
                         <option value="#">Seleccione Cuenta de Origen</option>
                         {this.state.cuentas.map((cuenta) => (
                           <option value={cuenta.id}>
-                            ({cuenta.coin}-{cuenta.actualbalance})-{cuenta.name}{" "}
+                            ({cuenta.coin.name}-{cuenta.name}{" "}
                           </option>
                         ))}
                       </select>

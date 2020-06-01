@@ -2,13 +2,12 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
 
-export default class Account_list extends Component {
-
+export default class Coinlist extends Component {
 
     constructor() {
         super();
         this.state = {
-            accounts: [],
+            coins: [],
         }
     }
 
@@ -18,13 +17,13 @@ export default class Account_list extends Component {
             window.location.href = "/"
         }
 
-        const res = await axios.get('http://167.99.15.83:4000/api/accounts/');
-        this.setState({ accounts: res.data.cuentas });
+        const res = await axios.get('http://167.99.15.83:4000/api/coins/');
+        this.setState({ coins: res.data.coins });
     }
 
     onSubmitDelete = async (id) => {
         const res_p = await axios.post(
-            "http://167.99.15.83:4000/api/accounts/delete/" + id
+            "http://167.99.15.83:4000/api/coins/delete/" + id
         );
         window.location.href = "/accounts";
 
@@ -44,7 +43,7 @@ export default class Account_list extends Component {
                                 {/* Page header start */}
                                 <div className="page-header page-wrapper">
                                     <div className="page-header-title">
-                                        <h4>Gestión de Cuentas</h4>
+                                        <h4>Gestión de Monedas</h4>
                                     </div>
 
                                 </div>
@@ -56,13 +55,13 @@ export default class Account_list extends Component {
                                             {/* Product list card start */}
                                             <div className="card product-add-modal">
                                                 <div className="card-header">
-                                                    <h5>Catálogo de Cuentas</h5>
+                                                    <h5>Catalóogo de Monedas</h5>
 
 
                                                     <div className="product-add-modal">
                                                         {/* <button type="button" className="btn btn-success waves-effect waves-light f-right d-inline-block md-trigger" data-toggle="modal" data-target="#modal-13"> <i className="icofont icofont-plus m-r-5" /> Nuevo Producto
                                                         </button>   */}
-                                                        <Link to={'/account_new'} > <button type="button" className="btn btn-success waves-effect waves-light f-right d-inline-block md-trigger" > <i className="icofont icofont-plus m-r-5" /> Nueva Cuenta
+                                                        <Link to={'/coin_new'} > <button type="button" className="btn btn-success waves-effect waves-light f-right d-inline-block md-trigger" > <i className="icofont icofont-plus m-r-5" /> Nueva Moneda
                                                             </button>
                                                         </Link>
                                                     </div>
@@ -81,33 +80,29 @@ export default class Account_list extends Component {
                                                                         <tr>
                                                                             <th>Imagen</th>
                                                                             <th>Nombre</th>
-                                                                            <th>Moneda</th>
+                                                                            <th>Code</th>
                                                                             <th>Descripción</th>
-                                                                            {/* <th>Balance Actual</th> */}
-                                                                            <th>Usuario</th>
-                                                                            {/* <th>Historial</th> */}
+                                                                            <th>Valor en Fecha</th>
                                                                             <th>Eliminar</th>
                                                                         </tr>
                                                                     </thead>
                                                                     <tbody>
-                                                                        {this.state.accounts.map(account =>
-                                                                            <tr key={account.id}>
+                                                                        {this.state.coins.map(coin =>
+                                                                            <tr key={coin.id}>
                                                                                 <td className="pro-list-img">
-                                                                                    <img width="80px" src={"assets/images/accounts/bank.jpg"} className="img-fluid" alt="tbl" />
+                                                                                    <img width="80px" src={"assets/images/moneda/moneda2.jpg"} className="img-fluid" alt="tbl" />
                                                                                 </td>
-                                                                                <td>{account.name}</td>
-                                                                                <td>{account.coin.name}</td>
-                                                                                <td>{account.description}</td>
-                                                                                {/* <td>{this.formatMoney(account.actualbalance)}</td> */}
-                                                                                <td>{account.user.name} {account.user.lastname} </td>
-                                                                                {/*  <td> <Link to={'/account/' + account.id} ><button type="button" className="btn btn-primary waves-effect" >Ver Historial</button></Link></td>*/}
-                                                                                <td><button type="button" data-toggle="modal" data-target={"#modal_delete_" + account.id} className="btn btn-danger waves-effect" >Eliminar</button></td>
+                                                                                <td>{coin.name}</td>
+                                                                                <td>{coin.code}</td>
+                                                                                <td>{coin.description}</td>
+                                                                                <td> <Link to={'/conversions/' + coin.id} ><button type="button" className="btn btn-primary waves-effect" >Ver Valores</button></Link></td>
+                                                                                <td><button type="button" data-toggle="modal" data-target={"#modal_delete_" + coin.id} className="btn btn-danger waves-effect" >Eliminar</button></td>
 
                                                                                 {/* INICIO Modal DELETE*/}
 
                                                                                 < div
                                                                                     className="modal fade"
-                                                                                    id={"modal_delete_" + account.id}
+                                                                                    id={"modal_delete_" + coin.id}
                                                                                     tabIndex={- 1}
                                                                                     role="dialog"
                                                                                 >
@@ -118,8 +113,8 @@ export default class Account_list extends Component {
                                                                                         <div className="modal-content">
                                                                                             <div className="modal-header">
                                                                                                 <h4 className="modal-title">
-                                                                                                    Eliminar Cuenta Monetaria:{" "}
-                                                                                                    {account.name}{" "}
+                                                                                                    Eliminar Modeda:{" "}
+                                                                                                    {coin.name}{" "}
                                                                                                 </h4>
                                                                                                 <button
                                                                                                     type="button"
@@ -134,7 +129,7 @@ export default class Account_list extends Component {
                                                                                                 <form
                                                                                                     onSubmit={() =>
                                                                                                         this.onSubmitDelete(
-                                                                                                            account.id
+                                                                                                            coin.id
                                                                                                         )
                                                                                                     }
                                                                                                 >
@@ -149,7 +144,7 @@ export default class Account_list extends Component {
                                                                                                             type="submit"
                                                                                                             className="btn btn-danger waves-effect "
                                                                                                         >
-                                                                                                            Eliminar Esta Cuenta Monetaria
+                                                                                                            Eliminar Esta Moneda
                 </button>
                                                                                                     </div>
                                                                                                 </form>
