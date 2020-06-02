@@ -245,13 +245,6 @@ export default class Sidebar extends Component {
                                             <span className="pcoded-mcaret" />
                                         </Link>
                                     </li>
-                                    <li className=" ">
-                                        <Link to={'/suppliers_list'} >
-                                            <span className="pcoded-micon"><i className="ti-angle-right" /></span>
-                                            <span className="pcoded-mtext" data-i18n="nav.navigate.navbar">Nuevo Proveedore</span>
-                                            <span className="pcoded-mcaret" />
-                                        </Link>
-                                    </li>
                                 </ul>
                             </li>
 
@@ -266,13 +259,6 @@ export default class Sidebar extends Component {
                                         <Link to={'/users_list'} >
                                             <span className="pcoded-micon"><i className="ti-angle-right" /></span>
                                             <span className="pcoded-mtext" data-i18n="nav.navigate.navbar">Ver Usuarios</span>
-                                            <span className="pcoded-mcaret" />
-                                        </Link>
-                                    </li>
-                                    <li className=" ">
-                                        <Link to={'/suppliers_list'} >
-                                            <span className="pcoded-micon"><i className="ti-angle-right" /></span>
-                                            <span className="pcoded-mtext" data-i18n="nav.navigate.navbar">Nuevo Usuario</span>
                                             <span className="pcoded-mcaret" />
                                         </Link>
                                     </li>
