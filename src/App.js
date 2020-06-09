@@ -27,7 +27,8 @@ import Account_new from "./pages/AccountNew";
 import AccountDashboard from "./pages/AccountDashboard";
 
 import Reports from "./pages/Reports";
-import Report_View from "./pages/Report_View";
+import ReportsUsers from './pages/reports/ReportsUsers'
+import ReportAtlasByProjectid from './pages/reports/ReportAtlasByProjectid'
 
 import Coinlist from './pages/Coinlist'
 import CoinNew from './pages/CoinNew'
@@ -76,11 +77,8 @@ function App() {
         <Route path="/account/:id" exact component={AccountDashboard} />
 
         <Route path="/reports" exact component={Reports} />
-        <Route
-          path="/report_view/:bgt_id/:proj_id/:trim"
-          exact
-          component={Report_View}
-        />
+        <Route path="/reports/excel_users" exact component={ReportsUsers} />
+        <Route path="/reports/atlas_by_project_id/:id/:coin_id" exact component={ReportAtlasByProjectid} />
 
       </Router>
     </div>

@@ -48,9 +48,18 @@ export default class Users_list extends Component {
             username: this.state.username,
             password: this.state.password
         });
-
         window.location.href = "/users_list";
 
+    };
+
+    onSubmitDelete = async (id) => {
+        const res_p = await axios.post(
+            "http://167.99.15.83:4000/api/users/delete/" + id
+        );
+        window.location.href = "/users_list";
+
+        if (res_p) {
+        }
     };
 
     render() {
@@ -121,9 +130,69 @@ export default class Users_list extends Component {
                                                                     <td>{user.createdAt}</td>
 
                                                                     <td className="action-icon">
-                                                                        <a href="/" className="m-r-15 crm-action-edit text-muted"><i className="icofont icofont-ui-edit" /></a>
-                                                                        <a href="/" className="crm-action-delete text-muted"><i className="icofont icofont-delete-alt" /></a>
+                                                                        <a href="#" className="m-r-15 crm-action-edit text-muted"><i className="icofont icofont-ui-edit" /></a>
+                                                                        <a href="#" data-toggle="modal" data-target={"#modal_delete_" + user.id} className="crm-action-delete text-muted"><i className="icofont icofont-delete-alt" /></a>
                                                                     </td>
+
+                                                                    {/* INICIO Modal DELETE*/}
+                                                                    < div
+                                                                        className="modal fade"
+                                                                        id={"modal_delete_" + user.id}
+                                                                        tabIndex={- 1}
+                                                                        role="dialog"
+                                                                    >
+                                                                        <div
+                                                                            className="modal-dialog modal-lg"
+                                                                            role="document"
+                                                                        >
+                                                                            <div className="modal-content">
+                                                                                <div className="modal-header">
+                                                                                    <h4 className="modal-title">
+                                                                                        Eliminar Usuario:{" "}
+                                                                                        ({user.name})-{user.last_name}
+                                                                                    </h4>
+                                                                                    <button
+                                                                                        type="button"
+                                                                                        className="close"
+                                                                                        data-dismiss="modal"
+                                                                                        aria-label="Close"
+                                                                                    >
+                                                                                        <span aria-hidden="true">×</span>
+                                                                                    </button>
+                                                                                </div>
+                                                                                <div className="modal-body">
+                                                                                    <form >
+                                                                                        <div
+                                                                                            style={{
+                                                                                                width: "100%",
+                                                                                                textAlign: "center",
+                                                                                                display: "inline-block",
+                                                                                            }}
+                                                                                        >
+                                                                                            <button
+                                                                                                onClick={() => this.onSubmitDelete(user.id)}
+                                                                                                type="button"
+                                                                                                className="btn btn-danger waves-effect "
+                                                                                            >
+                                                                                                Eliminar Este usuario
+                                                                                            </button>
+                                                                                        </div>
+                                                                                    </form>
+                                                                                    <div className="modal-footer">
+                                                                                        <button
+                                                                                            type="button"
+                                                                                            className="btn btn-default waves-effect "
+                                                                                            data-dismiss="modal"
+                                                                                        >
+                                                                                            Cerrar
+                                                                                        </button>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    { /*FIN Modal DELETE*/}
                                                                 </tr>
                                                             ))}
 

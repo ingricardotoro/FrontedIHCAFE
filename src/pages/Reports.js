@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import axios from "axios";
 import jsPDF from "jspdf";
 import 'jspdf-autotable';
+import { Link } from 'react-router-dom'
 
 export default class Reports extends Component {
 
@@ -61,19 +62,6 @@ export default class Reports extends Component {
     doc.text('Reporte de Presupuesto ATlAS ', 200, 50)
     doc.text('Proyecto CONECTA+ (' + anio + ') Modena:' + this.state.modena, 130, 70)
 
-
-    /*doc.autoTable({
-      head: headRows(),
-      body: bodyRows(25),
-      startY: 40,
-      head: [['Descripción', 'Cuenta Atlas', 'Q1', 'Ejer.', 'Q2', 'Ejer.', 'Q3', 'Ejer.', 'Q4', 'Ejer']],
-      body: [
-        Object.keys(this.state.accounts_atlas).map((cuenta) => {
-          ['id', 'MARVIN', 'MARVIN', 'MARVIN', 'MARVIN', 'MARVIN', 'MARVIN', 'MARVIN', 'MARVIN', 'MARVIN', 'MARVIN',]
-        })
-      ],
-    })*/
-
     doc.autoTable({
       head: headRows(),
       body: bodyRows(this.state.ArrayReportebyProject),
@@ -126,97 +114,9 @@ export default class Reports extends Component {
       return body
     }
 
-    /* function bodyRows(arrayBudgetLines) {
-      var body = [];
-      var arrayQ1 = [];
-      var arrayQ2 = [];
-      var arrayQ3 = [];
-      var arrayQ4 = [];
-
-      var FQ1_i = new Date("2020-01-01");
-      var FQ1_f = new Date("2020-03-31");
-
-      var FQ2_i = new Date("2020-01-01");
-      var FQ2_f = new Date("2020-03-31");
-
-      var FQ3_i = new Date("2020-01-01");
-      var FQ3_f = new Date("2020-03-31");
-
-      var FQ4_i = new Date("2020-01-01");
-      var FQ4_f = new Date("2020-03-31");
-
-      //recorrido de cada gasto de este proyecto
-      for (let index = 0; index < arrayBudgetLines.length; index++) {
-        for (let j = 0; j < arrayBudgetLines[index].length; j++) {
-          if (arrayBudgetLines[index][j].status === 'Aprobado') {
-
-            var fecha = new Date(arrayBudgetLines[index][j].date_start);
-            console.log(fecha.getTime()); console.log(FQ1_i.getTime()); console.log(FQ1_f.getTime());
-
-            if (fecha.getTime() >= FQ1_i.getTime() && fecha.getTime() <= FQ1_f.getTime()) {
-              arrayQ1.push(arrayBudgetLines[index][j]);
-            }
-
-            if (fecha >= "2020-04-01" && fecha <= "2020-06-30") {
-              arrayQ2.push(arrayBudgetLines[index][j]);
-            }
-
-            if (fecha >= "2020-07-01" && fecha <= "2020-09-31") {
-              arrayQ3.push(arrayBudgetLines[index][j]);
-            }
-
-            if (fecha >= "2020-10-01" && fecha <= "2020-12-31") {
-              arrayQ4.push(arrayBudgetLines[index][j]);
-            }
-
-          }
-        }
-      }
-      console.log(arrayQ1);
-      for (let index = 0; index < arrayQ1.length; index++) {
-        body.push({
-          id1: arrayQ1[index].id,
-          name1: arrayQ1[index].atlas_account.details,
-          balance1: arrayQ1[index].balance,
-        });
-      }
-
-      /* for (let index = 0; index < arrayQ2.length; index++) {
-
-        body.push({
-          id2: arrayQ2[index].id,
-          name2: arrayQ2[index].atlas_account.details,
-          balance2: arrayQ2[index].balance,
-        });
-      }
-
-      for (let index = 0; index < arrayQ3.length; index++) {
-
-        body.push({
-          id3: arrayQ3[index].id,
-          name3: arrayQ3[index].atlas_account.details,
-          balance3: arrayQ3[index].balance,
-        });
-      }
-
-      for (let index = 0; index < arrayQ4.length; index++) {
-
-        body.push({
-          id4: arrayQ4[index].id,
-          name4: arrayQ4[index].atlas_account.details,
-          balance4: arrayQ4[index].balance,
-        });
-      } 
-
-
-    return body
-  } */
-
-
     // Save the Data
     doc.save('Generated'.pdf);
   }
-
 
 
   async componentDidMount() {
@@ -302,18 +202,6 @@ export default class Reports extends Component {
     this.setState({ year: e.target.value });
   };
 
-  /*Metodo HandleGlobal*/
-  //handleChange = ({ target: {value,name} }) => this.setState({ [name]: value})
-
-  /*handleClick = () => {
-    axios.post('http://167.99.15.83:4000/api/reports/create-pdf', this.state)
-      .then(() => axios.get('http://167.99.15.83:4000/api/reports/fetch-pdf', { responseType: "blob" }))
-      .then((res) => {
-        const pdfBlob = new Blob([res.data], { type: 'application/pdf' });
-        saveAs(pdfBlob, 'newPdf.pdf');
-      })
-  }*/
-
   render() {
     return (
       <div>
@@ -331,6 +219,50 @@ export default class Reports extends Component {
                 {/* Page header start */}
                 {/* Page body start */}
                 <div className="page-body">
+
+                  <div className="row">
+                    <div className="col-sm-12">
+                      {/* Product list card start */}
+                      <div className="card product-add-modal">
+                        <div className="card-header">
+                          <h5>Reportes de Usuarios</h5>
+
+                          <div className="product-add-modal">
+
+                          </div>
+                        </div>
+                        <div className="card-block">
+                          <div className="table-responsive">
+                            <div className="table-content">
+                              <div className="dt-responsive table-responsive">
+                                <table
+                                  id="e-product-list"
+                                  className="table table-striped table-bordered nowrap"
+                                >
+                                  <thead>
+                                    <tr>
+                                      <th>Reportes de Usuarios</th>
+                                    </tr>
+                                  </thead>
+                                  <tbody>
+                                    <tr>
+                                      <td>
+                                        <Link to={'reports/excel_users'} className="btn btn-block btn-success" > Generate Excel de Usuarios </Link>
+                                      </td>
+                                    </tr>
+                                  </tbody>
+                                </table>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      {/* Product list card end */}
+                    </div>
+                  </div>
+
+
+
                   <div className="row">
                     <div className="col-sm-12">
                       {/* Product list card start */}
@@ -407,26 +339,9 @@ export default class Reports extends Component {
                                       </td>
                                       <td>
                                         <label>Crear Reporte</label>
-                                        {/* <Link
-                                          to={
-                                            "/report_view/" +
-                                            this.state.budget_id +
-                                            "/" +
-                                            this.state.project_id +
-                                            "/" +
-                                            this.state.trimestre
-                                          }
-                                          className="btn btn-block btn-primary"
-                                        >
-                                          Generar
-                                        </Link> */}
-                                        <button className="btn btn-block btn-primary" onClick={this.jsPdfGenerator} type="primary"> Generate PDF </button>
-                                        {/*  <button
-                                          onClick={this.handleClick}
-                                          className="btn btn-block btn-primary"
-                                        >
-                                          Generar
-                                        </button> */}
+
+                                        {/* <button className="btn btn-block btn-primary" onClick={this.jsPdfGenerator} type="primary"> Generate PDF </button> */}
+                                        <Link to={'reports/reportbyprojectid/'} className="btn btn-block btn-success" > Generate Excel de Reporte </Link>
 
                                       </td>
                                     </tr>
@@ -448,7 +363,7 @@ export default class Reports extends Component {
                       {/* Product list card start */}
                       <div className="card product-add-modal">
                         <div className="card-header">
-                          <h5>Creación de Reportes</h5>
+                          <h5>Reportes por proyectos</h5>
 
                           <div className="product-add-modal">
                             {/* <button type="button" className="btn btn-success waves-effect waves-light f-right d-inline-block md-trigger" data-toggle="modal" data-target="#modal-13"> <i className="icofont icofont-plus m-r-5" /> Nuevo Producto
@@ -470,7 +385,6 @@ export default class Reports extends Component {
                                       <th>Prespupuesto</th>
                                       <th>Proyecto</th>
                                       <th>Moneda</th>
-
                                       <th>Año</th>
                                       <th>Ver Reporte</th>
                                     </tr>
@@ -540,27 +454,8 @@ export default class Reports extends Component {
                                       </td>
                                       <td>
                                         <label>Crear Reporte</label>
-                                        {/* <Link
-                                          to={
-                                            "/report_view/" +
-                                            this.state.budget_id +
-                                            "/" +
-                                            this.state.project_id +
-                                            "/" +
-                                            this.state.trimestre
-                                          }
-                                          className="btn btn-block btn-primary"
-                                        >
-                                          Generar
-                                        </Link> */}
-                                        <button className="btn btn-block btn-primary" onClick={this.reporte_atlas_by_project} type="primary"> Generate PDF </button>
-                                        {/*  <button
-                                          onClick={this.handleClick}
-                                          className="btn btn-block btn-primary"
-                                        >
-                                          Generar
-                                        </button> */}
-
+                                        {/* <button className="btn btn-block btn-primary" onClick={this.reporte_atlas_by_project} type="primary"> Generate PDF </button> */}
+                                        <Link to={'reports/atlas_by_project_id/' + this.state.project_id + '/' + this.state.coin_id} className="btn btn-block btn-success" > Generate Excel de Reporte </Link>
                                       </td>
                                     </tr>
                                   </tbody>
@@ -574,6 +469,7 @@ export default class Reports extends Component {
                     </div>
                   </div>
                 </div>
+
                 {/* Page body end */}
               </div>
             </div>
@@ -581,7 +477,7 @@ export default class Reports extends Component {
             <div id="styleSelector"></div>
           </div>
         </div>
-      </div>
+      </div >
     );
   }
 }
