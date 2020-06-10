@@ -1224,10 +1224,10 @@ export default class TableCost extends Component {
                         className="form-control mt-3"
                       >
                         <option value="#">Seleccione Cuenta de Origen</option>
-                        {"CUENTAS=".this.state.cuentas}
+
                         {this.state.cuentas.map((cuenta) => (
                           <option value={cuenta.id}>
-                            ({cuenta.coin}-{cuenta.actualbalance})-{cuenta.name}{" "}
+                            ({cuenta.coin.code}-{cuenta.name}{" "}
                           </option>
                         ))}
                       </select>

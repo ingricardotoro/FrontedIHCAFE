@@ -1079,7 +1079,7 @@ export default class TableCost extends Component {
                     <div style={{ width: "50%", display: "inline-block" }}>
                       <input
                         onChange={this.onChangeStartDate}
-                        class="form-control mt-3"
+                        className="form-control mt-3"
                         type="date"
                         placeholder="Fecha de Inicio"
                       />
