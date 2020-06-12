@@ -36,6 +36,7 @@ import ConversionList from './pages/Conversions'
 
 import Login from './pages/Login'
 import Inicio from './pages/Inicio'
+import Dasboard from './pages/Dasboard'
 
 function App() {
   return (
@@ -49,6 +50,8 @@ function App() {
         <Sidebar />
 
         <Route exact path="/" component={Inicio} />
+        <Route exact path="/dashboard" component={Dasboard} />
+
         <Route path="/login" exact component={Login} />
 
         <Route path="/atlas" exact component={Atlas} />

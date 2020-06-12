@@ -30,7 +30,7 @@ export default class Login extends Component {
 
         login(user).then(res => {
             if (res) {
-                window.location.href = "/budgets"
+                window.location.href = "/dashboard"
                 //this.props.history.push('/budgets')
             }
         })

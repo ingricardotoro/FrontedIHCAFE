@@ -14,7 +14,7 @@ export default class Sidebar extends Component {
                         <ul className="pcoded-item pcoded-left-item">
 
                             <li className="pcoded-hasmenu">
-                                <Link to={'/budgets'} >
+                                <Link to={'/dashboard'} >
                                     <span className="pcoded-micon"><i className="ti-blackboard" /></span>
                                     <span className="pcoded-mtext" data-i18n="nav.navigate.main">Dashboard</span>
                                     <span className="pcoded-mcaret" />
