@@ -262,10 +262,10 @@ export default class Reports extends Component {
                   </div>
 
 
-
+                  {/* 
                   <div className="row">
                     <div className="col-sm-12">
-                      {/* Product list card start */}
+                      
                       <div className="card product-add-modal">
                         <div className="card-header">
                           <h5>Creación de Reportes ATLAS TOTAL</h5>
@@ -340,7 +340,7 @@ export default class Reports extends Component {
                                       <td>
                                         <label>Crear Reporte</label>
 
-                                        {/* <button className="btn btn-block btn-primary" onClick={this.jsPdfGenerator} type="primary"> Generate PDF </button> */}
+                                       
                                         <Link to={'reports/reportbyprojectid/'} className="btn btn-block btn-success" > Generate Excel de Reporte </Link>
 
                                       </td>
@@ -352,11 +352,11 @@ export default class Reports extends Component {
                           </div>
                         </div>
                       </div>
-                      {/* Product list card end */}
+                     
                     </div>
                   </div>
 
-
+ */}
 
                   <div className="row">
                     <div className="col-sm-12">

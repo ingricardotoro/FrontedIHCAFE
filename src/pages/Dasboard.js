@@ -139,6 +139,7 @@ export default class Dashboard extends Component {
                                             < div className="card product-add-modal">
                                                 <div className="card-header">
                                                     <h5>PROYECTO CONECTA+ (Q1) PRIMER TRIMESTRE</h5>
+                                                    <p>Areas de Gastos y Presupuesto disponible Combinadas</p>
                                                 </div>
                                                 <div className="card-block">
                                                     <div className="table-responsive">
@@ -179,6 +180,7 @@ export default class Dashboard extends Component {
                                             < div className="card product-add-modal">
                                                 <div className="card-header">
                                                     <h5>PROYECTO CONECTA+ (Q1) PRIMER TRIMESTRE</h5>
+                                                    <p>Porcentajes Ejecutados, Solicitados y Disponibles</p>
                                                 </div>
                                                 <div className="card-block">
                                                     <div className="table-responsive">
@@ -201,6 +203,7 @@ export default class Dashboard extends Component {
                                             < div className="card product-add-modal">
                                                 <div className="card-header">
                                                     <h5>PROYECTO CONECTA+ (Q1) PRIMER TRIMESTRE</h5>
+                                                    <p>Avances de gastos efectuados</p>
                                                 </div>
                                                 <div className="card-block">
                                                     <div className="table-responsive">
@@ -223,6 +226,7 @@ export default class Dashboard extends Component {
                                             < div className="card product-add-modal">
                                                 <div className="card-header">
                                                     <h5>PROYECTO CONECTA+ (Q1) PRIMER TRIMESTRE</h5>
+                                                    <p>Presupuesto disponible</p>
                                                 </div>
                                                 <div className="card-block">
                                                     <div className="table-responsive">

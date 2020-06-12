@@ -3,6 +3,7 @@ import axios from "axios";
 import moment from "moment";
 import RowCardsProjects from "../components/RowCardsProjects";
 import ModalVerFilesAtlas from "./ModalVerFilesAtlas";
+import jwt_decode from 'jwt-decode'
 
 export default class TableCost extends Component {
   constructor() {
@@ -75,6 +76,7 @@ export default class TableCost extends Component {
       variable: 0,
       //variable que almacenara el budgetstart del proyecto actual
       bdg_start_project: 0.0,
+      role: 0
     };
   }
 
@@ -84,6 +86,13 @@ export default class TableCost extends Component {
     if (!localStorage.usertoken) {
       window.location.href = "/"
     }
+
+    const token = localStorage.usertoken
+    const decode = jwt_decode(token)
+    this.setState({
+      role: decode.tipo_user_id
+    })
+
     const res = await axios.post(
       "http://167.99.15.83:4000/api/budgetlines/atlas/project/" +
       this.props.idProject
@@ -502,7 +511,7 @@ export default class TableCost extends Component {
                                                     <label className="text-success"> {this.formatMoney(budgetLinesAtlas.balance)}</label>
                                                 </td> */}
 
-                                  {budgetLinesAtlas.status === "Solicitado" ? (
+                                  {budgetLinesAtlas.status === "Solicitado" && this.state.role === 2 ? (
                                     <td>
                                       <button
                                         type="button"
