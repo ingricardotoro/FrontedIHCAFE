@@ -11,7 +11,7 @@ export default class AccountNew extends Component {
 
             description: "",
             name: "",
-            coin: 0,
+            coin_id: 0,
             coins: [],
             person_id: 0
 
@@ -37,7 +37,7 @@ export default class AccountNew extends Component {
 
     onChangeName = (e) => { this.setState({ name: e.target.value }) }
     onChangeDescription = (e) => { this.setState({ description: e.target.value }) }
-    onChangeCoin = (e) => { this.setState({ coin: e.target.value }) }
+    onChangeCoin = (e) => { this.setState({ coin_id: e.target.value }) }
 
 
     onSubmit = async e => {
@@ -45,7 +45,7 @@ export default class AccountNew extends Component {
         await axios.post('http://167.99.15.83:4000/api/accounts', {
             description: this.state.description,
             name: this.state.name,
-            coin: this.state.coin,
+            coin_id: this.state.coin_id,
             person_id: this.state.person_id
         })
         window.location.href = '/accounts';
