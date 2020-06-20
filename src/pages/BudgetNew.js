@@ -234,7 +234,7 @@ export default class BudgetNew extends Component {
                                     </option>
                                     {this.state.cuentas.map((cuenta) => (
                                       <option value={cuenta.id}>
-                                        ({cuenta.coin}-{cuenta.actualbalance})-
+                                        ({cuenta.coin.code}-{cuenta.actualbalance})-
                                         {cuenta.name}{" "}
                                       </option>
                                     ))}
