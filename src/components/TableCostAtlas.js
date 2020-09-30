@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 import moment from "moment";
+import { Link } from 'react-router-dom'
 import RowCardsProjects from "../components/RowCardsProjects";
 import ModalVerFilesAtlas from "./ModalVerFilesAtlas";
 import jwt_decode from 'jwt-decode'
@@ -572,16 +573,14 @@ export default class TableCost extends Component {
                                     </button>
                                   </td>
                                   <td align="center" className="action-icon">
-                                    <a
-                                      href="#!"
+                                    < Link
+                                      to={"/budgetline/edit/" + this.props.idProject + "/" + budgetLinesAtlas.id}
                                       className="m-r-15 text-muted"
-                                      data-toggle="tooltip"
-                                      data-placement="top"
-                                      title
                                       data-original-title="Edit"
                                     >
-                                      <i className="icofont icofont-ui-edit" />
-                                    </a>
+                                      <i className="icofont icofont-ui-edit"
+                                      ></i>
+                                    </Link>
 
                                     <a
                                       href="#!"

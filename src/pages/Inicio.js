@@ -1,6 +1,14 @@
 import React, { Component } from 'react'
 import { Link } from "react-router-dom";
 class Inicio extends Component {
+
+    componentWillMount() {
+
+        if (localStorage.usertoken) {
+            window.location.href = "/dashboard"
+        }
+    }
+
     render() {
         return (
             <div style={{ paddingTop: 30 }} className="container">
@@ -10,7 +18,6 @@ class Inicio extends Component {
 
                         <img style={{ paddingTop: 30 }} className="img-fluid" src="/assets/images/ihcafe.png" alt="Theme-Logo" />
                         <div style={{ paddingTop: 60, paddingBottom: 30 }} align='center'>
-
 
                             <button className="btn btn-block btn-primary">
                                 <Link to="login">

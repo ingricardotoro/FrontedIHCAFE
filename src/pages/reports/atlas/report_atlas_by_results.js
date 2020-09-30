@@ -1,40 +1,79 @@
 import React, { Component } from 'react'
-import axios from "axios"
 import { Link } from 'react-router-dom'
+import TabladeProductos from './TabladeProductos'
 
-export default class ReportAtlasByProjectid extends Component {
-
+export default class ReportAtlasByResults extends Component {
+    _isMounted_R = true
     constructor() {
-        super();
+        super()
+
         this.state = {
-            ArrayReportebyProject: [],
-            total_ejecutado: 0,
-            total_solicitado: 0
+            ArrayResults: [],
+            //ArrayProducts: [],
+            products: []
+
         };
     }
 
     async componentDidMount() {
+
+        this.setState({ ArrayResults: [] })
+        this.setState({ ProductS: [] })
 
         //verificacion de usuario logeado
         if (!localStorage.usertoken) {
             window.location.href = "/"
         }
 
-        const res = await axios.post(
-            "http://167.99.15.83:4000/api/budgetlines/atlas/reporte_atlas_by_project/" + this.props.match.params.id
-        );
+        //alert("Buscar Resultados Padres")
 
-        this.setState({ ArrayReportebyProject: res.data.ArrayReportebyProject });
+        /*const res_AR = await axios.get(
+            "http://167.99.15.83:4000/api/atlas/resultados/"
+        )
 
-        //recorremos todos los gastos de este proyecto
-        /*Object.keys(this.state.budgetLinesAtlas).map((budg_line) => {
-            if (budg_line === "Aprobado") {
-                this.state.total_ejecutado += this.state.budg_line.balance;
+        this.setState({ ArrayResults: res_AR.data.atlas_resultados })*/
 
-            }
-        })*/
+        fetch('http://167.99.15.83:4000/api/atlas/resultados/')
+            .then((response) => {
+                return response.json()
+            })
+            .then((recurso) => {
+                if (this._isMounted_R) {
+                    this.setState({ ArrayResults: recurso.atlas_resultados })
+                }
 
+                /*this.state.activities.map((A) => (
+                    console.log("Activity=" + A.name + " Id=" + A.id + " Code=" + A.code)
+                ))*/
+            })
+
+        /*this.state.ArrayResults.map((AR) => (
+            console.log("ArrayResults=" + AR.name + " ID=" + AR.id + " Code=" + AR.code)
+        ))*/
     }
+
+    componentWillUnmount() {
+        alert("Desmontando Resultado")
+        this._isMounted_R = false;
+    }
+
+    handleSetProducts = (productos) => {
+        this.setState({ products: productos })
+    }
+
+    /*handleInitialProducts = () => {
+        this.setState({ products: [] })
+    }*/
+
+    /*async buscarProductos(code_resultado) {
+
+        const res = await axios.get(
+            "http://167.99.15.83:4000/api/atlas/productos/" + code_resultado
+        )
+
+        this.setState({ ArrayProducts: res.data.productos_atlas })
+
+    }*/
 
     formatMoney(number) {
         if (this.props.match.params.coin_id == 1) {
@@ -53,7 +92,20 @@ export default class ReportAtlasByProjectid extends Component {
         //return number;
     }
 
+    /*createKey() {
+        const characters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+        let newkey = ""
+        for (let i = 0; i < 10; i++) {
+
+            //newkey += String.fromCharCode((Math.floor((Math.random() * 100)) % 94) + 33)
+            newkey += characters.charAt(Math.floor(Math.random() * characters.length));
+        }
+        console.log("NewKey=" + newkey)
+        return newkey
+    }*/
+
     render() {
+
         return (
             <div>
                 <div className="pcoded-content">
@@ -83,30 +135,40 @@ export default class ReportAtlasByProjectid extends Component {
                                 <div className="page-body">
                                     <div className="card product-add-modal">
                                         <div className="card-header">
-                                            <h5>Reporte de usuarios</h5>
+                                            <h5>Reporte Atlas por Resultados</h5>
 
                                         </div>
                                         <div className="card-block">
                                             <div className="table-content crm-table">
                                                 <div className="project-table">
-                                                    <table id="report" className="table table-striped nowrap">
+                                                    <table id="report" className="table table-striped ">
                                                         <thead>
                                                             <tr>
-                                                                <th style={{ border: '1px solid' }}>Código</th>
-                                                                <th style={{ border: '1px solid' }}>Nombre de Cuenta</th>
-                                                                <th style={{ border: '1px solid' }}>Aprobado</th>
-                                                                <th style={{ border: '1px solid' }}>Ejecutado</th>
+                                                                <th style={{ border: '1px solid', width: '200px' }}>Resultados</th>
+                                                                <th style={{ border: '1px solid' }}>Productos / Actividades</th>
+
                                                             </tr>
                                                         </thead>
                                                         <tbody>
-                                                            {this.state.ArrayReportebyProject.map((Item) => (
-                                                                <tr key={Item.id} style={{ border: '1px solid' }}>
-                                                                    <td style={{ border: '1px solid' }}>{Item.atlas_account.code} </td>
-                                                                    <td style={{ border: '1px solid' }}>{Item.atlas_account.name}</td>
-                                                                    <td style={{ border: '1px solid' }}>{this.formatMoney(Item.inicial)}</td>
-                                                                    <td style={{ border: '1px solid' }}>{this.formatMoney(Item.TOTAL)}</td>
-                                                                </tr>
-                                                            ))}
+
+                                                            {
+                                                                this.state.ArrayResults.map((Item) => (
+                                                                    <tr key={Item.id} style={{ border: '1px solid', whiteSpace: 'normal' }}>
+                                                                        <td style={{ border: '1px solid', whiteSpace: 'normal' }}>{Item.code}-{Item.details} </td>
+                                                                        <td style={{ border: '1px solid', whiteSpace: 'normal' }}>
+
+                                                                            {<TabladeProductos
+                                                                                key={Item.id}
+                                                                                code_resultado={Item.code}
+                                                                                handleSetProducts={this.handleSetProducts}
+                                                                                budget_atlas_id={this.props.match.params.budget_atlas_id}
+                                                                            />}
+
+                                                                        </td>
+                                                                    </tr>
+
+                                                                ))
+                                                            }
                                                         </tbody>
                                                     </table>
                                                 </div>
@@ -130,6 +192,8 @@ export default class ReportAtlasByProjectid extends Component {
         )
     }
 }
+
+
 
 function exportTableToExcel(tableID, filename = '') {
 

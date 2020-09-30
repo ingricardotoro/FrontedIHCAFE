@@ -48,6 +48,7 @@ export default class BudgetEdit extends Component {
       "http://167.99.15.83:4000/api/budgets/findBudgetById/" +
       this.props.match.params.id
     );
+    
     this.setState({ budget: res8.data.budget[0] });
     this.setState({ buddgetstart: this.state.budget.buddgetstart });
     this.setState({ code: this.state.budget.code });

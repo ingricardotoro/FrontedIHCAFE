@@ -65,8 +65,8 @@ export default class Projectcard extends Component {
                 <div className="card card-border-default">
                     <div className="card-header">
                         <Link to={'/project/' + this.props.id} className="card-title" >{this.props.name}</Link>
-
-                        <span className="label label-danger f-right">  {this.props.enddate} </span>
+                        <Link to={'/project/edit/' + this.props.id} className="btn btn-sm btn-warning f-right   ">  Editar </Link>
+                        {/* <span className="label label-danger f-right">  {this.props.enddate} </span> */}
                         <span className="label label-primary f-right">  {this.props.startdate} </span>
                     </div>
                     <div className="card-block">
@@ -75,7 +75,7 @@ export default class Projectcard extends Component {
                                 <p className="task-detail">{this.props.description} </p>
                                 <hr />
                                 <p className="task-due">
-                                    <strong> Ubiación : </strong><strong className="label label-warning">{this.props.location} </strong>
+                                    <strong> Ubiación : </strong><strong className="label label-info">{this.props.location} </strong>
                                     <strong> Estatus : </strong><strong className="label label-danger">{this.props.status}  </strong>
                                     <strong> Prioridad : </strong><strong className="label label-warning">{this.props.priority} </strong>
                                 </p>

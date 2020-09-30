@@ -120,8 +120,8 @@ export default class ListProjects extends Component {
                                           <label className="label label-success ml-3">
                                             Prespuesto Disponible: {(project.budgetstart)}
                                           </label>
-                                          <button className="btn btn-warning btn-sm m-1">Editar</button>
-                                          <button className="btn btn-danger btn-sm m-1">Eliminar</button>
+                                          <Link to={'/project/edit/' + project.id} className="btn btn-warning btn-sm m-1">Editar</Link>
+                                          {/* <button className="btn btn-danger btn-sm m-1">Eliminar</button> */}
                                         </div>
                                       </div>
                                     </div>

@@ -213,7 +213,7 @@ export default class Reports extends Component {
                 {/* Page header start */}
                 <div className="page-header page-wrapper">
                   <div className="page-header-title">
-                    <h4>Gestión de Reportes</h4>
+                    <h4>Gestión de Reportes Estandar</h4>
                   </div>
                 </div>
                 {/* Page header start */}

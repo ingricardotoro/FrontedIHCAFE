@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import axios from "axios";
 import moment from "moment";
+import { Link } from 'react-router-dom'
+
 import RowCardsProjects from "../components/RowCardsProjects";
 import ModalVerFiles from "./ModalVerFiles";
 
@@ -45,22 +47,6 @@ export default class TableCost extends Component {
       clasificaciones: [],
       cuentas: [],
 
-      /****atlas */
-      //resultados_atlas: [],
-      //result_atlas: "",
-
-      //products_atlas: [],
-      // product_atlas: "",
-
-      //activities_atlas: [],
-      //activity_atlas: 0,
-
-      //accounts_atlas: [],
-      //account_atlas: "",
-
-      //sub_accounts_atlas: [],
-      //sub_account_atlas: "",
-
       suppliers: [],
       supplier: 0,
       details: "",
@@ -76,6 +62,7 @@ export default class TableCost extends Component {
       variable: 0,
       //variable que almacenara el budgetstart del proyecto actual
       bdg_start_project: 0.0,
+
     };
   }
 
@@ -209,6 +196,7 @@ export default class TableCost extends Component {
   onChanceDetails = async (e) => {
     this.setState({ details: e.target.value });
   };
+
 
   onChanceAccount = async (e) => {
     this.setState({ account_id: e.target.value });
@@ -452,21 +440,18 @@ export default class TableCost extends Component {
                                       </button>
                                   </td>
                                   <td align="center" className="action-icon">
-                                    <a
-                                      href="#!"
+                                    < Link
+                                      to={"/budgetline/edit/" + this.props.idProject + "/" + budgetLine.id}
                                       className="m-r-15 text-muted"
-                                      data-toggle="tooltip"
-                                      data-placement="top"
-                                      title
                                       data-original-title="Edit"
                                     >
-                                      <i className="icofont icofont-ui-edit" />
-                                    </a>
+                                      <i className="icofont icofont-ui-edit"
+                                      ></i>
+                                    </Link>
 
                                     <a
                                       href="#!"
                                       className="text-muted"
-                                      title
                                       data-original-title="Eliminar"
                                     >
                                       <i
@@ -481,10 +466,10 @@ export default class TableCost extends Component {
 
                                   {/* INICIL Modal DELETE*/}
 
-                                  <div
+                                  < div
                                     className="modal fade"
                                     id={"modal_delete_" + budgetLine.id}
-                                    tabIndex={-1}
+                                    tabIndex={- 1}
                                     role="dialog"
                                   >
                                     <div
@@ -525,7 +510,7 @@ export default class TableCost extends Component {
                                                 type="submit"
                                                 className="btn btn-danger waves-effect "
                                               >
-                                                Eliminar Este Renglon
+                                                Eliminar Este Renglón
                                                 Presupuestario
                                                 </button>
                                             </div>
@@ -550,7 +535,7 @@ export default class TableCost extends Component {
                                   <div
                                     class="modal fade"
                                     id={"aprobar_" + budgetLine.id}
-                                    tabindex="-1"
+                                    tabIndex="-1"
                                     role="dialog"
                                   >
                                     <div
@@ -607,7 +592,7 @@ export default class TableCost extends Component {
                                               name="monto"
                                               type="text"
                                               className="form-control mb-3"
-                                              Value={budgetLine.balance}
+                                              value={budgetLine.balance}
                                             />
 
                                             <label>Comentarios</label>
@@ -689,7 +674,7 @@ export default class TableCost extends Component {
                                             "http://167.99.15.83:4000/api/files/"
                                           }
                                           method="post"
-                                          enctype="multipart/form-data"
+                                          encType="multipart/form-data"
                                         >
                                           <div class="modal-body">
                                             <div className="form-control mt-3">
@@ -927,13 +912,14 @@ export default class TableCost extends Component {
               {/* Product list card end */}
             </div>
           </div>
-        </div>
+        </div >
 
         {/* Add Contact Start Model */}
-        <div>
+        < div >
           {/* Modal large*/}
 
-          <div className="modal fade" id="modal-13" tabIndex={-1} role="dialog">
+          < div className="modal fade" id="modal-13" tabIndex={- 1
+          } role="dialog" >
             <div className="modal-dialog modal-lg" role="document">
               <div className="modal-content">
                 <div className="modal-header">
@@ -973,7 +959,7 @@ export default class TableCost extends Component {
                       >
                         <option value="#">Seleccione Categoría</option>
                         {this.state.categories.map((category) => (
-                          <option value={category.code}>
+                          <option key={category.id} value={category.code}>
                             ({category.code})-{category.name}{" "}
                           </option>
                         ))}
@@ -1023,7 +1009,7 @@ export default class TableCost extends Component {
                       >
                         <option value="#">Seleccione Cuenta de Origen</option>
                         {this.state.cuentas.map((cuenta) => (
-                          <option value={cuenta.id}>
+                          <option key={cuenta.id} value={cuenta.id}>
                             ({cuenta.coin.name}-{cuenta.name}{" "}
                           </option>
                         ))}
@@ -1039,7 +1025,7 @@ export default class TableCost extends Component {
                           Seleccione Beneficiario/Proveedor
                         </option>
                         {this.state.suppliers.map((supplier) => (
-                          <option value={supplier.id}>
+                          <option key={supplier.id} value={supplier.id}>
                             {supplier.contact_name}{" "}
                           </option>
                         ))}
@@ -1115,12 +1101,12 @@ export default class TableCost extends Component {
               </div>
             </div>
           </div>
-        </div>
+        </div >
 
         {/* Add Contact Ends Model*/}
 
         {/* Page body end */}
-      </div>
+      </div >
     );
   }
 }

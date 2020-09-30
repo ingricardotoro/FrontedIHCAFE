@@ -7,9 +7,10 @@ export default class ReportAtlasByProjectid extends Component {
     constructor() {
         super();
         this.state = {
-            ArrayReportebyProject: [],
+            ArrayReporteBudgetsByProjectIdByAccountId: [],
             total_ejecutado: 0,
-            total_solicitado: 0
+            total_solicitado: 0,
+            sub_account: ""
         };
     }
 
@@ -20,20 +21,31 @@ export default class ReportAtlasByProjectid extends Component {
             window.location.href = "/"
         }
 
-        const res = await axios.post(
-            "http://167.99.15.83:4000/api/budgetlines/atlas/reporte_atlas_by_project/" + this.props.match.params.id
-        );
+        const res = await axios.get(
 
-        this.setState({ ArrayReportebyProject: res.data.ArrayReportebyProject });
+            "http://167.99.15.83:4000/api/budgetlines/atlas/budgets_by_projectid_and_atlasaccountid/"
+            + this.props.match.params.project_id + '/'
+            + this.props.match.params.account_atlas + '/'
+            + this.props.match.params.coin_id + '/'
+            + this.props.match.params.year
+        )
 
-        //recorremos todos los gastos de este proyecto
-        /*Object.keys(this.state.budgetLinesAtlas).map((budg_line) => {
-            if (budg_line === "Aprobado") {
-                this.state.total_ejecutado += this.state.budg_line.balance;
+        this.setState({ ArrayReporteBudgetsByProjectIdByAccountId: res.data.ArrayReporteBudgetsByProjectIdByAccountId })
 
-            }
-        })*/
+    }
 
+    SubCaterogia(id) {
+
+        fetch('http://167.99.15.83:4000/api/atlas/find_sub_atlas_category/' + id)
+            .then((response) => {
+                return response.json()
+            })
+            .then((recurso) => {
+
+                this.setState({ sub_account: recurso.sub_accounts.name })
+            })
+
+        return this.state.sub_account
     }
 
     formatMoney(number) {
@@ -83,7 +95,7 @@ export default class ReportAtlasByProjectid extends Component {
                                 <div className="page-body">
                                     <div className="card product-add-modal">
                                         <div className="card-header">
-                                            <h5>Reporte de usuarios</h5>
+                                            <h5>Reporte Gastos</h5>
 
                                         </div>
                                         <div className="card-block">
@@ -92,19 +104,20 @@ export default class ReportAtlasByProjectid extends Component {
                                                     <table id="report" className="table table-striped nowrap">
                                                         <thead>
                                                             <tr>
-                                                                <th style={{ border: '1px solid' }}>Código</th>
-                                                                <th style={{ border: '1px solid' }}>Nombre de Cuenta</th>
-                                                                <th style={{ border: '1px solid' }}>Aprobado</th>
-                                                                <th style={{ border: '1px solid' }}>Ejecutado</th>
+                                                                <th style={{ border: '1px solid' }}>Correlativo</th>
+                                                                <th style={{ border: '1px solid' }}>Sub Caategoría</th>
+                                                                <th style={{ border: '1px solid' }}>Fecha</th>
+                                                                <th style={{ border: '1px solid' }}>Valor</th>
                                                             </tr>
                                                         </thead>
                                                         <tbody>
-                                                            {this.state.ArrayReportebyProject.map((Item) => (
+
+                                                            {this.state.ArrayReporteBudgetsByProjectIdByAccountId.map((Item) => (
                                                                 <tr key={Item.id} style={{ border: '1px solid' }}>
-                                                                    <td style={{ border: '1px solid' }}>{Item.atlas_account.code} </td>
-                                                                    <td style={{ border: '1px solid' }}>{Item.atlas_account.name}</td>
-                                                                    <td style={{ border: '1px solid' }}>{this.formatMoney(Item.inicial)}</td>
-                                                                    <td style={{ border: '1px solid' }}>{this.formatMoney(Item.TOTAL)}</td>
+                                                                    <td style={{ border: '1px solid' }}>{Item.code} </td>
+                                                                    <td style={{ border: '1px solid' }}>{this.SubCaterogia(Item.code_sub_atlas)}</td>
+                                                                    <td style={{ border: '1px solid' }}>{Item.date_start}</td>
+                                                                    <td style={{ border: '1px solid' }}>{this.formatMoney(Item.balance)}</td>
                                                                 </tr>
                                                             ))}
                                                         </tbody>
