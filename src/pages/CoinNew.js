@@ -28,7 +28,7 @@ export default class CoinNew extends Component {
 
     onSubmit = async e => {
         e.preventDefault();
-        await axios.post('http://167.99.15.83:4000/api/coins/', {
+        await axios.post('http://190.92.73.69:4000/api/coins/', {
             description: this.state.description,
             name: this.state.name,
             code: this.state.code

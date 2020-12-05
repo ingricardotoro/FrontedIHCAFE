@@ -15,15 +15,15 @@ export default class ModalVerFilesAtlas extends Component {
       window.location.href = "/"
     }
     const res_files = await axios.post(
-      "http://167.99.15.83:4000/api/files/filesbybudgetid_atlas/" + this.props.budget_id + "/" +
+      "http://190.92.73.69:4000/api/files/filesbybudgetid_atlas/" + this.props.budget_id + "/" +
       this.props.budgetlineatlas
     );
     this.setState({ files: res_files.data.files });
   }
   onClickDelete = async (filename) => {
-    await axios.post("http://167.99.15.83:4000/api/files/delete_atlas/" + filename);
+    await axios.post("http://190.92.73.69:4000/api/files/delete_atlas/" + filename);
     window.location.href =
-      "http://167.99.15.83:3001/project/" + this.props.idProject;
+      "http://190.92.73.69:3001/project/" + this.props.idProject;
   };
 
   render() {
@@ -63,7 +63,7 @@ export default class ModalVerFilesAtlas extends Component {
                                     <a
                                       className="media-left"
                                       href={
-                                        "http://167.99.15.83:4000/" +
+                                        "http://190.92.73.69:4000/" +
                                         file.filedir +
                                         file.filename
                                       }
@@ -72,7 +72,7 @@ export default class ModalVerFilesAtlas extends Component {
                                         style={{ width: "200px", color: "red" }}
                                         className="icofont icofont-file-pdf icofont-5x"
                                         src={
-                                          "http://167.99.15.83:4000/" +
+                                          "http://190.92.73.69:4000/" +
                                           file.filedir +
                                           file.filename
                                         }
@@ -83,7 +83,7 @@ export default class ModalVerFilesAtlas extends Component {
                                       <a
                                         className="media-left"
                                         href={
-                                          "http://167.99.15.83:4000/" +
+                                          "http://190.92.73.69:4000/" +
                                           file.filedir +
                                           file.filename
                                         }
@@ -92,7 +92,7 @@ export default class ModalVerFilesAtlas extends Component {
                                           style={{ width: "200px" }}
                                           className="img-thumbnail "
                                           src={
-                                            "http://167.99.15.83:4000/" +
+                                            "http://190.92.73.69:4000/" +
                                             file.filedir +
                                             file.filename
                                           }
@@ -111,7 +111,7 @@ export default class ModalVerFilesAtlas extends Component {
                                     </div>
                                     <a
                                       href={
-                                        "http://167.99.15.83:4000/" +
+                                        "http://190.92.73.69:4000/" +
                                         file.filedir +
                                         file.filename
                                       }

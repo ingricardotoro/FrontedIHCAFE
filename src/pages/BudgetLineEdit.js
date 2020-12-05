@@ -58,7 +58,7 @@ export default class BudgetLineEdit extends Component {
         }
 
         const res = await axios.post(
-            "http://167.99.15.83:4000/api/budgetlines/findone/" + this.props.match.params.projectId + "/" + this.props.match.params.id
+            "http://190.92.73.69:4000/api/budgetlines/findone/" + this.props.match.params.projectId + "/" + this.props.match.params.id
         );
 
         this.setState({ budgetLine: res.data.budgetLine });
@@ -81,15 +81,15 @@ export default class BudgetLineEdit extends Component {
 
 
         const res4 = await axios.get(
-            "http://167.99.15.83:4000/api/categories/categories_parents/"
+            "http://190.92.73.69:4000/api/categories/categories_parents/"
         );
         this.setState({ categories: res4.data.categories });
 
-        const res6 = await axios.get("http://167.99.15.83:4000/api/accounts/");
+        const res6 = await axios.get("http://190.92.73.69:4000/api/accounts/");
         this.setState({ cuentas: res6.data.cuentas });
 
         const res_suppliers = await axios.get(
-            "http://167.99.15.83:4000/api/suppliers/"
+            "http://190.92.73.69:4000/api/suppliers/"
         );
         this.setState({ suppliers: res_suppliers.data.suppliers });
 
@@ -100,7 +100,7 @@ export default class BudgetLineEdit extends Component {
     onChanceCategory = async (e) => {
         this.setState({ category_id: e.target.value });
         const res5 = await axios.get(
-            "http://167.99.15.83:4000/api/categories/categories_childs/" +
+            "http://190.92.73.69:4000/api/categories/categories_childs/" +
             e.target.value
         );
         this.setState({ clasificaciones: res5.data.clasificaciones });
@@ -109,7 +109,7 @@ export default class BudgetLineEdit extends Component {
     onChanceClasificacion = async (e) => {
         this.setState({ sub_category_code: e.target.value });
         const res7 = await axios.get(
-            "http://167.99.15.83:4000/api/categories/child/" + e.target.value
+            "http://190.92.73.69:4000/api/categories/child/" + e.target.value
         );
         this.setState({ name: res7.data.child.name });
     };
@@ -162,7 +162,7 @@ export default class BudgetLineEdit extends Component {
 
         e.preventDefault();
 
-        await axios.put("http://167.99.15.83:4000/api/budgetlines/update/" + this.props.match.params.projectId + "/" + this.props.match.params.id, {
+        await axios.put("http://190.92.73.69:4000/api/budgetlines/update/" + this.props.match.params.projectId + "/" + this.props.match.params.id, {
             code: this.state.code,
             description: this.state.details,
             supplier_id: this.state.supplier,

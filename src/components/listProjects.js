@@ -13,7 +13,7 @@ export default class listProjects extends Component {
             window.location.href = "/"
         }
         
-      const res = await axios.get('http://167.99.15.83:4000/api/projects/');
+      const res = await axios.get('http://190.92.73.69:4000/api/projects/');
       this.setState({projects:res.data.projects});
   
     }

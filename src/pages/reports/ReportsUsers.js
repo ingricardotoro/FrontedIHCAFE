@@ -18,7 +18,7 @@ export default class ReportsUsers extends Component {
             window.location.href = "/"
         }
         //traemos todo los usuario registrados
-        const res = await axios.get("http://167.99.15.83:4000/api/users/");
+        const res = await axios.get("http://190.92.73.69:4000/api/users/");
         this.setState({ users: res.data.users });
     }
 

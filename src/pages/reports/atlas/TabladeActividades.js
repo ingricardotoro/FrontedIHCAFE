@@ -24,12 +24,12 @@ export default class TabladeActividades extends Component {
         console.log("Buscando Actividades de Codigo=" + this.props.code_producto)
 
         const res_pp3 = await axios.get(
-            "http://167.99.15.83:4000/api/atlas/productos/" + this.props.code_producto
+            "http://190.92.73.69:4000/api/atlas/productos/" + this.props.code_producto
         );
         this.setState({ activities: res_pp3.data.productos_atlas })
 
 
-        /*fetch('http://167.99.15.83:4000/api/atlas/productos/' + this.props.code_producto)
+        /*fetch('http://190.92.73.69:4000/api/atlas/productos/' + this.props.code_producto)
             .then((response) => {
                 return response.json()
             })

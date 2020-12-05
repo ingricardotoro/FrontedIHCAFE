@@ -16,7 +16,7 @@ export default class CategoryTable extends Component {
             window.location.href = "/"
         }
 
-        const res3 = await axios.get('http://167.99.15.83:4000/api/categories/categories_childs/' + this.props.idCat);
+        const res3 = await axios.get('http://190.92.73.69:4000/api/categories/categories_childs/' + this.props.idCat);
         this.setState({ subcategories: res3.data.clasificaciones });
     }
     render() {
