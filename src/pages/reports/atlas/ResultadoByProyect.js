@@ -17,7 +17,7 @@ export default class ResultadoByProyect extends Component {
     async componentDidMount() {
 
         const res_p2 = await axios.post(
-            "http://190.92.73.69:4000/api/projects/findProjectsByBudgetId/" +
+            "http://localhost:4000/api/projects/findProjectsByBudgetId/" +
             this.props.budget_atlas_id
         );
         this.setState({ projects: res_p2.data.projectsbybudgetid });

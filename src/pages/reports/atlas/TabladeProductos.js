@@ -17,11 +17,7 @@ export default class TabladeProductos extends Component {
 
         const { handleSetProducts } = this.props
 
-<<<<<<< HEAD
         fetch('http://localhost:4000/api/atlas/productos/' + this.props.code_resultado)
-=======
-        fetch('http://190.92.73.69:4000/api/atlas/productos/' + this.props.code_resultado)
->>>>>>> e7cd564136482e6217dddf33ebedd39481c9d4a3
             .then((response) => {
                 return response.json()
             })
@@ -45,11 +41,7 @@ export default class TabladeProductos extends Component {
         //alert("Buscando Productos de Codigox=" + this.props.code_resultado)
 
         /*const res2 = await axios.get(
-<<<<<<< HEAD
             "http://localhost:4000/api/atlas/productos/" + this.props.code_resultado
-=======
-            "http://190.92.73.69:4000/api/atlas/productos/" + this.props.code_resultado
->>>>>>> e7cd564136482e6217dddf33ebedd39481c9d4a3
         )*/
 
         /*handleSetProducts(res2.data.productos_atlas){*/
@@ -86,17 +78,17 @@ export default class TabladeProductos extends Component {
                                 </td>
                                 <td style={{ border: '1px solid' }}> <strong>Actividades</strong>
 <<<<<<< HEAD
-                                    < TabladeActividades
-                                        key={Product.id}
-                                        code_producto={Product.code}
-                                        budget_atlas_id={this.props.budget_atlas_id}
-                                    />
+                                < TabladeActividades
+                                    key={Product.id}
+                                    code_producto={Product.code}
+                                    budget_atlas_id={this.props.budget_atlas_id}
+                                />
 =======
                                     {< TabladeActividades
-                                        key={Product.id}
-                                        code_producto={Product.code}
-                                        budget_atlas_id={this.props.budget_atlas_id}
-                                    />}
+                                    key={Product.id}
+                                    code_producto={Product.code}
+                                    budget_atlas_id={this.props.budget_atlas_id}
+                                />}
 >>>>>>> e7cd564136482e6217dddf33ebedd39481c9d4a3
 
                                 </td>
@@ -105,7 +97,7 @@ export default class TabladeProductos extends Component {
                         ))
                     }
                 </tbody>
-            </table>
+            </table >
         )
     }
 }

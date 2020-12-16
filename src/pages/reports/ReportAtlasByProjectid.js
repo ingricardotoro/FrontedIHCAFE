@@ -21,11 +21,7 @@ export default class ReportAtlasByProjectid extends Component {
         }
 
         const res = await axios.post(
-<<<<<<< HEAD
             "http://localhost:4000/api/budgetlines/atlas/reporte_atlas_by_project/" + this.props.match.params.id
-=======
-            "http://190.92.73.69:4000/api/budgetlines/atlas/reporte_atlas_by_project/" + this.props.match.params.id
->>>>>>> e7cd564136482e6217dddf33ebedd39481c9d4a3
         );
 
         this.setState({ ArrayReportebyProject: res.data.ArrayReportebyProject });

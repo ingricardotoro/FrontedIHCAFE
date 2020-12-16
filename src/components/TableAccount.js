@@ -52,7 +52,6 @@ export default class TableAccount extends Component {
             window.location.href = "/"
         }
 
-<<<<<<< HEAD
         /*const res = await axios.post('http://localhost:4000/api/budgetlines/project/'+this.props.idProject);
         this.setState({budgetLines:res.data.budgetLines});
 
@@ -66,21 +65,6 @@ export default class TableAccount extends Component {
         this.setState({categories:res4.data.categories});
 
         const res6 = await axios.get('http://localhost:4000/api/accounts/');
-=======
-        /*const res = await axios.post('http://190.92.73.69:4000/api/budgetlines/project/'+this.props.idProject);
-        this.setState({budgetLines:res.data.budgetLines});
-
-        const res2 = await axios.post('http://190.92.73.69:4000/api/budgetlines/cat_project/'+this.props.idProject);
-        this.setState({budgetLinesCat:res2.data.budgetCategories});
-
-        const res3 = await axios.get('http://190.92.73.69:4000/api/projects/');
-        this.setState({projects:res3.data.projects});
-
-        const res4 = await axios.get('http://190.92.73.69:4000/api/categories/categories_parents/');
-        this.setState({categories:res4.data.categories});
-
-        const res6 = await axios.get('http://190.92.73.69:4000/api/accounts/');
->>>>>>> e7cd564136482e6217dddf33ebedd39481c9d4a3
         this.setState({cuentas:res6.data.cuentas});*/
 
 
@@ -105,11 +89,7 @@ export default class TableAccount extends Component {
     /*onChanceProject = (e) => {this.setState({project_id: e.target.value})}
     onChanceClasificacion = async (e) => {
         this.setState({code: e.target.value});
-<<<<<<< HEAD
         const res7 = await axios.get('http://localhost:4000/api/categories/child/'+e.target.value);
-=======
-        const res7 = await axios.get('http://190.92.73.69:4000/api/categories/child/'+e.target.value);
->>>>>>> e7cd564136482e6217dddf33ebedd39481c9d4a3
         this.setState({name:res7.data.child.name});
     }
     onChangeStartDate = (e) => {this.setState({startdate: e.target.value})}
@@ -120,11 +100,7 @@ export default class TableAccount extends Component {
 
     /*onChanceCategory = async (e) => {
         this.setState({category_id: e.target.value });
-<<<<<<< HEAD
         const res5 = await axios.get('http://localhost:4000/api/categories/categories_childs/'+e.target.value);
-=======
-        const res5 = await axios.get('http://190.92.73.69:4000/api/categories/categories_childs/'+e.target.value);
->>>>>>> e7cd564136482e6217dddf33ebedd39481c9d4a3
         this.setState({clasificaciones:res5.data.clasificaciones});
     }*/
 
@@ -135,11 +111,7 @@ export default class TableAccount extends Component {
     //codigo para crear un nuevo renglon presupuestario
     /*onSubmit  = async e =>{
         e.preventDefault();
-<<<<<<< HEAD
         const res = await axios.post('http://localhost:4000/api/budgetlines',{
-=======
-        const res = await axios.post('http://190.92.73.69:4000/api/budgetlines',{
->>>>>>> e7cd564136482e6217dddf33ebedd39481c9d4a3
             code:this.state.code,
             name:this.state.name,
             status:this.state.status,

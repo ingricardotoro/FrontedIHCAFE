@@ -30,17 +30,10 @@ export default class ProjectNew extends Component {
             window.location.href = "/"
         }
 
-<<<<<<< HEAD
         const res = await axios.get('http://localhost:4000/api/budgets/');
         this.setState({ budgets: res.data.budgets });
 
         const res2 = await axios.get('http://localhost:4000/api/teams/');
-=======
-        const res = await axios.get('http://190.92.73.69:4000/api/budgets/');
-        this.setState({ budgets: res.data.budgets });
-
-        const res2 = await axios.get('http://190.92.73.69:4000/api/teams/');
->>>>>>> e7cd564136482e6217dddf33ebedd39481c9d4a3
         this.setState({ teams: res2.data.teams });
     }
 
@@ -58,11 +51,7 @@ export default class ProjectNew extends Component {
 
     onSubmit = async e => {
         e.preventDefault();
-<<<<<<< HEAD
         await axios.post('http://localhost:4000/api/projects', {
-=======
-        await axios.post('http://190.92.73.69:4000/api/projects', {
->>>>>>> e7cd564136482e6217dddf33ebedd39481c9d4a3
             code: this.state.code,
             name: this.state.name,
             budgetstart: this.state.monto,

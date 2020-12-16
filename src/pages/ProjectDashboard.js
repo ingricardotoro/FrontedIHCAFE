@@ -23,11 +23,7 @@ export default class ProjectDashboard extends Component {
     }
 
     const res = await axios.get(
-<<<<<<< HEAD
       "http://localhost:4000/api/projects/" + this.props.match.params.id
-=======
-      "http://190.92.73.69:4000/api/projects/" + this.props.match.params.id
->>>>>>> e7cd564136482e6217dddf33ebedd39481c9d4a3
     );
     this.setState({ tipo_budget: res.data.data.budget.tipo });
     this.setState({ budget_id: res.data.data.budget.id });

@@ -24,11 +24,7 @@ export default class Supliers_list extends Component {
         }
 
         //traemos todo los proveedores registrados
-<<<<<<< HEAD
         const res = await axios.get("http://localhost:4000/api/suppliers/");
-=======
-        const res = await axios.get("http://190.92.73.69:4000/api/suppliers/");
->>>>>>> e7cd564136482e6217dddf33ebedd39481c9d4a3
         this.setState({ suppliers: res.data.suppliers });
 
     }
@@ -42,11 +38,7 @@ export default class Supliers_list extends Component {
 
     onSubmit = async (e) => {
         e.preventDefault();
-<<<<<<< HEAD
         const resp = await axios.post("http://localhost:4000/api/suppliers", {
-=======
-        const resp = await axios.post("http://190.92.73.69:4000/api/suppliers", {
->>>>>>> e7cd564136482e6217dddf33ebedd39481c9d4a3
             company: this.state.company,
             phone1: this.state.phone1,
             address: this.state.address,
@@ -61,11 +53,7 @@ export default class Supliers_list extends Component {
 
     onSubmitDelete = async (id) => {
         const res_p = await axios.post(
-<<<<<<< HEAD
             "http://localhost:4000/api/suppliers/delete/" + id
-=======
-            "http://190.92.73.69:4000/api/suppliers/delete/" + id
->>>>>>> e7cd564136482e6217dddf33ebedd39481c9d4a3
         );
         window.location.href = "/suppliers_list";
 

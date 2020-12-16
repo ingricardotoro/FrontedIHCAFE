@@ -16,11 +16,7 @@ export default class ResultadosAtlas extends Component {
             window.location.href = "/"
         }
 
-<<<<<<< HEAD
         const res3 = await axios.get('http://localhost:4000/api/atlas/productos/' + this.props.codeResultado);
-=======
-        const res3 = await axios.get('http://190.92.73.69:4000/api/atlas/productos/' + this.props.codeResultado);
->>>>>>> e7cd564136482e6217dddf33ebedd39481c9d4a3
         this.setState({ productos_atlas: res3.data.productos_atlas });
     }
     render() {

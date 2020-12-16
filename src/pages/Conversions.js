@@ -23,19 +23,11 @@ export default class TeamMembers extends Component {
         }
 
         //obtenemos el id de la moneda que viene por url
-<<<<<<< HEAD
         const res = await axios.get('http://localhost:4000/api/coins/' + this.props.match.params.id);
         this.setState({ coin: res.data.coin });
 
         //obtenemos las conversiones de esta moneda
         const res2 = await axios.get('http://localhost:4000/api/conversions/' + this.state.coin.id);
-=======
-        const res = await axios.get('http://190.92.73.69:4000/api/coins/' + this.props.match.params.id);
-        this.setState({ coin: res.data.coin });
-
-        //obtenemos las conversiones de esta moneda
-        const res2 = await axios.get('http://190.92.73.69:4000/api/conversions/' + this.state.coin.id);
->>>>>>> e7cd564136482e6217dddf33ebedd39481c9d4a3
         this.setState({ conversions: res2.data.conversions });
 
     }
@@ -47,11 +39,7 @@ export default class TeamMembers extends Component {
 
     onSubmitDelete = async (id) => {
         const res_p = await axios.post(
-<<<<<<< HEAD
             "http://localhost:4000/api/conversions/delete/" + id
-=======
-            "http://190.92.73.69:4000/api/conversions/delete/" + id
->>>>>>> e7cd564136482e6217dddf33ebedd39481c9d4a3
         );
         window.location.href = "/conversions/" + this.state.coin.id;
 
@@ -61,11 +49,7 @@ export default class TeamMembers extends Component {
 
     onSubmitAddValue = async e => {
         //e.preventDefault();
-<<<<<<< HEAD
         await axios.post('http://localhost:4000/api/conversions', {
-=======
-        await axios.post('http://190.92.73.69:4000/api/conversions', {
->>>>>>> e7cd564136482e6217dddf33ebedd39481c9d4a3
             coin_id: this.state.coin.id,
             description: this.state.description,
             value: this.state.value,

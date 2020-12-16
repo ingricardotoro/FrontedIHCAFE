@@ -24,11 +24,7 @@ export default class TeamNew extends Component {
 
     onSubmit = async e => {
         e.preventDefault();
-<<<<<<< HEAD
         await axios.post('http://localhost:4000/api/teams', {
-=======
-        await axios.post('http://190.92.73.69:4000/api/teams', {
->>>>>>> e7cd564136482e6217dddf33ebedd39481c9d4a3
             description: this.state.description,
             name: this.state.name
         })

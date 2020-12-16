@@ -24,11 +24,7 @@ export default class Projectcard extends Component {
             window.location.href = "/"
         }
 
-<<<<<<< HEAD
         const res = await axios.post('http://localhost:4000/api/budgetlines/atlas/project/' + this.props.id);
-=======
-        const res = await axios.post('http://190.92.73.69:4000/api/budgetlines/atlas/project/' + this.props.id);
->>>>>>> e7cd564136482e6217dddf33ebedd39481c9d4a3
         this.setState({ budgetLines: res.data.budgetLines_atlas });
         this.calculo();
     }
