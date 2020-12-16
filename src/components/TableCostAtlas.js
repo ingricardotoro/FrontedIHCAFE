@@ -94,43 +94,43 @@ export default class TableCost extends Component {
     })
 
     const res = await axios.post(
-      "http://167.99.15.83:4000/api/budgetlines/atlas/project/" +
+      "http://localhost:4000/api/budgetlines/atlas/project/" +
       this.props.idProject
     );
     this.setState({ budgetLinesAtlas: res.data.budgetLines_atlas });
 
-    /*const res2 = await axios.post('http://167.99.15.83:4000/api/budgetlines/atlas/cat_project/'+this.props.idProject);
+    /*const res2 = await axios.post('http://localhost:4000/api/budgetlines/atlas/cat_project/'+this.props.idProject);
         this.setState({budgetLinesCat:res2.data.budgetCategories}); */
 
-    const res3 = await axios.get("http://167.99.15.83:4000/api/projects/");
+    const res3 = await axios.get("http://localhost:4000/api/projects/");
     this.setState({ projects: res3.data.projects });
 
     //obtenemos el budgetstart de este proyecto
     const res_pro = await axios.get(
-      "http://167.99.15.83:4000/api/projects/" + this.props.idProject
+      "http://localhost:4000/api/projects/" + this.props.idProject
     );
     this.setState({ bdg_start_project: res_pro.data.data.budgetstart });
 
     const res4 = await axios.get(
-      "http://167.99.15.83:4000/api/categories/categories_parents/"
+      "http://localhost:4000/api/categories/categories_parents/"
     );
     this.setState({ categories: res4.data.categories });
 
-    const res6 = await axios.get("http://167.99.15.83:4000/api/accounts/");
+    const res6 = await axios.get("http://localhost:4000/api/accounts/");
     this.setState({ cuentas: res6.data.cuentas });
 
     const res_atlas = await axios.get(
-      "http://167.99.15.83:4000/api/atlas/resultados"
+      "http://localhost:4000/api/atlas/resultados"
     );
     this.setState({ resultados_atlas: res_atlas.data.atlas_resultados });
 
     const res_account_atlas = await axios.get(
-      "http://167.99.15.83:4000/api/atlas/accounts"
+      "http://localhost:4000/api/atlas/accounts"
     );
     this.setState({ accounts_atlas: res_account_atlas.data.atlas_accounts });
 
     const res_suppliers = await axios.get(
-      "http://167.99.15.83:4000/api/suppliers/"
+      "http://localhost:4000/api/suppliers/"
     );
     this.setState({ suppliers: res_suppliers.data.suppliers });
 
@@ -140,7 +140,7 @@ export default class TableCost extends Component {
   onChanceCategory = async (e) => {
     this.setState({ category_id: e.target.value });
     const res5 = await axios.get(
-      "http://167.99.15.83:4000/api/categories/categories_childs/" +
+      "http://localhost:4000/api/categories/categories_childs/" +
       e.target.value
     );
     this.setState({ clasificaciones: res5.data.clasificaciones });
@@ -210,7 +210,7 @@ export default class TableCost extends Component {
   //onChanceProject = (e) => {this.setState({project_id: e.target.value})}
   /* INICIAL onChanceClasificacion = async (e) => {
         this.setState({code: e.target.value});
-        const res7 = await axios.get('http://167.99.15.83:4000/api/categories/child/'+e.target.value);
+        const res7 = await axios.get('http://localhost:4000/api/categories/child/'+e.target.value);
         this.setState({name:res7.data.child.name});
     } */
 
@@ -238,14 +238,14 @@ export default class TableCost extends Component {
 
   /* ININIAL  onChanceCategory = async (e) => {
         this.setState({category_id: e.target.value });
-        const res5 = await axios.get('http://167.99.15.83:4000/api/categories/categories_childs/'+e.target.value);
+        const res5 = await axios.get('http://localhost:4000/api/categories/categories_childs/'+e.target.value);
         this.setState({clasificaciones:res5.data.clasificaciones});
     } */
 
   onChanceResultAtlas = async (e) => {
     this.setState({ result_atlas: e.target.value });
     const res_prod_atlas = await axios.get(
-      "http://167.99.15.83:4000/api/atlas/productos/" + e.target.value
+      "http://localhost:4000/api/atlas/productos/" + e.target.value
     );
     this.setState({ products_atlas: res_prod_atlas.data.productos_atlas });
   };
@@ -253,7 +253,7 @@ export default class TableCost extends Component {
   onChanceProductAtlas = async (e) => {
     this.setState({ product_atlas: e.target.value });
     const res_activity_atlas = await axios.get(
-      "http://167.99.15.83:4000/api/atlas/productos/" + e.target.value
+      "http://localhost:4000/api/atlas/productos/" + e.target.value
     );
     this.setState({
       activities_atlas: res_activity_atlas.data.productos_atlas,
@@ -267,7 +267,7 @@ export default class TableCost extends Component {
   onChanceAccountAtlas = async (e) => {
     this.setState({ account_atlas: e.target.value });
     const res_sub_atlas = await axios.get(
-      "http://167.99.15.83:4000/api/atlas/sub_accounts/" + e.target.value
+      "http://localhost:4000/api/atlas/sub_accounts/" + e.target.value
     );
     this.setState({ sub_accounts_atlas: res_sub_atlas.data.sub_accounts });
   };
@@ -309,7 +309,7 @@ export default class TableCost extends Component {
       // si es aprobado un valor igual o menor
 
       await axios.post(
-        "http://167.99.15.83:4000/api/budgetlines/aprobar_atlas/" +
+        "http://localhost:4000/api/budgetlines/aprobar_atlas/" +
         id +
         "/" +
         this.state.aprobar +
@@ -335,8 +335,8 @@ export default class TableCost extends Component {
     this.setState({ fase_archivo: e.target.value });
   };
   onClickSubirArchivo = async (id) => {
-    //await axios.post('http://167.99.15.83:4000/api/files/'+id,{
-    await axios.post("http://167.99.15.83:4000/api/files/" + id, {
+    //await axios.post('http://localhost:4000/api/files/'+id,{
+    await axios.post("http://localhost:4000/api/files/" + id, {
       nombre_archivo: this.state.nombre_archivo,
       fase_archivo: this.state.fase_archivo,
       file: this.state.archivo,
@@ -347,7 +347,7 @@ export default class TableCost extends Component {
   onSubmit = async (e) => {
     e.preventDefault();
     const res = await axios.post(
-      "http://167.99.15.83:4000/api/budgetlines/budgetlineatlas",
+      "http://localhost:4000/api/budgetlines/budgetlineatlas",
       {
         code_resultado: this.state.result_atlas,
         code_producto: this.state.product_atlas,
@@ -384,7 +384,7 @@ export default class TableCost extends Component {
   //funcion para elimiar un renglon presupuestario
   onSubmitDelete = async (id) => {
     const res_p = await axios.post(
-      "http://167.99.15.83:4000/api/budgetlines/budgetlineatlas/delete/" + id
+      "http://localhost:4000/api/budgetlines/budgetlineatlas/delete/" + id
     );
     window.location.href = "/project/" + this.props.idProject;
     //return <Redirect to={"/project/"+this.props.idProject}  />
@@ -816,7 +816,7 @@ export default class TableCost extends Component {
                                         </div>
                                         <form
                                           action={
-                                            "http://167.99.15.83:4000/api/files/atlas"
+                                            "http://localhost:4000/api/files/atlas"
                                           }
                                           method="post"
                                           enctype="multipart/form-data"

@@ -30,7 +30,7 @@ export default class TabBudget extends Component {
       window.location.href = "/"
     }
     const res_p2 = await axios.post(
-      "http://167.99.15.83:4000/api/projects/findProjectsByBudgetId/" +
+      "http://localhost:4000/api/projects/findProjectsByBudgetId/" +
       this.props.id
     );
     this.setState({ projects2: res_p2.data.projectsbybudgetid });
@@ -44,7 +44,7 @@ export default class TabBudget extends Component {
 
   async calculo1() {
     const res_p = await axios.post(
-      "http://167.99.15.83:4000/api/projects/findProjectsByBudgetId/" +
+      "http://localhost:4000/api/projects/findProjectsByBudgetId/" +
       this.props.id
     );
     this.setState({ projects: res_p.data.projectsbybudgetid });
@@ -52,7 +52,7 @@ export default class TabBudget extends Component {
 
   async calculo2(project_id) {
     const res_bud = await axios.post(
-      "http://167.99.15.83:4000/api/budgetlines/atlas/project/" + project_id
+      "http://localhost:4000/api/budgetlines/atlas/project/" + project_id
     );
     // console.warn("VALOR="+res.data.budgetLines_atlas);
     this.setState({ budgetLinesAtlas2: res_bud.data.budgetLines_atlas });
@@ -85,7 +85,7 @@ export default class TabBudget extends Component {
   onDelete = async (e) => {
     //e.preventDefault();
     const res_p = await axios.post(
-      "http://167.99.15.83:4000/api/budgets/delete/" + this.props.id
+      "http://localhost:4000/api/budgets/delete/" + this.props.id
     );
 
     window.location.href = "/budgets";

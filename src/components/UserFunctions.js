@@ -15,7 +15,12 @@ export const register = newUser => {
 
 export const login = user => {
     return axios
-        .post('http://167.99.15.83:4000/api/users/login', {
+        .post('http://localhost:4000/api/users/login', {
+            /*headers: {
+                'Access-Control-Allow-Credentials': true,
+                'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
+            },*/
             username: user.username,
             password: user.password
         })

@@ -15,7 +15,7 @@ export default class ListProjects extends Component {
       window.location.href = "/"
     }
 
-    const res = await axios.get("http://167.99.15.83:4000/api/projects/");
+    const res = await axios.get("http://localhost:4000/api/projects/");
     this.setState({ projects: res.data.projects });
   }
 

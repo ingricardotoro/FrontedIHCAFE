@@ -45,7 +45,7 @@ export default class BudgetEdit extends Component {
     }
 
     const res8 = await axios.post(
-      "http://167.99.15.83:4000/api/budgets/findBudgetById/" +
+      "http://localhost:4000/api/budgets/findBudgetById/" +
       this.props.match.params.id
     );
     this.setState({ budget: res8.data.budget[0] });
@@ -63,10 +63,10 @@ export default class BudgetEdit extends Component {
     this.setState({ tipo_id: this.state.budget.tipo });
     this.setState({ tipo_name: this.state.budget.tipo });
 
-    const res6 = await axios.get("http://167.99.15.83:4000/api/accounts/");
+    const res6 = await axios.get("http://localhost:4000/api/accounts/");
     this.setState({ cuentas: res6.data.cuentas });
 
-    const res7 = await axios.get("http://167.99.15.83:4000/api/coins/");
+    const res7 = await axios.get("http://localhost:4000/api/coins/");
     this.setState({ coins: res7.data.coins });
   }
   onChangeBudgetstart = (e) => {
@@ -104,7 +104,7 @@ export default class BudgetEdit extends Component {
   onSubmit = async (e) => {
     e.preventDefault();
     const res = await axios.post(
-      "http://167.99.15.83:4000/api/budgets/edit/" + this.state.budget.id,
+      "http://localhost:4000/api/budgets/edit/" + this.state.budget.id,
       {
         code: this.state.code,
         name: this.state.name,

@@ -26,9 +26,12 @@ import Account_list from "./pages/Accounts";
 import Account_new from "./pages/AccountNew";
 import AccountDashboard from "./pages/AccountDashboard";
 
+import ReportsAtlas from './pages/ReportsAtlas'
 import Reports from "./pages/Reports";
 import ReportsUsers from './pages/reports/ReportsUsers'
 import ReportAtlasByProjectid from './pages/reports/ReportAtlasByProjectid'
+import ReportsAtlasBudgetByProAndAtlasAccount from './pages/reports/atlas/budgets_by_projectid_and_atlasaccountid'
+import ReportsAtlasBudgetByResults from './pages/reports/atlas/report_atlas_by_results'
 
 import Coinlist from './pages/Coinlist'
 import CoinNew from './pages/CoinNew'
@@ -80,6 +83,10 @@ function App() {
         <Route path="/account/:id" exact component={AccountDashboard} />
 
         <Route path="/reports" exact component={Reports} />
+        <Route path="/reports_atlas" exact component={ReportsAtlas} />
+        <Route path="/reports/atlas/budgets_by_projectid_and_atlasaccountid/:project_id/:account_atlas/:coin_id/:year" exact component={ReportsAtlasBudgetByProAndAtlasAccount} />
+        <Route path="/reports/atlas/report_atlas_by_results/:budget_atlas_id/:coin_id/:year" exact component={ReportsAtlasBudgetByResults} />
+
         <Route path="/reports/excel_users" exact component={ReportsUsers} />
         <Route path="/reports/atlas_by_project_id/:id/:coin_id" exact component={ReportAtlasByProjectid} />
 

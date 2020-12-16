@@ -14,20 +14,29 @@ export default class Dashboard extends Component {
 
     }
 
+
     async componentDidMount() {
         //verificacion de usuario logeado
-        if (!localStorage.usertoken) {
+        /*if (!localStorage.usertoken) {
             window.location.href = "/"
+        }*/
+
+        try {
+
+            const res = await axios.get("http://localhost:4000/api/projects/");
+            this.setState({ projects: res.data.projects });
+
+            const res1 = await axios.get("http://localhost:4000/api/projects/13");
+            this.setState({ budgetstart: res1.data.data.budgetstart });
+
+            const res2 = await axios.get("http://localhost:4000/api/budgetlines/atlas/grafica_atlas_by_project/13");
+            this.setState({ ArrayGraficabyProject: res2.data.ArrayGraficabyProject });
+
+
+        } catch (error) {
+            console.log(error)
         }
 
-        const res = await axios.get("http://167.99.15.83:4000/api/projects/");
-        this.setState({ projects: res.data.projects });
-
-        const res1 = await axios.get("http://167.99.15.83:4000/api/projects/13");
-        this.setState({ budgetstart: res1.data.data.budgetstart });
-
-        const res2 = await axios.get("http://167.99.15.83:4000/api/budgetlines/atlas/grafica_atlas_by_project/13");
-        this.setState({ ArrayGraficabyProject: res2.data.ArrayGraficabyProject });
 
     }
 
