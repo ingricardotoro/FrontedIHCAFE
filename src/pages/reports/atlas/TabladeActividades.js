@@ -1,10 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios'
-<<<<<<< HEAD
-
-=======
 import ResultadoByProyect from './ResultadoByProyect'
->>>>>>> e7cd564136482e6217dddf33ebedd39481c9d4a3
 
 export default class TabladeActividades extends Component {
 
@@ -15,13 +11,8 @@ export default class TabladeActividades extends Component {
 
         this.state = {
             activities: [],
-<<<<<<< HEAD
-            projects: [],
-            atlasaccounts: []
-=======
             /*projects: [],
             atlasaccounts: []*/
->>>>>>> e7cd564136482e6217dddf33ebedd39481c9d4a3
         };
     }
 

@@ -58,10 +58,7 @@ export default class TabladeProductos extends Component {
     }
 
     componentWillUnmount() {
-<<<<<<< HEAD
-=======
         alert("Desmontando Producto")
->>>>>>> e7cd564136482e6217dddf33ebedd39481c9d4a3
         this._isMounted_P = false;
     }
 
@@ -77,19 +74,11 @@ export default class TabladeProductos extends Component {
                                     {Product.code} -{Product.name}
                                 </td>
                                 <td style={{ border: '1px solid' }}> <strong>Actividades</strong>
-<<<<<<< HEAD
-                                < TabladeActividades
-                                    key={Product.id}
-                                    code_producto={Product.code}
-                                    budget_atlas_id={this.props.budget_atlas_id}
-                                />
-=======
                                     {< TabladeActividades
-                                    key={Product.id}
-                                    code_producto={Product.code}
-                                    budget_atlas_id={this.props.budget_atlas_id}
-                                />}
->>>>>>> e7cd564136482e6217dddf33ebedd39481c9d4a3
+                                        key={Product.id}
+                                        code_producto={Product.code}
+                                        budget_atlas_id={this.props.budget_atlas_id}
+                                    />}
 
                                 </td>
 
