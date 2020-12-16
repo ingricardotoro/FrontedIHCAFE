@@ -22,7 +22,11 @@ export default class ReportAtlasByResults extends Component {
             window.location.href = "/"
         }
 
+<<<<<<< HEAD
         /*fetch('http://localhost:4000/api/atlas/resultados/')
+=======
+        /*fetch('http://190.92.73.69:4000/api/atlas/resultados/')
+>>>>>>> e7cd564136482e6217dddf33ebedd39481c9d4a3
             .then((response) => {
                 return response.json()
             })
@@ -44,7 +48,11 @@ export default class ReportAtlasByResults extends Component {
     async buscarProductos(code_resultado) {
 
         const res = await axios.get(
+<<<<<<< HEAD
             "http://localhost:4000/api/atlas/productos/" + code_resultado
+=======
+            "http://190.92.73.69:4000/api/atlas/productos/" + code_resultado
+>>>>>>> e7cd564136482e6217dddf33ebedd39481c9d4a3
         )
         this.setState({ ArrayProducts: res.data.productos_atlas })
     }
@@ -1353,7 +1361,11 @@ class TabladeProductos extends Component {
         const { handleSetProducts } = this.props
 
         const res = await axios.get(
+<<<<<<< HEAD
             "http://localhost:4000/api/atlas/productos/" + this.props.code_resultado
+=======
+            "http://190.92.73.69:4000/api/atlas/productos/" + this.props.code_resultado
+>>>>>>> e7cd564136482e6217dddf33ebedd39481c9d4a3
         )
         handleSetProducts(res.data.productos_atlas)
         this.setState({ ArrayProducts: res.data.productos_atlas })
@@ -1361,7 +1373,11 @@ class TabladeProductos extends Component {
     }
 
 
+<<<<<<< HEAD
     /*fetch('http://localhost:4000/api/atlas/productos/' + this.props.code_resultado, { signal: this.abortController.signal })
+=======
+    /*fetch('http://190.92.73.69:4000/api/atlas/productos/' + this.props.code_resultado, { signal: this.abortController.signal })
+>>>>>>> e7cd564136482e6217dddf33ebedd39481c9d4a3
             .then((response) => {
         return response.json()
     })
@@ -1404,7 +1420,11 @@ class TabladeActividades extends Component {
 
     componentDidMount() {
 
+<<<<<<< HEAD
         fetch('http://localhost:4000/api/atlas/productos/' + this.props.code_producto)
+=======
+        fetch('http://190.92.73.69:4000/api/atlas/productos/' + this.props.code_producto)
+>>>>>>> e7cd564136482e6217dddf33ebedd39481c9d4a3
             .then((response) => {
                 return response.json()
             })

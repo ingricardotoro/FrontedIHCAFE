@@ -17,7 +17,11 @@ export default class Atlas extends Component {
         if (!localStorage.usertoken) {
             window.location.href = "/"
         }
+<<<<<<< HEAD
         const res = await axios.get('http://localhost:4000/api/atlas/resultados');
+=======
+        const res = await axios.get('http://190.92.73.69:4000/api/atlas/resultados');
+>>>>>>> e7cd564136482e6217dddf33ebedd39481c9d4a3
         this.setState({ atlas_resultados: res.data.atlas_resultados });
 
 

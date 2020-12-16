@@ -23,6 +23,7 @@ export default class TeamMembers extends Component {
         }
 
         //obtenemos el id del equipo que viene por url
+<<<<<<< HEAD
         const res = await axios.get('http://localhost:4000/api/teams/' + this.props.match.params.id);
         this.setState({ team: res.data.team });
 
@@ -36,6 +37,21 @@ export default class TeamMembers extends Component {
 
         //listados los roles para agregarlos
         const res4 = await axios.get('http://localhost:4000/api/roles');
+=======
+        const res = await axios.get('http://190.92.73.69:4000/api/teams/' + this.props.match.params.id);
+        this.setState({ team: res.data.team });
+
+        //buscamos los miembros de este equipo para listarlos
+        const res2 = await axios.get('http://190.92.73.69:4000/api/teammembers/' + this.state.team.id);
+        this.setState({ teammembers: res2.data.teammembers });
+
+        //listados los usuario para agregarlos
+        const res3 = await axios.get('http://190.92.73.69:4000/api/users');
+        this.setState({ users: res3.data.users });
+
+        //listados los roles para agregarlos
+        const res4 = await axios.get('http://190.92.73.69:4000/api/roles');
+>>>>>>> e7cd564136482e6217dddf33ebedd39481c9d4a3
         this.setState({ roles: res4.data.roles });
     }
 
@@ -44,7 +60,11 @@ export default class TeamMembers extends Component {
 
     onSubmitDelete = async (id) => {
         const res_p = await axios.post(
+<<<<<<< HEAD
             "http://localhost:4000/api/teammembers/delete/" + id
+=======
+            "http://190.92.73.69:4000/api/teammembers/delete/" + id
+>>>>>>> e7cd564136482e6217dddf33ebedd39481c9d4a3
         );
         window.location.href = "/teammembers/" + this.state.team.id;
 
@@ -55,7 +75,11 @@ export default class TeamMembers extends Component {
     onSubmitAddMember = async e => {
         //console.log("Aqui vamossss")
         //e.preventDefault();
+<<<<<<< HEAD
         await axios.post('http://localhost:4000/api/teammembers', {
+=======
+        await axios.post('http://190.92.73.69:4000/api/teammembers', {
+>>>>>>> e7cd564136482e6217dddf33ebedd39481c9d4a3
             team_id: this.state.team.id,
             person_id: this.state.person_id,
             rol_id: this.state.role_id

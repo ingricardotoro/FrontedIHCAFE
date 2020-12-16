@@ -15,7 +15,11 @@ export default class ListProjects extends Component {
       window.location.href = "/"
     }
 
+<<<<<<< HEAD
     const res = await axios.get("http://localhost:4000/api/projects/");
+=======
+    const res = await axios.get("http://190.92.73.69:4000/api/projects/");
+>>>>>>> e7cd564136482e6217dddf33ebedd39481c9d4a3
     this.setState({ projects: res.data.projects });
   }
 
@@ -120,8 +124,8 @@ export default class ListProjects extends Component {
                                           <label className="label label-success ml-3">
                                             Prespuesto Disponible: {(project.budgetstart)}
                                           </label>
-                                          <button className="btn btn-warning btn-sm m-1">Editar</button>
-                                          <button className="btn btn-danger btn-sm m-1">Eliminar</button>
+                                          <Link to={'/project/edit/' + project.id} className="btn btn-warning btn-sm m-1">Editar</Link>
+                                          {/* <button className="btn btn-danger btn-sm m-1">Eliminar</button> */}
                                         </div>
                                       </div>
                                     </div>

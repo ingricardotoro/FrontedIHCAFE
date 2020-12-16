@@ -28,12 +28,20 @@ export default class ReportAtlasByResults extends Component {
         //alert("Buscar Resultados Padres")
 
         /*const res_AR = await axios.get(
+<<<<<<< HEAD
             "http://localhost:4000/api/atlas/resultados/"
+=======
+            "http://190.92.73.69:4000/api/atlas/resultados/"
+>>>>>>> e7cd564136482e6217dddf33ebedd39481c9d4a3
         )
 
         this.setState({ ArrayResults: res_AR.data.atlas_resultados })*/
 
+<<<<<<< HEAD
         fetch('http://localhost:4000/api/atlas/resultados/')
+=======
+        fetch('http://190.92.73.69:4000/api/atlas/resultados/')
+>>>>>>> e7cd564136482e6217dddf33ebedd39481c9d4a3
             .then((response) => {
                 return response.json()
             })
@@ -53,6 +61,10 @@ export default class ReportAtlasByResults extends Component {
     }
 
     componentWillUnmount() {
+<<<<<<< HEAD
+=======
+        alert("Desmontando Resultado")
+>>>>>>> e7cd564136482e6217dddf33ebedd39481c9d4a3
         this._isMounted_R = false;
     }
 
@@ -67,7 +79,11 @@ export default class ReportAtlasByResults extends Component {
     /*async buscarProductos(code_resultado) {
 
         const res = await axios.get(
+<<<<<<< HEAD
             "http://localhost:4000/api/atlas/productos/" + code_resultado
+=======
+            "http://190.92.73.69:4000/api/atlas/productos/" + code_resultado
+>>>>>>> e7cd564136482e6217dddf33ebedd39481c9d4a3
         )
 
         this.setState({ ArrayProducts: res.data.productos_atlas })

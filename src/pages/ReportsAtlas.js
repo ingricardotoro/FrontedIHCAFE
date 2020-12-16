@@ -127,11 +127,19 @@ export default class ReportsAtlas extends Component {
 
     async componentDidMount() {
 
+<<<<<<< HEAD
         const res_atlas = await axios.get("http://localhost:4000/api/budgets/atlas");
         this.setState({ budgets_atlas: res_atlas.data.budgets });
 
         const res_account_atlas = await axios.get(
             "http://localhost:4000/api/atlas/accounts"
+=======
+        const res_atlas = await axios.get("http://190.92.73.69:4000/api/budgets/atlas");
+        this.setState({ budgets_atlas: res_atlas.data.budgets });
+
+        const res_account_atlas = await axios.get(
+            "http://190.92.73.69:4000/api/atlas/accounts"
+>>>>>>> e7cd564136482e6217dddf33ebedd39481c9d4a3
         );
         this.setState({ accounts_atlas: res_account_atlas.data.atlas_accounts });
 
@@ -143,7 +151,11 @@ export default class ReportsAtlas extends Component {
         this.state.arrayBudgetLines = [];//lo iniciaiza
 
         const res_pro_atlas = await axios.post(
+<<<<<<< HEAD
             "http://localhost:4000/api/projects/findProjectsByBudgetId/" +
+=======
+            "http://190.92.73.69:4000/api/projects/findProjectsByBudgetId/" +
+>>>>>>> e7cd564136482e6217dddf33ebedd39481c9d4a3
             e.target.value
         );
         this.setState({ projects_atlas: res_pro_atlas.data.projectsbybudgetid });
@@ -151,7 +163,11 @@ export default class ReportsAtlas extends Component {
         this.state.projects_atlas.map(async (p_atlas) => {
             //llamamos los gastos hechos en este proyecto y presupuesto
             const res = await axios.post(
+<<<<<<< HEAD
                 "http://localhost:4000/api/budgetlines/atlas/project/" + p_atlas.id
+=======
+                "http://190.92.73.69:4000/api/budgetlines/atlas/project/" + p_atlas.id
+>>>>>>> e7cd564136482e6217dddf33ebedd39481c9d4a3
             );
 
             this.setState({ budgetLinesAtlas: res.data.budgetLines_atlas });
@@ -171,7 +187,11 @@ export default class ReportsAtlas extends Component {
         this.setState({ project_id: e.target.value });
 
         const res_pro_atlas = await axios.post(
+<<<<<<< HEAD
             "http://localhost:4000/api/budgetlines/atlas/reporte_atlas_by_project/" +
+=======
+            "http://190.92.73.69:4000/api/budgetlines/atlas/reporte_atlas_by_project/" +
+>>>>>>> e7cd564136482e6217dddf33ebedd39481c9d4a3
             e.target.value
         );
 

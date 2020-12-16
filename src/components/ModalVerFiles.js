@@ -19,15 +19,25 @@ export default class ModalVerFiles extends Component {
 
 
     const res_files = await axios.post(
+<<<<<<< HEAD
       "http://localhost:4000/api/files/filesbybudgetid/" + this.props.budget_id + "/" +
+=======
+      "http://190.92.73.69:4000/api/files/filesbybudgetid/" + this.props.budget_id + "/" +
+>>>>>>> e7cd564136482e6217dddf33ebedd39481c9d4a3
       this.props.budgetline
     );
     this.setState({ files: res_files.data.files });
   }
   onClickDelete = async (filename) => {
+<<<<<<< HEAD
     await axios.post("http://localhost:4000/api/files/delete/" + filename);
     window.location.href =
       "http://localhost:3001/project/" + this.props.idProject;
+=======
+    await axios.post("http://190.92.73.69:4000/api/files/delete/" + filename);
+    window.location.href =
+      "http://190.92.73.69:3001/project/" + this.props.idProject;
+>>>>>>> e7cd564136482e6217dddf33ebedd39481c9d4a3
   };
 
   render() {
@@ -67,7 +77,11 @@ export default class ModalVerFiles extends Component {
                                     <a
                                       className="media-left"
                                       href={
+<<<<<<< HEAD
                                         "http://localhost:4000/" +
+=======
+                                        "http://190.92.73.69:4000/" +
+>>>>>>> e7cd564136482e6217dddf33ebedd39481c9d4a3
                                         file.filedir +
                                         file.filename
                                       }
@@ -76,7 +90,11 @@ export default class ModalVerFiles extends Component {
                                         style={{ width: "200px", color: "red" }}
                                         className="icofont icofont-file-pdf icofont-5x"
                                         src={
+<<<<<<< HEAD
                                           "http://localhost:4000/" +
+=======
+                                          "http://190.92.73.69:4000/" +
+>>>>>>> e7cd564136482e6217dddf33ebedd39481c9d4a3
                                           file.filedir +
                                           file.filename
                                         }
@@ -87,7 +105,11 @@ export default class ModalVerFiles extends Component {
                                       <a
                                         className="media-left"
                                         href={
+<<<<<<< HEAD
                                           "http://localhost:4000/" +
+=======
+                                          "http://190.92.73.69:4000/" +
+>>>>>>> e7cd564136482e6217dddf33ebedd39481c9d4a3
                                           file.filedir +
                                           file.filename
                                         }
@@ -96,7 +118,11 @@ export default class ModalVerFiles extends Component {
                                           style={{ width: "200px" }}
                                           className="img-thumbnail "
                                           src={
+<<<<<<< HEAD
                                             "http://localhost:4000/" +
+=======
+                                            "http://190.92.73.69:4000/" +
+>>>>>>> e7cd564136482e6217dddf33ebedd39481c9d4a3
                                             file.filedir +
                                             file.filename
                                           }
@@ -115,7 +141,11 @@ export default class ModalVerFiles extends Component {
                                     </div>
                                     <a
                                       href={
+<<<<<<< HEAD
                                         "http://localhost:4000/" +
+=======
+                                        "http://190.92.73.69:4000/" +
+>>>>>>> e7cd564136482e6217dddf33ebedd39481c9d4a3
                                         file.filedir +
                                         file.filename
                                       }

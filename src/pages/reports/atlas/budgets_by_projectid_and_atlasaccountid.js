@@ -23,7 +23,11 @@ export default class ReportAtlasByProjectid extends Component {
 
         const res = await axios.get(
 
+<<<<<<< HEAD
             "http://localhost:4000/api/budgetlines/atlas/budgets_by_projectid_and_atlasaccountid/"
+=======
+            "http://190.92.73.69:4000/api/budgetlines/atlas/budgets_by_projectid_and_atlasaccountid/"
+>>>>>>> e7cd564136482e6217dddf33ebedd39481c9d4a3
             + this.props.match.params.project_id + '/'
             + this.props.match.params.account_atlas + '/'
             + this.props.match.params.coin_id + '/'
@@ -36,7 +40,11 @@ export default class ReportAtlasByProjectid extends Component {
 
     SubCaterogia(id) {
 
+<<<<<<< HEAD
         fetch('http://localhost:4000/api/atlas/find_sub_atlas_category/' + id)
+=======
+        fetch('http://190.92.73.69:4000/api/atlas/find_sub_atlas_category/' + id)
+>>>>>>> e7cd564136482e6217dddf33ebedd39481c9d4a3
             .then((response) => {
                 return response.json()
             })

@@ -30,7 +30,11 @@ export default class TabBudget extends Component {
       window.location.href = "/"
     }
     const res_p2 = await axios.post(
+<<<<<<< HEAD
       "http://localhost:4000/api/projects/findProjectsByBudgetId/" +
+=======
+      "http://190.92.73.69:4000/api/projects/findProjectsByBudgetId/" +
+>>>>>>> e7cd564136482e6217dddf33ebedd39481c9d4a3
       this.props.id
     );
     this.setState({ projects2: res_p2.data.projectsbybudgetid });
@@ -44,7 +48,11 @@ export default class TabBudget extends Component {
 
   async calculo1() {
     const res_p = await axios.post(
+<<<<<<< HEAD
       "http://localhost:4000/api/projects/findProjectsByBudgetId/" +
+=======
+      "http://190.92.73.69:4000/api/projects/findProjectsByBudgetId/" +
+>>>>>>> e7cd564136482e6217dddf33ebedd39481c9d4a3
       this.props.id
     );
     this.setState({ projects: res_p.data.projectsbybudgetid });
@@ -52,7 +60,11 @@ export default class TabBudget extends Component {
 
   async calculo2(project_id) {
     const res_bud = await axios.post(
+<<<<<<< HEAD
       "http://localhost:4000/api/budgetlines/atlas/project/" + project_id
+=======
+      "http://190.92.73.69:4000/api/budgetlines/atlas/project/" + project_id
+>>>>>>> e7cd564136482e6217dddf33ebedd39481c9d4a3
     );
     // console.warn("VALOR="+res.data.budgetLines_atlas);
     this.setState({ budgetLinesAtlas2: res_bud.data.budgetLines_atlas });
@@ -85,7 +97,11 @@ export default class TabBudget extends Component {
   onDelete = async (e) => {
     //e.preventDefault();
     const res_p = await axios.post(
+<<<<<<< HEAD
       "http://localhost:4000/api/budgets/delete/" + this.props.id
+=======
+      "http://190.92.73.69:4000/api/budgets/delete/" + this.props.id
+>>>>>>> e7cd564136482e6217dddf33ebedd39481c9d4a3
     );
 
     window.location.href = "/budgets";

@@ -27,10 +27,17 @@ export default class RowBudget extends Component {
             window.location.href = "/"
         }
 
+<<<<<<< HEAD
         const res = await axios.post('http://localhost:4000/api/budgetlines/project/category/' + this.props.idProject + '/' + this.props.idCat);
         this.setState({ budgetLines: res.data.budgetLinesCat });
 
         const res3 = await axios.post('http://localhost:4000/api/categories/categoriesbyid/' + this.props.idCat);
+=======
+        const res = await axios.post('http://190.92.73.69:4000/api/budgetlines/project/category/' + this.props.idProject + '/' + this.props.idCat);
+        this.setState({ budgetLines: res.data.budgetLinesCat });
+
+        const res3 = await axios.post('http://190.92.73.69:4000/api/categories/categoriesbyid/' + this.props.idCat);
+>>>>>>> e7cd564136482e6217dddf33ebedd39481c9d4a3
         this.setState({ nameCategory: res3.data.category.name });
     }
 
@@ -43,7 +50,11 @@ export default class RowBudget extends Component {
     onSubmitAprobar = async (budgetLine_id) => {
         //e.preventDefault();
 
+<<<<<<< HEAD
         //const res_aprobar = await axios.post('http://localhost:4000/api/budgetlines/aprobar/'+budgetLine_id+'/'+this.state.aprobar);
+=======
+        //const res_aprobar = await axios.post('http://190.92.73.69:4000/api/budgetlines/aprobar/'+budgetLine_id+'/'+this.state.aprobar);
+>>>>>>> e7cd564136482e6217dddf33ebedd39481c9d4a3
     }
 
     calculo() { // para realizar el calculo de la suma de presupuestos

@@ -24,11 +24,19 @@ export default class Users_list extends Component {
         }
 
         //traemos todo los usuario registrados
+<<<<<<< HEAD
         const res = await axios.get("http://localhost:4000/api/users/");
         this.setState({ users: res.data.users });
 
         //traemos los tipo de usuarios de la tabla tipousuario
         const res2 = await axios.get("http://localhost:4000/api/tipousers/");
+=======
+        const res = await axios.get("http://190.92.73.69:4000/api/users/");
+        this.setState({ users: res.data.users });
+
+        //traemos los tipo de usuarios de la tabla tipousuario
+        const res2 = await axios.get("http://190.92.73.69:4000/api/tipousers/");
+>>>>>>> e7cd564136482e6217dddf33ebedd39481c9d4a3
         this.setState({ tipousuarios: res2.data.tipousers });
 
     }
@@ -41,7 +49,11 @@ export default class Users_list extends Component {
 
     onSubmit = async (e) => {
         e.preventDefault();
+<<<<<<< HEAD
         const resp = await axios.post("http://localhost:4000/api/users/register", {
+=======
+        const resp = await axios.post("http://190.92.73.69:4000/api/users/register", {
+>>>>>>> e7cd564136482e6217dddf33ebedd39481c9d4a3
             lastname: this.state.lastname,
             name: this.state.name,
             tipo_user_id: this.state.tipo_user,
@@ -54,7 +66,11 @@ export default class Users_list extends Component {
 
     onSubmitDelete = async (id) => {
         const res_p = await axios.post(
+<<<<<<< HEAD
             "http://localhost:4000/api/users/delete/" + id
+=======
+            "http://190.92.73.69:4000/api/users/delete/" + id
+>>>>>>> e7cd564136482e6217dddf33ebedd39481c9d4a3
         );
         window.location.href = "/users_list";
 

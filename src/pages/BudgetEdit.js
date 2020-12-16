@@ -45,9 +45,14 @@ export default class BudgetEdit extends Component {
     }
 
     const res8 = await axios.post(
+<<<<<<< HEAD
       "http://localhost:4000/api/budgets/findBudgetById/" +
+=======
+      "http://190.92.73.69:4000/api/budgets/findBudgetById/" +
+>>>>>>> e7cd564136482e6217dddf33ebedd39481c9d4a3
       this.props.match.params.id
     );
+
     this.setState({ budget: res8.data.budget[0] });
     this.setState({ buddgetstart: this.state.budget.buddgetstart });
     this.setState({ code: this.state.budget.code });
@@ -63,10 +68,17 @@ export default class BudgetEdit extends Component {
     this.setState({ tipo_id: this.state.budget.tipo });
     this.setState({ tipo_name: this.state.budget.tipo });
 
+<<<<<<< HEAD
     const res6 = await axios.get("http://localhost:4000/api/accounts/");
     this.setState({ cuentas: res6.data.cuentas });
 
     const res7 = await axios.get("http://localhost:4000/api/coins/");
+=======
+    const res6 = await axios.get("http://190.92.73.69:4000/api/accounts/");
+    this.setState({ cuentas: res6.data.cuentas });
+
+    const res7 = await axios.get("http://190.92.73.69:4000/api/coins/");
+>>>>>>> e7cd564136482e6217dddf33ebedd39481c9d4a3
     this.setState({ coins: res7.data.coins });
   }
   onChangeBudgetstart = (e) => {
@@ -104,7 +116,11 @@ export default class BudgetEdit extends Component {
   onSubmit = async (e) => {
     e.preventDefault();
     const res = await axios.post(
+<<<<<<< HEAD
       "http://localhost:4000/api/budgets/edit/" + this.state.budget.id,
+=======
+      "http://190.92.73.69:4000/api/budgets/edit/" + this.state.budget.id,
+>>>>>>> e7cd564136482e6217dddf33ebedd39481c9d4a3
       {
         code: this.state.code,
         name: this.state.name,

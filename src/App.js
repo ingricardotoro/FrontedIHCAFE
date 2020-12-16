@@ -12,8 +12,12 @@ import BudgetNew from "./pages/BudgetNew";
 import BudgetEdit from "./pages/BudgetEdit";
 import ListProjects from "./pages/ListProjects";
 import ProjectNew from "./pages/ProjectNew";
+import ProjectEdit from "./pages/ProjectEdit";
+
 import ListCategories from "./pages/ListCategories";
 import BudgetLineNew from "./pages/BudgetLineNew";
+import BudgetLineEdit from "./pages/BudgetLineEdit";
+
 
 import pageSupplierslist from "./pages/Suppliers_list";
 import Users_list from "./pages/Users_list";
@@ -63,9 +67,11 @@ function App() {
         <Route path="/budgets/new" exact component={BudgetNew} />
         <Route path="/budgets/edit/:id" exact component={BudgetEdit} />
         <Route path="/budgetline/new" exact component={BudgetLineNew} />
+        <Route path="/budgetline/edit/:projectId/:id" exact component={BudgetLineEdit} />
         <Route path="/categories" exact component={ListCategories} />
         <Route path="/projects" exact component={ListProjects} />
         <Route path="/projects/new" exact component={ProjectNew} />
+        <Route path="/project/edit/:id" exact component={ProjectEdit} />
         <Route path="/project/:id" exact component={projectDashboard} />
 
         <Route path="/suppliers_list" exact component={pageSupplierslist} />

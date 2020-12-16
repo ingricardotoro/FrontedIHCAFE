@@ -18,7 +18,11 @@ export default class Team_list extends Component {
             window.location.href = "/"
         }
 
+<<<<<<< HEAD
         const res = await axios.get('http://localhost:4000/api/teams/');
+=======
+        const res = await axios.get('http://190.92.73.69:4000/api/teams/');
+>>>>>>> e7cd564136482e6217dddf33ebedd39481c9d4a3
         this.setState({ teams: res.data.teams });
     }
 
@@ -28,7 +32,11 @@ export default class Team_list extends Component {
 
     onSubmitDelete = async (id) => {
         const res_p = await axios.post(
+<<<<<<< HEAD
             "http://localhost:4000/api/teams/delete/" + id
+=======
+            "http://190.92.73.69:4000/api/teams/delete/" + id
+>>>>>>> e7cd564136482e6217dddf33ebedd39481c9d4a3
         );
         window.location.href = "/teams_list";
 
