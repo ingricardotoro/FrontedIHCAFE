@@ -18,7 +18,7 @@ class Navbar extends Component {
             <div>
                 <div className="navbar-logo" style={{ backgroundColor: '#fff' }}>
                     <Link to={'/'} >
-                        <img style={{ height: 30 }} className="img-fluid" src="%PUBLIC_URL%/assets/images/ihcafe.png" alt="Theme-Logo" />
+                        <img style={{ height: 30 }} className="img-fluid" src="/assets/images/ihcafe.png" alt="Theme-Logo" />
                     </Link>
                 </div>
 
@@ -26,7 +26,7 @@ class Navbar extends Component {
 
                     <li className="user-profile header-notification">
                         <a href="#!">
-                            <img src="%PUBLIC_URL%/assets/images/user.png" alt="Usersa" />
+                            <img src="/assets/images/user.png" alt="Usersa" />
                             <span>Usuario</span>
                             <i className="ti-angle-down" />
                         </a>
