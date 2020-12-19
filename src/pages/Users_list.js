@@ -19,9 +19,9 @@ export default class Users_list extends Component {
     async componentDidMount() {
 
         //verificacion de usuario logeado
-        if (!localStorage.usertoken) {
+        /*if (!localStorage.usertoken) {
             window.location.href = "/"
-        }
+        }*/
 
         //traemos todo los usuario registrados
         const res = await axios.get("http://localhost:4000/api/users/");
