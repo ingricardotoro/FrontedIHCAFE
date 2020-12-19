@@ -72,7 +72,7 @@ class Navbar extends Component {
                 </div>
                 <ul className="nav-left">
                     <li>
-                        <div className="sidebar_toggle"><a href="/"><i className="ti-menu" /></a></div>
+                        <div className="sidebar_toggle"><a href="#"><i className="ti-menu" /></a></div>
                     </li>
 
                     {/* <li>
