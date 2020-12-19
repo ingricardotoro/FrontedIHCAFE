@@ -53,13 +53,13 @@ class Navbar extends Component {
         const userLink = (
             <div>
                 <div className="navbar-logo" style={{ backgroundColor: '#fff' }}>
-                    <a className="mobile-menu" id="mobile-collapse" href="/">
+                    <a className="mobile-menu" id="mobile-collapse" href="#">
                         <i className="ti-menu" />
                     </a>
                     {/*<a className="mobile-search morphsearch-search" href="/">
                         <i className="ti-search" />
                     </a>*/}
-                    <a className="mobile-options" href="/">
+                    <a className="mobile-options" href="#">
                         <i className="ti-more" />
                     </a>
 
