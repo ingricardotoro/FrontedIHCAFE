@@ -18,7 +18,7 @@ export default class Atlas extends Component {
             window.location.href = "/"
         }
 
-        const res = await axios.get('http://167.99.15.83/api/atlas/accounts');
+        const res = await axios.get('http://167.99.15.83:4000/api/atlas/accounts');
         this.setState({ atlas_accounts: res.data.atlas_accounts });
     }
 

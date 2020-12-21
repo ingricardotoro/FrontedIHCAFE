@@ -17,13 +17,13 @@ export default class Coinlist extends Component {
             window.location.href = "/"
         }
 
-        const res = await axios.get('http://167.99.15.83/api/coins/');
+        const res = await axios.get('http://167.99.15.83:4000/api/coins/');
         this.setState({ coins: res.data.coins });
     }
 
     onSubmitDelete = async (id) => {
         const res_p = await axios.post(
-            "http://167.99.15.83/api/coins/delete/" + id
+            "http://167.99.15.83:4000/api/coins/delete/" + id
         );
         window.location.href = "/accounts";
 

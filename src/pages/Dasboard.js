@@ -26,16 +26,16 @@ export default class Dashboard extends Component {
         try {
 
             //obtenemos los presupuestos con categoria atlas
-            const res_budgetsAtlas = await axios.get("http://167.99.15.83/api/budgets/atlas");
+            const res_budgetsAtlas = await axios.get("http://167.99.15.83:4000/api/budgets/atlas");
             this.setState({ budgets_atlas: res_budgetsAtlas.data.budgets });
 
-            /*const res = await axios.get("http://167.99.15.83/api/projects/");
+            /*const res = await axios.get("http://167.99.15.83:4000/api/projects/");
             this.setState({ projects: res.data.projects });
     
-            const res1 = await axios.get("http://167.99.15.83/api/projects/13");
+            const res1 = await axios.get("http://167.99.15.83:4000/api/projects/13");
             this.setState({ budgetstart: res1.data.data.budgetstart });
     
-            const res2 = await axios.get("http://167.99.15.83/api/budgetlines/atlas/grafica_atlas_by_project/13");
+            const res2 = await axios.get("http://167.99.15.83:4000/api/budgetlines/atlas/grafica_atlas_by_project/13");
             this.setState({ ArrayGraficabyProject: res2.data.ArrayGraficabyProject });*/
 
         }
@@ -48,7 +48,7 @@ export default class Dashboard extends Component {
         this.setState({ budget_id: e.target.value });
 
         const res_p = await axios.post(
-            "http://167.99.15.83/api/projects/findProjectsByBudgetId/" +
+            "http://167.99.15.83:4000/api/projects/findProjectsByBudgetId/" +
             e.target.value
         );
         this.setState({ projects_atlas: res_p.data.projectsbybudgetid });
@@ -59,12 +59,12 @@ export default class Dashboard extends Component {
         const projectid = e.target.value
 
         const res_projectById = await axios.get(
-            "http://167.99.15.83/api/projects/" + projectid
+            "http://167.99.15.83:4000/api/projects/" + projectid
         );
         this.setState({ project: res_projectById.data.data });
         this.setState({ budgetstart: res_projectById.data.data.budgetstart });
 
-        const res2 = await axios.get("http://167.99.15.83/api/budgetlines/atlas/grafica_atlas_by_project/" + projectid);
+        const res2 = await axios.get("http://167.99.15.83:4000/api/budgetlines/atlas/grafica_atlas_by_project/" + projectid);
         this.setState({ ArrayGraficabyProject: res2.data.ArrayGraficabyProject });
 
         console.log(res2)

@@ -28,12 +28,12 @@ export default class ReportAtlasByResults extends Component {
         //alert("Buscar Resultados Padres")
 
         /*const res_AR = await axios.get(
-            "http://167.99.15.83/api/atlas/resultados/"
+            "http://167.99.15.83:4000/api/atlas/resultados/"
         )
 
         this.setState({ ArrayResults: res_AR.data.atlas_resultados })*/
 
-        fetch('http://167.99.15.83/api/atlas/resultados/')
+        fetch('http://167.99.15.83:4000/api/atlas/resultados/')
             .then((response) => {
                 return response.json()
             })
@@ -68,7 +68,7 @@ export default class ReportAtlasByResults extends Component {
     /*async buscarProductos(code_resultado) {
 
         const res = await axios.get(
-            "http://167.99.15.83/api/atlas/productos/" + code_resultado
+            "http://167.99.15.83:4000/api/atlas/productos/" + code_resultado
         )
 
         this.setState({ ArrayProducts: res.data.productos_atlas })

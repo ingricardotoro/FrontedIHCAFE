@@ -23,19 +23,19 @@ export default class TeamMembers extends Component {
         }
 
         //obtenemos el id del equipo que viene por url
-        const res = await axios.get('http://167.99.15.83/api/teams/' + this.props.match.params.id);
+        const res = await axios.get('http://167.99.15.83:4000/api/teams/' + this.props.match.params.id);
         this.setState({ team: res.data.team });
 
         //buscamos los miembros de este equipo para listarlos
-        const res2 = await axios.get('http://167.99.15.83/api/teammembers/' + this.state.team.id);
+        const res2 = await axios.get('http://167.99.15.83:4000/api/teammembers/' + this.state.team.id);
         this.setState({ teammembers: res2.data.teammembers });
 
         //listados los usuario para agregarlos
-        const res3 = await axios.get('http://167.99.15.83/api/users');
+        const res3 = await axios.get('http://167.99.15.83:4000/api/users');
         this.setState({ users: res3.data.users });
 
         //listados los roles para agregarlos
-        const res4 = await axios.get('http://167.99.15.83/api/roles');
+        const res4 = await axios.get('http://167.99.15.83:4000/api/roles');
         this.setState({ roles: res4.data.roles });
     }
 
@@ -44,7 +44,7 @@ export default class TeamMembers extends Component {
 
     onSubmitDelete = async (id) => {
         const res_p = await axios.post(
-            "http://167.99.15.83/api/teammembers/delete/" + id
+            "http://167.99.15.83:4000/api/teammembers/delete/" + id
         );
         window.location.href = "/teammembers/" + this.state.team.id;
 
@@ -55,7 +55,7 @@ export default class TeamMembers extends Component {
     onSubmitAddMember = async e => {
         //console.log("Aqui vamossss")
         //e.preventDefault();
-        await axios.post('http://167.99.15.83/api/teammembers', {
+        await axios.post('http://167.99.15.83:4000/api/teammembers', {
             team_id: this.state.team.id,
             person_id: this.state.person_id,
             rol_id: this.state.role_id

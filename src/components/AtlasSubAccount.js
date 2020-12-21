@@ -15,7 +15,7 @@ export default class AtlasSubAccount extends Component {
             window.location.href = "/"
         }
 
-        const res3 = await axios.get('http://167.99.15.83/api/atlas/sub_accounts/' + this.props.codeResultado);
+        const res3 = await axios.get('http://167.99.15.83:4000/api/atlas/sub_accounts/' + this.props.codeResultado);
         this.setState({ subAccount_atlas: res3.data.sub_accounts });
     }
     render() {

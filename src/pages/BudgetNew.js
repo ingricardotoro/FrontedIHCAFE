@@ -37,10 +37,10 @@ export default class BudgetNew extends Component {
       window.location.href = "/"
     }
 
-    const res6 = await axios.get("http://167.99.15.83/api/accounts/");
+    const res6 = await axios.get("http://167.99.15.83:4000/api/accounts/");
     this.setState({ cuentas: res6.data.cuentas });
 
-    const res7 = await axios.get("http://167.99.15.83/api/coins/");
+    const res7 = await axios.get("http://167.99.15.83:4000/api/coins/");
     this.setState({ coins: res7.data.coins });
   }
   onChangeBudgetstart = (e) => {
@@ -77,7 +77,7 @@ export default class BudgetNew extends Component {
 
   onSubmit = async (e) => {
     e.preventDefault();
-    const res = await axios.post("http://167.99.15.83/api/budgets", {
+    const res = await axios.post("http://167.99.15.83:4000/api/budgets", {
       code: this.state.code,
       name: this.state.name,
       tipo: this.state.tipo,
