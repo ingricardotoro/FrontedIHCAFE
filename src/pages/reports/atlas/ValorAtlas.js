@@ -18,7 +18,7 @@ export default class ValorAtlas extends Component {
     async componentDidMount() {
 
         const res_p3 = await axios.post(
-            "http://localhost:4000/api/budgetlines/atlas/findAtlasAccountsByProjAct/"
+            "http://167.99.15.83/api/budgetlines/atlas/findAtlasAccountsByProjAct/"
             + this.props.project_id + "/" + this.props.code_activity
         );
         this.setState({ atlasaccounts: res_p3.data.results });

@@ -18,13 +18,13 @@ export default class Account_list extends Component {
             window.location.href = "/"
         }
 
-        const res = await axios.get('http://localhost:4000/api/accounts/');
+        const res = await axios.get('http://167.99.15.83/api/accounts/');
         this.setState({ accounts: res.data.cuentas });
     }
 
     onSubmitDelete = async (id) => {
         const res_p = await axios.post(
-            "http://localhost:4000/api/accounts/delete/" + id
+            "http://167.99.15.83/api/accounts/delete/" + id
         );
         window.location.href = "/accounts";
 
