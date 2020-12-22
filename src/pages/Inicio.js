@@ -5,7 +5,7 @@ class Inicio extends Component {
     componentWillMount() {
 
         if (localStorage.usertoken) {
-            window.location.href = "/dashboard"
+            window.location.href = "/coins"
         }
     }
 
