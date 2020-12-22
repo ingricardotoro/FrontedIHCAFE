@@ -91,7 +91,7 @@ export default class Account_list extends Component {
                                                                     </thead>
                                                                     <tbody>
                                                                         {this.state.accounts.map(account =>
-                                                                            <Fragment>
+                                                                            <Fragment key={account.id}>
                                                                                 <tr key={account.id}>
                                                                                     <td className="pro-list-img">
                                                                                         <img width="80px" src={"assets/images/accounts/bank.jpg"} className="img-fluid" alt="tbl" />
