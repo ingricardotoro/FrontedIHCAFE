@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
 
@@ -91,21 +91,22 @@ export default class Account_list extends Component {
                                                                     </thead>
                                                                     <tbody>
                                                                         {this.state.accounts.map(account =>
-                                                                            <tr key={account.id}>
-                                                                                <td className="pro-list-img">
-                                                                                    <img width="80px" src={"assets/images/accounts/bank.jpg"} className="img-fluid" alt="tbl" />
-                                                                                </td>
-                                                                                <td>{account.name}</td>
-                                                                                <td>{account.coin.name}</td>
-                                                                                <td>{account.description}</td>
-                                                                                {/* <td>{this.formatMoney(account.actualbalance)}</td> */}
-                                                                                <td>{account.user.name} {account.user.lastname} </td>
-                                                                                {/*  <td> <Link to={'/account/' + account.id} ><button type="button" className="btn btn-primary waves-effect" >Ver Historial</button></Link></td>*/}
-                                                                                <td><button type="button" data-toggle="modal" data-target={"#modal_delete_" + account.id} className="btn btn-danger waves-effect" >Eliminar</button></td>
+                                                                            <Fragment>
+                                                                                <tr key={account.id}>
+                                                                                    <td className="pro-list-img">
+                                                                                        <img width="80px" src={"assets/images/accounts/bank.jpg"} className="img-fluid" alt="tbl" />
+                                                                                    </td>
+                                                                                    <td>{account.name}</td>
+                                                                                    <td>{account.coin.name}</td>
+                                                                                    <td>{account.description}</td>
 
-                                                                                {/* INICIO Modal DELETE*/}
+                                                                                    <td>{account.user.name} {account.user.lastname} </td>
 
-                                                                                < div
+                                                                                    <td><button type="button" data-toggle="modal" data-target={"#modal_delete_" + account.id} className="btn btn-danger waves-effect" >Eliminar</button></td>
+                                                                                </tr>
+
+
+                                                                                <div
                                                                                     className="modal fade"
                                                                                     id={"modal_delete_" + account.id}
                                                                                     tabIndex={- 1}
@@ -150,7 +151,7 @@ export default class Account_list extends Component {
                                                                                                             className="btn btn-danger waves-effect "
                                                                                                         >
                                                                                                             Eliminar Esta Cuenta Monetaria
-                </button>
+                                                                                                        </button>
                                                                                                     </div>
                                                                                                 </form>
 
@@ -161,17 +162,14 @@ export default class Account_list extends Component {
                                                                                                         data-dismiss="modal"
                                                                                                     >
                                                                                                         Cerrar
-                </button>
+                                                                                                    </button>
                                                                                                 </div>
                                                                                             </div>
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
 
-                                                                                { /*FIN Modal DELETE*/}
-
-                                                                            </tr>
-
+                                                                            </Fragment>
 
                                                                         )}
                                                                     </tbody>
