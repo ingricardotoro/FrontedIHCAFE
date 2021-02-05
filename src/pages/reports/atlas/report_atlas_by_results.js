@@ -53,7 +53,7 @@ export default class ReportAtlasByResults extends Component {
     }
 
     componentWillUnmount() {
-        alert("Desmontando Resultado")
+        //alert("Desmontando Resultado")
         this._isMounted_R = false;
     }
 
