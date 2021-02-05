@@ -27,7 +27,7 @@ export default class ModalVerFiles extends Component {
   onClickDelete = async (filename) => {
     await axios.post("http://167.99.15.83:4000/api/files/delete/" + filename);
     window.location.href =
-      "http://190.92.73.69:3001/project/" + this.props.idProject;
+      "http://167.99.15.83/project/" + this.props.idProject;
   };
 
   render() {
