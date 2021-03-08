@@ -233,7 +233,7 @@ export default class TableCost extends Component {
         this.state.comentario
       );
 
-      window.location.href = "/project/" + this.props.idProject;
+      window.location.href = "http://167.99.15.83/project/" + this.props.idProject;
     } else {
       alert("Valor No Valido");
     }
@@ -286,7 +286,7 @@ export default class TableCost extends Component {
     const res_p = await axios.post(
       "http://167.99.15.83:4000/api/budgetlines/delete/" + id
     );
-    window.location.href = "/project/" + this.props.idProject;
+    window.location.href = "http://167.99.15.83/project/" + this.props.idProject;
 
     if (res_p) {
     }

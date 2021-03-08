@@ -174,7 +174,7 @@ export default class BudgetLineEdit extends Component {
             sub_category_code: this.state.sub_category_code,
         });
 
-        window.location.href = "/project/" + this.props.match.params.projectId;
+        window.location.href = "http://167.99.15.83/project/" + this.props.match.params.projectId;
     };
 
     render() {

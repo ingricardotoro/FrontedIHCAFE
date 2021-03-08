@@ -46,7 +46,7 @@ export default class TeamMembers extends Component {
         const res_p = await axios.post(
             "http://167.99.15.83:4000/api/teammembers/delete/" + id
         );
-        window.location.href = "/teammembers/" + this.state.team.id;
+        window.location.href = "http://167.99.15.83/teammembers/" + this.state.team.id;
 
         if (res_p) {
         }
