@@ -1,9 +1,10 @@
 import React, { Component } from "react";
+import { Link, withRouter } from "react-router-dom";
+
 //import TableCost from '../components/TableCost'
 import TableCostAtlas from "../components/TableCostAtlas";
 import TableCost from "../components/TableCost";
 
-import { Link } from "react-router-dom";
 import axios from "axios";
 
 export default class ProjectDashboard extends Component {
@@ -17,6 +18,8 @@ export default class ProjectDashboard extends Component {
 
   //determinamos el tipo de presupuesto (atlas o estandar)
   async componentDidMount() {
+
+    //console.log("P=" + JSON.stringify(history))
     //verificacion de usuario logeado
     if (!localStorage.usertoken) {
       window.location.href = "/"
@@ -62,12 +65,14 @@ export default class ProjectDashboard extends Component {
                     idProject={this.props.match.params.id}
                     budget_tipo={this.state.tipo_budget} //atlas o estandar
                     budget_id={this.state.budget_id} //id del presupuesto
+                    history={this.props.history}
                   />
                 ) : (
                     <TableCost
                       idProject={this.props.match.params.id}
                       budget_tipo={this.state.tipo_budget} //atlas o estandar
                       budget_id={this.state.budget_id} //id del presupuesto
+                      history={this.props.history}
                     />
                   )}
               </div>

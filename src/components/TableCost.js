@@ -1,13 +1,13 @@
 import React, { Component } from "react";
 import axios from "axios";
 import moment from "moment";
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from "react-router-dom";
 
 import RowCardsProjects from "../components/RowCardsProjects";
 import ModalVerFiles from "./ModalVerFiles";
 
 export default class TableCost extends Component {
-  constructor() {
+  constructor(props) {
     super();
     this.state = {
       redirect: false,
@@ -64,9 +64,15 @@ export default class TableCost extends Component {
       bdg_start_project: 0.0,
 
     };
+
+    //let history = this.props
+
   }
 
   async componentDidMount() {
+
+    //const { location, history } = this.props
+    //console.log("PROPS=" + history)
 
     //verificacion de usuario logeado
     if (!localStorage.usertoken) {
@@ -233,8 +239,8 @@ export default class TableCost extends Component {
         this.state.comentario
       );
 
-      window.location.href = "http://sipa.ihcafe.hn/project/" + this.props.idProject;
-      //window.location.href = "http://localhost:3001/project/" + this.props.idProject;
+      window.location.replace('');
+
     } else {
       alert("Valor No Valido");
     }
@@ -279,8 +285,7 @@ export default class TableCost extends Component {
       sub_category_code: this.state.sub_category_code,
     });
 
-    window.location.href = "http://sipa.ihcafe.hn/project/" + this.props.idProject;
-    //window.location.href = "http://localhost:3001/project/" + this.props.idProject;
+    window.location.replace('');
 
   };
 
@@ -289,7 +294,8 @@ export default class TableCost extends Component {
     const res_p = await axios.post(
       "http://167.99.15.83:4000/api/budgetlines/delete/" + id
     );
-    window.location.href = "http://sipa.ihcafe.hn/project/" + this.props.idProject;
+
+    window.location.replace('');
 
     if (res_p) {
     }
@@ -297,7 +303,6 @@ export default class TableCost extends Component {
 
   render() {
     this.calculo();
-
     return (
       <div>
         <RowCardsProjects

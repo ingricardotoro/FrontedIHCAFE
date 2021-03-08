@@ -319,8 +319,8 @@ export default class TableCost extends Component {
         "/" +
         this.state.comentario
       );
-
-      window.location.href = "http://sipa.ihcafe.hn/project/" + this.props.idProject;
+      window.location.replace('');
+      //window.location.href = "http://sipa.ihcafe.hn/project/" + this.props.idProject;
     } else {
       alert("Valor No Valido");
     }
@@ -376,7 +376,8 @@ export default class TableCost extends Component {
         /***atlas result_atlas, product_atlas ,account_atlas */
       }
     );
-    window.location.href = "http://sipa.ihcafe.hn/project/" + this.props.idProject;
+    window.location.replace('');
+    //window.location.href = "http://sipa.ihcafe.hn/project/" + this.props.idProject;
     //window.location.reload(true);
     if (res) {
     }
@@ -387,7 +388,8 @@ export default class TableCost extends Component {
     const res_p = await axios.post(
       "http://167.99.15.83:4000/api/budgetlines/budgetlineatlas/delete/" + id
     );
-    window.location.href = "http://sipa.ihcafe.hn/project/" + this.props.idProject;
+    window.location.replace('');
+    //window.location.href = "http://sipa.ihcafe.hn/project/" + this.props.idProject;
     //return <Redirect to={"/project/"+this.props.idProject}  />
     //return res_p ==1 ?  <Redirect push to="/budgets" />:  <Redirect push to="/budgets" />
     if (res_p) {
