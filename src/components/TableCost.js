@@ -240,7 +240,7 @@ export default class TableCost extends Component {
       );
 
       console.log("APROBANDO")
-      window.location.replace('');
+      //window.location.replace('');
 
     } else {
       alert("Valor No Valido");
