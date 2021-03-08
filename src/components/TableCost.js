@@ -233,7 +233,8 @@ export default class TableCost extends Component {
         this.state.comentario
       );
 
-      window.location.href = "sipa.ihcafe.hn/project/" + this.props.idProject;
+      window.location.href = "http://sipa.ihcafe.hn/project/" + this.props.idProject;
+      //window.location.href = "http://localhost:3001/project/" + this.props.idProject;
     } else {
       alert("Valor No Valido");
     }
@@ -279,6 +280,8 @@ export default class TableCost extends Component {
     });
 
     window.location.href = "http://sipa.ihcafe.hn/project/" + this.props.idProject;
+    //window.location.href = "http://localhost:3001/project/" + this.props.idProject;
+
   };
 
   //funcion para elimiar un renglon presupuestario
@@ -975,7 +978,7 @@ export default class TableCost extends Component {
                           Seleccione Clasificación de Renglón
                         </option>
                         {this.state.clasificaciones.map((clasificacion) => (
-                          <option value={clasificacion.code}>
+                          <option key={clasificacion.id} value={clasificacion.code}>
                             ({clasificacion.code})-{clasificacion.name}{" "}
                           </option>
                         ))}
