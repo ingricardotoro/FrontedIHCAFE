@@ -239,6 +239,7 @@ export default class TableCost extends Component {
         this.state.comentario
       );
 
+      console.log("APROBANDO")
       window.location.replace('');
 
     } else {
