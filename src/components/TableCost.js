@@ -233,7 +233,7 @@ export default class TableCost extends Component {
         this.state.comentario
       );
 
-      window.location.href = "http://sipa.ihcafe.hn/project/" + this.props.idProject;
+      window.location.href = "sipa.ihcafe.hn/project/" + this.props.idProject;
     } else {
       alert("Valor No Valido");
     }
@@ -278,7 +278,7 @@ export default class TableCost extends Component {
       sub_category_code: this.state.sub_category_code,
     });
 
-    window.location.href = "/project/" + this.props.idProject;
+    window.location.href = "http://sipa.ihcafe.hn/project/" + this.props.idProject;
   };
 
   //funcion para elimiar un renglon presupuestario
