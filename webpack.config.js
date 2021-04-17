@@ -8,7 +8,9 @@ module.exports = env => {
     return {
 
         //entry: __dirname + "/src/index.js",
-        entry: path.resolve(__dirname, 'src', 'index.js'),
+        //entry: path.resolve(__dirname, 'src', 'index.js'),
+        entry: ["babel-polyfill", path.resolve(__dirname, 'src', 'index.js')],
+        //entry: ['babel-polyfill', './test.js'],
         mode: 'development',
         output: {
             path: path.resolve(__dirname, 'build')
