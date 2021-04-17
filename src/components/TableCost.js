@@ -1,14 +1,15 @@
 import React, { Component } from "react";
 import axios from "axios";
 import moment from "moment";
-import { Link, useHistory } from "react-router-dom";
+import { Link, Redirect, useHistory } from "react-router-dom";
 
-import RowCardsProjects from "../components/RowCardsProjects";
+import RowCardsProjects from "./RowCardsProjects";
 import ModalVerFiles from "./ModalVerFiles";
 
 export default class TableCost extends Component {
   constructor(props) {
     super();
+
     this.state = {
       redirect: false,
 
@@ -65,7 +66,7 @@ export default class TableCost extends Component {
 
     };
 
-    //let history = this.props
+    //let history = useHistory()
 
   }
 
@@ -240,6 +241,9 @@ export default class TableCost extends Component {
       );
 
       console.log("APROBANDO")
+      //this.setState({ redirect: true })
+      window.location.replace('/project/' + this.props.idProject);
+
       //window.location.replace('');
 
     } else {
@@ -286,8 +290,8 @@ export default class TableCost extends Component {
       sub_category_code: this.state.sub_category_code,
     });
 
-    window.location.replace('');
-
+    window.location.replace('/project/' + this.props.idProject);
+    //this.props.history.push('/project/' + this.props.idProject);
   };
 
   //funcion para elimiar un renglon presupuestario
@@ -296,13 +300,15 @@ export default class TableCost extends Component {
       "http://167.99.15.83:4000/api/budgetlines/delete/" + id
     );
 
-    window.location.replace('');
+    //window.location.replace('');
+    window.location.replace('/project/' + this.props.idProject);
 
     if (res_p) {
     }
   };
 
   render() {
+
     this.calculo();
     return (
       <div>
