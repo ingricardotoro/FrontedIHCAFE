@@ -173,8 +173,8 @@ export default class BudgetLineEdit extends Component {
             category_id: this.state.category_id,
             sub_category_code: this.state.sub_category_code,
         });
-
-        window.location.href = "http://sipa.ihcafe.hn/project/" + this.props.match.params.projectId;
+        window.location.replace('');
+        //window.location.href = "http://sipa.ihcafe.hn/project/" + this.props.match.params.projectId;
     };
 
     render() {
