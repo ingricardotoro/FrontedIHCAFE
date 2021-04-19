@@ -3,7 +3,7 @@ import { Link, withRouter } from "react-router-dom";
 
 //import TableCost from '../components/TableCost'
 import TableCostAtlas from "../components/TableCostAtlas";
-import TableCost from "../components/TableCost";
+import TableCost from "../components/TableCost_orginal";
 
 import axios from "axios";
 
