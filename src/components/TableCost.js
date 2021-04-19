@@ -259,7 +259,9 @@ function TableCost(props) {
             )
 
             console.log("APROBANDO" + JSON.stringify(res))
-            history.push('/project/' + idProject)
+            window.location.replace('/project/' + this.props.idProject);
+
+            //history.push('/project/' + idProject)
             //this.setState({ redirect: true })
             //window.location.replace('/project/' + this.props.idProject);
             //window.location.replace('');
@@ -279,6 +281,16 @@ function TableCost(props) {
 
     const onClickFaseArchivo = async (e) => {
         setFase_archivo(e.target.value)
+    }
+
+    onClickSubirArchivo = async (id) => {
+        await axios.post("http://167.99.15.83:4000/api/files/" + id, {
+            nombre_archivo: this.state.nombre_archivo,
+            fase_archivo: this.state.fase_archivo,
+            file: this.state.archivo,
+        })
+        window.location.replace('/project/' + this.props.idProject);
+
     }
 
     const onSubmit = async (e) => {
@@ -313,7 +325,9 @@ function TableCost(props) {
         );
 
         //window.location.replace('');
-        history.push('/project/' + idProject);
+        window.location.replace('/project/' + this.props.idProject);
+
+        //history.push('/project/' + idProject);
 
         if (res_p) {
         }
