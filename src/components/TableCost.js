@@ -282,7 +282,7 @@ function TableCost(props) {
     }
 
     const onSubmit = async (e) => {
-        //e.preventDefault();
+        e.preventDefault();
         await axios.post("http://167.99.15.83:4000/api/budgetlines/", {
             code: budgetLine.code,
             description: budgetLine.description,
@@ -303,8 +303,8 @@ function TableCost(props) {
         })
 
         //console.log("RES=" + JSON.stringify(res.data.status))
-        history.replace('/project/' + idProject)
-        //window.location.replace('/project/' + this.props.idProject);
+        //history.replace('/project/' + idProject)
+        window.location.replace('/project/' + this.props.idProject);
     }
 
     const onSubmitDelete = async (id) => {

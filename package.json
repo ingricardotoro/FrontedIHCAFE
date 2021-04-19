@@ -31,7 +31,7 @@
     "react-scripts": "^3.4.0",
     "react-uid": "^2.3.0"
   },
-  "homepage": ".",
+  "homepage": "http://sipa.ihcafe.hn/",
   "scripts": {
     "start": "react-scripts start",
     "build_old": "react-scripts build",
