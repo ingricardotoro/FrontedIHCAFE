@@ -8,8 +8,8 @@ module.exports = env => {
     return {
 
         //entry: __dirname + "/src/index.js",
-        //entry: path.resolve(__dirname, 'src', 'index.js'),
-        entry: ["babel-polyfill", path.resolve(__dirname, 'src', 'index.js')],
+        entry: path.resolve(__dirname, 'src', 'index.js'),
+        //entry: ["babel-polyfill", path.resolve(__dirname, 'index.js')],
         //entry: ['babel-polyfill', './test.js'],
         mode: 'development',
         output: {
@@ -22,7 +22,7 @@ module.exports = env => {
             rules: [
                 {
                     test: /\.(js|jsx)$/,
-                    include: path.resolve(__dirname, 'src'),
+                    //include: path.resolve(__dirname, 'src'),
                     exclude: /node_modules/,
                     use: {
                         loader: "babel-loader",
@@ -38,7 +38,7 @@ module.exports = env => {
                 },
                 {
                     test: /\.css$/i,
-                    include: path.resolve(__dirname, 'src'),
+                    //include: path.resolve(__dirname, 'src'),
                     exclude: /node_modules/,
                     //use: ['style-loader', 'css-loader']
                     use: [{

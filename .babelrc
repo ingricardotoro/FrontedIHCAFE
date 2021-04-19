@@ -1,18 +1,18 @@
 {
   "presets": [
     "@babel/preset-env",
-    "@babel/preset-react"
+    //"@babel/preset-react",
+    //"es2015",
+    //"stage-0"
   ],
   "plugins": [
     "@babel/plugin-proposal-class-properties",
-    [
+    "@babel/transform-runtime"
+    /*[
       "transform-runtime",
       {
         "regenerator": true
       }
-    ]
+    ]*/
   ]
-  /*"presets": [
-    "react"
-  ]*/
 }
