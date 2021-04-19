@@ -282,7 +282,7 @@ function TableCost(props) {
     }
 
     const onSubmit = async (e) => {
-        e.preventDefault();
+        //e.preventDefault();
         await axios.post("http://167.99.15.83:4000/api/budgetlines/", {
             code: budgetLine.code,
             description: budgetLine.description,
