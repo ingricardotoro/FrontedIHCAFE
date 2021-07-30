@@ -5,6 +5,7 @@ import { Link, Redirect, useHistory } from "react-router-dom";
 
 import RowCardsProjects from "./RowCardsProjects";
 import ModalVerFiles from "./ModalVerFiles";
+import jwt_decode from 'jwt-decode'
 
 function TableCost(props) {
 
@@ -259,7 +260,7 @@ function TableCost(props) {
             )
 
             console.log("APROBANDO" + JSON.stringify(res))
-            window.location.replace('/project/' + this.props.idProject);
+            window.location.replace('/project/' + idProject);
 
             //history.push('/project/' + idProject)
             //this.setState({ redirect: true })
@@ -285,9 +286,9 @@ function TableCost(props) {
 
     onClickSubirArchivo = async (id) => {
         await axios.post("http://167.99.15.83:4000/api/files/" + id, {
-            nombre_archivo: this.state.nombre_archivo,
-            fase_archivo: this.state.fase_archivo,
-            file: this.state.archivo,
+            nombre_archivo: nombre_archivo,
+            fase_archivo: fase_archivo,
+            file: archivo,
         })
         window.location.replace('/project/' + this.props.idProject);
 
@@ -316,7 +317,7 @@ function TableCost(props) {
 
         //console.log("RES=" + JSON.stringify(res.data.status))
         //history.replace('/project/' + idProject)
-        window.location.replace('/project/' + this.props.idProject);
+        window.location.replace('/project/' + idProject);
     }
 
     const onSubmitDelete = async (id) => {
@@ -325,7 +326,7 @@ function TableCost(props) {
         );
 
         //window.location.replace('');
-        window.location.replace('/project/' + this.props.idProject);
+        window.location.replace('/project/' + idProject);
 
         //history.push('/project/' + idProject);
 
@@ -431,10 +432,10 @@ function TableCost(props) {
                                     </button>{" "}
                                                                     </td>
                                                                 ) : (
-                                                                        <td>
-                                                                            <label>{budgetLine.status}</label>
-                                                                        </td>
-                                                                    )}
+                                                                    <td>
+                                                                        <label>{budgetLine.status}</label>
+                                                                    </td>
+                                                                )}
 
                                                                 {budgetLine.status === "Aprobado" ? (
                                                                     <td>
@@ -450,10 +451,10 @@ function TableCost(props) {
                                     </button>
                                                                     </td>
                                                                 ) : (
-                                                                        <td align="center">
-                                                                            <label>---</label>
-                                                                        </td>
-                                                                    )}
+                                                                    <td align="center">
+                                                                        <label>---</label>
+                                                                    </td>
+                                                                )}
 
                                                                 <td>
                                                                     <button

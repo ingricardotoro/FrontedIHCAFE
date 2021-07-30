@@ -30,7 +30,8 @@ export default class ProjectNew extends Component {
             window.location.href = "/"
         }
 
-        const res = await axios.get('http://167.99.15.83:4000/api/budgets/');
+        const res = await axios.get('http://167.99.15.83:4000/api/budgets/all');
+        console.log("PRE=" + JSON.stringify(res.data.budgets))
         this.setState({ budgets: res.data.budgets });
 
         const res2 = await axios.get('http://167.99.15.83:4000/api/teams/');
