@@ -53,6 +53,7 @@ function TableCost(props) {
         account_id: 0,
         budgetstart: 0.0,//
         budgeupdate: 0.0,
+        budgetactual: 0.0,
         budgetfinal: 0.0,
         balance: 0.0,//
         description: ""
@@ -206,6 +207,42 @@ function TableCost(props) {
             balance: e.target.value,
         })
     }
+
+    const onChanceBudgetStart = (e) => {
+        setBudgetLine({
+            ...budgetLine,
+            budgetstart: e.target.value,
+            //balance: e.target.value,
+        })
+    };
+
+    const onChanceBudgeUpdate = (e) => {
+        setBudgetLine({
+            ...budgetLine,
+            budgeupdate: e.target.value,
+        })
+    };
+
+    const onChanceBudgetActual = (e) => {
+        setBudgetLine({
+            ...budgetLine,
+            budgeactual: e.target.value,
+        })
+    };
+
+    const onChancebuddgetFinal = (e) => {
+        setBudgetLine({
+            ...budgetLine,
+            budgetfinal: e.target.value,
+        })
+    };
+
+    const onChanceBalance = (e) => {
+        setBudgetLine({
+            ...budgetLine,
+            balance: e.target.value,
+        })
+    };
 
     const onchangeComentario = (e) => {
         setComentario(e.target.value)
@@ -365,7 +402,7 @@ function TableCost(props) {
                                     data-target="#modal-13"
                                 >
                                     <i className="icofont icofont-plus m-r-5" /> Crear Nuevo
-                </button>
+                                </button>
                             </div>
 
                             <div className="card-block">
@@ -380,7 +417,11 @@ function TableCost(props) {
                                                     <tr>
                                                         <th>Código</th>
                                                         <th>Nombre</th>
-                                                        <th>Valor</th>
+                                                        <th>Valor Inicial</th>
+                                                        <th>Modificado</th>
+                                                        <th>Actual</th>
+                                                        <th>Ejecutado</th>
+                                                        <th>Disponible</th>
                                                         <th>Fecha</th>
                                                         <th>Estado</th>
                                                         <th>Rembolsar</th>
@@ -401,12 +442,63 @@ function TableCost(props) {
                                                                     <h6>{budgetLine.name}</h6>
                                                                 </td>
 
-                                                                <td>
-                                                                    <label className="text-info">
-                                                                        {formatMoney(budgetLine.balance)}
-                                                                    </label>
-                                                                </td>
-
+                                                                {budgetLine.statu === "Aprobado" ? (
+                                                                    <>
+                                                                        <td>
+                                                                            <label className="text-info">
+                                                                                {formatMoney(budgetLine.budgetstart)}
+                                                                            </label>
+                                                                        </td>
+                                                                        <td>
+                                                                            <label className="text-info">
+                                                                                {formatMoney(budgetLine.budgeupdate)}
+                                                                            </label>
+                                                                        </td>
+                                                                        <td>
+                                                                            <label className="text-info">
+                                                                                {formatMoney(budgetLine.budgetactual)}
+                                                                            </label>
+                                                                        </td>
+                                                                        <td>
+                                                                            <label className="text-info">
+                                                                                {formatMoney(budgetLine.budgetfinal)}
+                                                                            </label>
+                                                                        </td>
+                                                                        <td>
+                                                                            <label className="text-info">
+                                                                                {formatMoney(budgetLine.balance)}
+                                                                            </label>
+                                                                        </td>
+                                                                    </>
+                                                                ) : (
+                                                                    <>
+                                                                        <td>
+                                                                            <label className="text-info">
+                                                                                {formatMoney(budgetLine.budgetstart)}
+                                                                            </label>
+                                                                        </td>
+                                                                        <td>
+                                                                            <label className="text-info">
+                                                                                {formatMoney(budgetLine.budgeupdate)}
+                                                                            </label>
+                                                                        </td>
+                                                                        <td>
+                                                                            <label className="text-info">
+                                                                                {formatMoney(budgetLine.budgetactual)}
+                                                                            </label>
+                                                                        </td>
+                                                                        <td>
+                                                                            <label className="text-info">
+                                                                                {formatMoney(budgetLine.budgetfinal)}
+                                                                            </label>
+                                                                        </td>
+                                                                        <td>
+                                                                            <label className="text-info">
+                                                                                {formatMoney(budgetLine.balance)}
+                                                                            </label>
+                                                                        </td>
+                                                                    </>
+                                                                )}
                                                                 <td>
                                                                     <label className="text-danger">
                                                                         {" "}
@@ -418,7 +510,7 @@ function TableCost(props) {
                                                                     </label>
                                                                 </td>
 
-                                                                {budgetLine.status === "Solicitado" ? (
+                                                                {budgetLine.status === "Solicitado" && rol === 2 ? (
                                                                     <td>
                                                                         <button
                                                                             type="button"
@@ -429,7 +521,7 @@ function TableCost(props) {
                                                                             }
                                                                         >
                                                                             Decidir
-                                    </button>{" "}
+                                                                        </button>{" "}
                                                                     </td>
                                                                 ) : (
                                                                     <td>
@@ -448,7 +540,7 @@ function TableCost(props) {
                                                                             }
                                                                         >
                                                                             Rembolsar
-                                    </button>
+                                                                        </button>
                                                                     </td>
                                                                 ) : (
                                                                     <td align="center">
@@ -466,7 +558,7 @@ function TableCost(props) {
                                                                         }
                                                                     >
                                                                         Ver
-                                    </button>
+                                                                    </button>
                                                                     <button
                                                                         type="button"
                                                                         class="btn btn-success waves-effect"
@@ -476,7 +568,7 @@ function TableCost(props) {
                                                                         }
                                                                     >
                                                                         Subir
-                                    </button>
+                                                                    </button>
                                                                 </td>
                                                                 <td align="center" className="action-icon">
                                                                     < Link
@@ -551,7 +643,7 @@ function TableCost(props) {
                                                                                         >
                                                                                             Eliminar Este Renglón
                                                                                             Presupuestario
-                                            </button>
+                                                                                        </button>
                                                                                     </div>
                                                                                 </form>
 
@@ -562,7 +654,7 @@ function TableCost(props) {
                                                                                         data-dismiss="modal"
                                                                                     >
                                                                                         Cerrar
-                                            </button>
+                                                                                    </button>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
@@ -597,7 +689,7 @@ function TableCost(props) {
                                                                                 >
                                                                                     <span aria-hidden="true">
                                                                                         &times;
-                                            </span>
+                                                                                    </span>
                                                                                 </button>
                                                                             </div>
                                                                             <form>
@@ -616,13 +708,13 @@ function TableCost(props) {
                                                                                     >
                                                                                         <option value="1">
                                                                                             Si Aprobar
-                                            </option>
+                                                                                        </option>
                                                                                         <option value="1">
                                                                                             SI APROBAR
-                                            </option>
+                                                                                        </option>
                                                                                         <option value="2">
                                                                                             NO APROBAR
-                                            </option>
+                                                                                        </option>
                                                                                     </select>
 
                                                                                     <label>Monto A Aprobar</label>
@@ -650,7 +742,7 @@ function TableCost(props) {
                                                                                         data-dismiss="modal"
                                                                                     >
                                                                                         Cerrar
-                                            </button>
+                                                                                    </button>
                                                                                     <button
                                                                                         type="submit"
                                                                                         onClick={() =>
@@ -662,7 +754,7 @@ function TableCost(props) {
                                                                                         class="btn btn-primary waves-effect waves-light "
                                                                                     >
                                                                                         Guardar
-                                            </button>
+                                                                                    </button>
                                                                                 </div>
                                                                             </form>
                                                                         </div>
@@ -693,7 +785,7 @@ function TableCost(props) {
                                                                             <div class="modal-header">
                                                                                 <h4 class="modal-title">
                                                                                     {budgetLine.name}-
-                                            {formatMoney(
+                                                                                    {formatMoney(
                                                                                         budgetLine.balance
                                                                                     )}{" "}
                                                                                 </h4>
@@ -705,7 +797,7 @@ function TableCost(props) {
                                                                                 >
                                                                                     <span aria-hidden="true">
                                                                                         &times;
-                                            </span>
+                                                                                    </span>
                                                                                 </button>
                                                                             </div>
                                                                             <form
@@ -763,16 +855,16 @@ function TableCost(props) {
                                                                                         >
                                                                                             <option value="0">
                                                                                                 Seleccion Fase
-                                                </option>
+                                                                                            </option>
                                                                                             <option value="Solicitud">
                                                                                                 Solicitud
-                                                </option>
+                                                                                            </option>
                                                                                             <option value="Desembolso">
                                                                                                 Desembolso
-                                                </option>
+                                                                                            </option>
                                                                                             <option value="Liquidacion">
                                                                                                 Liquidacion
-                                                </option>
+                                                                                            </option>
                                                                                         </select>
                                                                                     </div>
                                                                                 </div>
@@ -783,14 +875,14 @@ function TableCost(props) {
                                                                                         data-dismiss="modal"
                                                                                     >
                                                                                         Cerrar
-                                            </button>
+                                                                                    </button>
                                                                                     {/* <button type="button" onClick={ () =>this.onClickSubirArchivo(budgetLines.id )} class="btn btn-primary waves-effect waves-light ">Guardar</button> */}
                                                                                     <button
                                                                                         type="submit"
                                                                                         class="btn btn-primary waves-effect waves-light "
                                                                                     >
                                                                                         Guardar
-                                            </button>
+                                                                                    </button>
                                                                                 </div>
                                                                             </form>
                                                                         </div>
@@ -812,9 +904,9 @@ function TableCost(props) {
                                                                             <div class="modal-header">
                                                                                 <h4 class="modal-title">
                                                                                     Rembolsar {budgetLine.name}-
-                                            {formatMoney(
-                                                                                    budgetLine.balance
-                                                                                )}{" "}
+                                                                                    {formatMoney(
+                                                                                        budgetLine.balance
+                                                                                    )}{" "}
                                                                                 </h4>
                                                                                 <button
                                                                                     type="button"
@@ -824,7 +916,7 @@ function TableCost(props) {
                                                                                 >
                                                                                     <span aria-hidden="true">
                                                                                         &times;
-                                            </span>
+                                                                                    </span>
                                                                                 </button>
                                                                             </div>
                                                                             <div
@@ -834,7 +926,7 @@ function TableCost(props) {
                                                                                 <div>
                                                                                     <label htmlFor="">
                                                                                         Descripción del Rembolso
-                                            </label>
+                                                                                    </label>
                                                                                     <textarea
                                                                                         className="form-control"
                                                                                         style={{ width: "100%" }}
@@ -857,7 +949,7 @@ function TableCost(props) {
                                                                                         className="btn btn-primary waves-effect waves-light "
                                                                                     >
                                                                                         Reembolsar
-                                            </button>
+                                                                                    </button>
                                                                                 </div>
                                                                             </div>
                                                                             <div class="modal-footer">
@@ -867,7 +959,7 @@ function TableCost(props) {
                                                                                     data-dismiss="modal"
                                                                                 >
                                                                                     Cerrar
-                                        </button>
+                                                                                </button>
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -964,7 +1056,7 @@ function TableCost(props) {
                             <div className="modal-header">
                                 <h4 className="modal-title">
                                     Crear Nuevo Renglón Presupuestario
-                </h4>
+                                </h4>
                                 <button
                                     type="button"
                                     className="close"
@@ -1012,7 +1104,7 @@ function TableCost(props) {
                                         >
                                             <option value="#">
                                                 Seleccione Clasificación de Renglón
-                    </option>
+                                            </option>
                                             {clasificaciones.map((clasificacion) => (
                                                 <option key={clasificacion.id} value={clasificacion.code}>
                                                     ({clasificacion.code})-{clasificacion.name}{" "}
@@ -1047,7 +1139,7 @@ function TableCost(props) {
                                         >
                                             <option value="#">
                                                 Seleccione Beneficiario/Proveedor
-                    </option>
+                                            </option>
                                             {suppliers.map((supplier) => (
                                                 <option key={supplier.id} value={supplier.id}>
                                                     {supplier.contact_name}{" "}
@@ -1068,17 +1160,67 @@ function TableCost(props) {
                                         ></textarea>
                                     </div>
 
-                                    <div style={{ width: "50%", display: "inline-block" }}>
+                                    <div style={{ width: "25%", display: "inline-block" }}>
+                                        <label htmlFor="">Inicial</label>
+
                                         <input
                                             name="buddgetstart"
                                             type="number"
-                                            onChange={onChanceBudget}
+                                            onChange={onChanceBudgetStart}
                                             type="text"
                                             className="form-control"
-                                            placeholder="Ingrese El valor Solicitado : 0,000.00 "
+                                            placeholder="valor Inicial : 0,000.00 "
                                         />
                                     </div>
-                                    <div style={{ width: "50%", display: "inline-block" }}>
+                                    <div style={{ width: "25%", display: "inline-block" }}>
+                                        <label htmlFor="">Modificado</label>
+
+                                        <input
+                                            name="buddgetupdate"
+                                            type="number"
+                                            onChange={onChanceBudgeUpdate}
+                                            type="text"
+                                            className="form-control"
+                                            placeholder="valor Modificado : 0,000.00 "
+                                        />
+                                    </div>
+                                    <div style={{ width: "25%", display: "inline-block" }}>
+                                        <label htmlFor="">Actual</label>
+
+                                        <input
+                                            name="buddgetactual"
+                                            type="number"
+                                            onChange={onChanceBudgetActual}
+                                            type="text"
+                                            className="form-control"
+                                            placeholder="valor Actual : 0,000.00 "
+                                        />
+                                    </div>
+                                    <div style={{ width: "25%", display: "inline-block" }}>
+                                        <label htmlFor="">En Ejecucion</label>
+
+                                        <input
+                                            name="buddgetfinal"
+                                            type="number"
+                                            onChange={onChancebuddgetFinal}
+                                            type="text"
+                                            className="form-control"
+                                            placeholder="valor Ejecucion : 0,000.00 "
+                                        />
+                                    </div>
+                                    <div style={{ width: "33%", display: "inline-block", marginTop: '15px' }}>
+                                        <label htmlFor="">Disponible</label>
+
+                                        <input
+                                            name="balance"
+                                            onChange={onChanceBalance}
+                                            type="text"
+                                            className="form-control"
+                                            placeholder="Valor Disponible"
+                                        />
+                                    </div>
+                                    <div style={{ width: "33%", display: "inline-block", marginTop: '15px' }}>
+
                                         <input
                                             name="code"
                                             onChange={onChanceCode}
@@ -1088,16 +1230,16 @@ function TableCost(props) {
                                         />
                                     </div>
 
-                                    <div style={{ width: "50%", display: "inline-block" }}>
+                                    <div style={{ width: "33%", display: "inline-block", marginTop: '15px' }}>
                                         <input
                                             onChange={onChangeStartDate}
                                             className="form-control mt-3"
                                             type="date"
-                                            placeholder="Fecha de Inicio"
+                                            placeholder="Fecha"
                                         />
-                                        <label htmlFor="">Fecha de Inicio</label>
+                                        <label htmlFor="">Fecha</label>
                                     </div>
-                                    <div style={{ width: "50%", display: "inline-block" }}>
+                                    {/*  <div style={{ width: "50%", display: "inline-block" }}>
                                         <input
                                             onChange={onChangeEndDate}
                                             class="form-control mt-3"
@@ -1105,7 +1247,7 @@ function TableCost(props) {
                                             placeholder="Fecha de Final"
                                         />
                                         <label htmlFor="">Fecha de Finalización</label>
-                                    </div>
+                                    </div> */}
 
                                     <div className="modal-footer">
                                         <button
@@ -1115,13 +1257,13 @@ function TableCost(props) {
                                             data-dismiss="modal"
                                         >
                                             Cerrar
-                    </button>
+                                        </button>
                                         <button
                                             type="button"
                                             className="btn btn-primary waves-effect waves-light "
                                         >
                                             Guardar
-                    </button>
+                                        </button>
                                     </div>
                                 </form>
                             </div>

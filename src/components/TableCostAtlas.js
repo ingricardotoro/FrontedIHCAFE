@@ -648,7 +648,7 @@ function TableCostAtlas(props) {
                                                                             }
                                                                         >
                                                                             Decidir
-                                      </button>{" "}
+                                                                        </button>{" "}
                                                                     </td>
                                                                 ) : (
                                                                     <td>
@@ -667,7 +667,7 @@ function TableCostAtlas(props) {
                                                                             }
                                                                         >
                                                                             Rembolsar
-                                      </button>
+                                                                        </button>
                                                                     </td>
                                                                 ) : (
                                                                     <td align="center">
@@ -685,7 +685,7 @@ function TableCostAtlas(props) {
                                                                         }
                                                                     >
                                                                         Ver
-                                    </button>
+                                                                    </button>
                                                                     <button
                                                                         type="button"
                                                                         class="btn btn-success waves-effect"
@@ -695,7 +695,7 @@ function TableCostAtlas(props) {
                                                                         }
                                                                     >
                                                                         Subir
-                                    </button>
+                                                                    </button>
                                                                 </td>
                                                                 <td align="center" className="action-icon">
                                                                     < Link
@@ -774,7 +774,7 @@ function TableCostAtlas(props) {
                                                                                         >
                                                                                             Eliminar Este Renglon
                                                                                             Presupuestario
-                                              </button>
+                                                                                        </button>
                                                                                     </div>
                                                                                 </form>
 
@@ -785,7 +785,7 @@ function TableCostAtlas(props) {
                                                                                         data-dismiss="modal"
                                                                                     >
                                                                                         Cerrar
-                                            </button>
+                                                                                    </button>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
@@ -820,7 +820,7 @@ function TableCostAtlas(props) {
                                                                                 >
                                                                                     <span aria-hidden="true">
                                                                                         &times;
-                                            </span>
+                                                                                    </span>
                                                                                 </button>
                                                                             </div>
                                                                             <form>
@@ -839,13 +839,13 @@ function TableCostAtlas(props) {
                                                                                     >
                                                                                         <option value="1">
                                                                                             Si Aprobar
-                                              </option>
+                                                                                        </option>
                                                                                         <option value="1">
                                                                                             SI APROBAR
-                                              </option>
+                                                                                        </option>
                                                                                         <option value="2">
                                                                                             NO APROBAR
-                                              </option>
+                                                                                        </option>
                                                                                     </select>
 
                                                                                     <label>Monto A Aprobar</label>
@@ -873,7 +873,7 @@ function TableCostAtlas(props) {
                                                                                         data-dismiss="modal"
                                                                                     >
                                                                                         Cerrar
-                                            </button>
+                                                                                    </button>
                                                                                     <button
                                                                                         type="button"
                                                                                         onClick={() =>
@@ -885,7 +885,7 @@ function TableCostAtlas(props) {
                                                                                         class="btn btn-primary waves-effect waves-light "
                                                                                     >
                                                                                         Guardar
-                                            </button>
+                                                                                    </button>
                                                                                 </div>
                                                                             </form>
                                                                         </div>
@@ -922,8 +922,8 @@ function TableCostAtlas(props) {
                                                                                         budgetLinesAtlas.atlas_account
                                                                                             .name
                                                                                     }
-                                            -
-                                            {formatMoney(
+                                                                                    -
+                                                                                    {formatMoney(
                                                                                         budgetLinesAtlas.budgetstart
                                                                                     )}{" "}
                                                                                 </h4>
@@ -935,7 +935,7 @@ function TableCostAtlas(props) {
                                                                                 >
                                                                                     <span aria-hidden="true">
                                                                                         &times;
-                                            </span>
+                                                                                    </span>
                                                                                 </button>
                                                                             </div>
                                                                             <form
@@ -993,16 +993,16 @@ function TableCostAtlas(props) {
                                                                                         >
                                                                                             <option value="0">
                                                                                                 Seleccion Fase
-                                                </option>
+                                                                                            </option>
                                                                                             <option value="Solicitud">
                                                                                                 Solicitud
-                                                </option>
+                                                                                            </option>
                                                                                             <option value="Desembolso">
                                                                                                 Desembolso
-                                                </option>
+                                                                                            </option>
                                                                                             <option value="Liquidacion">
                                                                                                 Liquidacion
-                                                </option>
+                                                                                            </option>
                                                                                         </select>
                                                                                     </div>
                                                                                 </div>
@@ -1013,14 +1013,14 @@ function TableCostAtlas(props) {
                                                                                         data-dismiss="modal"
                                                                                     >
                                                                                         Cerrar
-                                            </button>
+                                                                                    </button>
                                                                                     {/* <button type="button" onClick={ () =>onClickSubirArchivo(budgetLinesAtlas.id )} class="btn btn-primary waves-effect waves-light ">Guardar</button> */}
                                                                                     <button
                                                                                         type="submit"
                                                                                         class="btn btn-primary waves-effect waves-light "
                                                                                     >
                                                                                         Guardar
-                                            </button>
+                                                                                    </button>
                                                                                 </div>
                                                                             </form>
                                                                         </div>
@@ -1042,9 +1042,9 @@ function TableCostAtlas(props) {
                                                                             <div class="modal-header">
                                                                                 <h4 class="modal-title">
                                                                                     Rembolsar {budgetLinesAtlas.name}-
-                                            {formatMoney(
-                                                                                    budgetLinesAtlas.budgetstart
-                                                                                )}{" "}
+                                                                                    {formatMoney(
+                                                                                        budgetLinesAtlas.budgetstart
+                                                                                    )}{" "}
                                                                                 </h4>
                                                                                 <button
                                                                                     type="button"
@@ -1054,14 +1054,14 @@ function TableCostAtlas(props) {
                                                                                 >
                                                                                     <span aria-hidden="true">
                                                                                         &times;
-                                            </span>
+                                                                                    </span>
                                                                                 </button>
                                                                             </div>
                                                                             <div class="modal-body" align="center">
                                                                                 <div>
                                                                                     <label htmlFor="">
                                                                                         Descripción del Rembolso
-                                            </label>
+                                                                                    </label>
                                                                                     <textarea
                                                                                         className="form-control"
                                                                                         style={{ width: "100%" }}
@@ -1084,7 +1084,7 @@ function TableCostAtlas(props) {
                                                                                         className="btn btn-primary waves-effect waves-light "
                                                                                     >
                                                                                         Reembolsar
-                                            </button>
+                                                                                    </button>
                                                                                 </div>
                                                                             </div>
                                                                             <div class="modal-footer">
@@ -1094,7 +1094,7 @@ function TableCostAtlas(props) {
                                                                                     data-dismiss="modal"
                                                                                 >
                                                                                     Cerrar
-                                          </button>
+                                                                                </button>
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -1190,7 +1190,7 @@ function TableCostAtlas(props) {
                             <div className="modal-header">
                                 <h4 className="modal-title">
                                     Crear Nuevo Renglón Presupuestario
-                  </h4>
+                                </h4>
                                 <button
                                     type="button"
                                     className="close"
@@ -1408,7 +1408,7 @@ function TableCostAtlas(props) {
                                         <label htmlFor="">Modificado</label>
 
                                         <input
-                                            name="buddgetstart"
+                                            name="buddgetupdate"
                                             onChange={onChanceBudgeUpdate}
                                             type="text"
                                             className="form-control"
@@ -1419,18 +1419,18 @@ function TableCostAtlas(props) {
                                         <label htmlFor="">Actual</label>
 
                                         <input
-                                            name="buddgetstart"
+                                            name="buddgetactual"
                                             onChange={onChanceBudgetActual}
                                             type="text"
                                             className="form-control"
-                                            placeholder="valor Acutal : 0,000.00 "
+                                            placeholder="valor Actual : 0,000.00 "
                                         />
                                     </div>
                                     <div style={{ width: "25%", display: "inline-block" }}>
                                         <label htmlFor="">En Ejecucion</label>
 
                                         <input
-                                            name="buddgetstart"
+                                            name="buddgetfinal"
                                             onChange={onChancebuddgetFinal}
                                             type="text"
                                             className="form-control"
@@ -1442,7 +1442,7 @@ function TableCostAtlas(props) {
                                         <label htmlFor="">Disponible</label>
 
                                         <input
-                                            name="code"
+                                            name="balance"
                                             onChange={onChanceBalance}
                                             type="text"
                                             className="form-control"
@@ -1494,7 +1494,7 @@ function TableCostAtlas(props) {
                                             className="btn btn-primary waves-effect waves-light "
                                         >
                                             Guardar
-                                         </button>
+                                        </button>
                                     </div>
                                 </form>
                             </div>
