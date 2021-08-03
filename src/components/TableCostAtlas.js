@@ -406,35 +406,40 @@ function TableCostAtlas(props) {
     //codigo para crear un nuevo renglon presupuestario
     const onSubmit = async (e) => {
         e.preventDefault();
+
+        let data = {
+            code_resultado: result_atlas,
+            code_producto: product_atlas,
+            code_activity: activity_atlas,
+            code_atlas: account_atlas,
+            code_sub_atlas: sub_account_atlas,
+
+            code: code,
+            details: details,
+            // name:name,
+            status: budgetLine.status,
+            //project_id:project_id,
+            project_id: idProject,
+            user_id: budgetLine.user_id,
+            supplier_id: supplier,
+            date_start: budgetLine.startdate,
+            date_end: budgetLine.startdate,
+            account_id: account_id,
+            budgetstart: budgetLine.budgetstart,
+            budgeupdate: budgetLine.budgeupdate,
+            budgetfinal: budgetLine.budgetfinal,
+            budgetactual: budgetLine.budgetactual,
+            balance: budgetLine.balance,
+            //category_id: category_id,
+
+        }
+
+        console.log("DATA=" + JSON.stringify(data))
+
         const res = await axios.post(
-            "http://167.99.15.83:4000/api/budgetlines/budgetlineatlas",
-            {
-                code_resultado: result_atlas,
-                code_producto: product_atlas,
-                code_activity: activity_atlas,
-                code_atlas: account_atlas,
-                code_sub_atlas: sub_account_atlas,
+            "http://167.99.15.83:4000/api/budgetlines/budgetlineatlas", data
+            //"localhost:4000/api/budgetlines/budgetlineatlas", data
 
-                code: code,
-                details: details,
-                // name:name,
-                status: budgetLine.status,
-                //project_id:project_id,
-                project_id: idProject,
-                user_id: budgetLine.user_id,
-                supplier_id: supplier,
-                date_start: budgetLine.startdate,
-                date_end: budgetLine.enddate,
-                account_id: account_id,
-                budgetstart: budgetLine.budgetstart,
-                budgeupdate: budgetLine.budgeupdate,
-                budgetfinal: budgetLine.budgetfinal,
-                budgetactual: budgetLine.budgetactual,
-                balance: budgetLine.balance,
-                category_id: category_id,
-
-                /***atlas result_atlas, product_atlas ,account_atlas */
-            }
         );
         //window.location.replace('');
         window.location.replace('/project/' + idProject);
