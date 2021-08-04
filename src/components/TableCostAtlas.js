@@ -442,7 +442,8 @@ function TableCostAtlas(props) {
 
         );
         //window.location.replace('');
-        window.location.replace('/project/' + idProject);
+        //window.location.replace('/project/' + idProject);
+        history.replace('/project/' + idProject)
 
         //window.location.href = "http://sipa.ihcafe.hn/project/" + props.idProject;
         //window.location.reload(true);
