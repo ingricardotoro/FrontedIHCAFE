@@ -45,6 +45,8 @@ import Login from './pages/Login'
 import Inicio from './pages/Inicio'
 import Dasboard from './pages/Dasboard'
 
+import { ToastContainer } from 'react-toastify'
+
 function App() {
   return (
 
@@ -97,6 +99,8 @@ function App() {
         <Route path="/reports/atlas_by_project_id/:id/:coin_id" exact component={ReportAtlasByProjectid} />
 
       </Router>
+
+      <ToastContainer />
     </div>
   );
 }

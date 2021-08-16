@@ -1,7 +1,9 @@
-import React, { Component, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import moment from "moment";
 import { Link, useHistory } from 'react-router-dom'
+import { toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css';
 
 import RowCardsProjects from "./RowCardsProjects";
 import ModalVerFilesAtlas from "./ModalVerFilesAtlas";
@@ -60,6 +62,9 @@ function TableCostAtlas(props) {
     const [bdg_start_project, setBdg_start_project] = useState(0)
     const [redirect, setRedirect] = useState(false)
     const [rol, setRol] = useState(0)
+
+    const [fileData, setFileData] = useState(null)
+    const [selectedFile, setSelectedFile] = useState(null)
 
     const [budgetLine, setBudgetLine] = useState({
         code: "",
@@ -338,17 +343,43 @@ function TableCostAtlas(props) {
 
     const onClickAprobar = async (id, maximo) => {
 
-        if (budgetLine.balance <= maximo) {
+        if (budgetLine.budgetstart <= maximo) {
             // si es aprobado un valor igual o menor
-            //console.log("http://167.99.15.83:4000/api/budgetlines/aprobar/" +
-            //  id + "/" + aprobar + "/" + valor + "/" + comentario)
-            let res = await axios.post(
+
+            let value = 0
+            let valueComent = ''
+
+            if (valor === -1) { //en caso de ser el mismo valor y no se halla cambiado
+                value = maximo
+            } else {
+                value = valor
+            }
+
+            if (comentario === '') { //en caso de ser el mismo valor y no se halla cambiado
+                //console.log("SIIII")
+                valueComent = 'sin comentarios'
+            } else {
+                //console.log("NOOOO")
+                valueComent = comentario
+            }
+
+            await axios.post(
                 "http://167.99.15.83:4000/api/budgetlines/aprobar_atlas/" +
-                id + "/" + aprobar + "/" + valor + "/" + comentario
-            )
+                id + "/" + aprobar + "/" + value + "/" + valueComent
+            ).then((dataResult) => {
+                //console.log("RESULT=" + JSON.stringify(dataResult))
+                //volvemos a traer los budgetsLines
+                getData()
+                //cerramos el modald de create New
+                document.getElementById('btnCerrarAprobar_' + id).click()
+
+            })
+                .catch((err) => {
+                    alert(err)
+                })
 
             //console.log("APROBANDO" + JSON.stringify(res))
-            window.location.replace('/project/' + idProject);
+            //window.location.replace('/project/' + idProject);
 
             //history.push('/project/' + idProject)
             //setState({ redirect: true })
@@ -360,29 +391,6 @@ function TableCostAtlas(props) {
         }
 
         /************ */
-
-        /* if (valor === -1) {
-            valor = maximo;
-        }
-
-        if (valor <= maximo) {
-            // si es aprobado un valor igual o menor
-
-            await axios.post(
-                "http://167.99.15.83:4000/api/budgetlines/aprobar_atlas/" +
-                id +
-                "/" +
-                aprobar +
-                "/" +
-                valor +
-                "/" +
-                comentario
-            );
-            window.location.replace('');
-            //window.location.href = "http://sipa.ihcafe.hn/project/" + props.idProject;
-        } else {
-            alert("Valor No Valido");
-        } */
     };
 
     const onClickArchivo = async (e) => {
@@ -394,13 +402,70 @@ function TableCostAtlas(props) {
     const onClickFaseArchivo = async (e) => {
         setFase_archivo(e.target.value);
     };
+
+    const handleFileChange = (e) => {
+
+        const [file] = e.target.files;//destructuracion
+        const isValidSize = file.size < 10 * 1024 * 1024 //tamaño maximo de 10 megas
+        const isNameOfOneImageRegEx = /.(jpe?g|gif|png|svg|pdf)$/i; //para validar el tipo de archivo , solo imagenes o PDF
+        const isValidType = isNameOfOneImageRegEx.test(file.name)
+
+        if (!isValidSize) return toast.error("Archivo supera el peso permitido (10 Mg)")
+        if (!isValidType) return toast.error("Solo se permiten imágenes o PDF")
+
+        setFileData(file)
+
+        const reader = new FileReader();
+
+        //le pasamos el file
+        reader.readAsDataURL(file)
+
+        //la siguietne funcion que se ejecuta al terminar de cargar el archivo
+        reader.onloadend = () => {
+            setSelectedFile(reader.result)
+        }
+    }
+
     const onClickSubirArchivo = async (id) => {
-        //await axios.post('http://167.99.15.83:4000/api/files/'+id,{
-        await axios.post("http://167.99.15.83:4000/api/files/" + id, {
+        //e.preventDefault();
+
+        if (fileData !== null && nombre_archivo !== "") {
+
+            let formDataFile = new FormData()
+            formDataFile.append('archivo', fileData)
+            formDataFile.append('file_name', nombre_archivo)
+            formDataFile.append('fase', fase_archivo)
+            formDataFile.append('budget_id', budget_id)
+            formDataFile.append('budgetlineatlas_id', id)
+
+            //console.log(formDataFile)
+
+            //await axios.post('http://167.99.15.83:4000/api/files/'+id,{
+            await axios.post("http://167.99.15.83:4000/api/files/atlas/", formDataFile)
+                .then((dataResult) => {
+
+                    //volvemos a traer los budgtines
+                    getData()
+                    toast.success('Archivo Subido Exitosamente', { position: toast.POSITION.TOP_RIGHT })
+                    //cerramos el modald de create New
+                    //document.getElementById('archivos_' + id).click()
+
+                })
+                .catch((err) => {
+                    toast.error('Error:' + err, { position: toast.POSITION.TOP_RIGHT })
+
+                    //alert(err)
+                })
+        } else {
+            toast.error('Faltan Datos', { position: toast.POSITION.TOP_RIGHT })
+        }
+
+        /*await axios.post("http://167.99.15.83:4000/api/files/" + id, {
             nombre_archivo: nombre_archivo,
             fase_archivo: fase_archivo,
-            file: archivo,
-        });
+            file: fileData,
+        });*/
+
     };
 
     //codigo para crear un nuevo renglon presupuestario
@@ -434,36 +499,59 @@ function TableCostAtlas(props) {
 
         }
 
-        console.log("DATA=" + JSON.stringify(data))
+        //console.log("DATA=" + JSON.stringify(data))
 
-        const res = await axios.post(
+        /*const res = await axios.post(
             "http://167.99.15.83:4000/api/budgetlines/budgetlineatlas", data
             //"localhost:4000/api/budgetlines/budgetlineatlas", data
 
-        );
+        );*/
+
+        await axios.post("http://167.99.15.83:4000/api/budgetlines/budgetlineatlas", data)
+            .then((dataResult) => {
+
+                //volvemos a traer los budgtines
+                getData()
+                //cerramos el modald de create New
+                document.getElementById('btnCloseNew').click()
+            })
+            .catch((err) => {
+                alert(err)
+            })
+
         //window.location.replace('');
         //window.location.replace('/project/' + idProject);
-        history.replace('/project/' + idProject)
+        //history.replace('/project/' + idProject)
 
         //window.location.href = "http://sipa.ihcafe.hn/project/" + props.idProject;
         //window.location.reload(true);
-        if (res) {
-        }
+        /*if (res) {
+        }*/
     };
 
     //funcion para elimiar un renglon presupuestario
     const onSubmitDelete = async (id) => {
-        const res_p = await axios.post(
-            "http://167.99.15.83:4000/api/budgetlines/budgetlineatlas/delete/" + id
-        );
-        window.location.replace('/project/' + idProject);
+
+        await axios.post("http://167.99.15.83:4000/api/budgetlines/budgetlineatlas/delete/" + id)
+            .then((dataResult) => {
+                //volvemos a traer los budgtines
+                alert(JSON.stringify(dataResult))
+                getData()
+                //cerramos el modald de create New
+                document.getElementById("detele_" + id).click()
+
+            })
+            .catch((err) => {
+                alert(err)
+            })
+        //window.location.replace('/project/' + idProject);
 
         //window.location.replace('');
         //window.location.href = "http://sipa.ihcafe.hn/project/" + props.idProject;
         //return <Redirect to={"/project/"+props.idProject}  />
         //return res_p ==1 ?  <Redirect push to="/budgets" />:  <Redirect push to="/budgets" />
-        if (res_p) {
-        }
+        /*if (res_p) {
+        }*/
     };
 
 
@@ -513,7 +601,7 @@ function TableCostAtlas(props) {
                                                     <tr>
                                                         <th>Código</th>
                                                         <th>Cuenta Atlas</th>
-                                                        <th>Valor Inicial</th>
+                                                        <th>Inicial</th>
                                                         <th>Modificado</th>
                                                         <th>Actual</th>
                                                         <th>Ejecutado</th>
@@ -605,9 +693,11 @@ function TableCostAtlas(props) {
                                                                         <td>
                                                                             <label className="text-info">
                                                                                 {" "}
-                                                                                {formatMoney(
-                                                                                    budgetLinesAtlas.balance
-                                                                                )}
+                                                                                {budgetLinesAtlas.budgetactual
+                                                                                    ? formatMoney(budgetLinesAtlas.actual)
+                                                                                    : 'HN 0.00'
+
+                                                                                }
                                                                             </label>
                                                                         </td>
                                                                         <td>
@@ -755,6 +845,7 @@ function TableCostAtlas(props) {
                                                                                     className="close"
                                                                                     data-dismiss="modal"
                                                                                     aria-label="Close"
+                                                                                    id={"detele_" + budgetLinesAtlas.id}
                                                                                 >
                                                                                     <span aria-hidden="true">×</span>
                                                                                 </button>
@@ -823,6 +914,7 @@ function TableCostAtlas(props) {
                                                                                     class="close"
                                                                                     data-dismiss="modal"
                                                                                     aria-label="Close"
+                                                                                    id={"btnCerrarAprobar_" + budgetLinesAtlas.id}
                                                                                 >
                                                                                     <span aria-hidden="true">
                                                                                         &times;
@@ -874,6 +966,7 @@ function TableCostAtlas(props) {
                                                                                 </div>
                                                                                 <div class="modal-footer">
                                                                                     <button
+
                                                                                         type="button"
                                                                                         class="btn btn-default waves-effect "
                                                                                         data-dismiss="modal"
@@ -899,8 +992,8 @@ function TableCostAtlas(props) {
                                                                 </div>
 
                                                                 <ModalVerFilesAtlas
-                                                                    budget_id={props.budget_id}
-                                                                    idProject={props.idProject}
+                                                                    budget_id={budget_id}
+                                                                    idProject={idProject}
                                                                     budgetlineatlas={budgetLinesAtlas.id}
                                                                     budgetlineatlasName={
                                                                         budgetLinesAtlas.atlas_account.name
@@ -925,8 +1018,7 @@ function TableCostAtlas(props) {
                                                                             <div class="modal-header">
                                                                                 <h4 class="modal-title">
                                                                                     {
-                                                                                        budgetLinesAtlas.atlas_account
-                                                                                            .name
+                                                                                        budgetLinesAtlas.atlas_account.name
                                                                                     }
                                                                                     -
                                                                                     {formatMoney(
@@ -945,18 +1037,19 @@ function TableCostAtlas(props) {
                                                                                 </button>
                                                                             </div>
                                                                             <form
-                                                                                action={
-                                                                                    "http://167.99.15.83:4000/api/files/atlas"
-                                                                                }
-                                                                                method="post"
-                                                                                enctype="multipart/form-data"
+                                                                            /* action={
+                                                                                "http://167.99.15.83:4000/api/files/atlas"
+                                                                            }
+                                                                            method="post"
+                                                                            enctype="multipart/form-data" */
                                                                             >
                                                                                 <div class="modal-body">
                                                                                     <div className="form-control mt-3">
                                                                                         <input
-                                                                                            onChange={onClickArchivo}
+                                                                                            onChange={handleFileChange}
                                                                                             type="file"
                                                                                             name="archivo"
+                                                                                            required
                                                                                         ></input>
                                                                                     </div>
                                                                                     <input
@@ -966,13 +1059,13 @@ function TableCostAtlas(props) {
                                                                                         className="form-control"
                                                                                     />
                                                                                     <input
-                                                                                        value={props.budget_id}
+                                                                                        value={budget_id}
                                                                                         name="budget_id"
                                                                                         type="hidden"
                                                                                         className="form-control"
                                                                                     />
                                                                                     <input
-                                                                                        value={props.idProject}
+                                                                                        value={idProject}
                                                                                         name="project_id"
                                                                                         type="hidden"
                                                                                         className="form-control"
@@ -987,6 +1080,7 @@ function TableCostAtlas(props) {
                                                                                             type="text"
                                                                                             className="form-control"
                                                                                             placeholder="Ingrese Nombre de Archivo "
+                                                                                            required
                                                                                         />
                                                                                     </div>
                                                                                     <div>
@@ -1014,7 +1108,7 @@ function TableCostAtlas(props) {
                                                                                 </div>
                                                                                 <div class="modal-footer">
                                                                                     <button
-                                                                                        type="button"
+                                                                                        type="submit"
                                                                                         class="btn btn-default waves-effect "
                                                                                         data-dismiss="modal"
                                                                                     >
@@ -1022,7 +1116,8 @@ function TableCostAtlas(props) {
                                                                                     </button>
                                                                                     {/* <button type="button" onClick={ () =>onClickSubirArchivo(budgetLinesAtlas.id )} class="btn btn-primary waves-effect waves-light ">Guardar</button> */}
                                                                                     <button
-                                                                                        type="submit"
+                                                                                        onClick={() => onClickSubirArchivo(budgetLinesAtlas.id)}
+                                                                                        type="button"
                                                                                         class="btn btn-primary waves-effect waves-light "
                                                                                     >
                                                                                         Guardar
@@ -1109,71 +1204,7 @@ function TableCostAtlas(props) {
                                                         )
                                                     )}
 
-                                                    {/*  <tr>
-                                        <td align="center" className="pro-name">
-                                            <label className="text-danger">---</label>
-                                        </td>
-                                        <td className="pro-name">
-                                            <h6>Total de Prespuesto APROBADO</h6>
-                                            <span>Suma de los Totales</span>
-                                        </td>
-                                        
-                                        <td>
-                                            <label className="text-info">{formatMoney(total_inicial)}</label>
-                                        </td>
-                                        <td>
-                                            <label className="text-danger">{formatMoney(total_ejecutado)}</label>
-                                        </td>
-                                        <td>
-                                            <label className="text-success">{formatMoney(total_disponible)}</label>
-                                        </td>
-                                        <td align="center">
-                                            <label >---</label>
-                                        </td>
-                                        <td align="center">
-                                            <label  >---</label>
-                                        </td>
-                                        <td align="center">
-                                            <label  >---</label>
-                                        </td>
-                                    
-                                        <td className="action-icon"> 
-                                          
-                                        </td>
-                                    </tr>
 
-                                    <tr>
-                                        <td align="center" className="pro-name">
-                                            <label className="text-danger">---</label>
-                                        </td>
-                                        <td className="pro-name">
-                                            <h6>Total de Prespuesto SOLICITADO</h6>
-                                            <span>Suma de los Totales</span>
-                                        </td>
-                                        
-                                        <td>
-                                             <label>{formatMoney(total_solicitado)}</label> 
-                                        </td>
-                                        <td align="center">
-                                            <label className="text-info">---</label>
-                                        </td>
-                                        <td align="center">
-                                            <label className="text-warning">---</label>
-                                        </td>
-                                        <td align="center">
-                                            <label >---</label>
-                                        </td>
-                                        <td align="center">
-                                            <label  >---</label>
-                                        </td>
-                                        <td align="center">
-                                            <label  >---</label>
-                                        </td>
-                                    
-                                        <td className="action-icon"> 
-                                          
-                                        </td>
-                                    </tr> */}
                                                 </tbody>
                                             </table>
                                         </div>
@@ -1198,6 +1229,7 @@ function TableCostAtlas(props) {
                                     Crear Nuevo Renglón Presupuestario
                                 </h4>
                                 <button
+                                    id='btnCloseNew'
                                     type="button"
                                     className="close"
                                     data-dismiss="modal"
@@ -1222,39 +1254,11 @@ function TableCostAtlas(props) {
                                         className="form-control mt-3"
                                         value={idProject}
                                     />
-                                    {/* <div style={{ width: "50%", display: "inline-block" }}>
-                      <select
-                        onChange={onChanceCategory}
-                        name="select"
-                        className="form-control mt-3"
-                      >
-                        <option value="#">Seleccione Categoría</option>
-                        {categories.map((category) => (
-                          <option value={category.code}>
-                            ({category.code})-{category.name}{" "}
-                          </option>
-                        ))}
-                      </select>
-                    </div>
-                    <div style={{ width: "50%", display: "inline-block" }}>
-                      <select
-                        onChange={onChanceClasificacion}
-                        name="select"
-                        className="form-control mt-3"
-                      >
-                        <option value="#">
-                          Seleccione Clasificación de Renglón
-                        </option>
-                        {clasificaciones.map((clasificacion) => (
-                          <option value={clasificacion.code}>
-                            ({clasificacion.code})-{clasificacion.name}{" "}
-                          </option>
-                        ))}
-                      </select>
-                    </div> */}
+
                                     <div style={{ width: "50%", display: "inline-block" }}>
                                         {/* Select de Resultados Atlas */}
                                         <select
+
                                             onChange={onChanceResultAtlas}
                                             name="select_result_atlas"
                                             className="form-control mt-3"
