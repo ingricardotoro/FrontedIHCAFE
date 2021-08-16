@@ -3,7 +3,8 @@ import axios from "axios";
 import moment from "moment";
 import { Link, useHistory } from 'react-router-dom'
 import { toast } from 'react-toastify'
-import 'react-toastify/dist/ReactToastify.css';
+//import 'react-toastify/dist/ReactToastify.css';
+//import 'react-toastify/scss/main.scss'
 
 import RowCardsProjects from "./RowCardsProjects";
 import ModalVerFilesAtlas from "./ModalVerFilesAtlas";

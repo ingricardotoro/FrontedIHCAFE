@@ -1,4 +1,3 @@
-
 import React from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import Sidebar from "./components/Sidebar";
@@ -46,6 +45,8 @@ import Inicio from './pages/Inicio'
 import Dasboard from './pages/Dasboard'
 
 import { ToastContainer } from 'react-toastify'
+//import 'react-toastify/dist/ReactToastify.css';
+//import 'react-toastify/scss/main.scss'
 
 function App() {
   return (

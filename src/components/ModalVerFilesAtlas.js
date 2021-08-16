@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Link, useHistory } from 'react-router-dom'
 import { toast } from 'react-toastify'
-import 'react-toastify/dist/ReactToastify.css';
-
+//import 'react-toastify/dist/ReactToastify.css';
+//import 'react-toastify/scss/main.scss'
 function ModalVerFilesAtlas(props) {
 
     const {
@@ -34,13 +34,12 @@ function ModalVerFilesAtlas(props) {
             "http://167.99.15.83:4000/api/files/filesbybudgetid_atlas/" + budget_id + "/" +
             budgetlineatlas
         );
-        console.log(res_files.data.files)
+        //console.log(res_files.data.files)
         setFiles(res_files.data.files);
     }
 
 
     const onClickDelete = async (filename) => {
-
 
         await axios.post("http://167.99.15.83:4000/api/files/delete_atlas/" + filename)
             .then((dataResult) => {
@@ -55,7 +54,7 @@ function ModalVerFilesAtlas(props) {
 
     };
 
-    console.log(files)
+    //console.log(files)
     if (files.length > 0) {
         return (
             <div>
@@ -96,6 +95,7 @@ function ModalVerFilesAtlas(props) {
                                                                             file.filedir +
                                                                             file.filename
                                                                         }
+                                                                        download={file.filename}
                                                                     >
                                                                         <i
                                                                             style={{ width: "200px", color: "red" }}
@@ -105,6 +105,7 @@ function ModalVerFilesAtlas(props) {
                                                                                 file.filedir +
                                                                                 file.filename
                                                                             }
+                                                                            download={file.filename}
                                                                         />
                                                                         Archivo PDF
                                                                     </a>
@@ -116,6 +117,7 @@ function ModalVerFilesAtlas(props) {
                                                                             file.filedir +
                                                                             file.filename
                                                                         }
+                                                                        download={file.filename}
                                                                     >
                                                                         <img
                                                                             style={{ width: "200px" }}
