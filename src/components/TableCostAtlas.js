@@ -448,6 +448,8 @@ function TableCostAtlas(props) {
                     //volvemos a traer los budgtines
                     getData()
                     toast.success('Archivo Subido Exitosamente', { position: toast.POSITION.TOP_RIGHT })
+                    document.getElementById('btnCerrarSF_' + id).click()
+
                     //cerramos el modald de create New
                     //document.getElementById('archivos_' + id).click()
 
@@ -1027,6 +1029,7 @@ function TableCostAtlas(props) {
                                                                                     )}{" "}
                                                                                 </h4>
                                                                                 <button
+                                                                                    id={'btnCerrarSF_' + budgetLinesAtlas.id}
                                                                                     type="button"
                                                                                     class="close"
                                                                                     data-dismiss="modal"
