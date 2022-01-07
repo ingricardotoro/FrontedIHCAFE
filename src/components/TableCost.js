@@ -841,7 +841,7 @@ function TableCost(props) {
                                                                 <div
                                                                     className="modal fade"
                                                                     id={"archivos_" + budgetLine.id}
-                                                                    tabindex="-1"
+                                                                    tabIndex="-1"
                                                                     role="dialog"
                                                                 >
                                                                     <div
@@ -960,7 +960,7 @@ function TableCost(props) {
                                                                 <div
                                                                     class="modal fade"
                                                                     id={"rembolsar_" + budgetLine.id}
-                                                                    tabindex="-1"
+                                                                    tabIndex="-1"
                                                                     role="dialog"
                                                                 >
                                                                     <div
