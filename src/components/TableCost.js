@@ -538,7 +538,7 @@ function TableCost(props) {
                                                                         <td>
                                                                             <button
                                                                                 type="button"
-                                                                                class="btn btn-danger waves-effect"
+                                                                                className="btn btn-danger waves-effect"
                                                                                 data-toggle="modal"
                                                                                 data-target={
                                                                                     "#aprobar_" + budgetLine.id
@@ -696,24 +696,24 @@ function TableCost(props) {
                                                                 {/*FIN Modal DELETE*/}
 
                                                                 <div
-                                                                    class="modal fade"
+                                                                    className="modal fade"
                                                                     id={"aprobar_" + budgetLine.id}
                                                                     tabIndex="-1"
                                                                     role="dialog"
                                                                 >
                                                                     <div
-                                                                        class="modal-dialog modal-lg"
+                                                                        className="modal-dialog modal-lg"
                                                                         role="document"
                                                                     >
-                                                                        <div class="modal-content">
-                                                                            <div class="modal-header">
-                                                                                <h5 class="modal-title">
+                                                                        <div className="modal-content">
+                                                                            <div className="modal-header">
+                                                                                <h5 className="modal-title">
 
                                                                                     {
                                                                                         budgetLine.name
                                                                                     }
                                                                                 </h5>
-                                                                                <h5 class="modal-title">
+                                                                                <h5 className="modal-title">
                                                                                     Aprobado:{" "}
                                                                                     {formatMoney(
                                                                                         budgetLine.buddgetstart
@@ -721,7 +721,7 @@ function TableCost(props) {
                                                                                 </h5>
                                                                                 <button
                                                                                     type="button"
-                                                                                    class="close"
+                                                                                    className="close"
                                                                                     data-dismiss="modal"
                                                                                     aria-label="Close"
                                                                                 >
@@ -731,8 +731,8 @@ function TableCost(props) {
                                                                                 </button>
                                                                             </div>
                                                                             <form>
-                                                                                <div class="modal-body">
-                                                                                    <p class="modal-title">
+                                                                                <div className="modal-body">
+                                                                                    <p className="modal-title">
                                                                                         Descripción:{" "}
                                                                                         {budgetLine.description}
                                                                                     </p>
@@ -762,9 +762,7 @@ function TableCost(props) {
                                                                                             type="text"
                                                                                             className="form-control"
                                                                                             placeholder="Valor Ejecutado 00.00"
-                                                                                            value={formatMoney(
-                                                                                                budgetLine.buddgetstart
-                                                                                            )}
+
                                                                                         />
                                                                                     </div>
 
@@ -804,10 +802,10 @@ function TableCost(props) {
 
 
                                                                                 </div>
-                                                                                <div class="modal-footer">
+                                                                                <div className="modal-footer">
                                                                                     <button
                                                                                         type="button"
-                                                                                        class="btn btn-default waves-effect "
+                                                                                        className="btn btn-default waves-effect "
                                                                                         data-dismiss="modal"
                                                                                     >
                                                                                         Cerrar
@@ -820,7 +818,7 @@ function TableCost(props) {
 
                                                                                             )
                                                                                         }
-                                                                                        class="btn btn-primary waves-effect waves-light "
+                                                                                        className="btn btn-primary waves-effect waves-light "
                                                                                     >
                                                                                         Guardar
                                                                                     </button>
@@ -841,18 +839,18 @@ function TableCost(props) {
 
                                                                 {/* SUBIR Archivos */}
                                                                 <div
-                                                                    class="modal fade"
+                                                                    className="modal fade"
                                                                     id={"archivos_" + budgetLine.id}
                                                                     tabindex="-1"
                                                                     role="dialog"
                                                                 >
                                                                     <div
-                                                                        class="modal-dialog modal-lg"
+                                                                        className="modal-dialog modal-lg"
                                                                         role="document"
                                                                     >
-                                                                        <div class="modal-content">
-                                                                            <div class="modal-header">
-                                                                                <h4 class="modal-title">
+                                                                        <div className="modal-content">
+                                                                            <div className="modal-header">
+                                                                                <h4 className="modal-title">
                                                                                     {budgetLine.name}-
                                                                                     {formatMoney(
                                                                                         budgetLine.balance
@@ -860,7 +858,7 @@ function TableCost(props) {
                                                                                 </h4>
                                                                                 <button
                                                                                     type="button"
-                                                                                    class="close"
+                                                                                    className="close"
                                                                                     data-dismiss="modal"
                                                                                     aria-label="Close"
                                                                                 >
@@ -876,7 +874,7 @@ function TableCost(props) {
                                                                                 method="post"
                                                                                 encType="multipart/form-data"
                                                                             >
-                                                                                <div class="modal-body">
+                                                                                <div className="modal-body">
                                                                                     <div className="form-control mt-3">
                                                                                         <input
                                                                                             onChange={onClickArchivo}
@@ -937,18 +935,18 @@ function TableCost(props) {
                                                                                         </select>
                                                                                     </div>
                                                                                 </div>
-                                                                                <div class="modal-footer">
+                                                                                <div className="modal-footer">
                                                                                     <button
                                                                                         type="button"
-                                                                                        class="btn btn-default waves-effect "
+                                                                                        className="btn btn-default waves-effect "
                                                                                         data-dismiss="modal"
                                                                                     >
                                                                                         Cerrar
                                                                                     </button>
-                                                                                    {/* <button type="button" onClick={ () =>this.onClickSubirArchivo(budgetLines.id )} class="btn btn-primary waves-effect waves-light ">Guardar</button> */}
+                                                                                    {/* <button type="button" onClick={ () =>this.onClickSubirArchivo(budgetLines.id )} className="btn btn-primary waves-effect waves-light ">Guardar</button> */}
                                                                                     <button
                                                                                         type="submit"
-                                                                                        class="btn btn-primary waves-effect waves-light "
+                                                                                        className="btn btn-primary waves-effect waves-light "
                                                                                     >
                                                                                         Guardar
                                                                                     </button>
