@@ -11,10 +11,13 @@ export default class RowCardsProjects extends Component {
   }
 
   formatMoney(number) {
-    return number.toLocaleString("en-US", {
-      style: "currency",
-      currency: "HNL",
-    });
+    if (number) {
+
+      return number.toLocaleString("en-US", {
+        style: "currency",
+        currency: "HNL",
+      });
+    }
     //return number;
   }
 
@@ -25,7 +28,7 @@ export default class RowCardsProjects extends Component {
       <div>
         <div className="row">
           {/* statstic card start */}
-          <div className="col-md-12 col-xl-3">
+          <div className="col-md-12 col-xl-4">
             <div className="card widget-statstic-card borderless-card">
               <div className="card-header">
                 <div className="card-header-left">
@@ -40,7 +43,7 @@ export default class RowCardsProjects extends Component {
                 <div className="text-left">
                   <h3 className="d-inline-block">
                     {" "}
-                    {this.formatMoney(this.props.inicial)}{" "}
+                    {this.formatMoney(this.props.aprobado)}{" "}
                   </h3>
                   <p>
                     <span className="f-right bg-primary">100%</span>
@@ -51,7 +54,7 @@ export default class RowCardsProjects extends Component {
           </div>
           {/* statstic card end */}
           {/* statstic card start */}
-          <div className="col-md-6 col-xl-3">
+          {/* <div className="col-md-6 col-xl-4">
             <div className="card widget-statstic-card borderless-card">
               <div className="card-header">
                 <div className="card-header-left">
@@ -75,10 +78,10 @@ export default class RowCardsProjects extends Component {
                 </div>
               </div>
             </div>
-          </div>
+          </div> */}
           {/* statstic card end */}
           {/* statstic card start */}
-          <div className="col-md-6 col-xl-3">
+          <div className="col-md-6 col-xl-4">
             <div className="card widget-statstic-card borderless-card">
               <div className="card-header">
                 <div className="card-header-left">
@@ -96,7 +99,7 @@ export default class RowCardsProjects extends Component {
                   </h3>
                   <p>
                     <span className="f-right bg-danger">
-                      {Math.round(this.props.porcentaje_ejecutado)}%
+                      {Math.round((this.props.ejecutado * 100) / this.props.aprobado)}%
                     </span>
                   </p>
                 </div>
@@ -106,7 +109,7 @@ export default class RowCardsProjects extends Component {
           {/* statstic card end */}
 
           {/* statstic card start */}
-          <div className="col-md-6 col-xl-3">
+          <div className="col-md-6 col-xl-4">
             <div className="card widget-statstic-card borderless-card">
               <div className="card-header">
                 <div className="card-header-left">
@@ -120,11 +123,11 @@ export default class RowCardsProjects extends Component {
                 <i className="icofont icofont-chart-line st-icon bg-success" />
                 <div className="text-left">
                   <h3 className="d-inline-block">
-                    {this.formatMoney(this.props.disponible)}
+                    {this.formatMoney(this.props.aprobado - this.props.ejecutado)}
                   </h3>
                   <p>
                     <span className="f-right bg-success">
-                      {Math.round(this.props.porcentaje_disponible)}%
+                      {Math.round(((this.props.aprobado - this.props.ejecutado) * 100) / this.props.aprobado)}%
                     </span>
                   </p>
                 </div>

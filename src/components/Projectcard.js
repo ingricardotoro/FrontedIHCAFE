@@ -85,46 +85,37 @@ export default class Projectcard extends Component {
                         {/* end of row */}
                     </div>
                     <div className="card-footer">
-                        <div className="task-list-table">
-                            <a href="#!"><img className="img-fluid img-circle" src="assets/images/avatar-1.png" alt={1} /></a>
-                            <a href="#!"><img className="img-fluid img-circle" src="assets/images/avatar-2.png" alt={1} /></a>
-                            <a href="#!"><i className="icofont icofont-plus" /></a>
-                        </div>
-                        <hr />
+
                         <div >
                             <table style={{ width: '100%' }} className="table-striped">
                                 <thead>
                                     <th>Tipo</th>
-                                    <th>Aprobado</th>
-                                    <th>Solicitado</th>
+                                    <th>Valor</th>
+
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td>Presupuesto Inicial </td>
+                                        <td>Presupuesto Aprobado </td>
                                         {/* <td>{this.formatMoney(this.state.total_inicial)}</td> */}
                                         <td>{this.formatMoney(this.props.budgetstart)}</td>
-                                        <td>{this.formatMoney(this.state.total_Solicitado)}</td>
+                                        {/* <td>{this.formatMoney(this.state.total_Solicitado)}</td> */}
                                     </tr>
                                     <tr>
                                         <td>Presupuesto Ejecutado</td>
                                         <td >{this.formatMoney(this.state.total_ejecutado)}</td>
-                                        <td>---</td>
+
                                     </tr>
-                                    <tr>
+                                    {/*  <tr>
                                         <td>Total de Reembolsos</td>
                                         <td >{this.formatMoney(this.state.total_reembolsos)}</td>
                                         <td>---</td>
-                                    </tr>
+                                    </tr> */}
                                     <tr>
                                         <td>Presupueto Disponible</td>
                                         <td>{this.formatMoney(this.state.total_disponible)}</td>
-                                        <td>---</td>
+
                                     </tr>
-                                    <tr>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                    </tr>
+
                                 </tbody>
 
                             </table>
@@ -137,6 +128,13 @@ export default class Projectcard extends Component {
                             </div>
                             {/* end of dropdown-secondary */}
 
+                        </div>
+                        <hr />
+
+                        <div className="task-list-table">
+                            <a href="#!"><img className="img-fluid img-circle" src="assets/images/avatar-1.png" alt={1} /></a>
+                            <a href="#!"><img className="img-fluid img-circle" src="assets/images/avatar-2.png" alt={1} /></a>
+                            <a href="#!"><i className="icofont icofont-plus" /></a>
                         </div>
                         {/* end of pull-right class */}
                     </div>

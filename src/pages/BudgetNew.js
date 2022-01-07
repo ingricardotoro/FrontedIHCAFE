@@ -21,7 +21,7 @@ export default class BudgetNew extends Component {
       balance: 0.0,
       returns: 0.0,
       deviation: 0.0,
-      status: true,
+      status: 'Aprobado',
       approval: true,
       approvalby_id: 1,
       dateapproval: Date.now(),
@@ -287,7 +287,7 @@ export default class BudgetNew extends Component {
                                 </div>
                               </div>
                               {
-                                <div className="row">
+                                /* <div className="row">
                                   <label className="col-sm-4 col-lg-2 col-form-label">
                                     Presupuesto Aprobado
                                   </label>
@@ -305,9 +305,9 @@ export default class BudgetNew extends Component {
                                       />
                                     </div>
                                   </div>
-                                </div>
+                                </div> */
                               }
-                              <div className="form-group row">
+                              {/*  <div className="form-group row">
                                 <label className="col-sm-2 col-form-label">
                                   Estado del Presupuesto
                                 </label>
@@ -322,7 +322,7 @@ export default class BudgetNew extends Component {
                                     <option value="2">En espera</option>
                                   </select>
                                 </div>
-                              </div>
+                              </div> */}
                               <div className="row">
                                 <label className="col-sm-4 col-lg-2 col-form-label">
                                   Guardar Presupuesto

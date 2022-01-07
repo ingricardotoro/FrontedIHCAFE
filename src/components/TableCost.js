@@ -20,36 +20,40 @@ function TableCost(props) {
     const [suppliers, setSuppliers] = useState([])
     const [archivo, setaArchivo] = useState([])
 
-    const [total_disponible, setTotal_disponible] = useState(0)
+    //const [total_disponible, setTotal_disponible] = useState(0)
     const [total_ejecutado, setTotal_ejecutado] = useState(0)
-    const [total_inicial, setTotal_inicial] = useState(0)
-    const [total_rembolsos, setTotal_rembolsos] = useState(0)
-    const [porcentaje_disponible, setPorcentaje_disponible] = useState(0)
-    const [porcentaje_ejecutado, setPorcentaje_ejecutado] = useState(0)
-    const [porcentaje_rembolsos, setPorcentaje_rembolsos] = useState(0)
-    const [porcentaje_solicitado, setPorcentaje_solicitado] = useState(0)
-    const [total_solicitado, setTotal_solicitado] = useState(0)
-    const [supplier, setSupplier] = useState(0)
-    const [aprobar, setAprobar] = useState(1)
-    const [valor, setValor] = useState(-1)
+    const [total_aprobado, setTotal_aprobado] = useState(0)
+    /*  const [total_inicial, setTotal_inicial] = useState(0)
+     const [total_rembolsos, setTotal_rembolsos] = useState(0)
+     const [porcentaje_disponible, setPorcentaje_disponible] = useState(0)
+     const [porcentaje_ejecutado, setPorcentaje_ejecutado] = useState(0)
+     const [porcentaje_rembolsos, setPorcentaje_rembolsos] = useState(0)
+     const [porcentaje_solicitado, setPorcentaje_solicitado] = useState(0)
+     const [total_solicitado, setTotal_solicitado] = useState(0) */
+    const [supplier, setSupplier] = useState(1)
+    //const [aprobar, setAprobar] = useState(1)
+    //const [valor, setValor] = useState(-1)
     const [comentario, setComentario] = useState("")
     const [nombre_archivo, setNombre_archivo] = useState("")
     const [fase_archivo, setFase_archivo] = useState("")
-    const [variable, setVariable] = useState(0)
+    //const [variable, setVariable] = useState(0)
     const [bdg_start_project, setBdg_start_project] = useState(0)
-    const [redirect, setRedirect] = useState(false)
+    //const [redirect, setRedirect] = useState(false)
+
+    let sumaTotalAprobado = 0.0
+    let sumaTotoalEjecutado = 0.0
 
     const [budgetLine, setBudgetLine] = useState({
-        code: "",
+        code: 0,
         name: "",//
         project_id: 0,//
         category_id: 0,//
         sub_category_code: "",//
         user_id: 1,
-        status: "Solicitado",
+        status: "Aprobado",
         supplier_id: 1,
-        startdate: "",//
-        enddate: "",//
+        startdate: Date.now(),//
+        enddate: Date.now(),//
         account_id: 0,
         budgetstart: 0.0,//
         budgeupdate: 0.0,
@@ -69,7 +73,10 @@ function TableCost(props) {
         }
 
         getData()
-        calculo();
+        if (budgetLines.length > 0) {
+
+            calculo();
+        }
 
     }, [])
 
@@ -78,6 +85,18 @@ function TableCost(props) {
         const res = await axios.post(
             "http://167.99.15.83:4000/api/budgetlines/project/" + idProject
         );
+        const buds = res.data.budgetLines
+        buds.map((bl) => {
+
+            sumaTotalAprobado += parseFloat(bl.buddgetstart)
+
+            if (bl.status === 'Ejecutado') {
+
+                sumaTotoalEjecutado += parseFloat(bl.balance)
+            }
+        })
+        setTotal_ejecutado(sumaTotoalEjecutado)
+        setTotal_aprobado(sumaTotalAprobado)
         setBudgetLines(res.data.budgetLines)
         //this.setState({ budgetLines: res.data.budgetLines });
 
@@ -130,32 +149,44 @@ function TableCost(props) {
 
     const calculo = () => {
         // para realizar el calculo de la suma de presupuestos
-        setTotal_inicial(0.0)
-        setTotal_ejecutado(0.0)
-        setTotal_disponible(0.0)
-        setTotal_solicitado(0.0)
-        let sumaTotoalSolicitado = 0.0
-        let sumaTotoalEjecutado = 0.0
-        let totoalDisponible = 0.0
-        budgetLines.map((bl) => {
+        //setTotal_inicial(0.0)
+        //setTotal_ejecutado(0.0)
+        //setTotal_aprobado(0.0)
+        //setTotal_disponible(0.0)
+        //setTotal_solicitado(0.0)
 
-            if (bl.status === 'Solicitado') {
-                sumaTotoalSolicitado += parseFloat(bl.balance)
-            }
+        //let sumaTotalAprobado = 0.0
+        //let sumaTotoalEjecutado = 0.0
+
+        //let totoalDisponible = 0.0
+
+        //console.log('LINES=' + budgetLines)
+        /* budgetLines.map((bl) => {
+
             if (bl.status === 'Aprobado') {
+                console.log('SUMA=' + bl.buddgetstart)
+                sumaTotalAprobado += parseFloat(bl.buddgetstart)
+            }
+            if (bl.status === 'Ejecutado') {
+                console.log('RESTA=' + bl.balance)
+
                 sumaTotoalEjecutado += parseFloat(bl.balance)
             }
         })
 
-        totoalDisponible = parseFloat(bdg_start_project) - parseFloat(sumaTotoalEjecutado)
+        console.log('SUMA APRO=' + sumaTotalAprobado)
+        console.log('SUMA EJE=' + sumaTotoalEjecutado) */
 
-        setTotal_solicitado(sumaTotoalSolicitado)
-        setTotal_ejecutado(sumaTotoalEjecutado)
-        setTotal_disponible(parseFloat(bdg_start_project) - parseFloat(sumaTotoalEjecutado))
+        //totoalDisponible = parseFloat(bdg_start_project) - parseFloat(sumaTotoalEjecutado)
 
-        setPorcentaje_ejecutado((sumaTotoalEjecutado * 100) / parseFloat(bdg_start_project))
-        setPorcentaje_disponible((totoalDisponible * 100) / parseFloat(bdg_start_project))
-        setPorcentaje_solicitado((sumaTotoalSolicitado * 100) / parseFloat(bdg_start_project))
+        //setTotal_solicitado(sumaTotoalSolicitado)
+        //setTotal_ejecutado(sumaTotoalEjecutado)
+        //setTotal_aprobado(sumaTotalAprobado)
+        //setTotal_disponible(parseFloat(bdg_start_project) - parseFloat(sumaTotoalEjecutado))
+
+        //setPorcentaje_ejecutado((sumaTotoalEjecutado * 100) / parseFloat(bdg_start_project))
+        //setPorcentaje_disponible((totoalDisponible * 100) / parseFloat(bdg_start_project))
+        //setPorcentaje_solicitado((sumaTotoalSolicitado * 100) / parseFloat(bdg_start_project))
 
     }
 
@@ -211,7 +242,7 @@ function TableCost(props) {
     const onChanceBudgetStart = (e) => {
         setBudgetLine({
             ...budgetLine,
-            budgetstart: e.target.value,
+            budgetstart: parseFloat(e.target.value),
             //balance: e.target.value,
         })
     };
@@ -249,7 +280,7 @@ function TableCost(props) {
     }
 
     const onchangeMonto = (e) => {
-        setValor(e.target.value)
+        //setValor(e.target.value)
     }
 
     const onchangeSelectAprobar = (e) => {
@@ -275,25 +306,28 @@ function TableCost(props) {
     }
 
     const formatMoney = (number) => {
-        return number.toLocaleString("en-US", {
-            style: "currency",
-            currency: "HNL",
-        });
+        if (number) {
+
+            return number.toLocaleString("en-US", {
+                style: "currency",
+                currency: "HNL",
+            });
+        } else {
+            return 'HNL 0.00'
+        }
         //return number;
     }
 
-    const onClickAprobar = async (id, maximo) => {
-        /*if (valor === -1) {
-            setValor(maximo)
-        }*/
+    const onClickAprobar = async (id) => {
 
-        if (budgetLine.balance <= maximo) {
+        if (budgetLine.balance <= budgetLine.balance) {
+
             // si es aprobado un valor igual o menor
             console.log("http://167.99.15.83:4000/api/budgetlines/aprobar/" +
-                id + "/" + aprobar + "/" + valor + "/" + comentario)
+                id + "/" + budgetLine.code + "/" + budgetLine.balance + "/" + budgetLine.startdate)
             let res = await axios.post(
                 "http://167.99.15.83:4000/api/budgetlines/aprobar/" +
-                id + "/" + aprobar + "/" + valor + "/" + comentario
+                id + "/" + budgetLine.code + "/" + budgetLine.balance + "/" + budgetLine.startdate
             )
 
             console.log("APROBANDO" + JSON.stringify(res))
@@ -321,7 +355,7 @@ function TableCost(props) {
         setFase_archivo(e.target.value)
     }
 
-    onClickSubirArchivo = async (id) => {
+    const onClickSubirArchivo = async (id) => {
         await axios.post("http://167.99.15.83:4000/api/files/" + id, {
             nombre_archivo: nombre_archivo,
             fase_archivo: fase_archivo,
@@ -332,8 +366,10 @@ function TableCost(props) {
     }
 
     const onSubmit = async (e) => {
+
         e.preventDefault();
         await axios.post("http://167.99.15.83:4000/api/budgetlines/", {
+            //await axios.post("http://localhost:4000/api/budgetlines/", {
             code: budgetLine.code,
             description: budgetLine.description,
             name: budgetLine.name,
@@ -374,15 +410,17 @@ function TableCost(props) {
     return (
         <div>
             <RowCardsProjects
-                inicial={bdg_start_project}
-                //inicial={total_inicial}
+                aprobado={total_aprobado}
                 ejecutado={total_ejecutado}
-                disponible={total_disponible}
-                solicitado={total_solicitado}
-                //rembolsos={total_rembolsos}
-                porcentaje_ejecutado={porcentaje_ejecutado}
-                porcentaje_disponible={porcentaje_disponible}
-                porcentaje_solicitado={porcentaje_solicitado}
+            /* inicial={bdg_start_project}
+            //inicial={total_inicial}
+            ejecutado={total_ejecutado}
+            disponible={total_disponible}
+            solicitado={total_solicitado}
+            //rembolsos={total_rembolsos}
+            porcentaje_ejecutado={porcentaje_ejecutado}
+            porcentaje_disponible={porcentaje_disponible}
+            porcentaje_solicitado={porcentaje_solicitado} */
             //porcentaje_rembolsos={this.state.porcentaje_rembolsos}
             />
 
@@ -417,14 +455,11 @@ function TableCost(props) {
                                                     <tr>
                                                         <th>Código</th>
                                                         <th>Nombre</th>
-                                                        <th>Valor Inicial</th>
-                                                        <th>Modificado</th>
-                                                        <th>Actual</th>
+                                                        <th>Aprobado</th>
                                                         <th>Ejecutado</th>
                                                         <th>Disponible</th>
                                                         <th>Fecha</th>
-                                                        <th>Estado</th>
-                                                        <th>Rembolsar</th>
+                                                        <th>Ejecutar</th>
                                                         <th>Archivos</th>
                                                         <th>Acciones</th>
                                                     </tr>
@@ -435,101 +470,90 @@ function TableCost(props) {
                                                             <tr key={budgetLine.id}>
                                                                 <td className="pro-name">
                                                                     <label className="text-danger">
-                                                                        {budgetLine.code}
+                                                                        {budgetLine.code ? budgetLine.code : '---'}
                                                                     </label>
                                                                 </td>
                                                                 <td className="pro-name">
                                                                     <h6>{budgetLine.name}</h6>
                                                                 </td>
 
-                                                                {budgetLine.statu === "Aprobado" ? (
+                                                                {budgetLine.status === "Aprobado" ? (
                                                                     <>
                                                                         <td>
                                                                             <label className="text-info">
-                                                                                {formatMoney(budgetLine.budgetstart)}
+                                                                                {formatMoney(budgetLine.buddgetstart)}
                                                                             </label>
                                                                         </td>
                                                                         <td>
                                                                             <label className="text-info">
-                                                                                {formatMoney(budgetLine.budgeupdate)}
+                                                                                {'---'}
                                                                             </label>
                                                                         </td>
+
                                                                         <td>
                                                                             <label className="text-info">
-                                                                                {formatMoney(budgetLine.budgetactual)}
-                                                                            </label>
-                                                                        </td>
-                                                                        <td>
-                                                                            <label className="text-info">
-                                                                                {formatMoney(budgetLine.budgetfinal)}
-                                                                            </label>
-                                                                        </td>
-                                                                        <td>
-                                                                            <label className="text-info">
-                                                                                {formatMoney(budgetLine.balance)}
+                                                                                {'---'}
                                                                             </label>
                                                                         </td>
                                                                     </>
-                                                                ) : (
+                                                                ) : ( // en caso de ser status EJECUTADO
                                                                     <>
                                                                         <td>
                                                                             <label className="text-info">
-                                                                                {formatMoney(budgetLine.budgetstart)}
+                                                                                {formatMoney(budgetLine.buddgetstart)}
                                                                             </label>
                                                                         </td>
                                                                         <td>
-                                                                            <label className="text-info">
-                                                                                {formatMoney(budgetLine.budgeupdate)}
-                                                                            </label>
-                                                                        </td>
-                                                                        <td>
-                                                                            <label className="text-info">
-                                                                                {formatMoney(budgetLine.budgetactual)}
-                                                                            </label>
-                                                                        </td>
-                                                                        <td>
-                                                                            <label className="text-info">
-                                                                                {formatMoney(budgetLine.budgetfinal)}
-                                                                            </label>
-                                                                        </td>
-                                                                        <td>
-                                                                            <label className="text-info">
+                                                                            <label className="text-danger">
                                                                                 {formatMoney(budgetLine.balance)}
+                                                                            </label>
+                                                                        </td>
+
+                                                                        <td>
+                                                                            <label className="text-success">
+                                                                                {formatMoney(parseFloat(budgetLine.buddgetstart) - parseFloat(budgetLine.balance))}
                                                                             </label>
                                                                         </td>
                                                                     </>
                                                                 )}
                                                                 <td>
-                                                                    <label className="text-danger">
-                                                                        {" "}
-                                                                        {formatMoney(
-                                                                            moment(budgetLine.date_start).format(
-                                                                                "DD/MM/YYYY"
-                                                                            )
-                                                                        )}
-                                                                    </label>
+                                                                    {
+                                                                        budgetLine.status === "Aprobado" ? (
+                                                                            '---'
+                                                                        ) : (
+                                                                            <label className="text-danger">
+
+                                                                                {formatMoney(
+                                                                                    moment(budgetLine.date_start).format(
+                                                                                        "DD/MM/YYYY"
+                                                                                    )
+                                                                                )}
+                                                                            </label>)
+                                                                    }
+
                                                                 </td>
 
-                                                                {budgetLine.status === "Solicitado" && rol === 2 ? (
-                                                                    <td>
-                                                                        <button
-                                                                            type="button"
-                                                                            class="btn btn-success waves-effect"
-                                                                            data-toggle="modal"
-                                                                            data-target={
-                                                                                "#aprobar_" + budgetLine.id
-                                                                            }
-                                                                        >
-                                                                            Decidir
-                                                                        </button>{" "}
-                                                                    </td>
-                                                                ) : (
-                                                                    <td>
-                                                                        <label>{budgetLine.status}</label>
-                                                                    </td>
-                                                                )}
+                                                                {//budgetLine.status === "Solicitado" && rol === 2 ? (
+                                                                    budgetLine.status === "Aprobado" ? (
+                                                                        <td>
+                                                                            <button
+                                                                                type="button"
+                                                                                class="btn btn-danger waves-effect"
+                                                                                data-toggle="modal"
+                                                                                data-target={
+                                                                                    "#aprobar_" + budgetLine.id
+                                                                                }
+                                                                            >
+                                                                                Ejecutar
+                                                                            </button>{" "}
+                                                                        </td>
+                                                                    ) : (
+                                                                        <td>
+                                                                            <label>{'Ejecutado'}</label>
+                                                                        </td>
+                                                                    )}
 
-                                                                {budgetLine.status === "Aprobado" ? (
+                                                                {/*budgetLine.status === "Aprobado" ? (
                                                                     <td>
                                                                         <button
                                                                             type="button"
@@ -546,30 +570,38 @@ function TableCost(props) {
                                                                     <td align="center">
                                                                         <label>---</label>
                                                                     </td>
-                                                                )}
+                                                                )*/}
 
-                                                                <td>
-                                                                    <button
-                                                                        type="button"
-                                                                        class="btn btn-primary waves-effect"
-                                                                        data-toggle="modal"
-                                                                        data-target={
-                                                                            "#ver_archivos_" + budgetLine.id
-                                                                        }
-                                                                    >
-                                                                        Ver
-                                                                    </button>
-                                                                    <button
-                                                                        type="button"
-                                                                        class="btn btn-success waves-effect"
-                                                                        data-toggle="modal"
-                                                                        data-target={
-                                                                            "#archivos_" + budgetLine.id
-                                                                        }
-                                                                    >
-                                                                        Subir
-                                                                    </button>
-                                                                </td>
+
+                                                                {budgetLine.status === "Aprobado" ? <td></td> :
+                                                                    (
+                                                                        <td>
+                                                                            <button
+                                                                                type="button"
+                                                                                className="btn btn-primary waves-effect"
+                                                                                data-toggle="modal"
+                                                                                data-target={
+                                                                                    "#ver_archivos_" + budgetLine.id
+                                                                                }
+                                                                            >
+                                                                                Ver
+                                                                            </button>
+                                                                            <button
+                                                                                type="button"
+                                                                                className="btn btn-success waves-effect"
+                                                                                data-toggle="modal"
+                                                                                data-target={
+                                                                                    "#archivos_" + budgetLine.id
+                                                                                }
+                                                                            >
+                                                                                Subir
+                                                                            </button>
+                                                                        </td>
+                                                                    )
+
+
+                                                                }
+
                                                                 <td align="center" className="action-icon">
                                                                     < Link
                                                                         to={"/budgetline/edit/" + idProject + "/" + budgetLine.id}
@@ -675,12 +707,18 @@ function TableCost(props) {
                                                                     >
                                                                         <div class="modal-content">
                                                                             <div class="modal-header">
-                                                                                <h4 class="modal-title">
-                                                                                    Monto:{" "}
+                                                                                <h5 class="modal-title">
+
+                                                                                    {
+                                                                                        budgetLine.name
+                                                                                    }
+                                                                                </h5>
+                                                                                <h5 class="modal-title">
+                                                                                    Aprobado:{" "}
                                                                                     {formatMoney(
-                                                                                        budgetLine.balance
+                                                                                        budgetLine.buddgetstart
                                                                                     )}{" "}
-                                                                                </h4>
+                                                                                </h5>
                                                                                 <button
                                                                                     type="button"
                                                                                     class="close"
@@ -699,41 +737,72 @@ function TableCost(props) {
                                                                                         {budgetLine.description}
                                                                                     </p>
 
-                                                                                    <select
-                                                                                        onChange={
-                                                                                            onchangeSelectAprobar
-                                                                                        }
-                                                                                        name="select"
-                                                                                        className="form-control mt-3"
-                                                                                    >
-                                                                                        <option value="1">
-                                                                                            Si Aprobar
-                                                                                        </option>
-                                                                                        <option value="1">
-                                                                                            SI APROBAR
-                                                                                        </option>
-                                                                                        <option value="2">
-                                                                                            NO APROBAR
-                                                                                        </option>
-                                                                                    </select>
+                                                                                    <div style={{ width: "47%", display: "inline-block" }}>
 
-                                                                                    <label>Monto A Aprobar</label>
-                                                                                    <input
-                                                                                        onChange={onchangeMonto}
-                                                                                        name="monto"
-                                                                                        type="text"
-                                                                                        className="form-control mb-3"
-                                                                                        value={budgetLine.valor}
-                                                                                    />
+                                                                                        <select
+                                                                                            onChange={onChanceSupplier}
+                                                                                            name="select_suppliers"
+                                                                                            className="form-control mt-3"
+                                                                                        >
+                                                                                            <option value="#">
+                                                                                                Seleccione Beneficiario/Proveedor
+                                                                                            </option>
+                                                                                            {suppliers.map((supplier) => (
+                                                                                                <option key={supplier.id} value={supplier.id}>
+                                                                                                    {supplier.contact_name}{" "}
+                                                                                                </option>
+                                                                                            ))}
+                                                                                        </select>
+                                                                                    </div>
+                                                                                    <div style={{ width: "47%", display: "inline-block", marginLeft: '5px' }}>
 
-                                                                                    <label>Comentarios</label>
-                                                                                    <textarea
-                                                                                        onChange={
-                                                                                            onchangeComentario
-                                                                                        }
-                                                                                        name="comentario"
-                                                                                        className="form-control"
-                                                                                    ></textarea>
+                                                                                        <input
+                                                                                            name="balance"
+                                                                                            onChange={onChanceBalance}
+                                                                                            type="text"
+                                                                                            className="form-control"
+                                                                                            placeholder="Valor Ejecutado 00.00"
+                                                                                            value={formatMoney(
+                                                                                                budgetLine.buddgetstart
+                                                                                            )}
+                                                                                        />
+                                                                                    </div>
+
+                                                                                    <div style={{ width: "47%", display: "inline-block", marginTop: '15px' }}>
+
+                                                                                        <input
+                                                                                            name="code"
+                                                                                            onChange={onChanceCode}
+                                                                                            type="text"
+                                                                                            className="form-control"
+                                                                                            placeholder="Ingrese Codigo de Identificación: 101 "
+                                                                                        />
+                                                                                    </div>
+
+                                                                                    <div style={{ width: "47%", display: "inline-block", marginTop: '15px', marginLeft: '5px' }}>
+                                                                                        <input
+                                                                                            onChange={onChangeStartDate}
+                                                                                            className="form-control mt-3"
+                                                                                            type="date"
+                                                                                            placeholder="Fecha"
+                                                                                        />
+
+                                                                                    </div>
+
+
+                                                                                    {/*  <div style={{ width: "40%", display: "inline-block", marginLeft: '5px' }}>
+                                                                                        <label>Comentarios</label>
+                                                                                        <textarea
+                                                                                            onChange={
+                                                                                                onchangeComentario
+                                                                                            }
+                                                                                            name="comentario"
+                                                                                            className="form-control"
+                                                                                        ></textarea>
+                                                                                    </div> */}
+
+
+
                                                                                 </div>
                                                                                 <div class="modal-footer">
                                                                                     <button
@@ -747,8 +816,8 @@ function TableCost(props) {
                                                                                         type="submit"
                                                                                         onClick={() =>
                                                                                             onClickAprobar(
-                                                                                                budgetLine.id,
-                                                                                                budgetLine.balance
+                                                                                                budgetLine.id
+
                                                                                             )
                                                                                         }
                                                                                         class="btn btn-primary waves-effect waves-light "
@@ -968,71 +1037,7 @@ function TableCost(props) {
                                                         ))
                                                         : null}
 
-                                                    {/*  <tr>
-                                    <td align="center" className="pro-name">
-                                        <label className="text-danger">---</label>
-                                    </td>
-                                    <td className="pro-name">
-                                        <h6>Total de Prespuesto APROBADO</h6>
-                                        <span>Suma de los Totales</span>
-                                    </td>
-                                    
-                                    <td>
-                                        <label className="text-info">{this.formatMoney(this.state.total_inicial)}</label>
-                                    </td>
-                                    <td>
-                                        <label className="text-danger">{this.formatMoney(this.state.total_ejecutado)}</label>
-                                    </td>
-                                    <td>
-                                        <label className="text-success">{this.formatMoney(this.state.total_disponible)}</label>
-                                    </td>
-                                    <td align="center">
-                                        <label >---</label>
-                                    </td>
-                                    <td align="center">
-                                        <label  >---</label>
-                                    </td>
-                                    <td align="center">
-                                        <label  >---</label>
-                                    </td>
-                                
-                                    <td className="action-icon"> 
-                                        
-                                    </td>
-                                </tr>
 
-                                <tr>
-                                    <td align="center" className="pro-name">
-                                        <label className="text-danger">---</label>
-                                    </td>
-                                    <td className="pro-name">
-                                        <h6>Total de Prespuesto SOLICITADO</h6>
-                                        <span>Suma de los Totales</span>
-                                    </td>
-                                    
-                                    <td>
-                                            <label>{this.formatMoney(this.state.total_solicitado)}</label> 
-                                    </td>
-                                    <td align="center">
-                                        <label className="text-info">---</label>
-                                    </td>
-                                    <td align="center">
-                                        <label className="text-warning">---</label>
-                                    </td>
-                                    <td align="center">
-                                        <label >---</label>
-                                    </td>
-                                    <td align="center">
-                                        <label  >---</label>
-                                    </td>
-                                    <td align="center">
-                                        <label  >---</label>
-                                    </td>
-                                
-                                    <td className="action-icon"> 
-                                        
-                                    </td>
-                                </tr> */}
                                                 </tbody>
                                             </table>
                                         </div>
@@ -1082,7 +1087,7 @@ function TableCost(props) {
                                         className="form-control mt-3"
                                         value={idProject}
                                     />
-                                    <div style={{ width: "50%", display: "inline-block" }}>
+                                    <div style={{ width: "33%", display: "inline-block" }}>
                                         <select
                                             onChange={onChanceCategory}
                                             name="select"
@@ -1096,14 +1101,14 @@ function TableCost(props) {
                                             ))}
                                         </select>
                                     </div>
-                                    <div style={{ width: "50%", display: "inline-block" }}>
+                                    <div style={{ width: "33%", display: "inline-block" }}>
                                         <select
                                             onChange={onChanceClasificacion}
                                             name="select"
                                             className="form-control mt-3"
                                         >
                                             <option value="#">
-                                                Seleccione Clasificación de Renglón
+                                                Seleccione Clasificación
                                             </option>
                                             {clasificaciones.map((clasificacion) => (
                                                 <option key={clasificacion.id} value={clasificacion.code}>
@@ -1117,13 +1122,13 @@ function TableCost(props) {
                                     {/* FIn del Select de Sub-Cuentas Atlas */}
                                     {/* </div> */}
 
-                                    <div style={{ width: "50%", display: "inline-block" }}>
+                                    <div style={{ width: "34%", display: "inline-block" }}>
                                         <select
                                             onChange={onChanceAccount}
                                             name="select_account_money"
                                             className="form-control mt-3"
                                         >
-                                            <option value="#">Seleccione Cuenta de Origen</option>
+                                            <option value="#">Seleccione Cuenta </option>
                                             {cuentas.map((cuenta) => (
                                                 <option key={cuenta.id} value={cuenta.id}>
                                                     ({cuenta.coin.name}-{cuenta.name}{" "}
@@ -1131,7 +1136,8 @@ function TableCost(props) {
                                             ))}
                                         </select>
                                     </div>
-                                    <div style={{ width: "50%", display: "inline-block" }}>
+
+                                    {/*  <div style={{ width: "50%", display: "inline-block" }}>
                                         <select
                                             onChange={onChanceSupplier}
                                             name="select_suppliers"
@@ -1146,12 +1152,12 @@ function TableCost(props) {
                                                 </option>
                                             ))}
                                         </select>
-                                    </div>
+                                    </div> */}
 
                                     <div className="input-group mt-3">
                                         <textarea
                                             onChange={onChanceDescription}
-                                            placeholder="Breve Descripción del gasto"
+                                            placeholder="Breve Descripción del renglón aprobado"
                                             className="form-control"
                                             value={budgetLine.description}
                                             name="details"
@@ -1160,8 +1166,8 @@ function TableCost(props) {
                                         ></textarea>
                                     </div>
 
-                                    <div style={{ width: "25%", display: "inline-block" }}>
-                                        <label htmlFor="">Inicial</label>
+                                    <div style={{ width: "33%", display: "inline-block" }}>
+                                        <label htmlFor="">Aprobado</label>
 
                                         <input
                                             name="buddgetstart"
@@ -1169,10 +1175,10 @@ function TableCost(props) {
                                             onChange={onChanceBudgetStart}
                                             type="text"
                                             className="form-control"
-                                            placeholder="valor Inicial : 0,000.00 "
+                                            placeholder="valor Aprobado : 0,000.00 "
                                         />
                                     </div>
-                                    <div style={{ width: "25%", display: "inline-block" }}>
+                                    {/*   <div style={{ width: "25%", display: "inline-block" }}>
                                         <label htmlFor="">Modificado</label>
 
                                         <input
@@ -1218,7 +1224,7 @@ function TableCost(props) {
                                             className="form-control"
                                             placeholder="Valor Disponible"
                                         />
-                                    </div>
+                                    </div> 
                                     <div style={{ width: "33%", display: "inline-block", marginTop: '15px' }}>
 
                                         <input
@@ -1238,7 +1244,7 @@ function TableCost(props) {
                                             placeholder="Fecha"
                                         />
                                         <label htmlFor="">Fecha</label>
-                                    </div>
+                                    </div>*/}
                                     {/*  <div style={{ width: "50%", display: "inline-block" }}>
                                         <input
                                             onChange={onChangeEndDate}
@@ -1259,7 +1265,7 @@ function TableCost(props) {
                                             Cerrar
                                         </button>
                                         <button
-                                            type="button"
+                                            type="submit"
                                             className="btn btn-primary waves-effect waves-light "
                                         >
                                             Guardar

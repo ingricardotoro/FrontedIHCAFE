@@ -19,15 +19,15 @@ export default class BudgetCard extends Component {
             <div>
                 <table className="table">
                     <thead>
-                        <th>Presupuesto Asignado</th>
-                        <th>Presupesto Solicitado</th>
+                        <th>Presupuesto Aprobado</th>
+                        {/* <th>Presupesto Solicitado</th> */}
                         <th>Presupuesto Ejecutado</th>
                         <th>Presupuesto Disponible</th>
                     </thead>
                     <tbody>
                         <tr>
                             <td><button style={{ width: '100%' }} className="btn btn-lg btn-primary  waves-effect waves-light" type="button"  >{this.formatMoney(this.props.budgetstart)}</button></td>
-                            <td><button style={{ width: '100%' }} className="btn btn-lg btn-warning  waves-effect waves-light" type="button"  >{this.formatMoney(this.props.total_solicitado2)}</button></td>
+                            {/* <td><button style={{ width: '100%' }} className="btn btn-lg btn-warning  waves-effect waves-light" type="button"  >{this.formatMoney(this.props.total_solicitado2)}</button></td> */}
                             <td><button style={{ width: '100%' }} className="btn btn-lg btn-danger  waves-effect waves-light" type="button"  >{this.formatMoney(this.props.total_ejecutado2)} </button></td>
                             <td><button style={{ width: '100%' }} className="btn btn-lg btn-success  waves-effect waves-light" type="button"  >{this.formatMoney(this.props.total_disponible2)} </button></td>
                         </tr>

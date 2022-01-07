@@ -17,7 +17,7 @@ export default class ProjectNew extends Component {
             budget_id: 0,
             team_id: 0,
             monto: 0,
-            status: "",
+            status: "Aprobado",
 
             budgets: [],
             teams: [],
@@ -92,7 +92,7 @@ export default class ProjectNew extends Component {
                                         <li className="breadcrumb-item"><Link to={'/budgets'} >Presupuestos</Link>
                                         </li>
                                         <li className="breadcrumb-item">Crear Nuevo
-                                </li>
+                                        </li>
                                     </ul>
                                 </div>
 
@@ -141,12 +141,12 @@ export default class ProjectNew extends Component {
                                                                     <textarea onChange={this.onChangeDescription} rows={5} cols={5} className="form-control" placeholder="Default textarea" defaultValue={""} />
                                                                 </div>
                                                             </div>
-                                                            <div className="form-group row">
+                                                            {/*  <div className="form-group row">
                                                                 <label className="col-sm-2 col-form-label">Presupuesto Aprobado del Proyecto</label>
                                                                 <div className="col-sm-10">
                                                                     <input onChange={this.onChangeMonto} required type="text" className="form-control" placeholder="Ingrese el Presupuesto Aprobado para este Proyecto" />
                                                                 </div>
-                                                            </div>
+                                                            </div> */}
                                                             <div className="form-group row">
                                                                 <label className="col-sm-2 col-form-label">Prioridad del Proyecto</label>
                                                                 <div className="col-sm-10">
@@ -202,7 +202,7 @@ export default class ProjectNew extends Component {
                                                                 </div>
                                                             </div>
 
-                                                            <div className="form-group row">
+                                                            {/* <div className="form-group row">
                                                                 <label className="col-sm-2 col-form-label">Estado del Presupuesto</label>
                                                                 <div className="col-sm-10">
                                                                     <select onChange={this.onChangeStatus} name="select" className="form-control">
@@ -213,7 +213,7 @@ export default class ProjectNew extends Component {
                                                                         <option value="Finalizado">Finalizado</option>
                                                                     </select>
                                                                 </div>
-                                                            </div>
+                                                            </div> */}
                                                             <div className="row">
                                                                 <label className="col-sm-4 col-lg-2 col-form-label">Guardar Presupuesto</label>
                                                                 <div className="col-sm-8 col-lg-10">

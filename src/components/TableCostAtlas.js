@@ -446,9 +446,9 @@ function TableCostAtlas(props) {
                 .then((dataResult) => {
 
                     //volvemos a traer los budgtines
-                    getData()
                     toast.success('Archivo Subido Exitosamente', { position: toast.POSITION.TOP_RIGHT })
                     document.getElementById('btnCerrarSF_' + id).click()
+                    getData()
 
                     //cerramos el modald de create New
                     //document.getElementById('archivos_' + id).click()
@@ -732,9 +732,7 @@ function TableCostAtlas(props) {
                                                                         )}
                                                                     </label>
                                                                 </td>
-                                                                {/*<td>
-                                                    <label className="text-success"> {formatMoney(budgetLinesAtlas.balance)}</label>
-                                                </td> */}
+
 
                                                                 {budgetLinesAtlas.status === "Solicitado" && rol === 2 ? (
                                                                     <td>
@@ -798,7 +796,7 @@ function TableCostAtlas(props) {
                                                                 </td>
                                                                 <td align="center" className="action-icon">
                                                                     < Link
-                                                                        to={"/budgetline/edit/" + props.idProject + "/" + budgetLinesAtlas.id}
+                                                                        to={"/budgetline/edit/" + idProject + "/" + budgetLinesAtlas.id}
                                                                         className="m-r-15 text-muted"
                                                                         data-original-title="Edit"
                                                                     >
