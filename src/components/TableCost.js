@@ -331,9 +331,9 @@ function TableCost(props) {
             )
 
             console.log("APROBANDO" + JSON.stringify(res))
-            //window.location.replace('/project/' + idProject);
+            window.location.replace('/project/' + idProject);
 
-            history.push('/project/' + idProject)
+            //history.push('/project/' + idProject)
             //this.setState({ redirect: true })
             //window.location.replace('/project/' + this.props.idProject);
             //window.location.replace('');
@@ -389,8 +389,8 @@ function TableCost(props) {
         })
 
         //console.log("RES=" + JSON.stringify(res.data.status))
-        history.replace('/project/' + idProject)
-        //window.location.replace('/project/' + idProject);
+        //history.replace('/project/' + idProject)
+        window.location.replace('/project/' + idProject);
     }
 
     const onSubmitDelete = async (id) => {
