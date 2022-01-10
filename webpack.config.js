@@ -2,7 +2,7 @@ const HtmlWebPackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const webpack = require("webpack");
 const path = require('path')
-
+const devMode = process.env.NODE_ENV !== "production";
 
 module.exports = env => {
     return {
@@ -37,11 +37,20 @@ module.exports = env => {
                     }
                 },
                 {
-                    test: /\.css$/i,
-                    //include: path.resolve(__dirname, 'src'),
+                    //test: /\.(sa|sc|c)ss$/i,
                     exclude: /node_modules/,
-                    //use: ['style-loader', 'css-loader']
-                    use: [{
+                    test: /\.css$/i,
+                    loader: "css-loader",
+                    options: {
+                        url: true,
+                        import: true
+                    }
+
+
+                    //test: /\.css$/i,
+                    //include: path.resolve(__dirname, 'src'),
+                    // use: ['style-loader', 'css-loader']
+                    /*use: [{
                         loader: MiniCssExtractPlugin.loader,
                         options: {
                             //hmr: env.NODE_ENV === 'development',
@@ -54,19 +63,24 @@ module.exports = env => {
                             importLoaders: 0
                         }
                     }
-                    ]
+                    ]*/
                 },
                 {
                     test: /\.html$/,
                     loader: 'html-loader'
 
+                },
+
+                {
+                    test: /\.(png|jpg|gif|jpeg|svg|woff|woff2|eot|ttf)$/,
+                    loader: 'url-loader'
                 }
 
             ],
         },
-
-
-        plugins: [
+        plugins: [].concat(devMode ? [] : [new MiniCssExtractPlugin()]),
+        stats: { children: false },
+        /*plugins: [
             new MiniCssExtractPlugin({
                 filename: '[name].main.css',
                 chunkFilename: '[id].css'
@@ -74,6 +88,6 @@ module.exports = env => {
             new webpack.HotModuleReplacementPlugin(),
             new HtmlWebPackPlugin(),
 
-        ]
+        ]*/
     }
 };
