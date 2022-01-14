@@ -35,31 +35,31 @@ export default class ModalVerFiles extends Component {
       return (
         <div>
           <div
-            class="modal fade"
+            className="modal fade"
             id={"ver_archivos_" + this.props.budgetline}
-            tabindex="-1"
+            tabIndex="-1"
             role="dialog"
           >
-            <div class="modal-dialog modal-lg" role="document">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h4 class="modal-title">{this.props.budgetlineName} </h4>
+            <div className="modal-dialog modal-lg" role="document">
+              <div className="modal-content">
+                <div className="modal-header">
+                  <h4 className="modal-title">{this.props.budgetlineName} </h4>
                   <button
                     type="button"
-                    class="close"
+                    className="close"
                     data-dismiss="modal"
                     aria-label="Close"
                   >
                     <span aria-hidden="true">&times;</span>
                   </button>
                 </div>
-                <div class="modal-body" align="center">
+                <div className="modal-body" align="center">
                   <div className="row card-block">
                     <div className="col-md-12">
                       <p>{this.props.budgetlineDetails}</p>
                       <ul className="list-view">
                         {this.state.files.map((file) => (
-                          <li>
+                          <li key={file.id}>
                             <div className="card user-card">
                               <div className="card-block">
                                 <div className="media">
@@ -84,26 +84,26 @@ export default class ModalVerFiles extends Component {
                                       Archivo PDF
                                     </a>
                                   ) : (
-                                      <a
-                                        className="media-left"
-                                        href={
+                                    <a
+                                      className="media-left"
+                                      href={
+                                        "http://167.99.15.83:4000/" +
+                                        file.filedir +
+                                        file.filename
+                                      }
+                                    >
+                                      <img
+                                        style={{ width: "200px" }}
+                                        className="img-thumbnail "
+                                        src={
                                           "http://167.99.15.83:4000/" +
                                           file.filedir +
                                           file.filename
                                         }
-                                      >
-                                        <img
-                                          style={{ width: "200px" }}
-                                          className="img-thumbnail "
-                                          src={
-                                            "http://167.99.15.83:4000/" +
-                                            file.filedir +
-                                            file.filename
-                                          }
-                                          alt={file.filename}
-                                        />
-                                      </a>
-                                    )}
+                                        alt={file.filename}
+                                      />
+                                    </a>
+                                  )}
                                   <div className="media-body">
                                     <div className="col-xs-12">
                                       <h6 className="d-inline-block">
@@ -144,10 +144,10 @@ export default class ModalVerFiles extends Component {
                     </div>
                   </div>
                 </div>
-                <div class="modal-footer">
+                <div className="modal-footer">
                   <button
                     type="button"
-                    class="btn btn-default waves-effect "
+                    className="btn btn-default waves-effect "
                     data-dismiss="modal"
                   >
                     Cerrar
@@ -162,29 +162,29 @@ export default class ModalVerFiles extends Component {
       return (
         <div>
           <div
-            class="modal fade"
+            className="modal fade"
             id={"ver_archivos_" + this.props.budgetlineatlas}
-            tabindex="-1"
+            tabIndex="-1"
             role="dialog"
           >
-            <div class="modal-dialog modal-lg" role="document">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h4 class="modal-title">SIN ARCHIVOS INGRESADOS </h4>
+            <div className="modal-dialog modal-lg" role="document">
+              <div className="modal-content">
+                <div className="modal-header">
+                  <h4 className="modal-title">SIN ARCHIVOS INGRESADOS </h4>
                   <button
                     type="button"
-                    class="close"
+                    className="close"
                     data-dismiss="modal"
                     aria-label="Close"
                   >
                     <span aria-hidden="true">&times;</span>
                   </button>
                 </div>
-                <div class="modal-body" align="center"></div>
-                <div class="modal-footer">
+                <div className="modal-body" align="center"></div>
+                <div className="modal-footer">
                   <button
                     type="button"
-                    class="btn btn-default waves-effect "
+                    className="btn btn-default waves-effect "
                     data-dismiss="modal"
                   >
                     Cerrar

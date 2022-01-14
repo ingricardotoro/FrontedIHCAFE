@@ -323,17 +323,20 @@ function TableCost(props) {
         if (budgetLine.balance <= budgetLine.balance) {
 
             // si es aprobado un valor igual o menor
-            console.log("http://167.99.15.83:4000/api/budgetlines/aprobar/" +
-                id + "/" + budgetLine.code + "/" + budgetLine.balance + "/" + budgetLine.startdate)
-            let res = await axios.post(
+            let res_apro = await axios.post(
                 "http://167.99.15.83:4000/api/budgetlines/aprobar/" +
                 id + "/" + budgetLine.code + "/" + budgetLine.balance + "/" + budgetLine.startdate
             )
 
-            console.log("APROBANDO" + JSON.stringify(res))
-            window.location.replace('/project/' + idProject);
+            console.log("APROBANDO" + JSON.stringify(res_apro))
+            //window.location.replace('/project/' + idProject);
+            if (res_apro.data.ok === true) {
+                document.getElementById('bnt_cerrar_aprobar').click()
+                getData()
+            }
 
             //history.push('/project/' + idProject)
+            //history.push(`/project/${idProject}`)
             //this.setState({ redirect: true })
             //window.location.replace('/project/' + this.props.idProject);
             //window.location.replace('');
@@ -361,14 +364,16 @@ function TableCost(props) {
             fase_archivo: fase_archivo,
             file: archivo,
         })
-        window.location.replace('/project/' + this.props.idProject);
+        //window.location.replace('/project/' + this.props.idProject);
+        //history.push('/project/' + idProject)
+        history.push(`/project/${idProject}`)
 
     }
 
     const onSubmit = async (e) => {
 
         e.preventDefault();
-        await axios.post("http://167.99.15.83:4000/api/budgetlines/", {
+        const res_bl = await axios.post("http://167.99.15.83:4000/api/budgetlines/", {
             //await axios.post("http://localhost:4000/api/budgetlines/", {
             code: budgetLine.code,
             description: budgetLine.description,
@@ -388,9 +393,14 @@ function TableCost(props) {
             sub_category_code: budgetLine.sub_category_code,
         })
 
+        if (res_bl.data.ok === true) {
+            document.getElementById('btn_cerrar_create').click()
+            getData()
+        }
         //console.log("RES=" + JSON.stringify(res.data.status))
         //history.replace('/project/' + idProject)
-        window.location.replace('/project/' + idProject);
+        //history.push(`/project/${idProject}`)
+        //window.location.replace('/project/' + idProject);
     }
 
     const onSubmitDelete = async (id) => {
@@ -399,9 +409,9 @@ function TableCost(props) {
         );
 
         //window.location.replace('');
-        window.location.replace('/project/' + idProject);
+        //window.location.replace('/project/' + idProject);
 
-        //history.push('/project/' + idProject);
+        history.push('/project/' + idProject);
 
         if (res_p) {
         }
@@ -557,7 +567,7 @@ function TableCost(props) {
                                                                     <td>
                                                                         <button
                                                                             type="button"
-                                                                            class="btn btn-warning waves-effect"
+                                                                            className="btn btn-warning waves-effect"
                                                                             data-toggle="modal"
                                                                             data-target={
                                                                                 "#rembolsar_" + budgetLine.id
@@ -807,6 +817,7 @@ function TableCost(props) {
                                                                                         type="button"
                                                                                         className="btn btn-default waves-effect "
                                                                                         data-dismiss="modal"
+                                                                                        id="bnt_cerrar_aprobar"
                                                                                     >
                                                                                         Cerrar
                                                                                     </button>
@@ -958,18 +969,18 @@ function TableCost(props) {
                                                                 {/* FINAL DE SUBIR ARCHIVOS */}
 
                                                                 <div
-                                                                    class="modal fade"
+                                                                    className="modal fade"
                                                                     id={"rembolsar_" + budgetLine.id}
                                                                     tabIndex="-1"
                                                                     role="dialog"
                                                                 >
                                                                     <div
-                                                                        class="modal-dialog modal-lg"
+                                                                        className="modal-dialog modal-lg"
                                                                         role="document"
                                                                     >
-                                                                        <div class="modal-content">
-                                                                            <div class="modal-header">
-                                                                                <h4 class="modal-title">
+                                                                        <div className="modal-content">
+                                                                            <div className="modal-header">
+                                                                                <h4 className="modal-title">
                                                                                     Rembolsar {budgetLine.name}-
                                                                                     {formatMoney(
                                                                                         budgetLine.balance
@@ -977,7 +988,7 @@ function TableCost(props) {
                                                                                 </h4>
                                                                                 <button
                                                                                     type="button"
-                                                                                    class="close"
+                                                                                    className="close"
                                                                                     data-dismiss="modal"
                                                                                     aria-label="Close"
                                                                                 >
@@ -987,7 +998,7 @@ function TableCost(props) {
                                                                                 </button>
                                                                             </div>
                                                                             <div
-                                                                                class="modal-body"
+                                                                                className="modal-body"
                                                                                 align="center"
                                                                             >
                                                                                 <div>
@@ -1019,10 +1030,10 @@ function TableCost(props) {
                                                                                     </button>
                                                                                 </div>
                                                                             </div>
-                                                                            <div class="modal-footer">
+                                                                            <div className="modal-footer">
                                                                                 <button
                                                                                     type="button"
-                                                                                    class="btn btn-default waves-effect "
+                                                                                    className="btn btn-default waves-effect "
                                                                                     data-dismiss="modal"
                                                                                 >
                                                                                     Cerrar
@@ -1065,6 +1076,7 @@ function TableCost(props) {
                                     className="close"
                                     data-dismiss="modal"
                                     aria-label="Close"
+                                    id="btn_cerrar_create"
                                 >
                                     <span aria-hidden="true">×</span>
                                 </button>
@@ -1246,7 +1258,7 @@ function TableCost(props) {
                                     {/*  <div style={{ width: "50%", display: "inline-block" }}>
                                         <input
                                             onChange={onChangeEndDate}
-                                            class="form-control mt-3"
+                                            className="form-control mt-3"
                                             type="date"
                                             placeholder="Fecha de Final"
                                         />

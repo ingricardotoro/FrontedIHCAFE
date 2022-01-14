@@ -194,6 +194,7 @@ export default class TabBudget extends Component {
                   <div className="row">
                     {this.state.projects.map((project) => (
                       <Projectcard
+                        key={project.id}
                         name={project.name}
                         id={project.id}
                         budgetstart={project.budgetstart}

@@ -1,5 +1,6 @@
+
 import React from "react";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter as Routes, Route } from "react-router-dom";
 import Sidebar from "./components/Sidebar";
 
 import Atlas from "./pages/Atlas";
@@ -48,12 +49,13 @@ import { ToastContainer } from 'react-toastify'
 //import 'react-toastify/dist/ReactToastify.css';
 //import 'react-toastify/scss/main.scss'
 
+
 function App() {
   return (
 
     <div className="App">
 
-      <Router>
+      <Routes>
 
         <Navbar />
 
@@ -72,10 +74,11 @@ function App() {
         <Route path="/budgetline/new" exact component={BudgetLineNew} />
         <Route path="/budgetline/edit/:projectId/:id" exact component={BudgetLineEdit} />
         <Route path="/categories" exact component={ListCategories} />
-        <Route path="/projects" exact component={ListProjects} />
-        <Route path="/projects/new" exact component={ProjectNew} />
-        <Route path="/project/edit/:id" exact component={ProjectEdit} />
-        <Route path="/project/:id" exact component={projectDashboard} />
+
+        <Route path="/projects" component={ListProjects} />
+        <Route path="/projects/new" component={ProjectNew} />
+        <Route path="/project/edit/:id" component={ProjectEdit} />
+        <Route path="/project/:id" component={projectDashboard} />
 
         <Route path="/suppliers_list" exact component={pageSupplierslist} />
         <Route path="/users_list" exact component={Users_list} />
@@ -99,7 +102,7 @@ function App() {
         <Route path="/reports/excel_users" exact component={ReportsUsers} />
         <Route path="/reports/atlas_by_project_id/:id/:coin_id" exact component={ReportAtlasByProjectid} />
 
-      </Router>
+      </Routes>
 
       <ToastContainer />
     </div>
