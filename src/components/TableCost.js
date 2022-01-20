@@ -320,18 +320,19 @@ function TableCost(props) {
 
     const onClickAprobar = async (id) => {
 
+
         if (budgetLine.balance <= budgetLine.balance) {
 
             // si es aprobado un valor igual o menor
-            let res_apro = await axios.post(
+            const res_apro = await axios.post(
                 "http://167.99.15.83:4000/api/budgetlines/aprobar/" +
                 id + "/" + budgetLine.code + "/" + budgetLine.balance + "/" + budgetLine.startdate
             )
 
-            console.log("APROBANDO" + JSON.stringify(res_apro))
+            //console.log("APROBANDO" + JSON.stringify(res_apro))
             //window.location.replace('/project/' + idProject);
             if (res_apro.data.ok === true) {
-                document.getElementById('bnt_cerrar_aprobar').click()
+                document.getElementById(`btn_cerrar_aprobar_${id}`).click()
                 getData()
             }
 
@@ -411,10 +412,12 @@ function TableCost(props) {
         //window.location.replace('');
         //window.location.replace('/project/' + idProject);
 
-        history.push('/project/' + idProject);
-
-        if (res_p) {
+        //history.push('/project/' + idProject);
+        if (res_p.data.ok === true) {
+            document.getElementById('btn_del_cerrar').click()
+            getData()
         }
+
     }
 
     return (
@@ -660,6 +663,7 @@ function TableCost(props) {
                                                                                     className="close"
                                                                                     data-dismiss="modal"
                                                                                     aria-label="Close"
+                                                                                    id='btn_del_cerrar'
                                                                                 >
                                                                                     <span aria-hidden="true">×</span>
                                                                                 </button>
@@ -817,12 +821,12 @@ function TableCost(props) {
                                                                                         type="button"
                                                                                         className="btn btn-default waves-effect "
                                                                                         data-dismiss="modal"
-                                                                                        id="bnt_cerrar_aprobar"
+                                                                                        id={"btn_cerrar_aprobar_" + budgetLine.id}
                                                                                     >
                                                                                         Cerrar
                                                                                     </button>
                                                                                     <button
-                                                                                        type="submit"
+                                                                                        type="button"
                                                                                         onClick={() =>
                                                                                             onClickAprobar(
                                                                                                 budgetLine.id
