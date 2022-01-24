@@ -326,7 +326,7 @@ function TableCost(props) {
     setBudgetLine({
       code: 0,
       name: '', //
-      project_id: 0, //
+      project_id: idProject, //
       category_id: 0, //
       sub_category_code: '', //
       user_id: 1,
@@ -466,7 +466,7 @@ function TableCost(props) {
         supplier_id: budgetLine.supplier,
         date_start: budgetLine.date_start,
         buddgetstart: budgetLine.budgetstart,
-        balance: budgetLine.budgetstart,
+        balance: budgetLine.balance,
       }
     );
 
