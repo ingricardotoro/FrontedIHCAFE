@@ -1,27 +1,22 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 
 export default class RowCardsProjects extends Component {
-
   componentDidMount() {
     //verificacion de usuario logeado
     if (!localStorage.usertoken) {
-      window.location.href = "/"
+      window.location.href = '/';
     }
-
   }
 
   formatMoney(number) {
     if (number) {
-
-      return number.toLocaleString("en-US", {
-        style: "currency",
-        currency: "HNL",
+      return number.toLocaleString('en-US', {
+        style: 'currency',
+        currency: 'HNL',
       });
     }
     //return number;
   }
-
-
 
   render() {
     return (
@@ -42,11 +37,15 @@ export default class RowCardsProjects extends Component {
                 <i className="icofont icofont-presentation-alt st-icon bg-primary" />
                 <div className="text-left">
                   <h3 className="d-inline-block">
-                    {" "}
-                    {this.formatMoney(this.props.aprobado)}{" "}
+                    {' '}
+                    {this.formatMoney(this.props.aprobado)}{' '}
                   </h3>
                   <p>
-                    <span className="f-right bg-primary">100%</span>
+                    {this.props.aprobado === 0 ? (
+                      <span className="f-right bg-primary">0%</span>
+                    ) : (
+                      <span className="f-right bg-primary">100%</span>
+                    )}
                   </p>
                 </div>
               </div>
@@ -99,7 +98,13 @@ export default class RowCardsProjects extends Component {
                   </h3>
                   <p>
                     <span className="f-right bg-danger">
-                      {Math.round((this.props.ejecutado * 100) / this.props.aprobado)}%
+                      {this.props.aprobado === 0 ? (
+                        <span>0%</span>
+                      ) : (
+                        Math.round(
+                          (this.props.ejecutado * 100) / this.props.aprobado
+                        ) + '%'
+                      )}
                     </span>
                   </p>
                 </div>
@@ -123,11 +128,20 @@ export default class RowCardsProjects extends Component {
                 <i className="icofont icofont-chart-line st-icon bg-success" />
                 <div className="text-left">
                   <h3 className="d-inline-block">
-                    {this.formatMoney(this.props.aprobado - this.props.ejecutado)}
+                    {this.formatMoney(
+                      this.props.aprobado - this.props.ejecutado
+                    )}
                   </h3>
                   <p>
                     <span className="f-right bg-success">
-                      {Math.round(((this.props.aprobado - this.props.ejecutado) * 100) / this.props.aprobado)}%
+                      {this.props.aprobado === 0 ? (
+                        <span>0%</span>
+                      ) : (
+                        Math.round(
+                          ((this.props.aprobado - this.props.ejecutado) * 100) /
+                            this.props.aprobado
+                        ) + '%'
+                      )}
                     </span>
                   </p>
                 </div>

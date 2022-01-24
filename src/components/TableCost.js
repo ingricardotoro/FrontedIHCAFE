@@ -5,6 +5,7 @@ import { Link, Redirect, useHistory } from 'react-router-dom';
 
 import RowCardsProjects from './RowCardsProjects';
 import ModalVerFiles from './ModalVerFiles';
+//import { set } from 'core-js/core/dict';
 //import jwt_decode from 'jwt-decode';
 
 function TableCost(props) {
@@ -33,7 +34,7 @@ function TableCost(props) {
   const [supplier, setSupplier] = useState(1);
   //const [aprobar, setAprobar] = useState(1)
   //const [valor, setValor] = useState(-1)
-  const [comentario, setComentario] = useState('');
+  //const [comentario, setComentario] = useState('');
   const [nombre_archivo, setNombre_archivo] = useState('');
   const [fase_archivo, setFase_archivo] = useState('');
   //const [variable, setVariable] = useState(0)
@@ -235,13 +236,13 @@ function TableCost(props) {
     });
   };
 
-  const onChanceBudget = (e) => {
+  /*const onChanceBudget = (e) => {
     setBudgetLine({
       ...budgetLine,
       budgetstart: e.target.value,
       balance: e.target.value,
     });
-  };
+  };*/
 
   const onChanceBudgetStart = (e) => {
     setBudgetLine({
@@ -251,48 +252,48 @@ function TableCost(props) {
     });
   };
 
-  const onChanceBudgeUpdate = (e) => {
+  /*const onChanceBudgeUpdate = (e) => {
     setBudgetLine({
       ...budgetLine,
       budgeupdate: e.target.value,
     });
-  };
+  };*/
 
-  const onChanceBudgetActual = (e) => {
+  /*const onChanceBudgetActual = (e) => {
     setBudgetLine({
       ...budgetLine,
       budgeactual: e.target.value,
     });
-  };
+  };*/
 
-  const onChancebuddgetFinal = (e) => {
+  /*const onChancebuddgetFinal = (e) => {
     setBudgetLine({
       ...budgetLine,
       budgetfinal: e.target.value,
     });
-  };
+  };*/
 
   const onChanceBalance = (e) => {
     setBudgetLine({
       ...budgetLine,
-      balance: e.target.value,
+      balance: parseFloat(e.target.value),
     });
   };
 
-  const onchangeComentario = (e) => {
+  /*const onchangeComentario = (e) => {
     setComentario(e.target.value);
-  };
+  };*/
 
-  const onchangeMonto = (e) => {
+  /*const onchangeMonto = (e) => {
     //setValor(e.target.value)
-  };
+  };*/
 
-  const onchangeSelectAprobar = (e) => {
+  /*const onchangeSelectAprobar = (e) => {
     setBudgetLine({
       ...budgetLine,
       aprobar: e.target.value,
     });
-  };
+  };*/
 
   const onChanceSupplier = (e) => {
     //setSupplier(e.target.value)
@@ -375,9 +376,9 @@ function TableCost(props) {
     }
   };
 
-  const onClickArchivo = async (e) => {
+  /*const onClickArchivo = async (e) => {
     setaArchivo(e.target.value);
-  };
+  };*/
 
   const onClickNombreArchivo = async (e) => {
     setNombre_archivo(e.target.value);
@@ -450,6 +451,35 @@ function TableCost(props) {
     }
   };
 
+  const handleClickEdit = (budgetLine) => {
+    setBudgetLine(budgetLine);
+    document.getElementById('btn_modal_edit').click();
+    //document.getElementById('#modal_edit').modal('show');
+  };
+
+  const handleEdit = async (id) => {
+    const res_p = await axios.put(
+      'http://167.99.15.83:4000/api/budgetlines/update/' + idProject + '/' + id,
+      {
+        code: budgetLine.code,
+        description: budgetLine.details,
+        supplier_id: budgetLine.supplier,
+        date_start: budgetLine.date_start,
+        buddgetstart: budgetLine.budgetstart,
+        balance: budgetLine.budgetstart,
+      }
+    );
+
+    //window.location.replace('');
+    //window.location.replace('/project/' + idProject);
+
+    //history.push('/project/' + idProject);
+    if (res_p.data.ok === true) {
+      document.getElementById('btn_cerrar_edit').click();
+      getAllBudgets();
+    }
+  };
+
   //funcion para controlar el archivo de imagen
   const handleFileChange = () => {
     /*const [file] = e.target.files; //destructuracion
@@ -498,6 +528,16 @@ function TableCost(props) {
                   data-target="#modal-13"
                 >
                   <i className="icofont icofont-plus m-r-5" /> Crear Nuevo
+                </button>
+
+                <button
+                  id={'btn_modal_edit'}
+                  style={{ display: 'none' }}
+                  type="button"
+                  data-toggle="modal"
+                  data-target="#modal_editar"
+                >
+                  <i className="icofont icofont-plus m-r-5" /> Editar
                 </button>
               </div>
 
@@ -664,7 +704,7 @@ function TableCost(props) {
                                   )}
 
                                   <td align="center" className="action-icon">
-                                    <Link
+                                    {/* <Link
                                       to={
                                         '/budgetline/edit/' +
                                         idProject +
@@ -676,9 +716,32 @@ function TableCost(props) {
                                     >
                                       <i className="icofont icofont-ui-edit"></i>
                                     </Link>
-
-                                    <a
+ */}
+                                    {/*  <a
                                       href="#!"
+                                      className="text-muted"
+                                      data-original-title="Editar"
+                                    >
+                                      <i
+                                        className="icofont icofont-ui-edit"
+                                        data-toggle="modal"
+                                        data-target={
+                                          '#modal_edit_' + budgetLine.id
+                                        }
+                                      ></i>
+                                    </a> */}
+
+                                    <button
+                                      onClick={() =>
+                                        handleClickEdit(budgetLine)
+                                      }
+                                      className="text-muted"
+                                      data-original-title="Editar"
+                                    >
+                                      <i className="icofont icofont-ui-edit"></i>
+                                    </button>
+
+                                    <button
                                       className="text-muted"
                                       data-original-title="Eliminar"
                                     >
@@ -689,7 +752,7 @@ function TableCost(props) {
                                           '#modal_delete_' + budgetLine.id
                                         }
                                       ></i>
-                                    </a>
+                                    </button>
                                   </td>
 
                                   {/* INICIL Modal DELETE*/}
@@ -1036,7 +1099,7 @@ function TableCost(props) {
                                   </div>
                                   {/* FINAL DE SUBIR ARCHIVOS */}
 
-                                  <div
+                                  {/* <div
                                     className="modal fade"
                                     id={'rembolsar_' + budgetLine.id}
                                     tabIndex="-1"
@@ -1107,6 +1170,7 @@ function TableCost(props) {
                                       </div>
                                     </div>
                                   </div>
+                                   */}
                                 </tr>
                               ))
                             : null}
@@ -1352,6 +1416,177 @@ function TableCost(props) {
       </div>
 
       {/* Add BudgetLine Ends Model*/}
+
+      {/**MODAL PARA EDITAR */}
+      <div
+        className="modal fade"
+        id={'modal_editar'}
+        tabIndex={-1}
+        role="dialog"
+      >
+        <div className="modal-dialog modal-lg" role="document">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h6 className="modal-title">
+                Edición de Reglón presupuestario: {budgetLine.name}{' '}
+              </h6>
+              <button
+                type="button"
+                className="close"
+                data-dismiss="modal"
+                aria-label="Close"
+                id="btn_cerrar_edit"
+              >
+                <span aria-hidden="true">×</span>
+              </button>
+            </div>
+            <div className="modal-body">
+              <input
+                name=""
+                type="hidden"
+                className="form-control mt-3"
+                value={idProject}
+              />
+
+              <div
+                className="input-group mt-3 "
+                style={{
+                  width: '95%',
+                }}
+              >
+                <textarea
+                  onChange={onChanceDescription}
+                  placeholder="Breve Descripción del renglón aprobado"
+                  className="form-control"
+                  value={budgetLine.description}
+                  name="details"
+                  cols="30"
+                  rows="3"
+                ></textarea>
+              </div>
+
+              <div
+                style={{
+                  width: '30%',
+                  display: 'inline-block',
+                }}
+              >
+                {/*  <label htmlFor="">Proveedor</label>*/}
+                <select
+                  onChange={onChanceSupplier}
+                  name="select_suppliers"
+                  className="form-control mt-3"
+                >
+                  <option value={budgetLine.supplier_id}>
+                    Beneficiario/Proveedor
+                  </option>
+
+                  {suppliers.map((supplier) => (
+                    <option key={supplier.id} value={supplier.id}>
+                      {supplier.contact_name}{' '}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              <div
+                style={{
+                  width: '30%',
+                  display: 'inline-block',
+                  marginLeft: '15px',
+                }}
+              >
+                <label htmlFor="">codigo </label>
+
+                <input
+                  name="code"
+                  value={budgetLine.code}
+                  onChange={onChanceCode}
+                  type="text"
+                  className="form-control"
+                  placeholder="Ingrese Codigo de Identificación: 01-101-01 "
+                />
+              </div>
+              <div
+                style={{
+                  width: '30%',
+                  display: 'inline-block',
+                  marginLeft: '15px',
+                }}
+              >
+                {/* <label htmlFor="">Fecha</label> */}
+
+                <input
+                  onChange={onChangeStartDate}
+                  className="form-control mt-3"
+                  type="date"
+                  placeholder="Fecha"
+                  value={budgetLine.date_start}
+                />
+                {/*  <label htmlFor="">Fecha</label> */}
+              </div>
+
+              <div
+                style={{
+                  width: '33%',
+                  display: 'inline-block',
+                  marginTop: '10px',
+                }}
+              >
+                <label htmlFor="">Valor Aprobado</label>
+
+                <input
+                  name="buddgetstart"
+                  type="number"
+                  onChange={onChanceBudgetStart}
+                  type="text"
+                  className="form-control"
+                  placeholder="valor Aprobado : 0,000.00 "
+                  value={budgetLine.buddgetstart}
+                />
+              </div>
+
+              <div
+                style={{
+                  width: '33%',
+                  display: 'inline-block',
+                  marginTop: '10px',
+                  marginLeft: '15px',
+                }}
+              >
+                <label htmlFor="">Valor Ejecutado</label>
+
+                <input
+                  name="balance"
+                  type="number"
+                  onChange={onChanceBalance}
+                  className="form-control"
+                  placeholder="valor Ejecutado : 0,000.00 "
+                  value={budgetLine.balance}
+                />
+              </div>
+              <div className="modal-footer">
+                <button
+                  id="cerrar"
+                  type="button"
+                  className="btn btn-default waves-effect "
+                  data-dismiss="modal"
+                >
+                  Cerrar
+                </button>
+                <button
+                  type="button"
+                  className="btn btn-primary waves-effect waves-light "
+                  onClick={() => handleEdit(budgetLine.id)}
+                >
+                  Guardar
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      {/**FIN DEL MODAL PARA EDITAR */}
 
       {/* Page body end */}
     </div>

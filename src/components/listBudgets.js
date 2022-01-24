@@ -1,26 +1,25 @@
-import React, { Component } from "react";
-import axios from "axios";
-import { Link } from "react-router-dom";
-import TabBudget from "../components/TabBudget";
+import React, { Component } from 'react';
+import axios from 'axios';
+import { Link } from 'react-router-dom';
+import TabBudget from '../components/TabBudget';
 
 export default class listBudgets extends Component {
   constructor() {
     super();
     this.state = {
       budgets: [],
-      user_name: "",
-      user_lastname: ""
+      user_name: '',
+      user_lastname: '',
     };
   }
 
   async componentDidMount() {
-
     //verificacion de usuario logeado
     if (!localStorage.usertoken) {
-      window.location.href = "/"
+      window.location.href = '/';
     }
 
-    const res = await axios.get("http://167.99.15.83:4000/api/budgets/all");
+    const res = await axios.get('http://167.99.15.83:4000/api/budgets/all');
     this.setState({ budgets: res.data.budgets });
   }
 
@@ -35,12 +34,12 @@ export default class listBudgets extends Component {
                   <div className="page-header-title">
                     <h4>Presupuestos </h4>
 
-                    <span>Listado de Presupuestos 2020</span>
+                    <span>Listado de Presupuestos</span>
                   </div>
 
                   <div>
                     <Link
-                      to={"/budgets/new"}
+                      to={'/budgets/new'}
                       type="button"
                       className="btn btn-primary waves-effect waves-light f-left mt-3 d-inline-block md-trigger"
                     >
@@ -63,17 +62,17 @@ export default class listBudgets extends Component {
                   </div>
                 </div>
                 <div className="mt-5">
-                  {console.warn("VARLO=" + this.state.budgets.name)}
                   {this.state.budgets.map((budget) => (
                     <TabBudget
+                      key={budget.id}
                       nombre={budget.name}
                       id={budget.id}
                       description={budget.description}
                       //account={budget.account.name}
-                      budgetstart={budget.buddgetstart}
-                      budgetupdate={budget.buddgeupdate}
-                      balance={budget.balance}
-                      returns={budget.returns}
+                      //budgetstart={budget.buddgetstart}
+                      //budgetupdate={budget.buddgeupdate}
+                      //balance={budget.balance}
+                      //returns={budget.returns}
                     />
                   ))}
                 </div>
