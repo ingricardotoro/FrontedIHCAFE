@@ -78,7 +78,7 @@ function TableCost(props) {
 
   const getData = async () => {
     const res = await axios.post(
-      'http://167.99.15.83:4000/api/budgetlines/project/' + idProject
+      'https://167.99.15.83:4000/api/budgetlines/project/' + idProject
     );
     const buds = res.data.budgetLines;
 
@@ -94,28 +94,28 @@ function TableCost(props) {
     setBudgetLines(res.data.budgetLines);
     //this.setState({ budgetLines: res.data.budgetLines });
 
-    const res3 = await axios.get('http://167.99.15.83:4000/api/projects/');
+    const res3 = await axios.get('https://167.99.15.83:4000/api/projects/');
     //this.setState({ projects: res3.data.projects });
     setProjects(res3.data.projects);
     //obtenemos el budgetstart de este proyecto
     const res_pro = await axios.get(
-      'http://167.99.15.83:4000/api/projects/' + idProject
+      'https://167.99.15.83:4000/api/projects/' + idProject
     );
     //this.setState({ bdg_start_project: res_pro.data.data.budgetstart });
     setBdg_start_project(res_pro.data.data.budgetstart);
 
     const res4 = await axios.get(
-      'http://167.99.15.83:4000/api/categories/categories_parents/'
+      'https://167.99.15.83:4000/api/categories/categories_parents/'
     );
     //this.setState({ categories: res4.data.categories });
     setCategories(res4.data.categories);
 
-    const res6 = await axios.get('http://167.99.15.83:4000/api/accounts/');
+    const res6 = await axios.get('https://167.99.15.83:4000/api/accounts/');
     //this.setState({ cuentas: res6.data.cuentas });
     setCuentas(res6.data.cuentas);
 
     const res_suppliers = await axios.get(
-      'http://167.99.15.83:4000/api/suppliers/'
+      'https://167.99.15.83:4000/api/suppliers/'
     );
     //this.setState({ suppliers: res_suppliers.data.suppliers });
     setSuppliers(res_suppliers.data.suppliers);
@@ -129,7 +129,7 @@ function TableCost(props) {
 
   const getAllBudgets = async () => {
     const res = await axios.post(
-      'http://167.99.15.83:4000/api/budgetlines/project/' + idProject
+      'https://167.99.15.83:4000/api/budgetlines/project/' + idProject
     );
     const buds = res.data.budgetLines;
     console.log('B=' + JSON.stringify(budgetLines));
@@ -152,7 +152,7 @@ function TableCost(props) {
     });
     //this.setState({ category_id: e.target.value });
     const res5 = await axios.get(
-      'http://167.99.15.83:4000/api/categories/categories_childs/' +
+      'https://167.99.15.83:4000/api/categories/categories_childs/' +
         e.target.value
     );
     //this.setState({ clasificaciones: res5.data.clasificaciones });
@@ -199,7 +199,7 @@ function TableCost(props) {
     let valorx = e.target.value;
 
     const res7 = await axios.get(
-      'http://167.99.15.83:4000/api/categories/child/' + valorx
+      'https://167.99.15.83:4000/api/categories/child/' + valorx
     );
     setBudgetLine({
       ...budgetLine,
@@ -348,7 +348,7 @@ function TableCost(props) {
     if (budgetLine.balance <= budgetLine.balance) {
       // si es aprobado un valor igual o menor
       const res_apro = await axios.post(
-        'http://167.99.15.83:4000/api/budgetlines/aprobar/' +
+        'https://167.99.15.83:4000/api/budgetlines/aprobar/' +
           id +
           '/' +
           budgetLine.code +
@@ -389,7 +389,7 @@ function TableCost(props) {
   };
 
   /*const onClickSubirArchivo = async (id) => {
-        await axios.post("http://167.99.15.83:4000/api/files/" + id, {
+        await axios.post("https://167.99.15.83:4000/api/files/" + id, {
             nombre_archivo: nombre_archivo,
             fase_archivo: fase_archivo,
             file: archivo,
@@ -403,7 +403,7 @@ function TableCost(props) {
   const onSubmit = async (e) => {
     e.preventDefault();
     const res_bl = await axios.post(
-      'http://167.99.15.83:4000/api/budgetlines/',
+      'https://167.99.15.83:4000/api/budgetlines/',
       {
         //await axios.post("http://localhost:4000/api/budgetlines/", {
         code: budgetLine.code,
@@ -438,7 +438,7 @@ function TableCost(props) {
 
   const handleDelete = async (id) => {
     const res_p = await axios.post(
-      'http://167.99.15.83:4000/api/budgetlines/delete/' + id
+      'https://167.99.15.83:4000/api/budgetlines/delete/' + id
     );
 
     //window.location.replace('');
@@ -459,7 +459,10 @@ function TableCost(props) {
 
   const handleEdit = async (id) => {
     const res_p = await axios.put(
-      'http://167.99.15.83:4000/api/budgetlines/update/' + idProject + '/' + id,
+      'https://167.99.15.83:4000/api/budgetlines/update/' +
+        idProject +
+        '/' +
+        id,
       {
         code: budgetLine.code,
         description: budgetLine.details,
@@ -1007,7 +1010,7 @@ function TableCost(props) {
                                         </div>
                                         <form
                                           action={
-                                            'http://167.99.15.83:4000/api/files/'
+                                            'https://167.99.15.83:4000/api/files/'
                                           }
                                           method="post"
                                           encType="multipart/form-data"

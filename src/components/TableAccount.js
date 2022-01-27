@@ -1,13 +1,12 @@
-import React, { Component } from 'react'
-import RowCardsProjects from '../components/RowCardsProjects'
-import RowBudget from '../components/RowBudget'
+import React, { Component } from 'react';
+import RowCardsProjects from '../components/RowCardsProjects';
+import RowBudget from '../components/RowBudget';
 
 export default class TableAccount extends Component {
-
-    constructor() {
-        super();
-        this.state = {
-            /*budgetLines:[],
+  constructor() {
+    super();
+    this.state = {
+      /*budgetLines:[],
             budgetLinesCat:[],
             projects:[],
             
@@ -40,37 +39,32 @@ export default class TableAccount extends Component {
             categories:[],
             clasificaciones:[],
             cuentas:[]*/
+    };
+  }
 
-
-        }
+  async componentDidMount() {
+    //verificacion de usuario logeado
+    if (!localStorage.usertoken) {
+      window.location.href = '/';
     }
 
-    async componentDidMount() {
-
-        //verificacion de usuario logeado
-        if (!localStorage.usertoken) {
-            window.location.href = "/"
-        }
-
-        /*const res = await axios.post('http://167.99.15.83:4000/api/budgetlines/project/'+this.props.idProject);
+    /*const res = await axios.post('https://167.99.15.83:4000/api/budgetlines/project/'+this.props.idProject);
         this.setState({budgetLines:res.data.budgetLines});
 
-        const res2 = await axios.post('http://167.99.15.83:4000/api/budgetlines/cat_project/'+this.props.idProject);
+        const res2 = await axios.post('https://167.99.15.83:4000/api/budgetlines/cat_project/'+this.props.idProject);
         this.setState({budgetLinesCat:res2.data.budgetCategories});
 
-        const res3 = await axios.get('http://167.99.15.83:4000/api/projects/');
+        const res3 = await axios.get('https://167.99.15.83:4000/api/projects/');
         this.setState({projects:res3.data.projects});
 
-        const res4 = await axios.get('http://167.99.15.83:4000/api/categories/categories_parents/');
+        const res4 = await axios.get('https://167.99.15.83:4000/api/categories/categories_parents/');
         this.setState({categories:res4.data.categories});
 
-        const res6 = await axios.get('http://167.99.15.83:4000/api/accounts/');
+        const res6 = await axios.get('https://167.99.15.83:4000/api/accounts/');
         this.setState({cuentas:res6.data.cuentas});*/
+  }
 
-
-    }
-
-    /*calculo(){ // para realizar el calculo de la suma de presupuestos
+  /*calculo(){ // para realizar el calculo de la suma de presupuestos
 
         this.state.total_inicial=0.0;this.state.total_ejecutado=0.0; this.state.total_disonible=0.0;
         for (let index = 0; index < this.state.budgetLines.length; index++) {
@@ -85,33 +79,33 @@ export default class TableAccount extends Component {
 
     }*/
 
-    /**********************LLENADO PARA EL SAVE********* */
-    /*onChanceProject = (e) => {this.setState({project_id: e.target.value})}
+  /**********************LLENADO PARA EL SAVE********* */
+  /*onChanceProject = (e) => {this.setState({project_id: e.target.value})}
     onChanceClasificacion = async (e) => {
         this.setState({code: e.target.value});
-        const res7 = await axios.get('http://167.99.15.83:4000/api/categories/child/'+e.target.value);
+        const res7 = await axios.get('https://167.99.15.83:4000/api/categories/child/'+e.target.value);
         this.setState({name:res7.data.child.name});
     }
     onChangeStartDate = (e) => {this.setState({startdate: e.target.value})}
     onChangeEndDate = (e) => {this.setState({enddate: e.target.value})}
     onChanceAccount = (e) => {this.setState({account_id: e.target.value})}
     onChanceBudget = (e) => {this.setState({buddgetstart: e.target.value});this.setState({balance: e.target.value});}*/
-    /**********************fINAL DEL LLENADO PARA EL SAVE********* */
+  /**********************fINAL DEL LLENADO PARA EL SAVE********* */
 
-    /*onChanceCategory = async (e) => {
+  /*onChanceCategory = async (e) => {
         this.setState({category_id: e.target.value });
-        const res5 = await axios.get('http://167.99.15.83:4000/api/categories/categories_childs/'+e.target.value);
+        const res5 = await axios.get('https://167.99.15.83:4000/api/categories/categories_childs/'+e.target.value);
         this.setState({clasificaciones:res5.data.clasificaciones});
     }*/
 
-    /*formatMoney(number) {
+  /*formatMoney(number) {
         return number.toLocaleString('en-US', { style: 'currency', currency: 'HNL' });
     }*/
 
-    //codigo para crear un nuevo renglon presupuestario
-    /*onSubmit  = async e =>{
+  //codigo para crear un nuevo renglon presupuestario
+  /*onSubmit  = async e =>{
         e.preventDefault();
-        const res = await axios.post('http://167.99.15.83:4000/api/budgetlines',{
+        const res = await axios.post('https://167.99.15.83:4000/api/budgetlines',{
             code:this.state.code,
             name:this.state.name,
             status:this.state.status,
@@ -132,54 +126,51 @@ export default class TableAccount extends Component {
        
     }*/
 
-    render() {
+  render() {
+    //this.calculo();
 
-        //this.calculo();
+    return (
+      <div>
+        <RowCardsProjects
+          inicial="100000.00"
+          ejecutado="100000.00"
+          disponible="100000.00"
+          rembolsos="0.0"
+          porcentaje_ejecutado="50%"
+          porcentaje_disponible="50%"
+          porcentaje_rembolsos="0%"
+        />
 
-        return (
-            <div>
+        {/* Page body start */}
+        <div className="page-body">
+          <div className="row">
+            <div className="col-sm-12">
+              {/* Product list card start */}
+              <div className="card product-add-modal">
+                <div className="card-header">
+                  <h5>Historial de Movimientos </h5>
 
-                <RowCardsProjects
-                    inicial="100000.00"
-                    ejecutado="100000.00"
-                    disponible="100000.00"
-                    rembolsos="0.0"
-                    porcentaje_ejecutado="50%"
-                    porcentaje_disponible="50%"
-                    porcentaje_rembolsos="0%"
-                />
-
-                {/* Page body start */}
-                <div className="page-body">
-                    <div className="row">
-                        <div className="col-sm-12">
-                            {/* Product list card start */}
-                            <div className="card product-add-modal">
-                                <div className="card-header">
-                                    <h5>Historial de Movimientos </h5>
-
-                                    <button type="button" className="btn btn-primary waves-effect waves-light f-right d-inline-block md-trigger" data-toggle="modal" data-target="#modal-13"><i className="icofont icofont-plus m-r-5" /> Crear Nuevo</button>
-                                </div>
-
-
-
-                                <RowBudget idCat={1} idProject={1} />
-
-
-
-                            </div>
-                            {/* Product list card end */}
-                        </div>
-                    </div>
+                  <button
+                    type="button"
+                    className="btn btn-primary waves-effect waves-light f-right d-inline-block md-trigger"
+                    data-toggle="modal"
+                    data-target="#modal-13"
+                  >
+                    <i className="icofont icofont-plus m-r-5" /> Crear Nuevo
+                  </button>
                 </div>
 
-                {/* Add Contact Start Model */}
-
-
-
-                {/* Page body end */}
-
+                <RowBudget idCat={1} idProject={1} />
+              </div>
+              {/* Product list card end */}
             </div>
-        )
-    }
+          </div>
+        </div>
+
+        {/* Add Contact Start Model */}
+
+        {/* Page body end */}
+      </div>
+    );
+  }
 }

@@ -19,7 +19,7 @@ export default class listBudgets extends Component {
       window.location.href = '/';
     }
 
-    const res = await axios.get('http://167.99.15.83:4000/api/budgets/all');
+    const res = await axios.get('https://167.99.15.83:4000/api/budgets/all');
     this.setState({ budgets: res.data.budgets });
   }
 

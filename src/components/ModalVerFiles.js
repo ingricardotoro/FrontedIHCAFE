@@ -1,33 +1,32 @@
-import React, { Component } from "react";
-import axios from "axios";
+import React, { Component } from 'react';
+import axios from 'axios';
 
 export default class ModalVerFiles extends Component {
   constructor() {
     super();
     this.state = {
-      files: []
-
+      files: [],
     };
   }
 
   async componentDidMount() {
-
     //verificacion de usuario logeado
     if (!localStorage.usertoken) {
-      window.location.href = "/"
+      window.location.href = '/';
     }
 
-
     const res_files = await axios.post(
-      "http://167.99.15.83:4000/api/files/filesbybudgetid/" + this.props.budget_id + "/" +
-      this.props.budgetline
+      'https://167.99.15.83:4000/api/files/filesbybudgetid/' +
+        this.props.budget_id +
+        '/' +
+        this.props.budgetline
     );
     this.setState({ files: res_files.data.files });
   }
   onClickDelete = async (filename) => {
-    await axios.post("http://167.99.15.83:4000/api/files/delete/" + filename);
+    await axios.post('https://167.99.15.83:4000/api/files/delete/' + filename);
     window.location.href =
-      "http://167.99.15.83/project/" + this.props.idProject;
+      'https://167.99.15.83/project/' + this.props.idProject;
   };
 
   render() {
@@ -36,7 +35,7 @@ export default class ModalVerFiles extends Component {
         <div>
           <div
             className="modal fade"
-            id={"ver_archivos_" + this.props.budgetline}
+            id={'ver_archivos_' + this.props.budgetline}
             tabIndex="-1"
             role="dialog"
           >
@@ -63,20 +62,20 @@ export default class ModalVerFiles extends Component {
                             <div className="card user-card">
                               <div className="card-block">
                                 <div className="media">
-                                  {file.filename.slice(-4) === ".pdf" ? (
+                                  {file.filename.slice(-4) === '.pdf' ? (
                                     <a
                                       className="media-left"
                                       href={
-                                        "http://167.99.15.83:4000/" +
+                                        'https://167.99.15.83:4000/' +
                                         file.filedir +
                                         file.filename
                                       }
                                     >
                                       <i
-                                        style={{ width: "200px", color: "red" }}
+                                        style={{ width: '200px', color: 'red' }}
                                         className="icofont icofont-file-pdf icofont-5x"
                                         src={
-                                          "http://167.99.15.83:4000/" +
+                                          'https://167.99.15.83:4000/' +
                                           file.filedir +
                                           file.filename
                                         }
@@ -87,16 +86,16 @@ export default class ModalVerFiles extends Component {
                                     <a
                                       className="media-left"
                                       href={
-                                        "http://167.99.15.83:4000/" +
+                                        'https://167.99.15.83:4000/' +
                                         file.filedir +
                                         file.filename
                                       }
                                     >
                                       <img
-                                        style={{ width: "200px" }}
+                                        style={{ width: '200px' }}
                                         className="img-thumbnail "
                                         src={
-                                          "http://167.99.15.83:4000/" +
+                                          'https://167.99.15.83:4000/' +
                                           file.filedir +
                                           file.filename
                                         }
@@ -107,7 +106,7 @@ export default class ModalVerFiles extends Component {
                                   <div className="media-body">
                                     <div className="col-xs-12">
                                       <h6 className="d-inline-block">
-                                        {file.description}{" "}
+                                        {file.description}{' '}
                                       </h6>
                                     </div>
                                     <div className="f-13 text-muted m-b-15">
@@ -115,12 +114,12 @@ export default class ModalVerFiles extends Component {
                                     </div>
                                     <a
                                       href={
-                                        "http://167.99.15.83:4000/" +
+                                        'https://167.99.15.83:4000/' +
                                         file.filedir +
                                         file.filename
                                       }
                                     >
-                                      DESCARGAR{" "}
+                                      DESCARGAR{' '}
                                     </a>
 
                                     <div className="mt-3 red">
@@ -131,7 +130,7 @@ export default class ModalVerFiles extends Component {
                                         }
                                         className="btn btn-sm btn-danger"
                                       >
-                                        Eliminar Archivo{" "}
+                                        Eliminar Archivo{' '}
                                       </button>
                                     </div>
                                   </div>
@@ -163,7 +162,7 @@ export default class ModalVerFiles extends Component {
         <div>
           <div
             className="modal fade"
-            id={"ver_archivos_" + this.props.budgetlineatlas}
+            id={'ver_archivos_' + this.props.budgetlineatlas}
             tabIndex="-1"
             role="dialog"
           >

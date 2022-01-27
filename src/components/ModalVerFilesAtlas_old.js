@@ -1,5 +1,5 @@
-import React, { Component } from "react";
-import axios from "axios";
+import React, { Component } from 'react';
+import axios from 'axios';
 
 export default class ModalVerFilesAtlas extends Component {
   constructor() {
@@ -12,18 +12,22 @@ export default class ModalVerFilesAtlas extends Component {
   async componentDidMount() {
     //verificacion de usuario logeado
     if (!localStorage.usertoken) {
-      window.location.href = "/"
+      window.location.href = '/';
     }
     const res_files = await axios.post(
-      "http://167.99.15.83:4000/api/files/filesbybudgetid_atlas/" + this.props.budget_id + "/" +
-      this.props.budgetlineatlas
+      'https://167.99.15.83:4000/api/files/filesbybudgetid_atlas/' +
+        this.props.budget_id +
+        '/' +
+        this.props.budgetlineatlas
     );
     this.setState({ files: res_files.data.files });
   }
   onClickDelete = async (filename) => {
-    await axios.post("http://167.99.15.83:4000/api/files/delete_atlas/" + filename);
+    await axios.post(
+      'https://167.99.15.83:4000/api/files/delete_atlas/' + filename
+    );
     window.location.href =
-      "http://167.99.15.83/project/" + this.props.idProject;
+      'https://167.99.15.83/project/' + this.props.idProject;
   };
 
   render() {
@@ -32,7 +36,7 @@ export default class ModalVerFilesAtlas extends Component {
         <div>
           <div
             class="modal fade"
-            id={"ver_archivos_" + this.props.budgetlineatlas}
+            id={'ver_archivos_' + this.props.budgetlineatlas}
             tabindex="-1"
             role="dialog"
           >
@@ -59,20 +63,20 @@ export default class ModalVerFilesAtlas extends Component {
                             <div className="card user-card">
                               <div className="card-block">
                                 <div className="media">
-                                  {file.filename.slice(-4) === ".pdf" ? (
+                                  {file.filename.slice(-4) === '.pdf' ? (
                                     <a
                                       className="media-left"
                                       href={
-                                        "http://167.99.15.83:4000/" +
+                                        'https://167.99.15.83:4000/' +
                                         file.filedir +
                                         file.filename
                                       }
                                     >
                                       <i
-                                        style={{ width: "200px", color: "red" }}
+                                        style={{ width: '200px', color: 'red' }}
                                         className="icofont icofont-file-pdf icofont-5x"
                                         src={
-                                          "http://167.99.15.83:4000/" +
+                                          'https://167.99.15.83:4000/' +
                                           file.filedir +
                                           file.filename
                                         }
@@ -80,30 +84,30 @@ export default class ModalVerFilesAtlas extends Component {
                                       Archivo PDF
                                     </a>
                                   ) : (
-                                      <a
-                                        className="media-left"
-                                        href={
-                                          "http://167.99.15.83:4000/" +
+                                    <a
+                                      className="media-left"
+                                      href={
+                                        'https://167.99.15.83:4000/' +
+                                        file.filedir +
+                                        file.filename
+                                      }
+                                    >
+                                      <img
+                                        style={{ width: '200px' }}
+                                        className="img-thumbnail "
+                                        src={
+                                          'https://167.99.15.83:4000/' +
                                           file.filedir +
                                           file.filename
                                         }
-                                      >
-                                        <img
-                                          style={{ width: "200px" }}
-                                          className="img-thumbnail "
-                                          src={
-                                            "http://167.99.15.83:4000/" +
-                                            file.filedir +
-                                            file.filename
-                                          }
-                                          alt={file.filename}
-                                        />
-                                      </a>
-                                    )}
+                                        alt={file.filename}
+                                      />
+                                    </a>
+                                  )}
                                   <div className="media-body">
                                     <div className="col-xs-12">
                                       <h6 className="d-inline-block">
-                                        {file.description}{" "}
+                                        {file.description}{' '}
                                       </h6>
                                     </div>
                                     <div className="f-13 text-muted m-b-15">
@@ -111,12 +115,12 @@ export default class ModalVerFilesAtlas extends Component {
                                     </div>
                                     <a
                                       href={
-                                        "http://167.99.15.83:4000/" +
+                                        'https://167.99.15.83:4000/' +
                                         file.filedir +
                                         file.filename
                                       }
                                     >
-                                      DESCARGAR{" "}
+                                      DESCARGAR{' '}
                                     </a>
 
                                     <div className="mt-3 red">
@@ -127,7 +131,7 @@ export default class ModalVerFilesAtlas extends Component {
                                         }
                                         className="btn btn-sm btn-danger"
                                       >
-                                        Eliminar Archivo{" "}
+                                        Eliminar Archivo{' '}
                                       </button>
                                     </div>
                                   </div>
@@ -159,7 +163,7 @@ export default class ModalVerFilesAtlas extends Component {
         <div>
           <div
             class="modal fade"
-            id={"ver_archivos_" + this.props.budgetlineatlas}
+            id={'ver_archivos_' + this.props.budgetlineatlas}
             tabindex="-1"
             role="dialog"
           >

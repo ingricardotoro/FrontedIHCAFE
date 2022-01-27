@@ -1,36 +1,30 @@
-import React, { Component } from 'react'
-import axios from 'axios'
+import React, { Component } from 'react';
+import axios from 'axios';
 
 export default class listProjects extends Component {
-
     state = {
-        projects:[]
-    }
+        projects: [],
+    };
 
-    async componentDidMount(){
+    async componentDidMount() {
         //verificacion de usuario logeado
         if (!localStorage.usertoken) {
-            window.location.href = "/"
+            window.location.href = '/';
         }
-        
-      const res = await axios.get('http://167.99.15.83:4000/api/projects/');
-      this.setState({projects:res.data.projects});
-  
+
+        const res = await axios.get('https://167.99.15.83:4000/api/projects/');
+        this.setState({ projects: res.data.projects });
     }
 
-
     render() {
-        return (
-            <div>
-                Listado de Projectos
-           
-                 {
-                    this.state.projects.map(project =><p  key={project.id}> {project.code} </p>)
-                 }
-                 
-            
-         </div>
-           
-        )
+        return ( <
+            div >
+            Listado de Projectos {
+                this.state.projects.map((project) => ( <
+                    p key = { project.id } > { project.code } < /p>
+                ))
+            } <
+            /div>
+        );
     }
 }

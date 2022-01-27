@@ -1,10 +1,10 @@
-import React, { Component } from "react";
-import axios from "axios";
-import moment from "moment";
-import { Link } from 'react-router-dom'
-import RowCardsProjects from "./RowCardsProjects";
-import ModalVerFilesAtlas from "./ModalVerFilesAtlas";
-import jwt_decode from 'jwt-decode'
+import React, { Component } from 'react';
+import axios from 'axios';
+import moment from 'moment';
+import { Link } from 'react-router-dom';
+import RowCardsProjects from './RowCardsProjects';
+import ModalVerFilesAtlas from './ModalVerFilesAtlas';
+import jwt_decode from 'jwt-decode';
 
 export default class TableCost extends Component {
   constructor() {
@@ -27,15 +27,15 @@ export default class TableCost extends Component {
       total_solicitado: 0.0,
 
       //para el modal
-      code: "",
-      name: "",
+      code: '',
+      name: '',
       project_id: 0,
       category_id: 0,
       user_id: 1,
-      status: "Solicitado",
+      status: 'Solicitado',
       supplier_id: 1,
-      startdate: "",
-      enddate: "",
+      startdate: '',
+      enddate: '',
       account_id: 0,
       budgetstart: 0.0,
       budgeupdate: 0.0,
@@ -48,90 +48,89 @@ export default class TableCost extends Component {
 
       /****atlas */
       resultados_atlas: [],
-      result_atlas: "",
+      result_atlas: '',
 
       products_atlas: [],
-      product_atlas: "",
+      product_atlas: '',
 
       activities_atlas: [],
       activity_atlas: 0,
 
       accounts_atlas: [],
-      account_atlas: "",
+      account_atlas: '',
 
       sub_accounts_atlas: [],
-      sub_account_atlas: "",
+      sub_account_atlas: '',
 
       suppliers: [],
       supplier: 0,
-      details: "",
+      details: '',
 
       aprobar: 1,
       valor: -1.0,
-      comentario: "",
+      comentario: '',
 
       archivo: [],
-      nombre_archivo: "",
-      fase_archivo: "",
+      nombre_archivo: '',
+      fase_archivo: '',
 
       variable: 0,
       //variable que almacenara el budgetstart del proyecto actual
       bdg_start_project: 0.0,
-      role: 0
+      role: 0,
     };
   }
 
   async componentDidMount() {
-
     //verificacion de usuario logeado
     if (!localStorage.usertoken) {
-      window.location.href = "/"
+      window.location.href = '/';
     }
 
-    const token = localStorage.usertoken
-    const decode = jwt_decode(token)
+    const token = localStorage.usertoken;
+    const decode = jwt_decode(token);
     this.setState({
-      role: decode.tipo_user_id
-    })
+      role: decode.tipo_user_id,
+    });
 
     const res = await axios.post(
-      "http://167.99.15.83:4000/api/budgetlines/atlas/project/" +
-      this.props.idProject
+      'https://167.99.15.83:4000/api/budgetlines/atlas/project/' +
+        this.props.idProject
     );
     this.setState({ budgetLinesAtlas: res.data.budgetLines_atlas });
 
-    /*const res2 = await axios.post('http://167.99.15.83:4000/api/budgetlines/atlas/cat_project/'+this.props.idProject);
+    /*const res2 = await axios.post('https://167.99.15.83:4000/api/budgetlines/atlas/cat_project/'+this.props.idProject);
         this.setState({budgetLinesCat:res2.data.budgetCategories}); */
 
-    const res3 = await axios.get("http://167.99.15.83:4000/api/projects/");
+    const res3 = await axios.get('https://167.99.15.83:4000/api/projects/');
     this.setState({ projects: res3.data.projects });
 
     //obtenemos el budgetstart de este proyecto
     const res_pro = await axios.get(
-      "http://167.99.15.83:4000/api/projects/" + this.props.idProject
+      'https://167.99.15.83:4000/api/projects/' + this.props.idProject
     );
     this.setState({ bdg_start_project: res_pro.data.data.budgetstart });
 
     const res4 = await axios.get(
-      "http://167.99.15.83:4000/api/categories/categories_parents/"
+      'https://167.99.15.83:4000/api/categories/categories_parents/'
     );
     this.setState({ categories: res4.data.categories });
 
-    const res6 = await axios.get("http://167.99.15.83:4000/api/accounts/");
+    const res6 = await axios.get('https://167.99.15.83:4000/api/accounts/');
     this.setState({ cuentas: res6.data.cuentas });
 
     const res_atlas = await axios.get(
-      "http://167.99.15.83:4000/api/atlas/resultados"
+      'https://167.99.15.83:4000/api/atlas/resultados'
     );
     this.setState({ resultados_atlas: res_atlas.data.atlas_resultados });
 
     const res_account_atlas = await axios.get(
-      "http://167.99.15.83:4000/api/atlas/accounts"
+      'https://167.99.15.83:4000/api/atlas/accounts'
     );
     this.setState({ accounts_atlas: res_account_atlas.data.atlas_accounts });
 
     const res_suppliers = await axios.get(
-      "http://167.99.15.83:4000/api/suppliers/"
+      'https://167.99.15.83:4000/api/suppliers/'
     );
     this.setState({ suppliers: res_suppliers.data.suppliers });
 
@@ -141,8 +140,8 @@ export default class TableCost extends Component {
   onChanceCategory = async (e) => {
     this.setState({ category_id: e.target.value });
     const res5 = await axios.get(
-      "http://167.99.15.83:4000/api/categories/categories_childs/" +
-      e.target.value
+      'https://167.99.15.83:4000/api/categories/categories_childs/' +
+        e.target.value
     );
     this.setState({ clasificaciones: res5.data.clasificaciones });
   };
@@ -170,18 +169,17 @@ export default class TableCost extends Component {
         this.setState({total_solicitado:0.0});*/
 
     for (let index = 0; index < this.state.budgetLinesAtlas.length; index++) {
-      if (this.state.budgetLinesAtlas[index].status === "Solicitado") {
+      if (this.state.budgetLinesAtlas[index].status === 'Solicitado') {
         this.state.total_solicitado =
           this.state.total_solicitado +
           this.state.budgetLinesAtlas[index].budgetstart;
         //this.setState(this.state.total_solicitado , this.state.total_solicitado + this.state.budgetLinesAtlas[index].budgetstart);
       }
-      if (this.state.budgetLinesAtlas[index].status === "Aprobado") {
+      if (this.state.budgetLinesAtlas[index].status === 'Aprobado') {
         //this.state.total_inicial +=  this.state.budgetLinesAtlas[index].budgetstart;
 
-        this.state.total_ejecutado += this.state.budgetLinesAtlas[
-          index
-        ].balance;
+        this.state.total_ejecutado +=
+          this.state.budgetLinesAtlas[index].balance;
 
         //this.state.total_disponible += this.state.budgetLinesAtlas[index].balance;
 
@@ -211,7 +209,7 @@ export default class TableCost extends Component {
   //onChanceProject = (e) => {this.setState({project_id: e.target.value})}
   /* INICIAL onChanceClasificacion = async (e) => {
         this.setState({code: e.target.value});
-        const res7 = await axios.get('http://167.99.15.83:4000/api/categories/child/'+e.target.value);
+        const res7 = await axios.get('https://167.99.15.83:4000/api/categories/child/'+e.target.value);
         this.setState({name:res7.data.child.name});
     } */
 
@@ -239,14 +237,14 @@ export default class TableCost extends Component {
 
   /* ININIAL  onChanceCategory = async (e) => {
         this.setState({category_id: e.target.value });
-        const res5 = await axios.get('http://167.99.15.83:4000/api/categories/categories_childs/'+e.target.value);
+        const res5 = await axios.get('https://167.99.15.83:4000/api/categories/categories_childs/'+e.target.value);
         this.setState({clasificaciones:res5.data.clasificaciones});
     } */
 
   onChanceResultAtlas = async (e) => {
     this.setState({ result_atlas: e.target.value });
     const res_prod_atlas = await axios.get(
-      "http://167.99.15.83:4000/api/atlas/productos/" + e.target.value
+      'https://167.99.15.83:4000/api/atlas/productos/' + e.target.value
     );
     this.setState({ products_atlas: res_prod_atlas.data.productos_atlas });
   };
@@ -254,7 +252,7 @@ export default class TableCost extends Component {
   onChanceProductAtlas = async (e) => {
     this.setState({ product_atlas: e.target.value });
     const res_activity_atlas = await axios.get(
-      "http://167.99.15.83:4000/api/atlas/productos/" + e.target.value
+      'https://167.99.15.83:4000/api/atlas/productos/' + e.target.value
     );
     this.setState({
       activities_atlas: res_activity_atlas.data.productos_atlas,
@@ -268,7 +266,7 @@ export default class TableCost extends Component {
   onChanceAccountAtlas = async (e) => {
     this.setState({ account_atlas: e.target.value });
     const res_sub_atlas = await axios.get(
-      "http://167.99.15.83:4000/api/atlas/sub_accounts/" + e.target.value
+      'https://167.99.15.83:4000/api/atlas/sub_accounts/' + e.target.value
     );
     this.setState({ sub_accounts_atlas: res_sub_atlas.data.sub_accounts });
   };
@@ -294,9 +292,9 @@ export default class TableCost extends Component {
   };
 
   formatMoney(number) {
-    return number.toLocaleString("en-US", {
-      style: "currency",
-      currency: "HNL",
+    return number.toLocaleString('en-US', {
+      style: 'currency',
+      currency: 'HNL',
     });
     //return number;
   }
@@ -310,19 +308,19 @@ export default class TableCost extends Component {
       // si es aprobado un valor igual o menor
 
       await axios.post(
-        "http://167.99.15.83:4000/api/budgetlines/aprobar_atlas/" +
-        id +
-        "/" +
-        this.state.aprobar +
-        "/" +
-        this.state.valor +
-        "/" +
-        this.state.comentario
+        'https://167.99.15.83:4000/api/budgetlines/aprobar_atlas/' +
+          id +
+          '/' +
+          this.state.aprobar +
+          '/' +
+          this.state.valor +
+          '/' +
+          this.state.comentario
       );
       window.location.replace('');
       //window.location.href = "http://sipa.ihcafe.hn/project/" + this.props.idProject;
     } else {
-      alert("Valor No Valido");
+      alert('Valor No Valido');
     }
   };
 
@@ -336,8 +334,8 @@ export default class TableCost extends Component {
     this.setState({ fase_archivo: e.target.value });
   };
   onClickSubirArchivo = async (id) => {
-    //await axios.post('http://167.99.15.83:4000/api/files/'+id,{
-    await axios.post("http://167.99.15.83:4000/api/files/" + id, {
+    //await axios.post('https://167.99.15.83:4000/api/files/'+id,{
+    await axios.post('https://167.99.15.83:4000/api/files/' + id, {
       nombre_archivo: this.state.nombre_archivo,
       fase_archivo: this.state.fase_archivo,
       file: this.state.archivo,
@@ -348,7 +346,7 @@ export default class TableCost extends Component {
   onSubmit = async (e) => {
     e.preventDefault();
     const res = await axios.post(
-      "http://167.99.15.83:4000/api/budgetlines/budgetlineatlas",
+      'https://167.99.15.83:4000/api/budgetlines/budgetlineatlas',
       {
         code_resultado: this.state.result_atlas,
         code_producto: this.state.product_atlas,
@@ -386,7 +384,7 @@ export default class TableCost extends Component {
   //funcion para elimiar un renglon presupuestario
   onSubmitDelete = async (id) => {
     const res_p = await axios.post(
-      "http://167.99.15.83:4000/api/budgetlines/budgetlineatlas/delete/" + id
+      'https://167.99.15.83:4000/api/budgetlines/budgetlineatlas/delete/' + id
     );
     window.location.replace('');
     //window.location.href = "http://sipa.ihcafe.hn/project/" + this.props.idProject;
@@ -421,7 +419,7 @@ export default class TableCost extends Component {
           porcentaje_ejecutado={this.state.porcentaje_ejecutado}
           porcentaje_disponible={this.state.porcentaje_disponible}
           porcentaje_solicitado={this.state.porcentaje_solicitado}
-        //porcentaje_rembolsos={this.state.porcentaje_rembolsos}
+          //porcentaje_rembolsos={this.state.porcentaje_rembolsos}
         />
 
         {/* Page body start */}
@@ -480,10 +478,10 @@ export default class TableCost extends Component {
                                       {budgetLinesAtlas.atlas_account.name}
                                     </h6>
                                   </td>
-                                  {budgetLinesAtlas.statu === "Aprobado" ? (
+                                  {budgetLinesAtlas.statu === 'Aprobado' ? (
                                     <td>
                                       <label className="text-info">
-                                        {" "}
+                                        {' '}
                                         {this.formatMoney(
                                           budgetLinesAtlas.balance
                                         )}
@@ -492,7 +490,7 @@ export default class TableCost extends Component {
                                   ) : (
                                     <td>
                                       <label className="text-info">
-                                        {" "}
+                                        {' '}
                                         {this.formatMoney(
                                           budgetLinesAtlas.budgetstart
                                         )}
@@ -502,11 +500,11 @@ export default class TableCost extends Component {
 
                                   <td>
                                     <label className="text-danger">
-                                      {" "}
+                                      {' '}
                                       {this.formatMoney(
                                         moment(
                                           budgetLinesAtlas.date_start
-                                        ).format("DD/MM/YYYY")
+                                        ).format('DD/MM/YYYY')
                                       )}
                                     </label>
                                   </td>
@@ -514,18 +512,19 @@ export default class TableCost extends Component {
                                                     <label className="text-success"> {this.formatMoney(budgetLinesAtlas.balance)}</label>
                                                 </td> */}
 
-                                  {budgetLinesAtlas.status === "Solicitado" && this.state.role === 2 ? (
+                                  {budgetLinesAtlas.status === 'Solicitado' &&
+                                  this.state.role === 2 ? (
                                     <td>
                                       <button
                                         type="button"
                                         class="btn btn-success waves-effect"
                                         data-toggle="modal"
                                         data-target={
-                                          "#aprobar_" + budgetLinesAtlas.id
+                                          '#aprobar_' + budgetLinesAtlas.id
                                         }
                                       >
                                         Decidir
-                                      </button>{" "}
+                                      </button>{' '}
                                     </td>
                                   ) : (
                                     <td>
@@ -533,14 +532,14 @@ export default class TableCost extends Component {
                                     </td>
                                   )}
 
-                                  {budgetLinesAtlas.status === "Aprobado" ? (
+                                  {budgetLinesAtlas.status === 'Aprobado' ? (
                                     <td>
                                       <button
                                         type="button"
                                         class="btn btn-warning waves-effect"
                                         data-toggle="modal"
                                         data-target={
-                                          "#rembolsar_" + budgetLinesAtlas.id
+                                          '#rembolsar_' + budgetLinesAtlas.id
                                         }
                                       >
                                         Rembolsar
@@ -558,7 +557,7 @@ export default class TableCost extends Component {
                                       class="btn btn-primary waves-effect"
                                       data-toggle="modal"
                                       data-target={
-                                        "#ver_archivos_" + budgetLinesAtlas.id
+                                        '#ver_archivos_' + budgetLinesAtlas.id
                                       }
                                     >
                                       Ver
@@ -568,20 +567,24 @@ export default class TableCost extends Component {
                                       class="btn btn-success waves-effect"
                                       data-toggle="modal"
                                       data-target={
-                                        "#archivos_" + budgetLinesAtlas.id
+                                        '#archivos_' + budgetLinesAtlas.id
                                       }
                                     >
                                       Subir
                                     </button>
                                   </td>
                                   <td align="center" className="action-icon">
-                                    < Link
-                                      to={"/budgetline/edit/" + this.props.idProject + "/" + budgetLinesAtlas.id}
+                                    <Link
+                                      to={
+                                        '/budgetline/edit/' +
+                                        this.props.idProject +
+                                        '/' +
+                                        budgetLinesAtlas.id
+                                      }
                                       className="m-r-15 text-muted"
                                       data-original-title="Edit"
                                     >
-                                      <i className="icofont icofont-ui-edit"
-                                      ></i>
+                                      <i className="icofont icofont-ui-edit"></i>
                                     </Link>
 
                                     <a
@@ -594,7 +597,7 @@ export default class TableCost extends Component {
                                         className="icofont icofont-delete-alt"
                                         data-toggle="modal"
                                         data-target={
-                                          "#modal_delete_" + budgetLinesAtlas.id
+                                          '#modal_delete_' + budgetLinesAtlas.id
                                         }
                                       ></i>
                                     </a>
@@ -604,7 +607,7 @@ export default class TableCost extends Component {
 
                                   <div
                                     className="modal fade"
-                                    id={"modal_delete_" + budgetLinesAtlas.id}
+                                    id={'modal_delete_' + budgetLinesAtlas.id}
                                     tabIndex={-1}
                                     role="dialog"
                                   >
@@ -615,11 +618,11 @@ export default class TableCost extends Component {
                                       <div className="modal-content">
                                         <div className="modal-header">
                                           <h4 className="modal-title">
-                                            Eliminar Presupuesto:{" "}
+                                            Eliminar Presupuesto:{' '}
                                             {
                                               budgetLinesAtlas.atlas_account
                                                 .name
-                                            }{" "}
+                                            }{' '}
                                           </h4>
                                           <button
                                             type="button"
@@ -640,9 +643,9 @@ export default class TableCost extends Component {
                                           >
                                             <div
                                               style={{
-                                                width: "100%",
-                                                textAlign: "center",
-                                                display: "inline-block",
+                                                width: '100%',
+                                                textAlign: 'center',
+                                                display: 'inline-block',
                                               }}
                                             >
                                               <button
@@ -673,7 +676,7 @@ export default class TableCost extends Component {
 
                                   <div
                                     class="modal fade"
-                                    id={"aprobar_" + budgetLinesAtlas.id}
+                                    id={'aprobar_' + budgetLinesAtlas.id}
                                     tabindex="-1"
                                     role="dialog"
                                   >
@@ -684,10 +687,10 @@ export default class TableCost extends Component {
                                       <div class="modal-content">
                                         <div class="modal-header">
                                           <h4 class="modal-title">
-                                            Monto:{" "}
+                                            Monto:{' '}
                                             {this.formatMoney(
                                               budgetLinesAtlas.budgetstart
-                                            )}{" "}
+                                            )}{' '}
                                           </h4>
                                           <button
                                             type="button"
@@ -703,7 +706,7 @@ export default class TableCost extends Component {
                                         <form>
                                           <div class="modal-body">
                                             <p class="modal-title">
-                                              Descripción:{" "}
+                                              Descripción:{' '}
                                               {budgetLinesAtlas.details}
                                             </p>
 
@@ -784,7 +787,7 @@ export default class TableCost extends Component {
                                   {/* SUBIR Archivos */}
                                   <div
                                     class="modal fade"
-                                    id={"archivos_" + budgetLinesAtlas.id}
+                                    id={'archivos_' + budgetLinesAtlas.id}
                                     tabindex="-1"
                                     role="dialog"
                                   >
@@ -802,7 +805,7 @@ export default class TableCost extends Component {
                                             -
                                             {this.formatMoney(
                                               budgetLinesAtlas.budgetstart
-                                            )}{" "}
+                                            )}{' '}
                                           </h4>
                                           <button
                                             type="button"
@@ -817,7 +820,7 @@ export default class TableCost extends Component {
                                         </div>
                                         <form
                                           action={
-                                            "http://167.99.15.83:4000/api/files/atlas"
+                                            'https://167.99.15.83:4000/api/files/atlas'
                                           }
                                           method="post"
                                           enctype="multipart/form-data"
@@ -907,7 +910,7 @@ export default class TableCost extends Component {
 
                                   <div
                                     class="modal fade"
-                                    id={"rembolsar_" + budgetLinesAtlas.id}
+                                    id={'rembolsar_' + budgetLinesAtlas.id}
                                     tabindex="-1"
                                     role="dialog"
                                   >
@@ -921,7 +924,7 @@ export default class TableCost extends Component {
                                             Rembolsar {budgetLinesAtlas.name}-
                                             {this.formatMoney(
                                               budgetLinesAtlas.budgetstart
-                                            )}{" "}
+                                            )}{' '}
                                           </h4>
                                           <button
                                             type="button"
@@ -941,7 +944,7 @@ export default class TableCost extends Component {
                                             </label>
                                             <textarea
                                               className="form-control"
-                                              style={{ width: "100%" }}
+                                              style={{ width: '100%' }}
                                               id=""
                                               cols="30"
                                               rows="10"
@@ -950,7 +953,7 @@ export default class TableCost extends Component {
                                           <input
                                             type="hidden"
                                             name={
-                                              "input_rembolsar_" +
+                                              'input_rembolsar_' +
                                               budgetLinesAtlas.id
                                             }
                                             value={budgetLinesAtlas.id}
@@ -1123,7 +1126,7 @@ export default class TableCost extends Component {
                         ))}
                       </select>
                     </div> */}
-                    <div style={{ width: "50%", display: "inline-block" }}>
+                    <div style={{ width: '50%', display: 'inline-block' }}>
                       {/* Select de Resultados Atlas */}
                       <select
                         onChange={this.onChanceResultAtlas}
@@ -1133,14 +1136,14 @@ export default class TableCost extends Component {
                         <option value="#">Seleccione Resultado Atlas</option>
                         {this.state.resultados_atlas.map((resultado_atlas) => (
                           <option value={resultado_atlas.code}>
-                            ({resultado_atlas.code})-{resultado_atlas.name}{" "}
+                            ({resultado_atlas.code})-{resultado_atlas.name}{' '}
                           </option>
                         ))}
                       </select>
                       {/* FIn del Select de Resultados Atlas */}
                     </div>
 
-                    <div style={{ width: "50%", display: "inline-block" }}>
+                    <div style={{ width: '50%', display: 'inline-block' }}>
                       {/* Select de Productos Atlas */}
                       <select
                         onChange={this.onChanceProductAtlas}
@@ -1150,7 +1153,7 @@ export default class TableCost extends Component {
                         <option value="#">Seleccione Producto Atlas</option>
                         {this.state.products_atlas.map((product_atlas) => (
                           <option value={product_atlas.code}>
-                            ({product_atlas.code})-{product_atlas.name}{" "}
+                            ({product_atlas.code})-{product_atlas.name}{' '}
                           </option>
                         ))}
                       </select>
@@ -1167,14 +1170,14 @@ export default class TableCost extends Component {
                         <option value="#">Seleccione Actividad Atlas</option>
                         {this.state.activities_atlas.map((activity_atlas) => (
                           <option value={activity_atlas.code}>
-                            ({activity_atlas.code})-{activity_atlas.name}{" "}
+                            ({activity_atlas.code})-{activity_atlas.name}{' '}
                           </option>
                         ))}
                       </select>
                       {/* FIn del Select de Productos Atlas */}
                     </div>
 
-                    <div style={{ width: "50%", display: "inline-block" }}>
+                    <div style={{ width: '50%', display: 'inline-block' }}>
                       {/* Select de Cuentas Atlas */}
                       <select
                         onChange={this.onChanceAccountAtlas}
@@ -1184,14 +1187,14 @@ export default class TableCost extends Component {
                         <option value="#">Seleccione Cuenta Atlas</option>
                         {this.state.accounts_atlas.map((account_atlas) => (
                           <option value={account_atlas.id}>
-                            {account_atlas.name}{" "}
+                            {account_atlas.name}{' '}
                           </option>
                         ))}
                       </select>
                       {/* FIn del Select de Cuentas Atlas */}
                     </div>
 
-                    <div style={{ width: "50%", display: "inline-block" }}>
+                    <div style={{ width: '50%', display: 'inline-block' }}>
                       {/* Select de Sub-Cuentas Atlas */}
                       <select
                         onChange={this.onChanceSubAccountAtlas}
@@ -1202,7 +1205,7 @@ export default class TableCost extends Component {
                         {this.state.sub_accounts_atlas.map(
                           (sub_account_atlas) => (
                             <option value={sub_account_atlas.id}>
-                              {sub_account_atlas.name}{" "}
+                              {sub_account_atlas.name}{' '}
                             </option>
                           )
                         )}
@@ -1227,7 +1230,7 @@ export default class TableCost extends Component {
                                         )
                                     } 
                                 </select> */}
-                    <div style={{ width: "50%", display: "inline-block" }}>
+                    <div style={{ width: '50%', display: 'inline-block' }}>
                       <select
                         onChange={this.onChanceAccount}
                         name="select_account_money"
@@ -1237,12 +1240,12 @@ export default class TableCost extends Component {
 
                         {this.state.cuentas.map((cuenta) => (
                           <option value={cuenta.id}>
-                            ({cuenta.coin.code}-{cuenta.name}{" "}
+                            ({cuenta.coin.code}-{cuenta.name}{' '}
                           </option>
                         ))}
                       </select>
                     </div>
-                    <div style={{ width: "50%", display: "inline-block" }}>
+                    <div style={{ width: '50%', display: 'inline-block' }}>
                       <select
                         onChange={this.onChanceSupplier}
                         name="select_suppliers"
@@ -1253,7 +1256,7 @@ export default class TableCost extends Component {
                         </option>
                         {this.state.suppliers.map((supplier) => (
                           <option value={supplier.id}>
-                            {supplier.contact_name}{" "}
+                            {supplier.contact_name}{' '}
                           </option>
                         ))}
                       </select>
@@ -1270,7 +1273,7 @@ export default class TableCost extends Component {
                       ></textarea>
                     </div>
 
-                    <div style={{ width: "50%", display: "inline-block" }}>
+                    <div style={{ width: '50%', display: 'inline-block' }}>
                       <input
                         name="buddgetstart"
                         onChange={this.onChanceBudget}
@@ -1279,7 +1282,7 @@ export default class TableCost extends Component {
                         placeholder="Ingrese El valor Solicitado : 0,000.00 "
                       />
                     </div>
-                    <div style={{ width: "50%", display: "inline-block" }}>
+                    <div style={{ width: '50%', display: 'inline-block' }}>
                       <input
                         name="code"
                         onChange={this.onChanceCode}
@@ -1289,7 +1292,7 @@ export default class TableCost extends Component {
                       />
                     </div>
 
-                    <div style={{ width: "50%", display: "inline-block" }}>
+                    <div style={{ width: '50%', display: 'inline-block' }}>
                       <input
                         onChange={this.onChangeStartDate}
                         class="form-control mt-3"
@@ -1298,7 +1301,7 @@ export default class TableCost extends Component {
                       />
                       <label htmlFor="">Fecha de Inicio</label>
                     </div>
-                    <div style={{ width: "50%", display: "inline-block" }}>
+                    <div style={{ width: '50%', display: 'inline-block' }}>
                       <input
                         onChange={this.onChangeEndDate}
                         class="form-control mt-3"
