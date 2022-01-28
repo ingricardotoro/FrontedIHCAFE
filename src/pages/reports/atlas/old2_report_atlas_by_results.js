@@ -20,7 +20,7 @@ export default class ReportAtlasByResults extends Component {
             window.location.href = '/';
         }
 
-        /*fetch('https://167.99.15.83:4000/api/atlas/resultados/')
+        /*fetch('http://167.99.15.83:4000/api/atlas/resultados/')
                 .then((response) => {
                     return response.json()
                 })
@@ -41,7 +41,7 @@ export default class ReportAtlasByResults extends Component {
 
     async buscarProductos(code_resultado) {
         const res = await axios.get(
-            'https://167.99.15.83:4000/api/atlas/productos/' + code_resultado
+            'http://167.99.15.83:4000/api/atlas/productos/' + code_resultado
         );
         this.setState({ ArrayProducts: res.data.productos_atlas });
     }
@@ -6647,7 +6647,7 @@ class TabladeProductos extends Component {
         const { handleSetProducts } = this.props;
 
         const res = await axios.get(
-            'https://167.99.15.83:4000/api/atlas/productos/' +
+            'http://167.99.15.83:4000/api/atlas/productos/' +
             this.props.code_resultado
         );
         handleSetProducts(res.data.productos_atlas);
@@ -6655,7 +6655,7 @@ class TabladeProductos extends Component {
         //this.setState({ ArrayResults: res.data.atlas_resultados })
     }
 
-    /*fetch('https://167.99.15.83:4000/api/atlas/productos/' + this.props.code_resultado, { signal: this.abortController.signal })
+    /*fetch('http://167.99.15.83:4000/api/atlas/productos/' + this.props.code_resultado, { signal: this.abortController.signal })
               .then((response) => {
           return response.json()
       })
@@ -6696,8 +6696,7 @@ class TabladeActividades extends Component {
 
     componentDidMount() {
         fetch(
-                'https://167.99.15.83:4000/api/atlas/productos/' +
-                this.props.code_producto
+                'http://167.99.15.83:4000/api/atlas/productos/' + this.props.code_producto
             )
             .then((response) => {
                 return response.json();

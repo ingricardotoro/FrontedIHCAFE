@@ -15,7 +15,8 @@ export const register = (newUser) => {
 
 export const login = (user) => {
   return axios
-    .post('https://167.99.15.83:4000/api/users/login', {
+    .post('http://167.99.15.83:4000/api/users/login', {
+      //.post('https://sipa.ihcafe.hn:4000/api/users/login', {
       username: user.username,
       password: user.password,
     })

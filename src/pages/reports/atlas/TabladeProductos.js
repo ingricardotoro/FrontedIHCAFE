@@ -17,7 +17,7 @@ export default class TabladeProductos extends Component {
         const { handleSetProducts } = this.props;
 
         fetch(
-                'https://167.99.15.83:4000/api/atlas/productos/' +
+                'http://167.99.15.83:4000/api/atlas/productos/' +
                 this.props.code_resultado
             )
             .then((response) => {
@@ -42,7 +42,7 @@ export default class TabladeProductos extends Component {
         //alert("Buscando Productos de Codigox=" + this.props.code_resultado)
 
         /*const res2 = await axios.get(
-                "https://167.99.15.83:4000/api/atlas/productos/" + this.props.code_resultado
+                "http://167.99.15.83:4000/api/atlas/productos/" + this.props.code_resultado
             )*/
 
         /*handleSetProducts(res2.data.productos_atlas){*/

@@ -29,11 +29,11 @@ export default class ProjectEdit extends Component {
         }
 
         const res = await axios.get(
-            'https://167.99.15.83:4000/api/projects/' + this.props.match.params.id
+            'http://167.99.15.83:4000/api/projects/' + this.props.match.params.id
         );
         this.setState({ project: res.data.data });
 
-        const res2 = await axios.get('https://167.99.15.83:4000/api/teams/');
+        const res2 = await axios.get('http://167.99.15.83:4000/api/teams/');
         this.setState({ teams: res2.data.teams });
 
         this.setState({ name: this.state.project.name });
@@ -81,7 +81,7 @@ export default class ProjectEdit extends Component {
     onSubmit = async(e) => {
         e.preventDefault();
         await axios.put(
-            'https://167.99.15.83:4000/api/projects/' + this.props.match.params.id, {
+            'http://167.99.15.83:4000/api/projects/' + this.props.match.params.id, {
                 //code: this.state.code,
                 name: this.state.name,
                 budgetstart: this.state.monto,

@@ -132,12 +132,12 @@ export default class ReportsAtlas extends Component {
 
     async componentDidMount() {
         const res_atlas = await axios.get(
-            'https://167.99.15.83:4000/api/budgets/atlas'
+            'http://167.99.15.83:4000/api/budgets/atlas'
         );
         this.setState({ budgets_atlas: res_atlas.data.budgets });
 
         const res_account_atlas = await axios.get(
-            'https://167.99.15.83:4000/api/atlas/accounts'
+            'http://167.99.15.83:4000/api/atlas/accounts'
         );
         this.setState({ accounts_atlas: res_account_atlas.data.atlas_accounts });
     }
@@ -147,7 +147,7 @@ export default class ReportsAtlas extends Component {
         this.state.arrayBudgetLines = []; //lo iniciaiza
 
         const res_pro_atlas = await axios.post(
-            'https://167.99.15.83:4000/api/projects/findProjectsByBudgetId/' +
+            'http://167.99.15.83:4000/api/projects/findProjectsByBudgetId/' +
             e.target.value
         );
         this.setState({ projects_atlas: res_pro_atlas.data.projectsbybudgetid });
@@ -155,7 +155,7 @@ export default class ReportsAtlas extends Component {
         this.state.projects_atlas.map(async(p_atlas) => {
             //llamamos los gastos hechos en este proyecto y presupuesto
             const res = await axios.post(
-                'https://167.99.15.83:4000/api/budgetlines/atlas/project/' + p_atlas.id
+                'http://167.99.15.83:4000/api/budgetlines/atlas/project/' + p_atlas.id
             );
 
             this.setState({ budgetLinesAtlas: res.data.budgetLines_atlas });
@@ -174,7 +174,7 @@ export default class ReportsAtlas extends Component {
         this.setState({ project_id: e.target.value });
 
         const res_pro_atlas = await axios.post(
-            'https://167.99.15.83:4000/api/budgetlines/atlas/reporte_atlas_by_project/' +
+            'http://167.99.15.83:4000/api/budgetlines/atlas/reporte_atlas_by_project/' +
             e.target.value
         );
 

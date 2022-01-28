@@ -27,7 +27,7 @@ export default class AccountNew extends Component {
             person_id: decode.id,
         });
 
-        const res = await axios.get('https://167.99.15.83:4000/api/coins/');
+        const res = await axios.get('http://167.99.15.83:4000/api/coins/');
         this.setState({ coins: res.data.coins });
     }
 
@@ -43,7 +43,7 @@ export default class AccountNew extends Component {
 
     onSubmit = async(e) => {
         e.preventDefault();
-        await axios.post('https://167.99.15.83:4000/api/accounts', {
+        await axios.post('http://167.99.15.83:4000/api/accounts', {
             description: this.state.description,
             name: this.state.name,
             coin_id: this.state.coin_id,

@@ -20,7 +20,7 @@ export default class ReportAtlasByProjectid extends Component {
         }
 
         const res = await axios.get(
-            'https://167.99.15.83:4000/api/budgetlines/atlas/budgets_by_projectid_and_atlasaccountid/' +
+            'http://167.99.15.83:4000/api/budgetlines/atlas/budgets_by_projectid_and_atlasaccountid/' +
             this.props.match.params.project_id +
             '/' +
             this.props.match.params.account_atlas +
@@ -36,7 +36,7 @@ export default class ReportAtlasByProjectid extends Component {
     }
 
     SubCaterogia(id) {
-        fetch('https://167.99.15.83:4000/api/atlas/find_sub_atlas_category/' + id)
+        fetch('http://167.99.15.83:4000/api/atlas/find_sub_atlas_category/' + id)
             .then((response) => {
                 return response.json();
             })

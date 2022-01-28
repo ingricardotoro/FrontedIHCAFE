@@ -19,7 +19,7 @@ export default class ReportAtlasByProjectid extends Component {
         }
 
         const res = await axios.post(
-            'https://167.99.15.83:4000/api/budgetlines/atlas/reporte_atlas_by_project/' +
+            'http://167.99.15.83:4000/api/budgetlines/atlas/reporte_atlas_by_project/' +
             this.props.match.params.id
         );
 
