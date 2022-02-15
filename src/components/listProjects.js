@@ -2,29 +2,28 @@ import React, { Component } from 'react';
 import axios from 'axios';
 
 export default class listProjects extends Component {
-    state = {
-        projects: [],
-    };
+  state = {
+    projects: [],
+  };
 
-    async componentDidMount() {
-        //verificacion de usuario logeado
-        if (!localStorage.usertoken) {
-            window.location.href = '/';
-        }
-
-        const res = await axios.get('http://167.99.15.83:4000/api/projects/');
-        this.setState({ projects: res.data.projects });
+  async componentDidMount() {
+    //verificacion de usuario logeado
+    if (!localStorage.usertoken) {
+      window.location.href = '/';
     }
 
-    render() {
-        return ( <
-            div >
-            Listado de Projectos {
-                this.state.projects.map((project) => ( <
-                    p key = { project.id } > { project.code } < /p>
-                ))
-            } <
-            /div>
-        );
-    }
+    const res = await axios.get('http://167.99.15.83:4000/api/projects/');
+    this.setState({ projects: res.data.projects });
+  }
+
+  render() {
+    return (
+      <div>
+        Listado de Projectos
+        {this.state.projects.map((project) => (
+          <p key={project.id}> {project.code} </p>
+        ))}
+      </div>
+    );
+  }
 }
