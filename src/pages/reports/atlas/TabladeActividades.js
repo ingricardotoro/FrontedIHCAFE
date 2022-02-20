@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import ResultadoByProyect from './ResultadoByProyect';
+import { API_URL } from '../../../config/api';
 
 export default class TabladeActividades extends Component {
   _isMounted_A = true;
@@ -19,14 +20,14 @@ export default class TabladeActividades extends Component {
     this.setState({ activities: [] });
 
     //  console.log("Code=" + this.props.code_producto)
-    console.log('Buscando Actividades de Codigo=' + this.props.code_producto);
+    //console.log('Buscando Actividades de Codigo=' + this.props.code_producto);
 
     const res_pp3 = await axios.get(
-      'http://167.99.15.83:4000/api/atlas/productos/' + this.props.code_producto
+      `${API_URL}/atlas/productos/${this.props.code_producto}`
     );
     this.setState({ activities: res_pp3.data.productos_atlas });
 
-    /*fetch('http://167.99.15.83:4000/api/atlas/productos/' + this.props.code_producto)
+    /*fetch('https://api.ihcafe.hn/api/atlas/productos/' + this.props.code_producto)
             .then((response) => {
                 return response.json()
             })

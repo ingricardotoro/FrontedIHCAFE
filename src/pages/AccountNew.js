@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import jwt_decode from 'jwt-decode';
+import { API_URL } from '../config/api';
 
 export default class AccountNew extends Component {
   constructor() {
@@ -27,7 +28,7 @@ export default class AccountNew extends Component {
       person_id: decode.id,
     });
 
-    const res = await axios.get('http://167.99.15.83:4000/api/coins/');
+    const res = await axios.get(`${API_URL}/coins/`);
     this.setState({ coins: res.data.coins });
   }
 
@@ -43,7 +44,7 @@ export default class AccountNew extends Component {
 
   onSubmit = async (e) => {
     e.preventDefault();
-    await axios.post('http://167.99.15.83:4000/api/accounts', {
+    await axios.post(API_URL + '/accounts', {
       description: this.state.description,
       name: this.state.name,
       coin_id: this.state.coin_id,

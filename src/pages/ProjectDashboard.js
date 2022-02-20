@@ -7,6 +7,7 @@ import TableCostAtlas from '../components/TableCostAtlas';
 //import TableCost from "../components/TableCost_orginal";
 
 import axios from 'axios';
+import { API_URL } from '../config/api';
 
 export default class ProjectDashboard extends Component {
   constructor() {
@@ -26,7 +27,7 @@ export default class ProjectDashboard extends Component {
     }
 
     const res = await axios.get(
-      'http://167.99.15.83:4000/api/projects/' + this.props.match.params.id
+      `${API_URL}/projects/${this.props.match.params.id}`
     );
     this.setState({ tipo_budget: res.data.data.budget.tipo });
     this.setState({ budget_id: res.data.data.budget.id });

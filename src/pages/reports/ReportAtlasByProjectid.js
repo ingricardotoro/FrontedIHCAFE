@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import { API_URL } from '../../config/api';
 
 export default class ReportAtlasByProjectid extends Component {
   constructor() {
@@ -19,7 +20,8 @@ export default class ReportAtlasByProjectid extends Component {
     }
 
     const res = await axios.post(
-      'http://167.99.15.83:4000/api/budgetlines/atlas/reporte_atlas_by_project/' +
+      API_URL +
+        '/budgetlines/atlas/reporte_atlas_by_project/' +
         this.props.match.params.id
     );
 

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import { API_URL } from '../config/api';
 
 export default class Projectcard extends Component {
   constructor() {
@@ -26,7 +27,7 @@ export default class Projectcard extends Component {
     }
 
     const res = await axios.post(
-      'http://167.99.15.83:4000/api/budgetlines/atlas/project/' + this.props.id
+      `${API_URL}/budgetlines/atlas/project/${this.props.id}`
     );
     this.setState({ budgetLines_Atlas: res.data.budgetLines_atlas });
     this.calculo();
@@ -46,7 +47,7 @@ export default class Projectcard extends Component {
     let nuevoTotalAprobado = 0.0;
     let nuevoTotalEjecutado = 0.0;
     const res = await axios.post(
-      'http://167.99.15.83:4000/api/budgetlines/project/' + this.props.id
+      `${API_URL}/budgetlines/project/${this.props.id}`
     );
     const buds = res.data.budgetLines;
 

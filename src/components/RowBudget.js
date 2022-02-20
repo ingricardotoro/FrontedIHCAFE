@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import { API_URL } from '../config/api';
 
 export default class RowBudget extends Component {
   constructor() {
@@ -25,16 +26,12 @@ export default class RowBudget extends Component {
     }
 
     const res = await axios.post(
-      'http://167.99.15.83:4000/api/budgetlines/project/category/' +
-        this.props.idProject +
-        '/' +
-        this.props.idCat
+      `${API_URL}/budgetlines/project/category/${this.props.idProject}/${this.props.idCat}`
     );
     this.setState({ budgetLines: res.data.budgetLinesCat });
 
     const res3 = await axios.post(
-      'http://167.99.15.83:4000/api/categories/categoriesbyid/' +
-        this.props.idCat
+      `${API_URL}/categories/categoriesbyid/${this.props.idCat}`
     );
     this.setState({ nameCategory: res3.data.category.name });
   }
@@ -52,7 +49,7 @@ export default class RowBudget extends Component {
   //const multiplyES6 = (x, y) => { return x * y };
   onSubmitAprobar = async (budgetLine_id) => {
     //e.preventDefault();
-    //const res_aprobar = await axios.post('http://167.99.15.83:4000/api/budgetlines/aprobar/'+budgetLine_id+'/'+this.state.aprobar);
+    //const res_aprobar = await axios.post('https://api.ihcafe.hn/api/budgetlines/aprobar/'+budgetLine_id+'/'+this.state.aprobar);
   };
 
   calculo() {

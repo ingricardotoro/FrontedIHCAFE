@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import { API_URL } from '../config/api';
 export default class ProjectEdit extends Component {
   constructor() {
     super();
@@ -29,11 +30,11 @@ export default class ProjectEdit extends Component {
     }
 
     const res = await axios.get(
-      'http://167.99.15.83:4000/api/projects/' + this.props.match.params.id
+      `${API_URL}/projects/${this.props.match.params.id}`
     );
     this.setState({ project: res.data.data });
 
-    const res2 = await axios.get('http://167.99.15.83:4000/api/teams/');
+    const res2 = await axios.get(`${API_URL}/teams/`);
     this.setState({ teams: res2.data.teams });
 
     this.setState({ name: this.state.project.name });
@@ -80,22 +81,19 @@ export default class ProjectEdit extends Component {
 
   onSubmit = async (e) => {
     e.preventDefault();
-    await axios.put(
-      'http://167.99.15.83:4000/api/projects/' + this.props.match.params.id,
-      {
-        //code: this.state.code,
-        name: this.state.name,
-        budgetstart: this.state.monto,
-        location: this.state.location,
-        description: this.state.description,
-        priority: this.state.priority,
-        startdate: this.state.startdate,
-        enddate: this.state.enddate,
-        budget_id: this.state.budget_id,
-        team_id: this.state.team_id,
-        status: this.state.status,
-      }
-    );
+    await axios.put(API_URL + '/projects/' + this.props.match.params.id, {
+      //code: this.state.code,
+      name: this.state.name,
+      budgetstart: this.state.monto,
+      location: this.state.location,
+      description: this.state.description,
+      priority: this.state.priority,
+      startdate: this.state.startdate,
+      enddate: this.state.enddate,
+      budget_id: this.state.budget_id,
+      team_id: this.state.team_id,
+      status: this.state.status,
+    });
     //window.location.href = 'https://ihcafe-35ae7.firebaseapp.com/projects'
     window.location.href = '/budgets';
     //return <Redirect to={"/projects"}  />

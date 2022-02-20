@@ -5,6 +5,7 @@ import { Link, Redirect, useHistory } from 'react-router-dom';
 
 import RowCardsProjects from './RowCardsProjects';
 import ModalVerFiles from './ModalVerFiles';
+import { API_URL } from '../config/api';
 //import { set } from 'core-js/core/dict';
 //import jwt_decode from 'jwt-decode';
 
@@ -77,9 +78,7 @@ function TableCost(props) {
   }, []);
 
   const getData = async () => {
-    const res = await axios.post(
-      'http://167.99.15.83:4000/api/budgetlines/project/' + idProject
-    );
+    const res = await axios.post(`${API_URL}/budgetlines/project/${idProject}`);
     const buds = res.data.budgetLines;
 
     buds.map((bl) => {
@@ -94,29 +93,23 @@ function TableCost(props) {
     setBudgetLines(res.data.budgetLines);
     //this.setState({ budgetLines: res.data.budgetLines });
 
-    const res3 = await axios.get('http://167.99.15.83:4000/api/projects/');
+    const res3 = await axios.get(`${API_URL}/projects/`);
     //this.setState({ projects: res3.data.projects });
     setProjects(res3.data.projects);
     //obtenemos el budgetstart de este proyecto
-    const res_pro = await axios.get(
-      'http://167.99.15.83:4000/api/projects/' + idProject
-    );
+    const res_pro = await axios.get(`${API_URL}/projects/${idProject}`);
     //this.setState({ bdg_start_project: res_pro.data.data.budgetstart });
     setBdg_start_project(res_pro.data.data.budgetstart);
 
-    const res4 = await axios.get(
-      'http://167.99.15.83:4000/api/categories/categories_parents/'
-    );
+    const res4 = await axios.get(`${API_URL}/categories/categories_parents/`);
     //this.setState({ categories: res4.data.categories });
     setCategories(res4.data.categories);
 
-    const res6 = await axios.get('http://167.99.15.83:4000/api/accounts/');
+    const res6 = await axios.get(`${API_URL}/accounts/`);
     //this.setState({ cuentas: res6.data.cuentas });
     setCuentas(res6.data.cuentas);
 
-    const res_suppliers = await axios.get(
-      'http://167.99.15.83:4000/api/suppliers/'
-    );
+    const res_suppliers = await axios.get(`${API_URL}/suppliers/`);
     //this.setState({ suppliers: res_suppliers.data.suppliers });
     setSuppliers(res_suppliers.data.suppliers);
 
@@ -128,9 +121,7 @@ function TableCost(props) {
   };
 
   const getAllBudgets = async () => {
-    const res = await axios.post(
-      'http://167.99.15.83:4000/api/budgetlines/project/' + idProject
-    );
+    const res = await axios.post(`${API_URL}/budgetlines/project/${idProject}`);
     const buds = res.data.budgetLines;
     console.log('B=' + JSON.stringify(budgetLines));
     buds.map((bl) => {
@@ -152,8 +143,7 @@ function TableCost(props) {
     });
     //this.setState({ category_id: e.target.value });
     const res5 = await axios.get(
-      'http://167.99.15.83:4000/api/categories/categories_childs/' +
-        e.target.value
+      `${API_URL}/categories/categories_childs/${e.target.value}`
     );
     //this.setState({ clasificaciones: res5.data.clasificaciones });
     setClasificaciones(res5.data.clasificaciones);
@@ -198,9 +188,7 @@ function TableCost(props) {
   const onChanceClasificacion = async (e) => {
     let valorx = e.target.value;
 
-    const res7 = await axios.get(
-      'http://167.99.15.83:4000/api/categories/child/' + valorx
-    );
+    const res7 = await axios.get(`${API_URL}/categories/child/${valorx}`);
     setBudgetLine({
       ...budgetLine,
       name: res7.data.child.name,
@@ -348,14 +336,7 @@ function TableCost(props) {
     if (budgetLine.balance <= budgetLine.balance) {
       // si es aprobado un valor igual o menor
       const res_apro = await axios.post(
-        'http://167.99.15.83:4000/api/budgetlines/aprobar/' +
-          id +
-          '/' +
-          budgetLine.code +
-          '/' +
-          budgetLine.balance +
-          '/' +
-          budgetLine.startdate
+        `${API_URL}/budgetlines/aprobar/${id}/${budgetLine.code}/ ${budgetLine.balance}/${budgetLine.startdate}`
       );
 
       //console.log("APROBANDO" + JSON.stringify(res_apro))
@@ -389,7 +370,7 @@ function TableCost(props) {
   };
 
   /*const onClickSubirArchivo = async (id) => {
-        await axios.post("http://167.99.15.83:4000/api/files/" + id, {
+        await axios.post("https://api.ihcafe.hn/api/files/" + id, {
             nombre_archivo: nombre_archivo,
             fase_archivo: fase_archivo,
             file: archivo,
@@ -402,28 +383,25 @@ function TableCost(props) {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    const res_bl = await axios.post(
-      'http://167.99.15.83:4000/api/budgetlines/',
-      {
-        //await axios.post("http://localhost:4000/api/budgetlines/", {
-        code: budgetLine.code,
-        description: budgetLine.description,
-        name: budgetLine.name,
-        status: budgetLine.status,
-        project_id: budgetLine.project_id,
-        user_id: budgetLine.user_id,
-        supplier_id: supplier,
-        date_start: budgetLine.startdate,
-        date_end: budgetLine.enddate,
-        account_id: budgetLine.account_id,
-        buddgetstart: budgetLine.budgetstart,
-        buddgeupdate: budgetLine.budgeupdate,
-        buddgetfinal: budgetLine.budgetfinal,
-        balance: budgetLine.budgetstart,
-        category_id: budgetLine.category_id,
-        sub_category_code: budgetLine.sub_category_code,
-      }
-    );
+    const res_bl = await axios.post(API_URL + '/budgetlines/', {
+      //await axios.post("http://localhost:4000/api/budgetlines/", {
+      code: budgetLine.code,
+      description: budgetLine.description,
+      name: budgetLine.name,
+      status: budgetLine.status,
+      project_id: budgetLine.project_id,
+      user_id: budgetLine.user_id,
+      supplier_id: supplier,
+      date_start: budgetLine.startdate,
+      date_end: budgetLine.enddate,
+      account_id: budgetLine.account_id,
+      buddgetstart: budgetLine.budgetstart,
+      buddgeupdate: budgetLine.budgeupdate,
+      buddgetfinal: budgetLine.budgetfinal,
+      balance: budgetLine.budgetstart,
+      category_id: budgetLine.category_id,
+      sub_category_code: budgetLine.sub_category_code,
+    });
 
     if (res_bl.data.ok === true) {
       document.getElementById('btn_cerrar_create').click();
@@ -437,9 +415,7 @@ function TableCost(props) {
   };
 
   const handleDelete = async (id) => {
-    const res_p = await axios.post(
-      'http://167.99.15.83:4000/api/budgetlines/delete/' + id
-    );
+    const res_p = await axios.post(`${API_URL}/budgetlines/delete/${id}`);
 
     //window.location.replace('');
     //window.location.replace('/project/' + idProject);
@@ -459,7 +435,7 @@ function TableCost(props) {
 
   const handleEdit = async (id) => {
     const res_p = await axios.put(
-      'http://167.99.15.83:4000/api/budgetlines/update/' + idProject + '/' + id,
+      API_URL + '/budgetlines/update/' + idProject + '/' + id,
       {
         code: budgetLine.code,
         description: budgetLine.details,
@@ -1006,9 +982,7 @@ function TableCost(props) {
                                           </button>
                                         </div>
                                         <form
-                                          action={
-                                            'http://167.99.15.83:4000/api/files/'
-                                          }
+                                          action={`${API_URL}/files`}
                                           method="post"
                                           encType="multipart/form-data"
                                         >

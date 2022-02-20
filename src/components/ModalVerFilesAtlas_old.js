@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import { API_URL } from '../config/api';
 
 export default class ModalVerFilesAtlas extends Component {
   constructor() {
@@ -15,19 +16,14 @@ export default class ModalVerFilesAtlas extends Component {
       window.location.href = '/';
     }
     const res_files = await axios.post(
-      'http://167.99.15.83:4000/api/files/filesbybudgetid_atlas/' +
-        this.props.budget_id +
-        '/' +
-        this.props.budgetlineatlas
+      `${API_URL}/files/filesbybudgetid_atlas/${this.props.budget_id}/${this.props.budgetlineatlas}`
     );
     this.setState({ files: res_files.data.files });
   }
   onClickDelete = async (filename) => {
-    await axios.post(
-      'http://167.99.15.83:4000/api/files/delete_atlas/' + filename
-    );
+    await axios.post(`${API_URL}/files/delete_atlas/${filename}`);
     window.location.href =
-      'http://167.99.15.83/project/' + this.props.idProject;
+      'https://167.99.15.83/project/' + this.props.idProject;
   };
 
   render() {
@@ -66,40 +62,32 @@ export default class ModalVerFilesAtlas extends Component {
                                   {file.filename.slice(-4) === '.pdf' ? (
                                     <a
                                       className="media-left"
-                                      href={
-                                        'http://167.99.15.83:4000/' +
-                                        file.filedir +
-                                        file.filename
-                                      }
+                                      href={`${API_URL}/${
+                                        file.filedir + file.filename
+                                      }`}
                                     >
                                       <i
                                         style={{ width: '200px', color: 'red' }}
                                         className="icofont icofont-file-pdf icofont-5x"
-                                        src={
-                                          'http://167.99.15.83:4000/' +
-                                          file.filedir +
-                                          file.filename
-                                        }
+                                        href={`${API_URL}/${
+                                          file.filedir + file.filename
+                                        }`}
                                       />
                                       Archivo PDF
                                     </a>
                                   ) : (
                                     <a
                                       className="media-left"
-                                      href={
-                                        'http://167.99.15.83:4000/' +
-                                        file.filedir +
-                                        file.filename
-                                      }
+                                      href={`${API_URL}/${
+                                        file.filedir + file.filename
+                                      }`}
                                     >
                                       <img
                                         style={{ width: '200px' }}
                                         className="img-thumbnail "
-                                        src={
-                                          'http://167.99.15.83:4000/' +
-                                          file.filedir +
-                                          file.filename
-                                        }
+                                        href={`${API_URL}/${
+                                          file.filedir + file.filename
+                                        }`}
                                         alt={file.filename}
                                       />
                                     </a>
@@ -114,11 +102,9 @@ export default class ModalVerFilesAtlas extends Component {
                                       {file.fase}
                                     </div>
                                     <a
-                                      href={
-                                        'http://167.99.15.83:4000/' +
-                                        file.filedir +
-                                        file.filename
-                                      }
+                                      href={`${API_URL}/${
+                                        file.filedir + file.filename
+                                      }`}
                                     >
                                       DESCARGAR{' '}
                                     </a>

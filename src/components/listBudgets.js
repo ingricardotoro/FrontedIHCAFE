@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import TabBudget from '../components/TabBudget';
+import { API_URL } from '../config/api';
 
 export default class listBudgets extends Component {
   constructor() {
@@ -19,7 +20,7 @@ export default class listBudgets extends Component {
       window.location.href = '/';
     }
 
-    const res = await axios.get('http://167.99.15.83:4000/api/budgets/all');
+    const res = await axios.get(`${API_URL}/budgets/all`);
     this.setState({ budgets: res.data.budgets });
   }
 

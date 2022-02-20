@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import ChartistGraph from 'react-chartist';
+import { API_URL } from '../config/api';
 
 export default class Dashboard extends Component {
   constructor() {
@@ -22,18 +23,16 @@ export default class Dashboard extends Component {
 
     try {
       //obtenemos los presupuestos con categoria atlas
-      const res_budgetsAtlas = await axios.get(
-        'http://167.99.15.83:4000/api/budgets/atlas'
-      );
+      const res_budgetsAtlas = await axios.get(`${API_URL}/budgets/atlas`);
       this.setState({ budgets_atlas: res_budgetsAtlas.data.budgets });
 
-      /*const res = await axios.get("http://167.99.15.83:4000/api/projects/");
+      /*const res = await axios.get("https://api.ihcafe.hn/api/projects/");
             this.setState({ projects: res.data.projects });
     
-            const res1 = await axios.get("http://167.99.15.83:4000/api/projects/13");
+            const res1 = await axios.get("https://api.ihcafe.hn/api/projects/13");
             this.setState({ budgetstart: res1.data.data.budgetstart });
     
-            const res2 = await axios.get("http://167.99.15.83:4000/api/budgetlines/atlas/grafica_atlas_by_project/13");
+            const res2 = await axios.get("https://api.ihcafe.hn/api/budgetlines/atlas/grafica_atlas_by_project/13");
             this.setState({ ArrayGraficabyProject: res2.data.ArrayGraficabyProject });*/
     } catch (error) {
       console.log('ERROR IN CATCH', error);
@@ -44,8 +43,7 @@ export default class Dashboard extends Component {
     this.setState({ budget_id: e.target.value });
 
     const res_p = await axios.post(
-      'http://167.99.15.83:4000/api/projects/findProjectsByBudgetId/' +
-        e.target.value
+      `${API_URL}/projects/findProjectsByBudgetId/${e.target.value}`
     );
     this.setState({ projects_atlas: res_p.data.projectsbybudgetid });
   };
@@ -53,15 +51,12 @@ export default class Dashboard extends Component {
   onChangeSelectProject_Atlas = async (e) => {
     const projectid = e.target.value;
 
-    const res_projectById = await axios.get(
-      'http://167.99.15.83:4000/api/projects/' + projectid
-    );
+    const res_projectById = await axios.get(`${API_URL}/projects/${projectid}`);
     this.setState({ project: res_projectById.data.data });
     this.setState({ budgetstart: res_projectById.data.data.budgetstart });
 
     const res2 = await axios.get(
-      'http://167.99.15.83:4000/api/budgetlines/atlas/grafica_atlas_by_project/' +
-        projectid
+      `${API_URL}/budgetlines/atlas/grafica_atlas_by_project/${projectid}`
     );
     this.setState({ ArrayGraficabyProject: res2.data.ArrayGraficabyProject });
 
@@ -93,9 +88,9 @@ export default class Dashboard extends Component {
       disponibles[index] = totaldisponible;
     }
 
-    console.log('Inicial=' + presupuestoInicial);
-    console.log('Gastos=' + sumadegastos);
-    console.log('Disponible=' + totaldisponible);
+    //console.log('Inicial=' + presupuestoInicial);
+    //console.log('Gastos=' + sumadegastos);
+    //console.log('Disponible=' + totaldisponible);
 
     var lineChartDataGastos = {
       labels: semanas,

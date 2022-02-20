@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import { API_URL } from '../config/api';
 
 export default class TeamMembers extends Component {
   constructor() {
@@ -23,22 +24,22 @@ export default class TeamMembers extends Component {
 
     //obtenemos el id del equipo que viene por url
     const res = await axios.get(
-      'http://167.99.15.83:4000/api/teams/' + this.props.match.params.id
+      `${API_URL}/teams/${this.props.match.params.id}`
     );
     this.setState({ team: res.data.team });
 
     //buscamos los miembros de este equipo para listarlos
     const res2 = await axios.get(
-      'http://167.99.15.83:4000/api/teammembers/' + this.state.team.id
+      `${API_URL}/teammembers/${this.state.team.id}`
     );
     this.setState({ teammembers: res2.data.teammembers });
 
     //listados los usuario para agregarlos
-    const res3 = await axios.get('http://167.99.15.83:4000/api/users');
+    const res3 = await axios.get(`${API_URL}/users`);
     this.setState({ users: res3.data.users });
 
     //listados los roles para agregarlos
-    const res4 = await axios.get('http://167.99.15.83:4000/api/roles');
+    const res4 = await axios.get(`${API_URL}/roles`);
     this.setState({ roles: res4.data.roles });
   }
 
@@ -50,9 +51,7 @@ export default class TeamMembers extends Component {
   };
 
   onSubmitDelete = async (id) => {
-    const res_p = await axios.post(
-      'http://167.99.15.83:4000/api/teammembers/delete/' + id
-    );
+    const res_p = await axios.post(`${API_URL}/teammembers/delete/${id}`);
 
     window.location.replace('');
     //window.location.href = "http://167.99.15.83/teammembers/" + this.state.team.id;
@@ -64,7 +63,7 @@ export default class TeamMembers extends Component {
   onSubmitAddMember = async (e) => {
     //console.log("Aqui vamossss")
     //e.preventDefault();
-    await axios.post('http://167.99.15.83:4000/api/teammembers', {
+    await axios.post(API_URL + '/teammembers', {
       team_id: this.state.team.id,
       person_id: this.state.person_id,
       rol_id: this.state.role_id,

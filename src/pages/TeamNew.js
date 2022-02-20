@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import { API_URL } from '../config/api';
 
 export default class TeamNew extends Component {
   constructor() {
@@ -27,7 +28,7 @@ export default class TeamNew extends Component {
 
   onSubmit = async (e) => {
     e.preventDefault();
-    await axios.post('http://167.99.15.83:4000/api/teams', {
+    await axios.post(`${API_URL}/teams`, {
       description: this.state.description,
       name: this.state.name,
     });

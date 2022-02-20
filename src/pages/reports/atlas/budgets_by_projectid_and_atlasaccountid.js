@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import { API_URL } from '../../../config/api';
 
 export default class ReportAtlasByProjectid extends Component {
   constructor() {
@@ -20,7 +21,8 @@ export default class ReportAtlasByProjectid extends Component {
     }
 
     const res = await axios.get(
-      'http://167.99.15.83:4000/api/budgetlines/atlas/budgets_by_projectid_and_atlasaccountid/' +
+      API_URL +
+        '/budgetlines/atlas/budgets_by_projectid_and_atlasaccountid/' +
         this.props.match.params.project_id +
         '/' +
         this.props.match.params.account_atlas +
@@ -37,7 +39,7 @@ export default class ReportAtlasByProjectid extends Component {
   }
 
   SubCaterogia(id) {
-    fetch('http://167.99.15.83:4000/api/atlas/find_sub_atlas_category/' + id)
+    fetch(API_URL + '/atlas/find_sub_atlas_category/' + id)
       .then((response) => {
         return response.json();
       })

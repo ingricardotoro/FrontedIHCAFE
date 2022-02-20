@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import jwt_decode from 'jwt-decode';
+import { API_URL } from '../config/api';
 
 export default class CoinNew extends Component {
   constructor() {
@@ -32,7 +33,7 @@ export default class CoinNew extends Component {
 
   onSubmit = async (e) => {
     e.preventDefault();
-    await axios.post('http://167.99.15.83:4000/api/coins/', {
+    await axios.post(`${API_URL}/coins/`, {
       description: this.state.description,
       name: this.state.name,
       code: this.state.code,

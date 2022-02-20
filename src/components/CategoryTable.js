@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import { API_URL } from '../config/api';
 export default class CategoryTable extends Component {
   constructor() {
     super();
@@ -15,8 +16,7 @@ export default class CategoryTable extends Component {
     }
 
     const res3 = await axios.get(
-      'http://167.99.15.83:4000/api/categories/categories_childs/' +
-        this.props.idCat
+      `${API_URL}/categories/categories_childs/${this.props.idCat}`
     );
     this.setState({ subcategories: res3.data.clasificaciones });
   }

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import { API_URL } from '../../../config/api';
 
 export default class ValorAtlas extends Component {
   _isMounted_A = true;
@@ -14,7 +15,8 @@ export default class ValorAtlas extends Component {
 
   async componentDidMount() {
     const res_p3 = await axios.post(
-      'http://167.99.15.83:4000/api/budgetlines/atlas/findAtlasAccountsByProjAct/' +
+      API_URL +
+        '/budgetlines/atlas/findAtlasAccountsByProjAct/' +
         this.props.project_id +
         '/' +
         this.props.code_activity
@@ -28,9 +30,10 @@ export default class ValorAtlas extends Component {
   render() {
     return (
       <>
+        {' '}
         {this.state.atlasaccounts.map((atlas, index) => (
-          <div key={index}>{atlas.name} </div>
-        ))}
+          <div key={index}> {atlas.name} </div>
+        ))}{' '}
       </>
     );
   }

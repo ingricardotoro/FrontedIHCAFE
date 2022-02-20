@@ -9,6 +9,7 @@ import { toast } from 'react-toastify';
 import RowCardsProjects from './RowCardsProjects';
 import ModalVerFilesAtlas from './ModalVerFilesAtlas';
 import jwt_decode from 'jwt-decode';
+import { API_URL } from '../config/api';
 
 function TableCostAtlas(props) {
   const { idProject, budget_id } = props;
@@ -106,40 +107,30 @@ function TableCostAtlas(props) {
     setRol(decode.tipo_user_id);
 
     const res = await axios.post(
-      'http://167.99.15.83:4000/api/budgetlines/atlas/project/' + idProject
+      `${API_URL}/budgetlines/atlas/project/${idProject}`
     );
     setBudgetLinesAtlas(res.data.budgetLines_atlas);
 
-    const res3 = await axios.get('http://167.99.15.83:4000/api/projects/');
+    const res3 = await axios.get(`${API_URL}/projects/`);
     setProjects(res3.data.projects);
 
     //obtenemos el budgetstart de este proyecto
-    const res_pro = await axios.get(
-      'http://167.99.15.83:4000/api/projects/' + idProject
-    );
+    const res_pro = await axios.get(`${API_URL}/projects/${idProject}`);
     setBdg_start_project(res_pro.data.data.budgetstart);
 
-    const res4 = await axios.get(
-      'http://167.99.15.83:4000/api/categories/categories_parents/'
-    );
+    const res4 = await axios.get(`${API_URL}/categories/categories_parents/`);
     setCategories(res4.data.categories);
 
-    const res6 = await axios.get('http://167.99.15.83:4000/api/accounts/');
+    const res6 = await axios.get(`${API_URL}/accounts/`);
     setAccounts(res6.data.cuentas);
 
-    const res_atlas = await axios.get(
-      'http://167.99.15.83:4000/api/atlas/resultados'
-    );
+    const res_atlas = await axios.get(`${API_URL}/atlas/resultados`);
     setResultados_atlas(res_atlas.data.atlas_resultados);
 
-    const res_account_atlas = await axios.get(
-      'http://167.99.15.83:4000/api/atlas/accounts'
-    );
+    const res_account_atlas = await axios.get(`${API_URL}/atlas/accounts`);
     setAccounts_atlas(res_account_atlas.data.atlas_accounts);
 
-    const res_suppliers = await axios.get(
-      'http://167.99.15.83:4000/api/suppliers/'
-    );
+    const res_suppliers = await axios.get(`${API_URL}/suppliers/`);
     setSuppliers(res_suppliers.data.suppliers);
 
     setProject_id(idProject);
@@ -148,8 +139,7 @@ function TableCostAtlas(props) {
   const onChanceCategory = async (e) => {
     setCategory_id(e.target.value);
     const res5 = await axios.get(
-      'http://167.99.15.83:4000/api/categories/categories_childs/' +
-        e.target.value
+      `${API_URL}/categories/categories_childs/${e.target.value}`
     );
     setClasificaciones(res5.data.clasificaciones);
   };
@@ -199,7 +189,7 @@ function TableCostAtlas(props) {
   //onChanceProject = (e) => {setState({project_id: e.target.value})}
   /* INICIAL onChanceClasificacion = async (e) => {
           setState({code: e.target.value});
-          const res7 = await axios.get('http://167.99.15.83:4000/api/categories/child/'+e.target.value);
+          const res7 = await axios.get('https://api.ihcafe.hn/api/categories/child/'+e.target.value);
           setState({name:res7.data.child.name});
       } */
 
@@ -272,7 +262,7 @@ function TableCostAtlas(props) {
 
   /* ININIAL  onChanceCategory = async (e) => {
           setState({category_id: e.target.value });
-          const res5 = await axios.get('http://167.99.15.83:4000/api/categories/categories_childs/'+e.target.value);
+          const res5 = await axios.get('https://api.ihcafe.hn/api/categories/categories_childs/'+e.target.value);
           setState({clasificaciones:res5.data.clasificaciones});
       } */
 
@@ -280,7 +270,7 @@ function TableCostAtlas(props) {
     //setState({ result_atlas: e.target.value });
     setResult_atlas(e.target.value);
     const res_prod_atlas = await axios.get(
-      'http://167.99.15.83:4000/api/atlas/productos/' + e.target.value
+      `${API_URL}/atlas/productos/${e.target.value}`
     );
     //setState({ products_atlas: res_prod_atlas.data.productos_atlas });
     setProducts_atlas(res_prod_atlas.data.productos_atlas);
@@ -290,7 +280,7 @@ function TableCostAtlas(props) {
     //setState({ product_atlas: e.target.value });
     setProduct_atlas(e.target.value);
     const res_activity_atlas = await axios.get(
-      'http://167.99.15.83:4000/api/atlas/productos/' + e.target.value
+      `${API_URL}/atlas/productos/${e.target.value}`
     );
     //setState({activities_atlas: res_activity_atlas.data.productos_atlas,});
     setActivities_atlas(res_activity_atlas.data.productos_atlas);
@@ -304,7 +294,7 @@ function TableCostAtlas(props) {
     //setState({ account_atlas: e.target.value });
     setAccount_atlas(e.target.value);
     const res_sub_atlas = await axios.get(
-      'http://167.99.15.83:4000/api/atlas/sub_accounts/' + e.target.value
+      `${API_URL}/atlas/sub_accounts/${e.target.value}`
     );
     setSub_accounts_atlas(res_sub_atlas.data.sub_accounts);
   };
@@ -369,14 +359,7 @@ function TableCostAtlas(props) {
 
       await axios
         .post(
-          'http://167.99.15.83:4000/api/budgetlines/aprobar_atlas/' +
-            id +
-            '/' +
-            aprobar +
-            '/' +
-            value +
-            '/' +
-            valueComent
+          `${API_URL}/budgetlines/aprobar_atlas/${id}/${aprobar}/${value}/${valueComent}`
         )
         .then((dataResult) => {
           //console.log("RESULT=" + JSON.stringify(dataResult))
@@ -449,9 +432,9 @@ function TableCostAtlas(props) {
 
       //console.log(formDataFile)
 
-      //await axios.post('http://167.99.15.83:4000/api/files/'+id,{
+      //await axios.post('https://api.ihcafe.hn/api/files/'+id,{
       await axios
-        .post('http://167.99.15.83:4000/api/files/atlas/', formDataFile)
+        .post(API_URL + '/files/atlas/', formDataFile)
         .then((dataResult) => {
           //volvemos a traer los budgtines
           toast.success('Archivo Subido Exitosamente', {
@@ -472,7 +455,7 @@ function TableCostAtlas(props) {
       toast.error('Faltan Datos', { position: toast.POSITION.TOP_RIGHT });
     }
 
-    /*await axios.post("http://167.99.15.83:4000/api/files/" + id, {
+    /*await axios.post("https://api.ihcafe.hn/api/files/" + id, {
             nombre_archivo: nombre_archivo,
             fase_archivo: fase_archivo,
             file: fileData,
@@ -512,13 +495,13 @@ function TableCostAtlas(props) {
     //console.log("DATA=" + JSON.stringify(data))
 
     /*const res = await axios.post(
-            "http://167.99.15.83:4000/api/budgetlines/budgetlineatlas", data
+            "https://api.ihcafe.hn/api/budgetlines/budgetlineatlas", data
             //"localhost:4000/api/budgetlines/budgetlineatlas", data
 
         );*/
 
     await axios
-      .post('http://167.99.15.83:4000/api/budgetlines/budgetlineatlas', data)
+      .post(API_URL + '/budgetlines/budgetlineatlas', data)
       .then((dataResult) => {
         //volvemos a traer los budgtines
         getData();
@@ -542,9 +525,7 @@ function TableCostAtlas(props) {
   //funcion para elimiar un renglon presupuestario
   const onSubmitDelete = async (id) => {
     await axios
-      .post(
-        'http://167.99.15.83:4000/api/budgetlines/budgetlineatlas/delete/' + id
-      )
+      .post(`${API_URL}/budgetlines/budgetlineatlas/delete/${id}`)
       .then((dataResult) => {
         //volvemos a traer los budgtines
         alert(JSON.stringify(dataResult));
@@ -1024,7 +1005,7 @@ function TableCostAtlas(props) {
                                     </div>
                                     <form
                                     /* action={
-                                                                                "http://167.99.15.83:4000/api/files/atlas"
+                                                                                "https://api.ihcafe.hn/api/files/atlas"
                                                                             }
                                                                             method="post"
                                                                             enctype="multipart/form-data" */

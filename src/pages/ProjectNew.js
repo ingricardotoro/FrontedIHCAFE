@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import { API_URL } from '../config/api';
 export default class ProjectNew extends Component {
   constructor() {
     super();
@@ -28,11 +29,11 @@ export default class ProjectNew extends Component {
       window.location.href = '/';
     }
 
-    const res = await axios.get('http://167.99.15.83:4000/api/budgets/all');
+    const res = await axios.get(`${API_URL}/budgets/all`);
     console.log('PRE=' + JSON.stringify(res.data.budgets));
     this.setState({ budgets: res.data.budgets });
 
-    const res2 = await axios.get('http://167.99.15.83:4000/api/teams/');
+    const res2 = await axios.get(`${API_URL}/teams`);
     this.setState({ teams: res2.data.teams });
   }
 
@@ -72,7 +73,7 @@ export default class ProjectNew extends Component {
 
   onSubmit = async (e) => {
     e.preventDefault();
-    await axios.post('http://167.99.15.83:4000/api/projects', {
+    await axios.post(API_URL + '/projects', {
       code: this.state.code,
       name: this.state.name,
       budgetstart: this.state.monto,

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link, useHistory } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import { API_URL } from '../config/api';
 //import 'react-toastify/dist/ReactToastify.css';
 //import 'react-toastify/scss/main.scss'
 function ModalVerFilesAtlas(props) {
@@ -28,10 +29,7 @@ function ModalVerFilesAtlas(props) {
 
   const getData = async () => {
     const res_files = await axios.post(
-      'http://167.99.15.83:4000/api/files/filesbybudgetid_atlas/' +
-        budget_id +
-        '/' +
-        budgetlineatlas
+      `${API_URL}/files/filesbybudgetid_atlas/${budget_id}/${budgetlineatlas}`
     );
     //console.log(res_files.data.files)
     setFiles(res_files.data.files);
@@ -39,7 +37,7 @@ function ModalVerFilesAtlas(props) {
 
   const onClickDelete = async (filename) => {
     await axios
-      .post('http://167.99.15.83:4000/api/files/delete_atlas/' + filename)
+      .post(`${API_URL}/files/delete_atlas/${filename}`)
       .then((dataResult) => {
         //volvemos a traer los archivos
         getData();
@@ -88,21 +86,17 @@ function ModalVerFilesAtlas(props) {
                                 {file.filename.slice(-4) === '.pdf' ? (
                                   <a
                                     className="media-left"
-                                    href={
-                                      'http://167.99.15.83:4000/' +
-                                      file.filedir +
-                                      file.filename
-                                    }
+                                    href={`${API_URL}/${
+                                      file.filedir + file.filename
+                                    }`}
                                     download={file.filename}
                                   >
                                     <i
                                       style={{ width: '200px', color: 'red' }}
                                       className="icofont icofont-file-pdf icofont-5x"
-                                      src={
-                                        'http://167.99.15.83:4000/' +
-                                        file.filedir +
-                                        file.filename
-                                      }
+                                      href={`${API_URL}/${
+                                        file.filedir + file.filename
+                                      }`}
                                       download={file.filename}
                                     />
                                     Archivo PDF
@@ -110,21 +104,17 @@ function ModalVerFilesAtlas(props) {
                                 ) : (
                                   <a
                                     className="media-left"
-                                    href={
-                                      'http://167.99.15.83:4000/' +
-                                      file.filedir +
-                                      file.filename
-                                    }
+                                    href={`${API_URL}/${
+                                      file.filedir + file.filename
+                                    }`}
                                     download={file.filename}
                                   >
                                     <img
                                       style={{ width: '200px' }}
                                       className="img-thumbnail "
-                                      src={
-                                        'http://167.99.15.83:4000/' +
-                                        file.filedir +
-                                        file.filename
-                                      }
+                                      href={`${API_URL}/${
+                                        file.filedir + file.filename
+                                      }`}
                                       alt={file.filename}
                                     />
                                   </a>
@@ -139,11 +129,9 @@ function ModalVerFilesAtlas(props) {
                                     {file.fase}
                                   </div>
                                   <a
-                                    href={
-                                      'http://167.99.15.83:4000/' +
-                                      file.filedir +
-                                      file.filename
-                                    }
+                                    href={`${API_URL}/${
+                                      file.filedir + file.filename
+                                    }`}
                                   >
                                     DESCARGAR{' '}
                                   </a>

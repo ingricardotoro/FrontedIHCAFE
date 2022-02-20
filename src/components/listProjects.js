@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import { API_URL } from '../config/api';
 
 export default class listProjects extends Component {
   state = {
@@ -12,7 +13,7 @@ export default class listProjects extends Component {
       window.location.href = '/';
     }
 
-    const res = await axios.get('http://167.99.15.83:4000/api/projects/');
+    const res = await axios.get(`${API_URL}/projects/`);
     this.setState({ projects: res.data.projects });
   }
 

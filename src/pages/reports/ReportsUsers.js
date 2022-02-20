@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import { API_URL } from '../../config/api';
 
 export default class ReportsUsers extends Component {
   constructor() {
@@ -16,7 +17,7 @@ export default class ReportsUsers extends Component {
       window.location.href = '/';
     }
     //traemos todo los usuario registrados
-    const res = await axios.get('http://167.99.15.83:4000/api/users/');
+    const res = await axios.get(`${API_URL}/users/`);
     this.setState({ users: res.data.users });
   }
 

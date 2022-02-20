@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import ValorAtlas from './ValorAtlas';
+import { API_URL } from '../../../config/api';
 
 export default class ResultadoByProyect extends Component {
   _isMounted_A = true;
@@ -15,8 +16,7 @@ export default class ResultadoByProyect extends Component {
 
   async componentDidMount() {
     const res_p2 = await axios.post(
-      'http://167.99.15.83:4000/api/projects/findProjectsByBudgetId/' +
-        this.props.budget_atlas_id
+      `${API_URL}/projects/findProjectsByBudgetId/${this.props.budget_atlas_id}`
     );
     this.setState({ projects: res_p2.data.projectsbybudgetid });
   }

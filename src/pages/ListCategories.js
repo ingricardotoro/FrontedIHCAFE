@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import CategoryTable from '../components/CategoryTable';
+import { API_URL } from '../config/api';
 export default class ListCategories extends Component {
   constructor() {
     super();
@@ -15,9 +16,7 @@ export default class ListCategories extends Component {
       window.location.href = '/';
     }
 
-    const res = await axios.get(
-      'https://backendihcafe.herokuapp.com/api/categories/categories_parents'
-    );
+    const res = await axios.get(`${API_URL}/categories/categories_parents`);
     this.setState({ categories_parents: res.data.categories });
   }
 

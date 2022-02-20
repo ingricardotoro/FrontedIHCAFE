@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import { API_URL } from '../config/api';
 export default class Supliers_list extends Component {
   constructor() {
     super();
@@ -21,7 +22,7 @@ export default class Supliers_list extends Component {
     }
 
     //traemos todo los proveedores registrados
-    const res = await axios.get('http://167.99.15.83:4000/api/suppliers/');
+    const res = await axios.get(`${API_URL}/suppliers/`);
     this.setState({ suppliers: res.data.suppliers });
   }
 
@@ -46,7 +47,7 @@ export default class Supliers_list extends Component {
 
   onSubmit = async (e) => {
     e.preventDefault();
-    const resp = await axios.post('http://167.99.15.83:4000/api/suppliers', {
+    const resp = await axios.post(API_URL + '/suppliers', {
       company: this.state.company,
       phone1: this.state.phone1,
       address: this.state.address,
@@ -59,9 +60,7 @@ export default class Supliers_list extends Component {
   };
 
   onSubmitDelete = async (id) => {
-    const res_p = await axios.post(
-      'http://167.99.15.83:4000/api/suppliers/delete/' + id
-    );
+    const res_p = await axios.post(`${API_URL}/suppliers/delete/${id}`);
     window.location.href = '/suppliers_list';
 
     if (res_p) {

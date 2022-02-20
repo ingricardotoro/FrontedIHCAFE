@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { API_URL } from '../../../config/api';
 import TabladeActividades from './TabladeActividades';
 
 export default class TabladeProductos extends Component {
@@ -16,10 +17,7 @@ export default class TabladeProductos extends Component {
 
     const { handleSetProducts } = this.props;
 
-    fetch(
-      'http://167.99.15.83:4000/api/atlas/productos/' +
-        this.props.code_resultado
-    )
+    fetch(`${API_URL}/atlas/productos/${this.props.code_resultado}`)
       .then((response) => {
         return response.json();
       })
@@ -42,7 +40,7 @@ export default class TabladeProductos extends Component {
     //alert("Buscando Productos de Codigox=" + this.props.code_resultado)
 
     /*const res2 = await axios.get(
-            "http://167.99.15.83:4000/api/atlas/productos/" + this.props.code_resultado
+            "https://api.ihcafe.hn/api/atlas/productos/" + this.props.code_resultado
         )*/
 
     /*handleSetProducts(res2.data.productos_atlas){*/

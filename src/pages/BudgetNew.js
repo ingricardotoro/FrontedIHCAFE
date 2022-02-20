@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import { API_URL } from '../config/api';
 
 export default class BudgetNew extends Component {
   constructor() {
@@ -37,10 +38,10 @@ export default class BudgetNew extends Component {
       window.location.href = '/';
     }
 
-    const res6 = await axios.get('http://167.99.15.83:4000/api/accounts/');
+    const res6 = await axios.get(`${API_URL}/accounts/`);
     this.setState({ cuentas: res6.data.cuentas });
 
-    const res7 = await axios.get('http://167.99.15.83:4000/api/coins/');
+    const res7 = await axios.get(`${API_URL}/coins/`);
     this.setState({ coins: res7.data.coins });
   }
   onChangeBudgetstart = (e) => {
@@ -77,7 +78,7 @@ export default class BudgetNew extends Component {
 
   onSubmit = async (e) => {
     e.preventDefault();
-    const res = await axios.post('http://167.99.15.83:4000/api/budgets', {
+    const res = await axios.post(API_URL + '/budgets', {
       code: this.state.code,
       name: this.state.name,
       tipo: this.state.tipo,

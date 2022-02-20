@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import ResultadosAtlas from '../components/ResultadosAtlas';
+import { API_URL } from '../config/api';
 
 export default class Atlas extends Component {
   constructor() {
@@ -15,9 +16,7 @@ export default class Atlas extends Component {
     if (!localStorage.usertoken) {
       window.location.href = '/';
     }
-    const res = await axios.get(
-      'http://167.99.15.83:4000/api/atlas/resultados'
-    );
+    const res = await axios.get(`${API_URL}/atlas/resultados`);
     this.setState({ atlas_resultados: res.data.atlas_resultados });
   }
 

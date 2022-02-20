@@ -3,6 +3,7 @@ import axios from 'axios';
 import jsPDF from 'jspdf';
 import 'jspdf-autotable';
 import { Link } from 'react-router-dom';
+import { API_URL } from '../config/api';
 
 export default class Reports extends Component {
   constructor() {
@@ -130,20 +131,16 @@ export default class Reports extends Component {
       window.location.href = '/';
     }
 
-    const res = await axios.get('http://167.99.15.83:4000/api/budgets/');
+    const res = await axios.get(`${API_URL}/budgets`);
     this.setState({ budgets: res.data.budgets });
 
-    const res_atlas = await axios.get(
-      'http://167.99.15.83:4000/api/budgets/atlas'
-    );
+    const res_atlas = await axios.get(`${API_URL}/budgets/atlas`);
     this.setState({ budgets_atlas: res_atlas.data.budgets });
 
-    const res_account_atlas = await axios.get(
-      'http://167.99.15.83:4000/api/atlas/accounts'
-    );
+    const res_account_atlas = await axios.get(`${API_URL}/atlas/accounts`);
     this.setState({ accounts_atlas: res_account_atlas.data.atlas_accounts });
 
-    /*const res = await axios.get("http://167.99.15.83:4000/api/coins/");
+    /*const res = await axios.get("https://api.ihcafe.hn/api/coins/");
     this.setState({ budgets: res.data.budgets });*/
   }
 
@@ -151,8 +148,7 @@ export default class Reports extends Component {
     this.setState({ budget_id: e.target.value });
 
     const res_p = await axios.post(
-      'http://167.99.15.83:4000/api/projects/findProjectsByBudgetId/' +
-        e.target.value
+      `${API_URL}/projects/findProjectsByBudgetId/${e.target.value}`
     );
     this.setState({ projects: res_p.data.projectsbybudgetid });
   };
@@ -162,15 +158,14 @@ export default class Reports extends Component {
     this.state.arrayBudgetLines = []; //lo iniciaiza
 
     const res_pro_atlas = await axios.post(
-      'http://167.99.15.83:4000/api/projects/findProjectsByBudgetId/' +
-        e.target.value
+      `${API_URL}/projects/findProjectsByBudgetId/${e.target.value}`
     );
     this.setState({ projects_atlas: res_pro_atlas.data.projectsbybudgetid });
 
     this.state.projects_atlas.map(async (p_atlas) => {
       //llamamos los gastos hechos en este proyecto y presupuesto
       const res = await axios.post(
-        'http://167.99.15.83:4000/api/budgetlines/atlas/project/' + p_atlas.id
+        `${API_URL}/budgetlines/atlas/project/${p_atlas.id}`
       );
 
       this.setState({ budgetLinesAtlas: res.data.budgetLines_atlas });
@@ -189,8 +184,7 @@ export default class Reports extends Component {
     this.setState({ project_id: e.target.value });
 
     const res_pro_atlas = await axios.post(
-      'http://167.99.15.83:4000/api/budgetlines/atlas/reporte_atlas_by_project/' +
-        e.target.value
+      `${API_URL}/budgetlines/atlas/reporte_atlas_by_project/${e.target.value}`
     );
 
     this.setState({

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import AtlasSubAccount from '../components/AtlasSubAccount';
+import { API_URL } from '../config/api';
 
 export default class Atlas extends Component {
   constructor() {
@@ -16,7 +17,7 @@ export default class Atlas extends Component {
       window.location.href = '/';
     }
 
-    const res = await axios.get('http://167.99.15.83:4000/api/atlas/accounts');
+    const res = await axios.get(`${API_URL}/atlas/accounts`);
     this.setState({ atlas_accounts: res.data.atlas_accounts });
   }
 

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import { API_URL } from '../config/api';
 
 export default class BudgetLineEdit extends Component {
   constructor() {
@@ -54,10 +55,7 @@ export default class BudgetLineEdit extends Component {
     }
 
     const res = await axios.post(
-      'http://167.99.15.83:4000/api/budgetlines/findone/' +
-        this.props.match.params.projectId +
-        '/' +
-        this.props.match.params.id
+      `${API_URL}/budgetlines/findone/${this.props.match.params.projectId}/${this.props.match.params.id}`
     );
 
     this.setState({ budgetLine: res.data.budgetLine });
@@ -80,17 +78,13 @@ export default class BudgetLineEdit extends Component {
       sub_category_code: this.state.budgetLine.sub_category_code,
     });
 
-    const res4 = await axios.get(
-      'http://167.99.15.83:4000/api/categories/categories_parents/'
-    );
+    const res4 = await axios.get(`${API_URL}/categories/categories_parents/`);
     this.setState({ categories: res4.data.categories });
 
-    const res6 = await axios.get('http://167.99.15.83:4000/api/accounts/');
+    const res6 = await axios.get(`${API_URL}/accounts/`);
     this.setState({ cuentas: res6.data.cuentas });
 
-    const res_suppliers = await axios.get(
-      'http://167.99.15.83:4000/api/suppliers/'
-    );
+    const res_suppliers = await axios.get(`${API_URL}/suppliers/`);
     this.setState({ suppliers: res_suppliers.data.suppliers });
 
     this.setState({ project_id: this.props.idProject });
@@ -99,8 +93,7 @@ export default class BudgetLineEdit extends Component {
   onChanceCategory = async (e) => {
     this.setState({ category_id: e.target.value });
     const res5 = await axios.get(
-      'http://167.99.15.83:4000/api/categories/categories_childs/' +
-        e.target.value
+      `${API_URL}/categories/categories_childs/${e.target.value}`
     );
     this.setState({ clasificaciones: res5.data.clasificaciones });
   };
@@ -108,7 +101,7 @@ export default class BudgetLineEdit extends Component {
   onChanceClasificacion = async (e) => {
     this.setState({ sub_category_code: e.target.value });
     const res7 = await axios.get(
-      'http://167.99.15.83:4000/api/categories/child/' + e.target.value
+      `${API_URL}/categories/child/${e.target.value}`
     );
     this.setState({ name: res7.data.child.name });
   };
@@ -159,7 +152,8 @@ export default class BudgetLineEdit extends Component {
     e.preventDefault();
 
     await axios.put(
-      'http://167.99.15.83:4000/api/budgetlines/update/' +
+      API_URL +
+        '/budgetlines/update/' +
         this.props.match.params.projectId +
         '/' +
         this.props.match.params.id,

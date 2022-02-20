@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import { API_URL } from '../config/api';
 
 export default class TeamMembers extends Component {
   constructor() {
@@ -23,13 +24,13 @@ export default class TeamMembers extends Component {
 
     //obtenemos el id de la moneda que viene por url
     const res = await axios.get(
-      'http://167.99.15.83:4000/api/coins/' + this.props.match.params.id
+      `${API_URL}/coins/${this.props.match.params.id}`
     );
     this.setState({ coin: res.data.coin });
 
     //obtenemos las conversiones de esta moneda
     const res2 = await axios.get(
-      'http://167.99.15.83:4000/api/conversions/' + this.state.coin.id
+      `${API_URL}/conversions/${this.state.coin.id}`
     );
     this.setState({ conversions: res2.data.conversions });
   }
@@ -48,9 +49,7 @@ export default class TeamMembers extends Component {
   };
 
   onSubmitDelete = async (id) => {
-    const res_p = await axios.post(
-      'http://167.99.15.83:4000/api/conversions/delete/' + id
-    );
+    const res_p = await axios.post(`${API_URL}/conversions/delete/${id}`);
     window.location.replace('');
     //window.location.href = "http://167.99.15.83/conversions/" + this.state.coin.id;
 
@@ -60,7 +59,7 @@ export default class TeamMembers extends Component {
 
   onSubmitAddValue = async (e) => {
     //e.preventDefault();
-    await axios.post('http://167.99.15.83:4000/api/conversions', {
+    await axios.post(API_URL + '/conversions', {
       coin_id: this.state.coin.id,
       description: this.state.description,
       value: this.state.value,

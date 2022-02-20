@@ -5,6 +5,7 @@ import { Link, Redirect, useHistory } from 'react-router-dom';
 
 import RowCardsProjects from './RowCardsProjects';
 import ModalVerFiles from './ModalVerFiles';
+import { API_URL } from '../config/api';
 
 export default class TableCost extends Component {
   constructor(props) {
@@ -78,34 +79,30 @@ export default class TableCost extends Component {
     }
 
     const res = await axios.post(
-      'http://167.99.15.83:4000/api/budgetlines/project/' + this.props.idProject
+      `${API_URL}/budgetlines/project/${this.props.idProject}`
     );
 
     this.setState({ budgetLines: res.data.budgetLines });
     //console.log(`1=${this.state.budgetLines[0].name}`);
-    /*const res2 = await axios.post('http://167.99.15.83:4000/api/budgetlines/atlas/cat_project/'+this.props.idProject);
+    /*const res2 = await axios.post('https://api.ihcafe.hn/api/budgetlines/atlas/cat_project/'+this.props.idProject);
         this.setState({budgetLinesCat:res2.data.budgetCategories}); */
 
-    const res3 = await axios.get('http://167.99.15.83:4000/api/projects/');
+    const res3 = await axios.get(`${API_URL}/projects/`);
     this.setState({ projects: res3.data.projects });
 
     //obtenemos el budgetstart de este proyecto
     const res_pro = await axios.get(
-      'http://167.99.15.83:4000/api/projects/' + this.props.idProject
+      `${API_URL}/projects/${this.props.idProject}`
     );
     this.setState({ bdg_start_project: res_pro.data.data.budgetstart });
 
-    const res4 = await axios.get(
-      'http://167.99.15.83:4000/api/categories/categories_parents/'
-    );
+    const res4 = await axios.get(`${API_URL}/categories/categories_parents`);
     this.setState({ categories: res4.data.categories });
 
-    const res6 = await axios.get('http://167.99.15.83:4000/api/accounts/');
+    const res6 = await axios.get(`${API_URL}/accounts/`);
     this.setState({ cuentas: res6.data.cuentas });
 
-    const res_suppliers = await axios.get(
-      'http://167.99.15.83:4000/api/suppliers/'
-    );
+    const res_suppliers = await axios.get(`${API_URL}/suppliers/`);
     this.setState({ suppliers: res_suppliers.data.suppliers });
 
     this.setState({ project_id: this.props.idProject });
@@ -114,8 +111,7 @@ export default class TableCost extends Component {
   onChanceCategory = async (e) => {
     this.setState({ category_id: e.target.value });
     const res5 = await axios.get(
-      'http://167.99.15.83:4000/api/categories/categories_childs/' +
-        e.target.value
+      `${API_URL}/categories/categories_childs/${e.target.value}`
     );
     this.setState({ clasificaciones: res5.data.clasificaciones });
   };
@@ -157,7 +153,7 @@ export default class TableCost extends Component {
   onChanceClasificacion = async (e) => {
     this.setState({ sub_category_code: e.target.value });
     const res7 = await axios.get(
-      'http://167.99.15.83:4000/api/categories/child/' + e.target.value
+      `${API_URL}/categories/child/${e.target.value}`
     );
     this.setState({ name: res7.data.child.name });
   };
@@ -187,8 +183,7 @@ export default class TableCost extends Component {
   onChanceCategory = async (e) => {
     this.setState({ category_id: e.target.value });
     const res5 = await axios.get(
-      'http://167.99.15.83:4000/api/categories/categories_childs/' +
-        e.target.value
+      `${API_URL}/categories/categories_childs/${e.target.value}`
     );
     this.setState({ clasificaciones: res5.data.clasificaciones });
   };
@@ -226,17 +221,10 @@ export default class TableCost extends Component {
       // si es aprobado un valor igual o menor
 
       await axios.post(
-        'http://167.99.15.83:4000/api/budgetlines/aprobar/' +
-          id +
-          '/' +
-          this.state.aprobar +
-          '/' +
-          this.state.valor +
-          '/' +
-          this.state.comentario
+        `${API_URL}/budgetlines/aprobar/${id}/${this.state.aprobar}/${this.state.valor}/${this.state.comentario}`
       );
 
-      console.log('APROBANDO');
+      //console.log('APROBANDO');
       //this.setState({ redirect: true })
       window.location.replace('/project/' + this.props.idProject);
 
@@ -256,7 +244,7 @@ export default class TableCost extends Component {
     this.setState({ fase_archivo: e.target.value });
   };
   onClickSubirArchivo = async (id) => {
-    await axios.post('http://167.99.15.83:4000/api/files/' + id, {
+    await axios.post(API_URL + '/files/' + id, {
       nombre_archivo: this.state.nombre_archivo,
       fase_archivo: this.state.fase_archivo,
       file: this.state.archivo,
@@ -266,7 +254,7 @@ export default class TableCost extends Component {
   //codigo para crear un nuevo renglon presupuestario
   onSubmit = async (e) => {
     e.preventDefault();
-    const res = await axios.post('http://167.99.15.83:4000/api/budgetlines/', {
+    const res = await axios.post(API_URL + '/budgetlines/', {
       code: this.state.code,
       description: this.state.details,
       name: this.state.name,
@@ -291,9 +279,7 @@ export default class TableCost extends Component {
 
   //funcion para elimiar un renglon presupuestario
   onSubmitDelete = async (id) => {
-    const res_p = await axios.post(
-      'http://167.99.15.83:4000/api/budgetlines/delete/' + id
-    );
+    const res_p = await axios.post(`${API_URL}/budgetlines/delete/${id}`);
 
     //window.location.replace('');
     window.location.replace('/project/' + this.props.idProject);
@@ -682,9 +668,7 @@ export default class TableCost extends Component {
                                             </button>
                                           </div>
                                           <form
-                                            action={
-                                              'http://167.99.15.83:4000/api/files/'
-                                            }
+                                            action={API_URL + '/files/'}
                                             method="post"
                                             encType="multipart/form-data"
                                           >

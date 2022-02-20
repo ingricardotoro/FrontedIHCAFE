@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import { API_URL } from '../config/api';
 export default class Users_list extends Component {
   constructor() {
     super();
@@ -21,11 +22,11 @@ export default class Users_list extends Component {
         }*/
 
     //traemos todo los usuario registrados
-    const res = await axios.get('http://167.99.15.83:4000/api/users/');
+    const res = await axios.get(`${API_URL}/users/`);
     this.setState({ users: res.data.users });
 
     //traemos los tipo de usuarios de la tabla tipousuario
-    const res2 = await axios.get('http://167.99.15.83:4000/api/tipousers/');
+    const res2 = await axios.get(`${API_URL}/tipousers/`);
     this.setState({ tipousuarios: res2.data.tipousers });
   }
 
@@ -47,23 +48,18 @@ export default class Users_list extends Component {
 
   onSubmit = async (e) => {
     e.preventDefault();
-    const resp = await axios.post(
-      'http://167.99.15.83:4000/api/users/register',
-      {
-        lastname: this.state.lastname,
-        name: this.state.name,
-        tipo_user_id: this.state.tipo_user,
-        username: this.state.username,
-        password: this.state.password,
-      }
-    );
+    const resp = await axios.post(API_URL + '/users/register', {
+      lastname: this.state.lastname,
+      name: this.state.name,
+      tipo_user_id: this.state.tipo_user,
+      username: this.state.username,
+      password: this.state.password,
+    });
     window.location.href = '/users_list';
   };
 
   onSubmitDelete = async (id) => {
-    const res_p = await axios.post(
-      'http://167.99.15.83:4000/api/users/delete/' + id
-    );
+    const res_p = await axios.post(`${API_URL}/users/delete/${id}`);
     window.location.href = '/users_list';
 
     if (res_p) {

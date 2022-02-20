@@ -3,6 +3,7 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import Projectcard from '../components/Projectcard';
 import BudgetCard from './BudgetCard';
+import { API_URL } from '../config/api';
 
 export default class TabBudget extends Component {
   constructor() {
@@ -32,8 +33,7 @@ export default class TabBudget extends Component {
       window.location.href = '/';
     }
     const res_p2 = await axios.post(
-      'http://167.99.15.83:4000/api/projects/findProjectsByBudgetId/' +
-        this.props.id
+      `${API_URL}/projects/findProjectsByBudgetId/${this.props.id}`
     );
     this.setState({ projects2: res_p2.data.projectsbybudgetid });
 
@@ -46,8 +46,7 @@ export default class TabBudget extends Component {
 
   async calculo1() {
     const res_p = await axios.post(
-      'http://167.99.15.83:4000/api/projects/findProjectsByBudgetId/' +
-        this.props.id
+      `${API_URL}/projects/findProjectsByBudgetId/ ${this.props.id}`
     );
     this.setState({ projects: res_p.data.projectsbybudgetid });
   }
@@ -58,7 +57,7 @@ export default class TabBudget extends Component {
     let nuevoTotalAprobado = 0.0;
     let nuevoTotalEjecutado = 0.0;
     const res = await axios.post(
-      'http://167.99.15.83:4000/api/budgetlines/project/' + project_id
+      `${API_URL}/budgetlines/project/${project_id}`
     );
     const buds = res.data.budgetLines;
 
@@ -74,7 +73,7 @@ export default class TabBudget extends Component {
 
     /**ATLASSSSSSSS */
     const res_bud = await axios.post(
-      'http://167.99.15.83:4000/api/budgetlines/atlas/project/' + project_id
+      `${API_URL}/budgetlines/atlas/project/${project_id}`
     );
     // console.warn("VALOR="+res.data.budgetLines_atlas);
     this.setState({ budgetLinesAtlas2: res_bud.data.budgetLines_atlas });
@@ -107,7 +106,7 @@ export default class TabBudget extends Component {
   onDelete = async (e) => {
     //e.preventDefault();
     const res_p = await axios.post(
-      'http://167.99.15.83:4000/api/budgets/delete/' + this.props.id
+      `${API_URL}/budgets/delete/${this.props.id}`
     );
 
     window.location.href = '/budgets';

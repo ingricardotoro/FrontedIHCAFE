@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import { API_URL } from '../config/api';
 
 export default class Account_list extends Component {
   constructor() {
@@ -16,14 +17,12 @@ export default class Account_list extends Component {
       window.location.href = '/';
     }
 
-    const res = await axios.get('http://167.99.15.83:4000/api/accounts/');
+    const res = await axios.get(`${API_URL}/accounts/`);
     this.setState({ accounts: res.data.cuentas });
   }
 
   onSubmitDelete = async (id) => {
-    const res_p = await axios.post(
-      'http://167.99.15.83:4000/api/accounts/delete/' + id
-    );
+    const res_p = await axios.post(`${API_URL}/accounts/delete/${id}`);
     window.location.href = '/accounts';
 
     if (res_p) {
