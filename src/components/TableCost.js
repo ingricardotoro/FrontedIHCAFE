@@ -123,7 +123,7 @@ function TableCost(props) {
   const getAllBudgets = async () => {
     const res = await axios.post(`${API_URL}/budgetlines/project/${idProject}`);
     const buds = res.data.budgetLines;
-    console.log('B=' + JSON.stringify(budgetLines));
+    //console.log('B=' + JSON.stringify(budgetLines));
     buds.map((bl) => {
       sumaTotalAprobado += parseFloat(bl.buddgetstart);
 
@@ -419,11 +419,13 @@ function TableCost(props) {
 
     //window.location.replace('');
     //window.location.replace('/project/' + idProject);
-
+    console.log(res_p.data);
     //history.push('/project/' + idProject);
     if (res_p.data.ok === true) {
-      document.getElementById('btn_del_cerrar').click();
+      document.getElementById(`btn_del_cerrar_${id}`).click();
       getAllBudgets();
+    } else {
+      alert('DATA OK = FALSE');
     }
   };
 
@@ -754,7 +756,9 @@ function TableCost(props) {
                                             className="close"
                                             data-dismiss="modal"
                                             aria-label="Close"
-                                            id="btn_del_cerrar"
+                                            id={
+                                              'btn_del_cerrar_' + budgetLine.id
+                                            }
                                           >
                                             <span aria-hidden="true">×</span>
                                           </button>
