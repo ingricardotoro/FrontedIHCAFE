@@ -475,20 +475,7 @@ function TableCost(props) {
 
   return (
     <div>
-      <RowCardsProjects
-        aprobado={total_aprobado}
-        ejecutado={total_ejecutado}
-        /* inicial={bdg_start_project}
-            //inicial={total_inicial}
-            ejecutado={total_ejecutado}
-            disponible={total_disponible}
-            solicitado={total_solicitado}
-            //rembolsos={total_rembolsos}
-            porcentaje_ejecutado={porcentaje_ejecutado}
-            porcentaje_disponible={porcentaje_disponible}
-            porcentaje_solicitado={porcentaje_solicitado} */
-        //porcentaje_rembolsos={this.state.porcentaje_rembolsos}
-      />
+      <RowCardsProjects aprobado={total_aprobado} ejecutado={total_ejecutado} />
 
       {/* Page body start */}
       <div className="page-body">
@@ -733,7 +720,7 @@ function TableCost(props) {
                                     </button>
                                   </td>
 
-                                  {/* INICIL Modal DELETE*/}
+                                  {/* INICIO Modal DELETE*/}
 
                                   <div
                                     className="modal fade"
@@ -798,6 +785,8 @@ function TableCost(props) {
                                   </div>
 
                                   {/*FIN Modal DELETE*/}
+
+                                  {/*INICIO Modal APROBAR*/}
 
                                   <div
                                     className="modal fade"
@@ -910,17 +899,6 @@ function TableCost(props) {
                                                 placeholder="Fecha"
                                               />
                                             </div>
-
-                                            {/*  <div style={{ width: "40%", display: "inline-block", marginLeft: '5px' }}>
-                                                                                        <label>Comentarios</label>
-                                                                                        <textarea
-                                                                                            onChange={
-                                                                                                onchangeComentario
-                                                                                            }
-                                                                                            name="comentario"
-                                                                                            className="form-control"
-                                                                                        ></textarea>
-                                                                                    </div> */}
                                           </div>
                                           <div className="modal-footer">
                                             <button
@@ -948,6 +926,8 @@ function TableCost(props) {
                                       </div>
                                     </div>
                                   </div>
+
+                                  {/*FINAL Modal APROBAR*/}
 
                                   <ModalVerFiles
                                     budget_id={budget_id}
@@ -992,11 +972,6 @@ function TableCost(props) {
                                         >
                                           <div className="modal-body">
                                             <div className="form-control mt-3">
-                                              {/* <input
-                                                                                            onChange={onClickArchivo}
-                                                                                            type="file"
-                                                                                            name="archivo"
-                                                                                        ></input> */}
                                               <input
                                                 //disabled={!flatEdit}
                                                 accept="image/*"
@@ -1187,14 +1162,7 @@ function TableCost(props) {
               </div>
               <div className="modal-body">
                 <form onSubmit={onSubmit}>
-                  {/* <select onChange={this.onChanceProject} name="select" className="form-control mt-3">
-                                <option value="#">Seleccione Proyecto</option>
-                                {
-                                    this.state.projects.map(project => 
-                                        <option value={project.id}>({project.code})-{project.name} </option>
-                                    )
-                                }
-                            </select> */}
+                 
                   <input
                     name=""
                     type="hidden"

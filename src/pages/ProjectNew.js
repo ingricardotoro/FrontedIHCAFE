@@ -241,7 +241,7 @@ export default class ProjectNew extends Component {
                                   </select>
                                 </div>
                               </div>
-                              <div className="form-group row">
+                              {/* <div className="form-group row">
                                 <label className="col-sm-2 col-form-label">
                                   Equipo de trabajo para Proyecto
                                 </label>
@@ -261,7 +261,7 @@ export default class ProjectNew extends Component {
                                     ))}
                                   </select>
                                 </div>
-                              </div>
+                              </div> */}
                               <div className="form-group row">
                                 <label className="col-sm-2 col-form-label">
                                   Fecha de Inicio
