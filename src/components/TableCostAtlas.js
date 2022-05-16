@@ -12,6 +12,7 @@ import jwt_decode from 'jwt-decode';
 import { API_URL } from '../config/api';
 
 function TableCostAtlas(props) {
+  //console.log('ESTOY EN ATLAS');
   const { idProject, budget_id } = props;
 
   const [total_ejecutado, setTotal_ejecutado] = useState(0);
@@ -388,18 +389,33 @@ function TableCostAtlas(props) {
    }*/
 
   const formatMoney = (number) => {
-    return number.toLocaleString('en-US', {
-      style: 'currency',
-      currency: 'HNL',
-    });
+    if (number) {
+      return number.toLocaleString('en-US', {
+        style: 'currency',
+        currency: 'HNL',
+      });
+    } else {
+      return 'HNL 0.00';
+    }
     //return number;
   };
 
-  const onClickAprobar = async (id, maximo) => {
-    if (budgetLine.budgetstart <= maximo) {
+  const onClickAprobar = async (id) => {
+    //console.log(budgetLine.budgetstart + '-+' + maximo);
+
+    if (budgetLine.balance <= budgetLine.balance) {
+      const res_apro = await axios.post(
+        `${API_URL}/budgetlines/aprobar_atlas/${id}/${budgetLine.code}/${budgetLine.balance}/${budgetLine.startdate}`
+      );
+
+      if (res_apro.data.ok === true) {
+        document.getElementById(`btn_cerrar_aprobar_${id}`).click();
+        cleanFormAprobar();
+        getAllBudgets();
+      }
       // si es aprobado un valor igual o menor
 
-      let value = 0;
+      /*  let value = 0; 
       let valueComent = '';
 
       if (valor === -1) {
@@ -416,9 +432,9 @@ function TableCostAtlas(props) {
       } else {
         //console.log("NOOOO")
         valueComent = comentario;
-      }
+      } */
 
-      await axios
+      /*await axios
         .post(
           `${API_URL}/budgetlines/aprobar_atlas/${id}/${aprobar}/${value}/${valueComent}`
         )
@@ -431,7 +447,7 @@ function TableCostAtlas(props) {
         })
         .catch((err) => {
           alert(err);
-        });
+        });*/
 
       //console.log("APROBANDO" + JSON.stringify(res))
       //window.location.replace('/project/' + idProject);
@@ -714,7 +730,7 @@ function TableCostAtlas(props) {
                                       <td>
                                         <label className="text-info">
                                           {formatMoney(
-                                            budgetLinesAtlas.buddgetstart
+                                            budgetLinesAtlas.budgetstart
                                           )}
                                         </label>
                                       </td>
@@ -735,7 +751,7 @@ function TableCostAtlas(props) {
                                       <td>
                                         <label className="text-info">
                                           {formatMoney(
-                                            budgetLinesAtlas.buddgetstart
+                                            budgetLinesAtlas.budgetstart
                                           )}
                                         </label>
                                       </td>
@@ -751,7 +767,7 @@ function TableCostAtlas(props) {
                                         <label className="text-success">
                                           {formatMoney(
                                             parseFloat(
-                                              budgetLinesAtlas.buddgetstart
+                                              budgetLinesAtlas.budgetstart
                                             ) -
                                               parseFloat(
                                                 budgetLinesAtlas.balance
@@ -990,7 +1006,7 @@ function TableCostAtlas(props) {
                                           <h5 className="modal-title">
                                             Aprobado:{' '}
                                             {formatMoney(
-                                              budgetLinesAtlas.buddgetstart
+                                              budgetLinesAtlas.budgetstart
                                             )}{' '}
                                           </h5>
                                           <button
@@ -1378,7 +1394,10 @@ function TableCostAtlas(props) {
                     >
                       <option value="#">Seleccione Resultado Atlas</option>
                       {resultados_atlas.map((resultado_atlas) => (
-                        <option value={resultado_atlas.code}>
+                        <option
+                          key={resultado_atlas.code}
+                          value={resultado_atlas.code}
+                        >
                           ({resultado_atlas.code})-{resultado_atlas.name}{' '}
                         </option>
                       ))}
@@ -1429,7 +1448,7 @@ function TableCostAtlas(props) {
                     >
                       <option value="#">Seleccione Cuenta Atlas</option>
                       {accounts_atlas.map((account_atlas) => (
-                        <option value={account_atlas.id}>
+                        <option key={account_atlas.id} value={account_atlas.id}>
                           {account_atlas.name}{' '}
                         </option>
                       ))}
@@ -1480,7 +1499,7 @@ function TableCostAtlas(props) {
                       <option value="#">Seleccione Cuenta de Origen</option>
 
                       {accounts.map((cuenta) => (
-                        <option value={cuenta.id}>
+                        <option key={cuenta.id} value={cuenta.id}>
                           ({cuenta.coin.code})-{cuenta.name}{' '}
                         </option>
                       ))}
@@ -1510,7 +1529,7 @@ function TableCostAtlas(props) {
                       name="buddgetstart"
                       type="number"
                       onChange={onChanceBudgetStart}
-                      type="text"
+                      //type="text"
                       className="form-control"
                       placeholder="valor Aprobado : 0,000.00 "
                       //value={budgetLine.budgetstart}

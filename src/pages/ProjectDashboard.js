@@ -60,21 +60,23 @@ export default class ProjectDashboard extends Component {
                   </div>
                 </div>
 
-                {this.state.tipo_budget === 'atlas' ? (
-                  <TableCostAtlas
-                    idProject={this.props.match.params.id}
-                    budget_tipo={this.state.tipo_budget} //atlas o estandar
-                    budget_id={this.state.budget_id} //id del presupuesto
-                    history={this.props.history}
-                  />
-                ) : (
-                  <TableCost
-                    idProject={this.props.match.params.id}
-                    budget_tipo={this.state.tipo_budget} //atlas o estandar
-                    budget_id={this.state.budget_id} //id del presupuesto
-                    history={this.props.history}
-                  />
-                )}
+                {this.state.tipo_budget !== '' ? (
+                  this.state.tipo_budget === 'atlas' ? (
+                    <TableCostAtlas
+                      idProject={this.props.match.params.id}
+                      budget_tipo={this.state.tipo_budget} //atlas o estandar
+                      budget_id={this.state.budget_id} //id del presupuesto
+                      history={this.props.history}
+                    />
+                  ) : (
+                    <TableCost
+                      idProject={this.props.match.params.id}
+                      budget_tipo={this.state.tipo_budget} //atlas o estandar
+                      budget_id={this.state.budget_id} //id del presupuesto
+                      history={this.props.history}
+                    />
+                  )
+                ) : null}
               </div>
             </div>
           </div>

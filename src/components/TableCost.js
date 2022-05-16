@@ -10,6 +10,8 @@ import { API_URL } from '../config/api';
 //import jwt_decode from 'jwt-decode';
 
 function TableCost(props) {
+  //console.log('ESTOY EN NO-ATLAS');
+
   const { idProject, budget_id } = props;
   let history = useHistory();
 
@@ -336,7 +338,7 @@ function TableCost(props) {
     if (budgetLine.balance <= budgetLine.balance) {
       // si es aprobado un valor igual o menor
       const res_apro = await axios.post(
-        `${API_URL}/budgetlines/aprobar/${id}/${budgetLine.code}/ ${budgetLine.balance}/${budgetLine.startdate}`
+        `${API_URL}/budgetlines/aprobar/${id}/${budgetLine.code}/${budgetLine.balance}/${budgetLine.startdate}`
       );
 
       //console.log("APROBANDO" + JSON.stringify(res_apro))
@@ -1162,7 +1164,6 @@ function TableCost(props) {
               </div>
               <div className="modal-body">
                 <form onSubmit={onSubmit}>
-                 
                   <input
                     name=""
                     type="hidden"
@@ -1255,7 +1256,7 @@ function TableCost(props) {
                       name="buddgetstart"
                       type="number"
                       onChange={onChanceBudgetStart}
-                      type="text"
+                      //type="text"
                       className="form-control"
                       placeholder="valor Aprobado : 0,000.00 "
                       //value={budgetLine.budgetstart}
@@ -1485,7 +1486,7 @@ function TableCost(props) {
                   name="buddgetstart"
                   type="number"
                   onChange={onChanceBudgetStart}
-                  type="text"
+                  //type="text"
                   className="form-control"
                   placeholder="valor Aprobado : 0,000.00 "
                   value={budgetLine.buddgetstart}
