@@ -510,6 +510,7 @@ function TableCost(props) {
 
       if (responde.data.ok === true) {
         document.getElementById(`archivos_${budgetLine_id}`).click();
+        return toast.info('Archivo Enviado Con Éxitos');
         getAllBudgets();
       } else {
         return toast.error('Error Subiendo Archivo');
