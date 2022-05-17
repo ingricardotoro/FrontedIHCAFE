@@ -6,6 +6,7 @@ import { Link, Redirect, useHistory } from 'react-router-dom';
 import RowCardsProjects from './RowCardsProjects';
 import ModalVerFiles from './ModalVerFiles';
 import { API_URL } from '../config/api';
+import { toast } from 'react-toastify';
 //import { set } from 'core-js/core/dict';
 //import jwt_decode from 'jwt-decode';
 
@@ -23,6 +24,7 @@ function TableCost(props) {
   const [cuentas, setCuentas] = useState([]);
   const [suppliers, setSuppliers] = useState([]);
   const [archivo, setaArchivo] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   //const [total_disponible, setTotal_disponible] = useState(0)
   const [total_ejecutado, setTotal_ejecutado] = useState(0);
@@ -421,7 +423,7 @@ function TableCost(props) {
 
     //window.location.replace('');
     //window.location.replace('/project/' + idProject);
-    console.log(res_p.data);
+    //console.log(res_p.data);
     //history.push('/project/' + idProject);
     if (res_p.data.ok === true) {
       document.getElementById(`btn_del_cerrar_${id}`).click();
@@ -461,7 +463,21 @@ function TableCost(props) {
   };
 
   //funcion para controlar el archivo de imagen
-  const handleFileChange = () => {
+  const handleFile = (event) => {
+    if (event.target.files.length === 0) return null;
+
+    let fileObjet = event.target.files[0]; // obtenemos el archivo
+
+    const isValidSize = fileObjet.size < 10 * 1024 * 1024; //tamaño maximo de 10 megas
+    const isNameOfOneImageRegEx = /.(jpe?g|gif|png|svg|pdf)$/i; //para validar el tipo de archivo , solo imagenes
+    const isValidType = isNameOfOneImageRegEx.test(fileObjet.name);
+
+    if (!isValidSize)
+      return toast.error('Imagen supera el peso permitido (10 Mg)');
+    if (!isValidType) return toast.error('Solo se permiten imágenes');
+
+    setaArchivo(fileObjet); //guardamos el file en el estado archivo
+
     /*const [file] = e.target.files; //destructuracion
         const isValidSize = file.size < 10 * 1024 * 1024; //tamaño maximo de 10 megas
         const isNameOfOneImageRegEx = /.(jpe?g|gif|png|svg)$/i; //para validar el tipo de archivo , solo imagenes
@@ -473,6 +489,35 @@ function TableCost(props) {
     
         setFileData(file);
         setFlatPhoto(true);*/
+  };
+
+  const handleUploadFile = async (e, budgetLine_id) => {
+    //Proceso para enviar un archivo
+    try {
+      e.preventDefault();
+      setLoading(true);
+
+      const sendFileData = new FormData();
+      sendFileData.append('file', archivo);
+
+      const responde = await axios.post(`${API_URL}/files`, {
+        nombre_archivo: nombre_archivo,
+        fase_archivo: fase_archivo,
+        budget_id: budget_id,
+        budgetline_id: budgetLine_id,
+        //file: archivo,
+      });
+
+      if (responde.data.ok === true) {
+        document.getElementById(`archivos_${budgetLine_id}`).click();
+        getAllBudgets();
+      } else {
+        return toast.error('Error Subiendo Archivo');
+      }
+
+      setLoading(false);
+      setaArchivo(null);
+    } catch (error) {}
   };
 
   return (
@@ -683,7 +728,7 @@ function TableCost(props) {
                                     >
                                       <i className="icofont icofont-ui-edit"></i>
                                     </Link>
- */}
+                                            */}
                                     {/*  <a
                                       href="#!"
                                       className="text-muted"
@@ -967,88 +1012,91 @@ function TableCost(props) {
                                             </span>
                                           </button>
                                         </div>
-                                        <form
+                                        {/*  <form
                                           action={`${API_URL}/files`}
                                           method="post"
                                           encType="multipart/form-data"
-                                        >
-                                          <div className="modal-body">
-                                            <div className="form-control mt-3">
-                                              <input
-                                                //disabled={!flatEdit}
-                                                accept="image/*"
-                                                onChange={handleFileChange}
-                                                name="photo"
-                                                id="photo"
-                                                type="file"
-                                              ></input>
-                                            </div>
+                                        > */}
+                                        <div className="modal-body">
+                                          <div className="form-control mt-3">
                                             <input
-                                              value={budgetLine.id}
-                                              name="budgetline_id"
-                                              type="hidden"
-                                              className="form-control"
-                                            />
-                                            <input
-                                              value={budget_id}
-                                              name="budget_id"
-                                              type="hidden"
-                                              className="form-control"
-                                            />
-                                            <input
-                                              value={idProject}
-                                              name="project_id"
-                                              type="hidden"
-                                              className="form-control"
-                                            />
+                                              //disabled={!flatEdit}
+                                              accept="image/*"
+                                              onChange={handleFile}
+                                              name="file"
+                                              id="file"
+                                              type="file"
+                                            ></input>
+                                          </div>
+                                          <input
+                                            value={budgetLine.id}
+                                            name="budgetline_id"
+                                            type="hidden"
+                                            className="form-control"
+                                          />
+                                          <input
+                                            value={budget_id}
+                                            name="budget_id"
+                                            type="hidden"
+                                            className="form-control"
+                                          />
+                                          <input
+                                            value={idProject}
+                                            name="project_id"
+                                            type="hidden"
+                                            className="form-control"
+                                          />
 
-                                            <div className="form-control mt-3">
-                                              <input
-                                                name="file_name"
-                                                onChange={onClickNombreArchivo}
-                                                type="text"
-                                                className="form-control"
-                                                placeholder="Ingrese Nombre de Archivo "
-                                              />
-                                            </div>
-                                            <div>
-                                              <select
-                                                onChange={onClickFaseArchivo}
-                                                name="fase"
-                                                className="form-control mt-3"
-                                              >
-                                                <option value="0">
-                                                  Seleccion Fase
-                                                </option>
-                                                <option value="Solicitud">
-                                                  Solicitud
-                                                </option>
-                                                <option value="Desembolso">
-                                                  Desembolso
-                                                </option>
-                                                <option value="Liquidacion">
-                                                  Liquidacion
-                                                </option>
-                                              </select>
-                                            </div>
+                                          <div className="form-control mt-3">
+                                            <input
+                                              name="file_name"
+                                              onChange={onClickNombreArchivo}
+                                              type="text"
+                                              className="form-control"
+                                              placeholder="Ingrese Nombre de Archivo "
+                                            />
                                           </div>
-                                          <div className="modal-footer">
-                                            <button
-                                              type="button"
-                                              className="btn btn-default waves-effect "
-                                              data-dismiss="modal"
+                                          <div>
+                                            <select
+                                              onChange={onClickFaseArchivo}
+                                              name="fase"
+                                              className="form-control mt-3"
                                             >
-                                              Cerrar
-                                            </button>
-                                            {/* <button type="button" onClick={ () =>this.onClickSubirArchivo(budgetLines.id )} className="btn btn-primary waves-effect waves-light ">Guardar</button> */}
-                                            <button
-                                              type="submit"
-                                              className="btn btn-primary waves-effect waves-light "
-                                            >
-                                              Guardar
-                                            </button>
+                                              <option value="0">
+                                                Seleccion Fase
+                                              </option>
+                                              <option value="Solicitud">
+                                                Solicitud
+                                              </option>
+                                              <option value="Desembolso">
+                                                Desembolso
+                                              </option>
+                                              <option value="Liquidacion">
+                                                Liquidacion
+                                              </option>
+                                            </select>
                                           </div>
-                                        </form>
+                                        </div>
+                                        <div className="modal-footer">
+                                          <button
+                                            type="button"
+                                            className="btn btn-default waves-effect "
+                                            data-dismiss="modal"
+                                          >
+                                            Cerrar
+                                          </button>
+                                          {/* <button type="button" onClick={ () =>this.onClickSubirArchivo(budgetLines.id )} className="btn btn-primary waves-effect waves-light ">Guardar</button> */}
+                                          <button
+                                            type="button"
+                                            onClick={() => {
+                                              handleUploadFile(budgetLine.id);
+                                            }}
+                                            className="btn btn-primary waves-effect waves-light "
+                                          >
+                                            Guardar
+                                          </button>
+                                        </div>
+                                        {/* </form> */}
                                       </div>
                                     </div>
                                   </div>

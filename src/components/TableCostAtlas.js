@@ -405,7 +405,7 @@ function TableCostAtlas(props) {
 
     if (budgetLine.balance <= budgetLine.balance) {
       const res_apro = await axios.post(
-        `${API_URL}/budgetlines/aprobar_atlas/${id}/${budgetLine.code}/${budgetLine.balance}/${budgetLine.startdate}`
+        `${API_URL}/budgetlines/aprobar_atlas/${id}/${code}/${budgetLine.balance}/${budgetLine.startdate}`
       );
 
       if (res_apro.data.ok === true) {
@@ -578,18 +578,30 @@ function TableCostAtlas(props) {
 
         );*/
 
-    await axios
+    const res_bl = await axios.post(
+      API_URL + '/budgetlines/budgetlineatlas/',
+      data
+    );
+
+    if (res_bl.data.ok === true) {
+      document.getElementById('btnCloseNew').click();
+      cleanFormAprobar();
+      getData();
+    }
+
+    /*await axios
       .post(API_URL + '/budgetlines/budgetlineatlas', data)
       //.post('localhost:4000/budgetlines/budgetlineatlas', data)
       .then((dataResult) => {
         //volvemos a traer los budgtines
+        cleanFormAprobar();
         getData();
         //cerramos el modald de create New
         document.getElementById('btnCloseNew').click();
       })
       .catch((err) => {
         alert(err);
-      });
+      });*/
 
     //window.location.replace('');
     //window.location.replace('/project/' + idProject);
