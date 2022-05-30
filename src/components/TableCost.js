@@ -491,28 +491,37 @@ function TableCost(props) {
         setFlatPhoto(true);*/
   };
 
-  const handleUploadFile = async (e, budgetLine_id) => {
+  const handleUploadFile = async (budgetLine_id) => {
+    alert('0');
+
     //Proceso para enviar un archivo
     try {
-      e.preventDefault();
+      //e.preventDefault();
       setLoading(true);
 
-      const sendFileData = new FormData();
-      sendFileData.append('file', archivo);
+      alert('1');
 
-      const responde = await axios.post(`${API_URL}/files`, {
+      const sendFileData = new FormData({
         nombre_archivo: nombre_archivo,
         fase_archivo: fase_archivo,
         budget_id: budget_id,
         budgetline_id: budgetLine_id,
-        //file: archivo,
       });
 
+      sendFileData.append('file', archivo);
+
+      const responde = await axios.post(`${API_URL}/files/`, sendFileData);
+      alert('2');
+
       if (responde.data.ok === true) {
+        alert('3');
+
         document.getElementById(`archivos_${budgetLine_id}`).click();
         return toast.info('Archivo Enviado Con Éxitos');
         getAllBudgets();
       } else {
+        alert('4');
+
         return toast.error('Error Subiendo Archivo');
       }
 
