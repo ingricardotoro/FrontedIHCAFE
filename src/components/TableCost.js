@@ -492,41 +492,76 @@ function TableCost(props) {
   };
 
   const handleUploadFile = async (budgetLine_id) => {
-    alert('0');
+    const config = {
+      headers: { 'content-type': 'multipart/form-data' },
+    };
+    console.log('0');
+
+    console.log('1');
+    const sendFileData = new FormData();
+    /* const sendFileData = new FormData({
+      nombre_archivo: nombre_archivo,
+      fase_archivo: fase_archivo,
+      budget_id: budget_id,
+      budgetline_id: budgetLine_id,
+    }); */
+    sendFileData.append('nombre_archivo', nombre_archivo);
+    sendFileData.append('fase_archivo', fase_archivo);
+    sendFileData.append('budget_id', budget_id);
+    sendFileData.append('budgetline_id', budgetLine_id);
+
+    sendFileData.append('file', archivo);
+
+    /* const sendFileData = new FormData({
+      nombre_archivo: nombre_archivo,
+      fase_archivo: fase_archivo,
+      budget_id: budget_id,
+      budgetline_id: budgetLine_id,
+    }); */
+
+    console.log(sendFileData);
 
     //Proceso para enviar un archivo
     try {
       //e.preventDefault();
-      setLoading(true);
+      //setLoading(true);
 
-      alert('1');
+      console.log('2');
 
-      const sendFileData = new FormData({
-        nombre_archivo: nombre_archivo,
-        fase_archivo: fase_archivo,
-        budget_id: budget_id,
-        budgetline_id: budgetLine_id,
-      });
+      await axios
+        .post(`${API_URL}/files/`, sendFileData, config)
+        .then((response) => {
+          console.log(response);
+          document.getElementById(`archivos_${budgetLine_id}`).click();
+          getAllBudgets();
+          setLoading(false);
+          setaArchivo(null);
+          return toast.info('Archivo Enviado Con Éxitos');
+        })
+        .catch((error) => {
+          console.log(error);
+          console.log('4');
+          setLoading(false);
+          setaArchivo(null);
 
-      sendFileData.append('file', archivo);
+          return toast.error('Error Subiendo Archivo');
+        });
 
-      const responde = await axios.post(`${API_URL}/files/`, sendFileData);
-      alert('2');
+      /* const responde = await axios.post(
+        `${API_URL}/files/`,
+        sendFileData,
+        config
+      ); */
 
-      if (responde.data.ok === true) {
-        alert('3');
+      console.log('2.5');
 
-        document.getElementById(`archivos_${budgetLine_id}`).click();
-        return toast.info('Archivo Enviado Con Éxitos');
-        getAllBudgets();
+      /* if (responde.data.ok === true) {
+        console.log('3');
+
+       
       } else {
-        alert('4');
-
-        return toast.error('Error Subiendo Archivo');
-      }
-
-      setLoading(false);
-      setaArchivo(null);
+       
+      } */
     } catch (error) {}
   };
 
@@ -1103,7 +1138,7 @@ function TableCost(props) {
                                             }}
                                             className="btn btn-primary waves-effect waves-light "
                                           >
-                                            Guardar
+                                            Enviar
                                           </button>
                                         </div>
                                         {/* </form> */}
